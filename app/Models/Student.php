@@ -13,4 +13,14 @@ class Student extends Model
     {
         return $this->belongsTo(Level::class);
     }
+
+    public function father()
+    {
+        return $this->belongsTo(Father::class);
+    }
+
+    public function mother()
+    {
+        return $this->belongsTo(Mother::class);
+    }
 }
