@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PlaygroupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/dashboard');
-})->name('welcome');
+    return view('auth.login');
+})->name('login');
+
+// Route::middleware(['auth'])->group(function () {
+
+// KB Tunas Aksara
+Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
+
 
 Route::get('/dashboard', function () {
-    return view('welcome');
+    return view('dashboard');
 });
+// });
+
 
 
 

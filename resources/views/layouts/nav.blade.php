@@ -23,28 +23,42 @@
 
         <li class="menu-label">KB Tunas Aksara</li>
         <li>
-            <a href="{{ url('widgets') }}">
-                <div class="parent-icon"><i class="lni lni-users"></i>
+            <a href="{{ route('playgroup.index') }}">
+                <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
                 <div class="menu-title">Data Peserta Didik</div>
+            </a>
+        </li>
+        <li>
+            <a href="/raport">
+                <div class="parent-icon"><i class="bx bx-grid-alt"></i>
+                </div>
+                <div class="menu-title">Nilai Raport</div>
             </a>
         </li>
 
         <li class="menu-label">TK Tunas Aksara</li>
         <li>
             <a href="{{ url('form-elements') }}">
-                <div class="parent-icon"><i class="lni lni-users"></i>
+                <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
                 <div class="menu-title">Data Peserta Didik</div>
             </a>
         </li>
+        <li>
+            <a href="/raport">
+                <div class="parent-icon"><i class="bx bx-grid-alt"></i>
+                </div>
+                <div class="menu-title">Nilai Raport</div>
+            </a>
+        </li>
 
-        <li class="menu-label">Data Guru</li>
+        <li class="menu-label">Tenaga Pendidik</li>
         <li>
             <a href="{{ url('form-wizard') }}">
-                <div class="parent-icon"><i class="lni lni-users"></i>
+                <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
-                <div class="menu-title">Data Peserta Didik</div>
+                <div class="menu-title">Data Guru</div>
             </a>
         </li>
     </ul>
