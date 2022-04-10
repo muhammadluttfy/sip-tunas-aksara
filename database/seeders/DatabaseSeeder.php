@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Level;
 use App\Models\Position;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +19,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        Student::factory(10)->create();
+
         User::create([
             'name' => 'Nurhidayatul Hikmah',
             'role_id' => 1,
@@ -30,6 +35,17 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Kepala Sekolah',],
             ['name' => 'Administrator',],
             ['name' => 'Tenaga Pendidik',],
+        ]);
+
+        Level::insert([
+            [
+                'jenjang_pendidikan' => 'KB Tunas Aksara',
+                'slug' => 'kb-tunas-aksara',
+            ],
+            [
+                'jenjang_pendidikan' => 'TK Tunas Aksara',
+                'slug' => 'tk-tunas-aksara',
+            ],
         ]);
     }
 }
