@@ -1,7 +1,7 @@
  @extends("layouts.app")
 
  @section('style')
-     <link href="assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+     <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
  @endsection
 
  @section('wrapper')
@@ -57,7 +57,9 @@
                                  <tr>
                                      <td>1</td>
                                      <td>200/paud/16</td>
-                                     <td>Annida Ayyasya Kusuma</td>
+                                     <td>
+                                         <a href="{{ route('playgroup.show') }}">Annida Ayyasya Kusuma</a>
+                                     </td>
                                      <td>Perempuan</td>
                                      <td></td>
                                  </tr>
@@ -81,8 +83,8 @@
  @endsection
 
  @section('script')
-     <script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-     <script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+     <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+     <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
      <script>
          $(document).ready(function() {
              $('#example').DataTable();
