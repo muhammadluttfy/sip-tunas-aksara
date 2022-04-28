@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PlaygroupController extends Controller
+class ParentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,6 @@ class PlaygroupController extends Controller
      */
     public function index()
     {
-        return view('playgroup.index');
     }
 
     /**
@@ -23,7 +22,7 @@ class PlaygroupController extends Controller
      */
     public function create()
     {
-        return view('playgroup.create');
+        return view('father.create');
     }
 
     /**
@@ -43,9 +42,9 @@ class PlaygroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        return view('playgroup.show');
+        //
     }
 
     /**
@@ -54,9 +53,9 @@ class PlaygroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('playgroup.edit');
+        //
     }
 
     /**
