@@ -23,6 +23,7 @@ Route::get('/', function () {
 // KB Tunas Aksara
 Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
 Route::get('/kb-tunas-aksara/profile', [PlaygroupController::class, 'show'])->name('playgroup.show');
+Route::get('/kb-tunas-aksara/profile/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
 
 
 Route::get('/dashboard', function () {
