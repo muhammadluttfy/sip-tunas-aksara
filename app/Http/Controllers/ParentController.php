@@ -22,7 +22,7 @@ class ParentController extends Controller
      */
     public function create()
     {
-        return view('father.create');
+        return view('parent.create');
     }
 
     /**

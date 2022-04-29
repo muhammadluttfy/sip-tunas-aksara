@@ -46,12 +46,12 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="nama" class="form-label">Nama Lengkap</label>
-                                                <input type="email" class="form-control" name="nama" id="nama"
+                                                <input type="text" class="form-control" name="nama" id="nama"
                                                     placeholder="Masukkan Nama Lengkap">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                                                <input type="email" class="form-control" name="tempat_lahir"
+                                                <input type="text" class="form-control" name="tempat_lahir"
                                                     id="tempat_lahir" placeholder="Masukkan Tempat Lahir">
                                             </div>
                                             <div class="col-md-6">

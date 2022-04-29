@@ -15,18 +15,18 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('level_id');
-            $table->string('father_id');
-            $table->string('mother_id');
-            $table->string('nis');
-            $table->string('nama_lengkap');
-            $table->string('nama_panggilan');
-            $table->string('avatar');
-            $table->string('jenis_kelamin');
-            $table->string('tempat_lahir');
-            $table->string('tanggal_lahir');
-            $table->string('agama');
-            $table->string('kewarganegaraan');
+            $table->string('level_id')->nullable();
+            $table->string('father_id')->nullable();
+            $table->string('mother_id')->nullable();
+            $table->string('nis')->nullable();
+            $table->string('nama_lengkap')->nullable();
+            $table->string('nama_panggilan')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->string('tanggal_lahir')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('kewarganegaraan')->nullable();
             $table->timestamps();
         });
     }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Aku;
+use App\Models\Ayah;
 
 class PlaygroupController extends Controller
 {
@@ -34,7 +37,21 @@ class PlaygroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        dd($data);
+
+        // $ayah = new Ayah;
+        // $ayah->tempat_lahir = $data['tempat_lahir'];
+        // $ayah->save();
+
+        // $aku = new Aku;
+        // $array_ayah = Ayah::latest()->first()->id;
+        // $ayah_id = $array_ayah;
+        // $aku->nama_lengkap = $data['nama_lengkap'];
+        // $aku->ayah_id = $ayah_id;
+        // $aku->save();
+
+        // return redirect()->back()->with('status', 'Berhasil, semangat skripsi!');
     }
 
     /**
