@@ -15,11 +15,12 @@ class StudentFactory extends Factory
     {
         return [
             'level_id' => $this->faker->numberBetween(1, 2),
-            'father_id' => $this->faker->numberBetween(1, 10),
-            'mother_id' => $this->faker->numberBetween(1, 10),
-            'nis' => $this->faker->numberBetween(1, 999) . ' / paud / ' . $this->faker->numberBetween(1, 99) . ' ' . $this->faker->numberBetween(1, 9) . ' ' . $this->faker->numberBetween(1, 9),
+            'father_id' => 1,
+            'mother_id' => 1,
+            // 'nis' => $this->faker->numberBetween(1, 999) . ' / paud / ' . $this->faker->numberBetween(1, 99) . ' ' . $this->faker->numberBetween(1, 9) . ' ' . $this->faker->numberBetween(1, 9),
+            'nis' => '001/paud/22',
             'nama_lengkap' => $this->faker->name,
-            'nama_panggilan' => $this->faker->name,
+            'nama_panggilan' => $this->faker->firstName(),
             'avatar' => $this->faker->imageUrl(),
             'jenis_kelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
             'tempat_lahir' => $this->faker->city,

@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Student::factory(10)->create();
-        Father::factory(10)->create();
-        Mother::factory(10)->create();
+        Student::factory(1)->create();
+        Father::factory(1)->create();
+        Mother::factory(1)->create();
 
         User::create([
             'name' => 'Nurhidayatul Hikmah',

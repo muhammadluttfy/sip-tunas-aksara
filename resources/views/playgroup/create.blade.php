@@ -29,7 +29,7 @@
 
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="card-title">Tambah Data Ayah</h5>
+                    <h5 class="card-title">Tambah Data Peserta Didik</h5>
                     <hr />
 
                     <!-- SmartWizard html -->
@@ -48,7 +48,7 @@
                                     <br>Form Identitas Ayah</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#step-4"> <strong>Step 4</strong>
+                                <a class="nav-link" href="#step-4"> <strong>Step 4 (Opsional)</strong>
                                     <br>Mutasi</a>
                             </li>
                         </ul>
@@ -75,25 +75,34 @@
                                                                 name="nama_panggilan_murid" id="nama_panggilan"
                                                                 placeholder="Masukkan Nama Panggilan">
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <label for="jenis_kelamin" class="form-label">Jenis
                                                                 Kelamin</label>
                                                             <select class="form-select" name="jenis_kelamin"
                                                                 id="jenis_kelamin">
-                                                                <option value="1">Laki - Laki</option>
-                                                                <option value="2">Perempuan</option>
+                                                                <option value="Laki - Laki">Laki - Laki</option>
+                                                                <option value="Perempuan">Perempuan</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <label for="agama_murid" class="form-label">Agama</label>
                                                             <select class="form-select" name="agama_murid"
                                                                 id="agama_murid">
-                                                                <option value="1">Islam</option>
-                                                                <option value="2">Protestan</option>
-                                                                <option value="3">Katolik</option>
-                                                                <option value="4">Hindu</option>
-                                                                <option value="5">Buddha</option>
-                                                                <option value="6">Konghucu</option>
+                                                                <option value="Islam">Islam</option>
+                                                                <option value="Protestan">Protestan</option>
+                                                                <option value="Katolik">Katolik</option>
+                                                                <option value="Hindu">Hindu</option>
+                                                                <option value="Buddha">Buddha</option>
+                                                                <option value="Konghucu">Konghucu</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="kewarganegaraan_murid"
+                                                                class="form-label">Kewarganegaraan</label>
+                                                            <select class="form-select" name="kewarganegaraan_murid"
+                                                                id="kewarganegaraan_murid">
+                                                                <option value="WNI">WNI</option>
+                                                                <option value="WNI Keturunan">WNI Keturunan</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-6">
@@ -161,10 +170,10 @@
                                                             <label for="gol_darah" class="form-label">Golongan
                                                                 Darah</label>
                                                             <select class="form-select" name="gol_darah" id="gol_darah">
-                                                                <option value="1">A</option>
-                                                                <option value="2">B</option>
-                                                                <option value="3">AB</option>
-                                                                <option value="4">O</option>
+                                                                <option value="A">A</option>
+                                                                <option value="B">B</option>
+                                                                <option value="AB">AB</option>
+                                                                <option value="O">O</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-12">
@@ -216,12 +225,12 @@
                                                             <label for="agama_ayah" class="form-label">Agama</label>
                                                             <select class="form-select" name="agama_ayah"
                                                                 id="agama_ayah">
-                                                                <option value="1">Islam</option>
-                                                                <option value="2">Protestan</option>
-                                                                <option value="3">Katolik</option>
-                                                                <option value="4">Hindu</option>
-                                                                <option value="5">Buddha</option>
-                                                                <option value="6">Konghucu</option>
+                                                                <option value="Islam">Islam</option>
+                                                                <option value="Protestan">Protestan</option>
+                                                                <option value="Katolik">Katolik</option>
+                                                                <option value="Hindu">Hindu</option>
+                                                                <option value="Buddha">Buddha</option>
+                                                                <option value="Konghucu">Konghucu</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-6">
@@ -229,8 +238,8 @@
                                                                 class="form-label">Kewarganegaraan</label>
                                                             <select class="form-select" name="kewarganegaraan_ayah"
                                                                 id="kewarganegaraan_ayah">
-                                                                <option value="1">WNI</option>
-                                                                <option value="2">WNI Keturunan</option>
+                                                                <option value="WNI">WNI</option>
+                                                                <option value="WNI Keturunan">WNI Keturunan</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -301,12 +310,12 @@
                                                         <div class="col-md-6">
                                                             <label for="agama_ibu" class="form-label">Agama</label>
                                                             <select class="form-select" name="agama_ibu" id="agama_ibu">
-                                                                <option value="1">Islam</option>
-                                                                <option value="2">Protestan</option>
-                                                                <option value="3">Katolik</option>
-                                                                <option value="4">Hindu</option>
-                                                                <option value="5">Buddha</option>
-                                                                <option value="6">Konghucu</option>
+                                                                <option value="Islam">Islam</option>
+                                                                <option value="Protestan">Protestan</option>
+                                                                <option value="Katolik">Katolik</option>
+                                                                <option value="Hindu">Hindu</option>
+                                                                <option value="Buddha">Buddha</option>
+                                                                <option value="Konghucu">Konghucu</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-6">
@@ -314,8 +323,8 @@
                                                                 class="form-label">Kewarganegaraan</label>
                                                             <select class="form-select" name="kewarganegaraan_ibu"
                                                                 id="kewarganegaraan_ibu">
-                                                                <option value="1">WNI</option>
-                                                                <option value="2">WNI Keturunan</option>
+                                                                <option value="WNI">WNI</option>
+                                                                <option value="WNI Keturunan">WNI Keturunan</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -401,10 +410,17 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="d-grid">
-                                                                <button type="submit" id="submit"
-                                                                    class="btn btn-primary">Tambah Peserta
-                                                                    Didik</button>
+                                                                <button type="submit" id="submit" class="btn btn-primary">
+                                                                    Tambah Peserta Didik
+                                                                </button>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <p><strong class="text-danger">Catatan :</strong> Klik
+                                                                tombol
+                                                                "Tambah Peserta Didik" jika calon peserta didik
+                                                                mendaftarkan diri di
+                                                                PAUD Tunas Aksara secara langsung dan bukan pindahan.</p>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -23,4 +23,9 @@ class Student extends Model
     {
         return $this->belongsTo(Mother::class);
     }
+
+    public function mutation()
+    {
+        return $this->belongsTo(Mutation::class);
+    }
 }

@@ -42,9 +42,17 @@
                                         <div class="row g-3">
                                             <div class="col-12">
                                                 <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                                                <input type="text" class="form-control" name="nama_lengkap"
-                                                    id="nama_lengkap" placeholder="Masukkan Nama Lengkap">
+                                                <input type="text"
+                                                    class="form-control @error('nama_lengkap') is-invalid @enderror"
+                                                    name="nama_lengkap" id="nama_lengkap"
+                                                    placeholder="Masukkan Nama Lengkap">
+                                                @error('nama_lengkap')
+                                                    <div class="invalid-feedback mb-2">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
+
                                             <div class="col-12">
                                                 <label for="nama_panggilan" class="form-label">Nama Panggilan</label>
                                                 <input type="text" class="form-control" name="nama_panggilan"
@@ -69,9 +77,17 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+                                                <label for="tempat_lahir"
+                                                    class="form-label @error('tempat_lahir') is-invalid @enderror">Tempat
+                                                    Lahir</label>
                                                 <input type="text" class="form-control" name="tempat_lahir"
                                                     id="tempat_lahir" placeholder="Masukkan Tempat Lahir">
+                                                @error('tempat_lahir')
+                                                    <div class="invalid-feedback mb-2">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
