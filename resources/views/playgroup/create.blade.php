@@ -47,10 +47,10 @@
                                 <a class="nav-link" href="#step-3"> <strong>Step 3</strong>
                                     <br>Form Identitas Ayah</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="#step-4"> <strong>Step 4 (Opsional)</strong>
                                     <br>Mutasi</a>
-                            </li>
+                            </li> --}}
                         </ul>
                         <form action="{{ route('playgroup.store') }}" method="POST">
                             @csrf
@@ -355,6 +355,20 @@
                                                                 Telepon</label>
                                                             <input type="text" class="form-control" name="no_telepon_ibu"
                                                                 id="no_telepon_ibu" placeholder="082XXXXXXXXX">
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="d-grid">
+                                                                <button type="submit" id="submit" class="btn btn-primary">
+                                                                    Tambah Peserta Didik
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <p><strong class="text-danger">Catatan :</strong> Klik
+                                                                tombol
+                                                                "Tambah Peserta Didik" jika calon peserta didik
+                                                                mendaftarkan diri di
+                                                                PAUD Tunas Aksara secara langsung dan bukan pindahan.</p>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -19,7 +19,10 @@ class PlaygroupController extends Controller
      */
     public function index()
     {
-        return view('playgroup.index');
+        return view('playgroup.index', [
+            // get specific data by level id
+            'students' => Student::where('level_id', 1)->get(),
+        ]);
     }
 
     /**
@@ -45,39 +48,39 @@ class PlaygroupController extends Controller
 
         $validatedData = $request->validate([
             // step 1 - validasi form peserta didik
-            'nama_lengkap_murid' => 'required|max:255',
-            'nama_panggilan_murid' => 'required|max:64',
-            'jenis_kelamin' => 'required',
-            'agama_murid' => 'required',
-            'tempat_lahir_murid' => 'required',
-            'tanggal_lahir_murid' => 'required|date',
+            'nama_lengkap_murid' => 'max:255',
+            'nama_panggilan_murid' => 'max:64',
+            'jenis_kelamin' => '',
+            'agama_murid' => '',
+            'tempat_lahir_murid' => '',
+            'tanggal_lahir_murid' => 'date',
             'saudara_kandung' => 'numeric',
             'saudara_tiri' => '',
             'saudara_angkat' => '',
             'imunitas_diterima' => '',
             'ciri_khusus' => '',
-            'bahasa' => 'required',
+            'bahasa' => '',
             'gol_darah' => '',
-            'alamat_murid' => 'required',
+            'alamat_murid' => '',
             'no_telepon_murid' => '',
 
             // step 2 - validasi form identitas ayah
-            'nama_lengkap_ayah' => 'required|max:255',
-            'tempat_lahir_ayah' => 'required',
-            'tanggal_lahir_ayah' => 'required|date',
-            'agama_ayah' => 'required',
-            'kewarganegaraan_ayah' => 'required',
+            'nama_lengkap_ayah' => 'max:255',
+            'tempat_lahir_ayah' => '',
+            'tanggal_lahir_ayah' => 'date',
+            'agama_ayah' => '',
+            'kewarganegaraan_ayah' => '',
             'pendidikan_ayah' => '',
             'pekerjaan_ayah' => '',
             'alamat_ayah' => 'max:1000',
             // 'no_telepon_ayah' => 'numeric',
 
             // step 3 - validasi form identitas ibu
-            'nama_lengkap_ibu' => 'required|max:255',
-            'tempat_lahir_ibu' => 'required',
-            'tanggal_lahir_ibu' => 'required|date',
-            'agama_ibu' => 'required',
-            'kewarganegaraan_ibu' => 'required',
+            'nama_lengkap_ibu' => 'max:255',
+            'tempat_lahir_ibu' => '',
+            'tanggal_lahir_ibu' => 'date',
+            'agama_ibu' => '',
+            'kewarganegaraan_ibu' => '',
             'pendidikan_ibu' => '',
             'pekerjaan_ibu' => '',
             'alamat_ibu' => 'max:1000',
@@ -160,7 +163,7 @@ class PlaygroupController extends Controller
         $student->save();
 
 
-        return redirect()->route('playgroup.index')->with('status', 'Berhasil, semangat skripsi!');
+        return redirect()->route('playgroup.index')->with('success', 'Task Created Successfully!');
     }
 
     /**
@@ -169,9 +172,15 @@ class PlaygroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Student $student)
     {
-        return view('playgroup.show');
+        return view('playgroup.show', [
+            // get data by id
+            'student' => $student,
+            'father' => $student->father,
+            'mother' => $student->mother,
+            'mutation' => $student->mutation,
+        ]);
     }
 
     /**

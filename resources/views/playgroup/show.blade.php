@@ -8,9 +8,10 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ route('playgroup.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Muhammad Lutfi</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $student->nama_lengkap }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -23,12 +24,17 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="{{ asset('assets/images/avatars/avatar-1.png') }}" alt="Muhammad Lutfi"
+                                        <img src="{{ $student->avatar }}" alt="{{ $student->nama_lengkap }}"
                                             class="rounded-circle p-1 bg-primary" width="110">
+                                        {{-- <img src="{{ asset('assets/images/avatars/avatar-1.png') }}"
+                                            alt="{{ $student->nama_lengkap }}" class="rounded-circle p-1 bg-primary"
+                                            width="110"> --}}
                                         <div class="mt-3">
-                                            <h4>Muhammad Lutfi</h4>
-                                            <p class="text-secondary mb-1">200 / PAUD / 16</p>
-                                            <p class="text-muted font-size-sm">Kelompok <strong>B</strong></p>
+                                            <h4>{{ $student->nama_lengkap }}</h4>
+                                            <p class="text-secondary mb-1">{{ $student->nis }}</p>
+                                            <p class="text-muted font-size-sm">Kelompok
+                                                <strong>{{ $student->kelompok }}</strong>
+                                            </p>
                                             <button class="btn btn-primary">Edit</button>
                                             <button class="btn btn-outline-primary">Kirim Pesan</button>
                                         </div>
@@ -44,7 +50,8 @@
                                             <h6 class="mb-0">Nama Lengkap</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="Muhammad Lutfi" disabled />
+                                            <input type="text" class="form-control" value="{{ $student->nama_lengkap }}"
+                                                disabled />
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -52,7 +59,8 @@
                                             <h6 class="mb-0">Nama Panggilan</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="Lutfi" disabled />
+                                            <input type="text" class="form-control"
+                                                value="{{ $student->nama_panggilan }}" disabled />
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -60,7 +68,8 @@
                                             <h6 class="mb-0">Jenis Kelamin</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="Lakeeekk!" disabled />
+                                            <input type="text" class="form-control"
+                                                value="{{ $student->jenis_kelamin }}" disabled />
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -68,7 +77,8 @@
                                             <h6 class="mb-0">Tempat Tanggal Lahir</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="Lombok, 31 Januari 2001"
+                                            <input type="text" class="form-control"
+                                                value="{{ $student->tempat_lahir }}, {{ date('d F Y', strtotime($student->tanggal_lahir)) }}"
                                                 disabled />
                                         </div>
                                     </div>
@@ -77,7 +87,8 @@
                                             <h6 class="mb-0">Agama</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="Islam" disabled />
+                                            <input type="text" class="form-control" value="{{ $student->agama }}"
+                                                disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +108,8 @@
                                                     <h6 class="mb-0">Kewarganegaraan</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="WNI" disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->kewarganegaraan }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +120,8 @@
                                                     <h6 class="mb-0">Jumlah Sdr Kandung</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="1" disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->saudara_kandung }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -119,7 +132,8 @@
                                                     <h6 class="mb-0">Jumlah Sdr Tiri</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="-" disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->saudara_tiri }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -130,7 +144,8 @@
                                                     <h6 class="mb-0">Jumlah Sdr Angkat</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="-" disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->saudara_angkat }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -141,19 +156,20 @@
                                                     <h6 class="mb-0">Bahasa sehari - hari</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="Sasak Daerah"
-                                                        disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->bahasa }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class=" col-md-6">
                                             <div class="row mb-3 align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Imunitas yg pernah diterima</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="-" disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->imunitas_diterima }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -164,7 +180,8 @@
                                                     <h6 class="mb-0">Ciri - ciri khusus</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="-" disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->ciri_khusus }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -175,7 +192,8 @@
                                                     <h6 class="mb-0">Golongan Darah</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="-" disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->gol_darah }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -186,8 +204,7 @@
                                                     <h6 class="mb-0">Alamat</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control"
-                                                        value="Lombok, NTB - Indonesia" disabled />
+                                                    <textarea class="form-control" name="alamat" id="alamat" rows="3" disabled>{{ $student->alamat }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -198,8 +215,20 @@
                                                     <h6 class="mb-0">Nomor Telepon</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <input type="text" class="form-control" value="082340378657"
-                                                        disabled />
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->no_telepon }}" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="row mb-3 align-items-center">
+                                                <div class="col-sm-5">
+                                                    <h6 class="mb-0">Jarak Rumah ke Sekolah</h6>
+                                                </div>
+                                                <div class="col-sm-7 text-secondary">
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $student->jarak_sekolah_rumah }} KM" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -260,7 +289,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="Muhammad Nuhri" disabled />
+                                                                value="{{ $father->nama_lengkap }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,7 +301,8 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="Lombok, 31 Desember 1968" disabled />
+                                                                value="{{ $father->tempat_lahir }}, {{ date('d, F, Y', strtotime($father->tangal_lahir)) }}"
+                                                                disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -283,8 +313,8 @@
                                                             <h6 class="mb-0">Agama</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control" value="Islam"
-                                                                disabled />
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $father->agama }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -295,20 +325,20 @@
                                                             <h6 class="mb-0">Kewarganegaraan</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control" value="WNI"
-                                                                disabled />
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $father->kewarganegaraan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
+                                                <div class="  col-md-6">
                                                     <div class="row mb-3 align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Pendidikan</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control" value="SMA"
-                                                                disabled />
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $father->pendidikan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -319,8 +349,8 @@
                                                             <h6 class="mb-0">Pekerjaan</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control" value="PNS"
-                                                                disabled />
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $father->pekerjaan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -331,8 +361,7 @@
                                                             <h6 class="mb-0">Alamat Rumah</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control"
-                                                                value="Kuripan Lombok Barat - NTB" disabled />
+                                                            <textarea class="form-control" rows="3" disabled>{{ $father->alamat }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -344,7 +373,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="082 *** *** ***" disabled />
+                                                                value="{{ $father->no_telepon }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -358,8 +387,8 @@
                                                             <h6 class="mb-0">Nama</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control" value="Nurhikmah"
-                                                                disabled />
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $mother->nama_lengkap }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -371,7 +400,8 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="Lombok, 31 Desember 1974" disabled />
+                                                                value="{{ $mother->tempat_lahir }}, {{ date('d, F, Y', strtotime($mother->tanggal_lahir)) }}"
+                                                                disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -382,8 +412,8 @@
                                                             <h6 class="mb-0">Agama</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control" value="Islam"
-                                                                disabled />
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $mother->agama }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -394,8 +424,8 @@
                                                             <h6 class="mb-0">Kewarganegaraan</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control" value="WNI"
-                                                                disabled />
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $mother->kewarganegaraan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -406,8 +436,8 @@
                                                             <h6 class="mb-0">Pendidikan</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control" value="SD"
-                                                                disabled />
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $mother->pendidikan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -419,7 +449,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="Ibu Rumah Tangga" disabled />
+                                                                value="{{ $mother->pekerjaan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -430,8 +460,7 @@
                                                             <h6 class="mb-0">Alamat Rumah</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <input type="text" class="form-control"
-                                                                value="Kuripan Lombok Barat - NTB" disabled />
+                                                            <textarea class="form-control" rows="3" disabled>{{ $mother->alamat }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -443,7 +472,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="082 *** *** ***" disabled />
+                                                                value="{{ $mother->no_telepon }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -480,7 +509,8 @@
 
                                                 <div class="row mb-3 align-items-center">
                                                     <div class="col-sm-4">
-                                                        <h6 class="mb-0">Meninggalkan PAUD / TK Tanggal</h6>
+                                                        <h6 class="mb-0">Meninggalkan PAUD / TK Tanggal
+                                                        </h6>
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
                                                         <input type="text" class="form-control" value="" disabled />

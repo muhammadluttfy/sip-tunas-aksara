@@ -22,6 +22,7 @@ class CreateStudentsTable extends Migration
             $table->string('nis')->nullable();
             $table->string('nama_lengkap')->nullable();
             $table->string('nama_panggilan')->nullable();
+            $table->string('kelompok')->nullable();
             $table->string('avatar')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->string('tempat_lahir')->nullable();
@@ -31,12 +32,13 @@ class CreateStudentsTable extends Migration
             $table->string('saudara_kandung')->nullable();
             $table->string('saudara_tiri')->nullable();
             $table->string('saudara_angkat')->nullable();
+            $table->string('bahasa')->nullable();
             $table->string('imunitas_diterima')->nullable();
             $table->string('ciri_khusus')->nullable();
-            $table->string('bahasa')->nullable();
             $table->string('gol_darah')->nullable();
             $table->string('alamat')->nullable();
             $table->string('no_telepon')->nullable();
+            $table->string('jarak_sekolah_rumah')->nullable();
             $table->timestamps();
         });
     }

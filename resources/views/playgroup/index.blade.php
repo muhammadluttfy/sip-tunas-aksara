@@ -44,26 +44,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>18083000124</td>
-                                    <td>Muhammad Lutfi</td>
-                                    <td>Lakeeekkkk!</td>
-                                    <td></td>
-                                    <td class="gap-2">
-                                        <a href="{{ route('playgroup.show') }}" class="mx-md-1">
-                                            <span class="badge bg-secondary text-white"><i class='bx bxs-show'></i>
-                                                Detail</span>
-                                        </a>
-                                        <a href="{{ route('playgroup.edit') }}" class="mx-md-1">
-                                            <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
-                                        </a>
-                                        <a href="" class="mx-md-1">
-                                            <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
-                                        </a>
-                                    </td>
+                                @foreach ($students as $student)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $student->nis }}</td>
+                                        <td>{{ $student->nama_lengkap }}</td>
+                                        <td>{{ $student->jenis_kelamin }}</td>
+                                        <td>{{ $student->level_id }}</td>
+                                        <td class="gap-2">
+                                            <a href="/kb-tunas-aksara/profil/{{ $student->id }}" class="mx-md-1">
+                                                <span class="badge bg-secondary text-white"><i class='bx bxs-show'></i>
+                                                    Detail</span>
+                                            </a>
+                                            <a href="{{ route('playgroup.edit') }}" class="mx-md-1">
+                                                <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
+                                            </a>
+                                            <a href="" class="mx-md-1">
+                                                <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
+                                            </a>
+                                        </td>
 
-                                </tr>
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -83,6 +85,8 @@
     </div>
     <!--end page wrapper -->
 @endsection
+
+@include('sweetalert::alert')
 
 @section('script')
     <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
