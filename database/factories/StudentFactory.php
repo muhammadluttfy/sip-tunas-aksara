@@ -33,7 +33,7 @@ class StudentFactory extends Factory
             'saudara_angkat' => $this->faker->numberBetween(0, 4),
             'imunitas_diterima' => $this->faker->randomElement(['Tidak', 'Ya']),
             'bahasa' => 'Sasak Lombok',
-            'gol_darah' => $this->faker->randomElement(['WNI', 'WNA']),
+            'gol_darah' => $this->faker->randomElement(['A', 'B', 'AB', 'O']),
             'alamat' => $this->faker->address,
             'no_telepon' => $this->faker->phoneNumber,
             'jarak_sekolah_rumah' => $this->faker->numberBetween(0, 10),

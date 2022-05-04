@@ -478,14 +478,19 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                                            <div class="row">
+
+                                            {{-- get data if mutation not empty --}}
+                                            @if (!empty($mutation))
                                                 <div class="row mb-3 align-items-center">
                                                     <div class="col-sm-4">
                                                         <h6 class="mb-0">Diterima Tanggal</h6>
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
-                                                        <input type="text" class="form-control" value="" disabled />
+                                                        <input type="text" class="form-control"
+                                                            value="{{ date('d F Y', strtotime($mutation->diterima_tanggal)) }}"
+                                                            disabled />
                                                     </div>
                                                 </div>
 
@@ -494,7 +499,8 @@
                                                         <h6 class="mb-0">Ditempatkan di Kelompok</h6>
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
-                                                        <input type="text" class="form-control" value="" disabled />
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $mutation->ditempatkan_di_kelompok }}" disabled />
                                                     </div>
                                                 </div>
 
@@ -503,7 +509,8 @@
                                                         <h6 class="mb-0">Berasal Dari PAUD / TK</h6>
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
-                                                        <input type="text" class="form-control" value="" disabled />
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $mutation->instansi_asal }}" disabled />
                                                     </div>
                                                 </div>
 
@@ -513,10 +520,30 @@
                                                         </h6>
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
-                                                        <input type="text" class="form-control" value="" disabled />
+                                                        <input type="text" class="form-control"
+                                                            value="{{ date('d F Y', strtotime($mutation->tgl_meninggalkan_instansi)) }}"
+                                                            disabled />
                                                     </div>
                                                 </div>
-                                            </div>
+
+                                                <div class="row mb-3 align-items-center">
+                                                    <div class="col-sm-4">
+                                                        <h6 class="mb-0">Alasan Meninggalkan PAUD / TK
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col-sm-8 text-secondary">
+                                                        <textarea class="form-control" name="alasan" id="alasan" rows="3" disabled>{{ $mutation->alasan }}</textarea>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="row">
+                                                    <div class="row mb-3 align-items-center">
+                                                        <div class="col-12 text-center">
+                                                            <h6 class="mb-0 text-danger">Tidak ada data mutasi!</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

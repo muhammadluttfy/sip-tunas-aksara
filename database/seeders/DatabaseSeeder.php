@@ -2,13 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\Father;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Level;
+use App\Models\Father;
 use App\Models\Mother;
-use App\Models\Position;
 use App\Models\Student;
+use App\Models\Mutation;
+use App\Models\Position;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,9 +23,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Student::factory(10)->create();
-        Father::factory(10)->create();
-        Mother::factory(10)->create();
+        Student::factory(5)->create();
+        Father::factory(5)->create();
+        Mother::factory(5)->create();
+        Mutation::factory(5)->create();
 
         User::create([
             'name' => 'Nurhidayatul Hikmah',
