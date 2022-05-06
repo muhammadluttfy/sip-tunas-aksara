@@ -15,31 +15,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
 
 // Route::middleware(['auth'])->group(function () {
+route::group(['middleware' => ['auth']], function () {
 
-// KB Tunas Aksara
-Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
-Route::get('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'create'])->name('playgroup.create');
+    Route::get('/', function () {
+        return redirect()->route('login');
+    });
 
-Route::post('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'store'])->name('playgroup.store');
+    // KB Tunas Aksara
+    Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
+    Route::get('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'create'])->name('playgroup.create');
 
-Route::get('/kb-tunas-aksara/profil/{student:id}', [PlaygroupController::class, 'show'])->name('playgroup.show');
-Route::get('/kb-tunas-aksara/profil/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
+    Route::post('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'store'])->name('playgroup.store');
 
-// Parent Controller
-Route::get('/kb-tunas-aksara/tambah-data-ayah', [ParentController::class, 'create'])->name('parent.create');
+    Route::get('/kb-tunas-aksara/profil/{student:id}', [PlaygroupController::class, 'show'])->name('playgroup.show');
+    Route::get('/kb-tunas-aksara/profil/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
+
+    // Parent Controller
+    Route::get('/kb-tunas-aksara/tambah-data-ayah', [ParentController::class, 'create'])->name('parent.create');
 
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 });
-// });
 
 
 

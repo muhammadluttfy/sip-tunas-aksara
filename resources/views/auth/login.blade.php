@@ -69,20 +69,40 @@
                                     <div class="mb-4 text-center login-separater"> <span>SIGN IN WITH EMAIL</span>
                                         <hr />
                                     </div>
+
+                                    {{-- if login error --}}
+                                    @if (session()->has('loginError'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <strong>{{ session()->get('loginError') }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @endif
+
                                     <div class="form-body">
-                                        <form class="row g-3">
+                                        <form action="/login" method="POST" class="row g-3">
+                                            @csrf
                                             <div class="col-12">
-                                                <label for="inputEmailAddress" class="form-label">Email
+                                                <label for="email" class="form-label">Email
                                                     Address</label>
-                                                <input type="email" class="form-control" id="inputEmailAddress"
-                                                    placeholder="Email Address">
+                                                <input type="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    name="email" id="email" placeholder="Email Address"
+                                                    value="{{ old('email') }}">
+                                                @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                             <div class="col-12">
-                                                <label for="inputChoosePassword" class="form-label">Enter
+                                                <label for="password" class="form-label">Enter
                                                     Password</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0"
-                                                        id="inputChoosePassword" placeholder="Enter Password"> <a
+                                                        name="password" id="password" placeholder="Enter Password"> <a
                                                         href="javascript:;" class="bg-transparent input-group-text"><i
                                                             class='bx bx-hide'></i></a>
                                                 </div>

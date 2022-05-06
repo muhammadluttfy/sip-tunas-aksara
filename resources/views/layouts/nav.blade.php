@@ -20,6 +20,22 @@
             </a>
         </li>
 
+        <li class="menu-label">Main Master</li>
+        <li>
+            <a href="#">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Data Peserta Didik</div>
+            </a>
+        </li>
+        <li>
+            <a href="/raport">
+                <div class="parent-icon"><i class="bx bx-grid-alt"></i>
+                </div>
+                <div class="menu-title">Nilai Raport</div>
+            </a>
+        </li>
+
 
         <li class="menu-label">KB Tunas Aksara</li>
         <li>

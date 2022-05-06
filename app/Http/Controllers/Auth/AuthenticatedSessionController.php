@@ -26,13 +26,28 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    // public function store(LoginRequest $request)
+    public function store(Request $request)
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
+        // $request->authenticate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // $request->session()->regenerate();
+
+        // return redirect()->intended(RouteServiceProvider::HOME);
+
+        $credentials = $request->validate([
+            'email' => ['required', 'string', 'email:dns'],
+            'password' => ['required', 'string'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        return back()->with('loginError', 'Login Failed!.',);
     }
 
     /**

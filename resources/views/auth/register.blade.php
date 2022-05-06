@@ -55,10 +55,11 @@
                                         <hr />
                                     </div>
                                     <div class="form-body">
-                                        <form class="row g-3">
+                                        <form action="/register" method="POST" class="row g-3">
+                                            @csrf
                                             <div class="col-sm-12">
                                                 <label for="name" class="form-label">Full Name</label>
-                                                <input type="email" class="form-control" id="name"
+                                                <input type="text" class="form-control" name="name" id="name"
                                                     placeholder="Full Name">
                                             </div>
 
