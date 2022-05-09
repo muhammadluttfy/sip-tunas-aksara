@@ -361,7 +361,11 @@
                     <img src="{{ asset('assets/images/avatars/avatar-2.png') }}" class="user-img"
                         alt="user avatar">
                     <div class="user-info ps-3">
-                        <p class="user-name mb-0">Pauline Seitz</p>
+                        @if (Str::length(Auth::guard('student')->user()) > 0)
+                            <p class="user-name mb-0">{{ Auth::guard('student')->user()->nama_lengkap }}</p>
+                        @elseif(Str::length(Auth::guard('user')->user()) > 0)
+                            <p class="user-name mb-0">{{ Auth::guard('user')->user()->nama_lengkap }}</p>
+                        @endif
                         <p class="designattion mb-0">Web Designer</p>
                     </div>
                 </a>
@@ -384,13 +388,8 @@
                     <li>
                         <div class="dropdown-divider mb-0"></div>
                     </li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                    <li><a class="dropdown-item" href="{{ route('logout') }}"><i
                                 class='bx bx-log-out-circle'></i><span>Logout</span></a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
                     </li>
                 </ul>
             </div>

@@ -41,13 +41,30 @@ class AuthenticatedSessionController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        // if (Auth::attempt($credentials)) {
+        //     $request->session()->regenerate();
 
+        //     return redirect()->intended(RouteServiceProvider::HOME);
+        // }
+
+        if (Auth::guard('student')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } elseif (Auth::guard('user')->attempt($credentials)) {
+            $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME);
         }
+    }
 
-        return back()->with('loginError', 'Login Failed!.',);
+    public function logout()
+    {
+        if (Auth::guard('student')->check()) {
+            Auth::guard('student')->logout();
+        } elseif (Auth::guard('user')->check()) {
+            Auth::guard('user')->logout();
+        }
+        // return redirect()->route('login');
+        return redirect('/');
     }
 
     /**

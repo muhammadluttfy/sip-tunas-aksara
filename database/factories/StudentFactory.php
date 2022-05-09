@@ -18,11 +18,12 @@ class StudentFactory extends Factory
             'level_id' => $this->faker->numberBetween(1, 2),
             'father_id' => $this->faker->numberBetween(1, 10),
             'mother_id' => $this->faker->numberBetween(1, 10),
+            'role' => 'Student',
             'no_identitas' => $this->faker->unique()->randomNumber(9),
             'nama_lengkap' => $this->faker->name,
             'slug' => $this->faker->unique()->slug,
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => $this->faker->password,
+            'email' => $this->faker->firstName() . '.' . $this->faker->lastName() . '@gmail.com',
+            'password' => bcrypt('password'),
             'avatar' => $this->faker->imageUrl(),
         ];
     }
