@@ -10,6 +10,7 @@ use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
 use App\Models\Position;
+use App\Models\StudentDetail;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,25 +24,43 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Student::factory(5)->create();
-        Father::factory(5)->create();
-        Mother::factory(5)->create();
-        Mutation::factory(5)->create();
+        Student::factory(10)->create();
+        StudentDetail::factory(10)->create();
+        Father::factory(10)->create();
+        Mother::factory(10)->create();
+        Mutation::factory(10)->create();
 
-        User::create([
-            'name' => 'Nurhidayatul Hikmah',
-            'role_id' => 1,
-            'avatar' => 'https://i.pravatar.cc/300',
-            'email' => 'creativedevelopment.id@gmail.com',
-            'password' => bcrypt('password'),
+        User::insert([
+            [
+                'role' => 'Kepala Sekolah',
+                'no_identitas' => '18083000124',
+                'nama_lengkap' => 'Muhammad Lutfi',
+                'slug' => 'muhammad-lutfi',
+                'email' => 'creativedevelopment.id@gmail.com',
+                'password' => bcrypt('password'),
+                'avatar' => 'https://i.pravatar.cc/300',
+                'remember_token' => '',
+                'created_at' => now(),
+            ],
+            [
+                'role' => 'Administrator',
+                'no_identitas' => '18083000125',
+                'nama_lengkap' => 'Nurhidayatul Hikmah',
+                'slug' => 'nurhidayatul-hikmah',
+                'email' => 'dayah@gmail.com',
+                'password' => bcrypt('password'),
+                'avatar' => 'https://i.pravatar.cc/300',
+                'remember_token' => '',
+                'created_at' => now(),
+            ],
         ]);
 
-        Role::insert([
-            // ['name' => 'Ketua Yayasan',],
-            ['name' => 'Kepala Sekolah',],
-            ['name' => 'Administrator',],
-            ['name' => 'Tenaga Pendidik',],
-        ]);
+        // Role::insert([
+        //     // ['name' => 'Ketua Yayasan',],
+        //     ['name' => 'Kepala Sekolah',],
+        //     ['name' => 'Administrator',],
+        //     ['name' => 'Tenaga Pendidik',],
+        // ]);
 
         Level::insert([
             [

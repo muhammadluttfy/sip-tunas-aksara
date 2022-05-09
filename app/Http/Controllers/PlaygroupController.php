@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Father;
 use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
+use App\Models\StudentDetail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +21,10 @@ class PlaygroupController extends Controller
     public function index()
     {
         return view('playgroup.index', [
-            // get specific data by level id
+            // get all data student by level_id = 1
             'students' => Student::where('level_id', 1)->get(),
+            // get jenis kelamin in StudentDetail table
+            'jenis_kelamin' => StudentDetail::select('jenis_kelamin')->distinct()->get(),
         ]);
     }
 
@@ -190,6 +192,7 @@ class PlaygroupController extends Controller
         return view('playgroup.show', [
             // get data by id
             'student' => $student,
+            'student_detail' => $student->student_detail,
             'father' => $student->father,
             'mother' => $student->mother,
             'mutation' => $student->mutation,

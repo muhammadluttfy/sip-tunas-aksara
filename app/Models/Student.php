@@ -11,9 +11,11 @@ class Student extends Model
 
     protected $guarded = [];
 
-    public function level()
+
+
+    public function student_detail()
     {
-        return $this->belongsTo(Level::class);
+        return $this->belongsTo(StudentDetail::class);
     }
 
     public function father()
@@ -29,5 +31,10 @@ class Student extends Model
     public function mutation()
     {
         return $this->belongsTo(Mutation::class);
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
     }
 }

@@ -10,8 +10,9 @@ class Mutation extends Model
     use HasFactory;
     protected $guarded = [''];
 
-    public function student()
+
+    public function student_detail()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(StudentDetail::class);
     }
 }

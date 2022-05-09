@@ -47,9 +47,9 @@
                                 @foreach ($students as $student)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $student->nis }}</td>
+                                        <td>{{ $student->no_identitas }}</td>
                                         <td>{{ $student->nama_lengkap }}</td>
-                                        <td>{{ $student->jenis_kelamin }}</td>
+                                        <td>{{ $jenis_kelamin }}</td>
                                         <td>{{ $student->level_id }}</td>
                                         <td class="gap-2">
                                             <a href="/kb-tunas-aksara/profil/{{ $student->id }}" class="mx-md-1">

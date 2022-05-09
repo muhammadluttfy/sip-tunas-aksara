@@ -14,30 +14,16 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
+            'student_detail_id' => $this->faker->numberBetween(1, 10),
             'level_id' => $this->faker->numberBetween(1, 2),
-            'father_id' => 1,
-            'mother_id' => 1,
-            'nis' => $this->faker->numberBetween(1, 999) . ' / paud / ' . $this->faker->numberBetween(1, 99) . ' ' . $this->faker->numberBetween(1, 9) . ' ' . $this->faker->numberBetween(1, 9),
-            // 'nis' => '001/paud/22',
+            'father_id' => $this->faker->numberBetween(1, 10),
+            'mother_id' => $this->faker->numberBetween(1, 10),
+            'no_identitas' => $this->faker->unique()->randomNumber(9),
             'nama_lengkap' => $this->faker->name,
-            'nama_panggilan' => $this->faker->firstName(),
+            'slug' => $this->faker->unique()->slug,
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => $this->faker->password,
             'avatar' => $this->faker->imageUrl(),
-            'kelompok' => $this->faker->randomElement(['A', 'B', 'C']),
-            'jenis_kelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
-            'tempat_lahir' => $this->faker->city,
-            'tanggal_lahir' => $this->faker->date(),
-            'agama' => $this->faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha']),
-            'kewarganegaraan' => $this->faker->randomElement(['WNI', 'WNA']),
-            'saudara_kandung' => $this->faker->numberBetween(0, 4),
-            'saudara_tiri' => $this->faker->numberBetween(0, 4),
-            'saudara_angkat' => $this->faker->numberBetween(0, 4),
-            'imunitas_diterima' => $this->faker->randomElement(['Tidak', 'Ya']),
-            'bahasa' => 'Sasak Lombok',
-            'gol_darah' => $this->faker->randomElement(['A', 'B', 'AB', 'O']),
-            'alamat' => $this->faker->address,
-            'no_telepon' => $this->faker->phoneNumber,
-            'jarak_sekolah_rumah' => $this->faker->numberBetween(0, 10),
-
         ];
     }
 }

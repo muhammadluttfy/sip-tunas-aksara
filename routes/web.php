@@ -15,15 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-// Route::middleware(['auth'])->group(function () {
 route::group(['middleware' => ['auth']], function () {
-
     Route::get('/', function () {
         return redirect()->route('login');
     });
+});
 
-    // KB Tunas Aksara
+
+route::group(['middleware' => ['auth', 'role:Kepala Sekolah,Administrator']], function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+
+    // START :: KB Tunas Aksara
     Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
     Route::get('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'create'])->name('playgroup.create');
 
@@ -31,16 +36,7 @@ route::group(['middleware' => ['auth']], function () {
 
     Route::get('/kb-tunas-aksara/profil/{student:id}', [PlaygroupController::class, 'show'])->name('playgroup.show');
     Route::get('/kb-tunas-aksara/profil/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
-
-    // Parent Controller
-    Route::get('/kb-tunas-aksara/tambah-data-ayah', [ParentController::class, 'create'])->name('parent.create');
-
-
-
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    // END :: KB Tunas Aksara
 });
 
 

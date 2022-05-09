@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Father extends Model
+class StudentDetail extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
 
-    public function student_detail()
+    public function student()
     {
-        return $this->hasMany(StudentDetail::class);
+        return $this->belongsTo(Student::class);
     }
 }
