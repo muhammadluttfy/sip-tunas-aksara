@@ -22,6 +22,7 @@ class PlaygroupController extends Controller
     public function index()
     {
         return view('playgroup.index', [
+            'title' => 'KB Tunas Aksara - Semua Peserta Didik',
             // get all data student by level_id = 1
             'students' => Student::where('level_id', 1)->get(),
         ]);
@@ -188,7 +189,7 @@ class PlaygroupController extends Controller
         $student->role = 'Student';
         $student->no_identitas = str_pad($latestStudent->id + 1, 3, "0", STR_PAD_LEFT) . '/paud/' . $year_id;
         $student->nama_lengkap = $data['nama_lengkap_murid'];
-        $student->slug = '@' . str_replace(' ', '', strtolower($data['nama_panggilan_murid']));
+        $student->username = '@' . str_replace(' ', '', strtolower($data['nama_panggilan_murid']));
         $student->email = strtolower($first_name . '.' . $last_name) . '@paud.com';
         $student->password = Hash::make($data['tanggal_lahir_murid']);
         $student->save();
@@ -207,6 +208,7 @@ class PlaygroupController extends Controller
     {
         return view('playgroup.show', [
             // get data by id
+            'title' => $student->nama_lengkap . ' ' . '(' . $student->username . ')',
             'student' => $student,
             'student_detail' => $student->student_detail,
             'father' => $student->father,
@@ -221,9 +223,16 @@ class PlaygroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Student $student)
     {
-        return view('playgroup.edit');
+        return view('playgroup.edit', [
+            'title' => 'Edit Profil' . ' - ' . $student->nama_lengkap . ' ' . '(' . $student->username . ')',
+            'student' => $student,
+            'student_detail' => $student->student_detail,
+            'father' => $student->father,
+            'mother' => $student->mother,
+            'mutation' => $student->mutation,
+        ]);
     }
 
     /**
@@ -246,6 +255,8 @@ class PlaygroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Student::find($id);
+        $data->delete();
+        return redirect()->route('playgroup.index')->with('success', 'Task Deleted Successfully!');
     }
 }

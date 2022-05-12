@@ -23,7 +23,9 @@ route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
     })->middleware('guest:user,student');
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('dashboard', [
+            'title' => 'Dashboard - Sistem Informasi Manajemen PAUD Tunas Aksara',
+        ]);
     });
 
     // START :: KB Tunas Aksara
@@ -32,8 +34,10 @@ route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::post('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'store'])->name('playgroup.store');
 
-    Route::get('/kb-tunas-aksara/profil/{student:slug}', [PlaygroupController::class, 'show'])->name('playgroup.show');
-    Route::get('/kb-tunas-aksara/profil/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
+    Route::get('/kb-tunas-aksara/profil/{student:username}', [PlaygroupController::class, 'show'])->name('playgroup.show');
+    Route::get('/kb-tunas-aksara/profil/{student:username}/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
+
+    Route::get('/kb-tunas-aksara/profil/delete/{id}', [PlaygroupController::class, 'destroy'])->name('playgroup.destroy');
     // END :: KB Tunas Aksara
 });
 

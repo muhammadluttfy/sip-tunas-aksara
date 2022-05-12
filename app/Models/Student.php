@@ -66,4 +66,18 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(Level::class);
     }
+
+
+    // ===== Handler untuk menghapus data relasi jika data paret di hapus ===== 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($student) {
+            $student->student_detail()->delete();
+            $student->father()->delete();
+            $student->mother()->delete();
+            $student->mutation()->delete();
+        });
+    }
 }

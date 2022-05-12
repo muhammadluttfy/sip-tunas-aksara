@@ -21,7 +21,7 @@ class StudentFactory extends Factory
             'role' => 'Student',
             'no_identitas' => $this->faker->unique()->randomNumber(9),
             'nama_lengkap' => $this->faker->name,
-            'slug' => '@' . strtolower($this->faker->firstName() . '-' . $this->faker->lastName()),
+            'username' => '@' . strtolower($this->faker->firstName() . '-' . $this->faker->lastName()),
             'email' => strtolower($this->faker->firstName() . '.' . $this->faker->lastName()) . '@gmail.com',
             'jenis_kelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
             'password' => bcrypt('password'),

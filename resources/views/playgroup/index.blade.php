@@ -52,14 +52,17 @@
                                         <td>{{ $student->jenis_kelamin }}</td>
                                         <td>{{ $student->level_id }}</td>
                                         <td class="gap-2">
-                                            <a href="/kb-tunas-aksara/profil/{{ $student->slug }}" class="mx-md-1">
+                                            <a href="/kb-tunas-aksara/profil/{{ $student->username }}"
+                                                class="mx-md-1">
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
-                                            <a href="{{ route('playgroup.edit') }}" class="mx-md-1">
+                                            <a href="/kb-tunas-aksara/profil/{{ $student->username }}/edit"
+                                                class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
-                                            <a href="" class="mx-md-1">
+                                            <a href="#" class="mx-md-1 delete" data-id="{{ $student->id }}"
+                                                data-name="{{ $student->username }}">
                                                 <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
                                             </a>
                                         </td>
@@ -86,9 +89,32 @@
     <!--end page wrapper -->
 @endsection
 
-@include('sweetalert::alert')
-
 @section('script')
+    {{-- sweet alert --}}
+    <script>
+        $('.delete').click(function() {
+            var studentId = $(this).attr('data-id');
+            var studentName = $(this).attr('data-name');
+            swal({
+                    title: "Apakah kamu yakin ?",
+                    text: "Kamu akan menghapus data " + studentName + " !",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location = "/kb-tunas-aksara/profil/delete/" + studentId + "";
+                        swal("Selamat! Data berhasil dihapus!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Data tidak jadi dihapus!");
+                    }
+                });
+        });
+    </script>
+
     <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
     <script>
