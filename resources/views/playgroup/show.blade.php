@@ -3,11 +3,11 @@
     <div class="page-wrapper">
         <div class="page-content">
             <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
                 <div class="breadcrumb-title pe-3">Detail</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
+                        <ol class="p-0 mb-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('playgroup.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
@@ -23,17 +23,17 @@
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="d-flex flex-column align-items-center text-center">
+                                    <div class="text-center d-flex flex-column align-items-center">
                                         <img src="{{ $student->avatar }}" alt="{{ $student->nama_lengkap }}"
-                                            class="rounded-circle p-1 bg-primary" width="110">
+                                            class="p-1 rounded-circle bg-primary" width="110">
                                         {{-- <img src="{{ asset('assets/images/avatars/avatar-1.png') }}"
-                                            alt="{{ $student->nama_lengkap }}" class="rounded-circle p-1 bg-primary"
+                                            alt="{{ $student->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
                                             width="110"> --}}
                                         <div class="mt-3">
                                             <h4>{{ $student->nama_lengkap }}</h4>
-                                            <p class="text-secondary mb-1">{{ $student->nis }}</p>
+                                            <p class="mb-1 text-secondary">{{ $student->no_identitas }}</p>
                                             <p class="text-muted font-size-sm">Kelompok
-                                                <strong>{{ $student->kelompok }}</strong>
+                                                <strong>{{ $student_detail->kelompok }}</strong>
                                             </p>
                                             <button class="btn btn-primary">Edit</button>
                                             <button class="btn btn-outline-primary">Kirim Pesan</button>
@@ -45,7 +45,7 @@
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row mb-3 align-items-center">
+                                    <div class="mb-3 row align-items-center">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Nama Lengkap</h6>
                                         </div>
@@ -54,16 +54,16 @@
                                                 disabled />
                                         </div>
                                     </div>
-                                    <div class="row mb-3 align-items-center">
+                                    <div class="mb-3 row align-items-center">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Nama Panggilan</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" class="form-control"
-                                                value="{{ $student->nama_panggilan }}" disabled />
+                                                value="{{ $student_detail->nama_panggilan }}" disabled />
                                         </div>
                                     </div>
-                                    <div class="row mb-3 align-items-center">
+                                    <div class="mb-3 row align-items-center">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Jenis Kelamin</h6>
                                         </div>
@@ -72,23 +72,23 @@
                                                 value="{{ $student->jenis_kelamin }}" disabled />
                                         </div>
                                     </div>
-                                    <div class="row mb-3 align-items-center">
+                                    <div class="mb-3 row align-items-center">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Tempat Tanggal Lahir</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" class="form-control"
-                                                value="{{ $student->tempat_lahir }}, {{ date('d F Y', strtotime($student->tanggal_lahir)) }}"
+                                                value="{{ $student_detail->tempat_lahir }}, {{ date('d F Y', strtotime($student->tanggal_lahir)) }}"
                                                 disabled />
                                         </div>
                                     </div>
-                                    <div class="row mb-3 align-items-center">
+                                    <div class="mb-3 row align-items-center">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Agama</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="{{ $student->agama }}"
-                                                disabled />
+                                            <input type="text" class="form-control"
+                                                value="{{ $student_detail->agama }}" disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -103,132 +103,133 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Kewarganegaraan</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->kewarganegaraan }}" disabled />
+                                                        value="{{ $student_detail->kewarganegaraan }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Jumlah Sdr Kandung</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->saudara_kandung }}" disabled />
+                                                        value="{{ $student_detail->saudara_kandung }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Jumlah Sdr Tiri</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->saudara_tiri }}" disabled />
+                                                        value="{{ $student_detail->saudara_tiri }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Jumlah Sdr Angkat</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->saudara_angkat }}" disabled />
+                                                        value="{{ $student_detail->saudara_angkat }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Bahasa sehari - hari</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->bahasa }}" disabled />
+                                                        value="{{ $student_detail->bahasa }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class=" col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Imunitas yg pernah diterima</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->imunitas_diterima }}" disabled />
+                                                        value="{{ $student_detail->imunitas_diterima }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Ciri - ciri khusus</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->ciri_khusus }}" disabled />
+                                                        value="{{ $student_detail->ciri_khusus }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Golongan Darah</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->gol_darah }}" disabled />
+                                                        value="{{ $student_detail->gol_darah }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Alamat</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <textarea class="form-control" name="alamat" id="alamat" rows="3" disabled>{{ $student->alamat }}</textarea>
+                                                    <textarea class="form-control" name="alamat" id="alamat" rows="3"
+                                                        disabled>{{ $student_detail->alamat }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Nomor Telepon</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->no_telepon }}" disabled />
+                                                        value="{{ $student_detail->no_telepon }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="row mb-3 align-items-center">
+                                            <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-5">
                                                     <h6 class="mb-0">Jarak Rumah ke Sekolah</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student->jarak_sekolah_rumah }} KM" disabled />
+                                                        value="{{ $student_detail->jarak_sekolah_rumah }} KM" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -245,7 +246,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                                    <ul class="mb-0 nav nav-tabs nav-primary" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab"
                                                 aria-selected="true">
@@ -279,11 +280,11 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    <div class="tab-content pt-3">
+                                    <div class="pt-3 tab-content">
                                         <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Nama</h6>
                                                         </div>
@@ -295,20 +296,20 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Tempat Tanggal Lahir</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $father->tempat_lahir }}, {{ date('d, F, Y', strtotime($father->tangal_lahir)) }}"
+                                                                value="{{ $father->tempat_lahir }}, {{ date('d F Y', strtotime($father->tangal_lahir)) }}"
                                                                 disabled />
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Agama</h6>
                                                         </div>
@@ -320,7 +321,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Kewarganegaraan</h6>
                                                         </div>
@@ -331,8 +332,8 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="  col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                <div class=" col-md-6">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Pendidikan</h6>
                                                         </div>
@@ -344,7 +345,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Pekerjaan</h6>
                                                         </div>
@@ -356,7 +357,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Alamat Rumah</h6>
                                                         </div>
@@ -367,7 +368,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Nomor Telepon</h6>
                                                         </div>
@@ -382,7 +383,7 @@
                                         <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Nama</h6>
                                                         </div>
@@ -394,20 +395,20 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Tempat Tanggal Lahir</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $mother->tempat_lahir }}, {{ date('d, F, Y', strtotime($mother->tanggal_lahir)) }}"
+                                                                value="{{ $mother->tempat_lahir }}, {{ date('d F Y', strtotime($mother->tanggal_lahir)) }}"
                                                                 disabled />
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Agama</h6>
                                                         </div>
@@ -419,7 +420,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Kewarganegaraan</h6>
                                                         </div>
@@ -431,7 +432,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Pendidikan</h6>
                                                         </div>
@@ -443,7 +444,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Pekerjaan</h6>
                                                         </div>
@@ -455,7 +456,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Alamat Rumah</h6>
                                                         </div>
@@ -466,7 +467,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="row mb-3 align-items-center">
+                                                    <div class="mb-3 row align-items-center">
                                                         <div class="col-sm-5">
                                                             <h6 class="mb-0">Nomor Telepon</h6>
                                                         </div>
@@ -483,7 +484,7 @@
 
                                             {{-- get data if mutation not empty --}}
                                             @if (!empty($mutation))
-                                                <div class="row mb-3 align-items-center">
+                                                <div class="mb-3 row align-items-center">
                                                     <div class="col-sm-4">
                                                         <h6 class="mb-0">Diterima Tanggal</h6>
                                                     </div>
@@ -494,7 +495,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row mb-3 align-items-center">
+                                                <div class="mb-3 row align-items-center">
                                                     <div class="col-sm-4">
                                                         <h6 class="mb-0">Ditempatkan di Kelompok</h6>
                                                     </div>
@@ -504,7 +505,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row mb-3 align-items-center">
+                                                <div class="mb-3 row align-items-center">
                                                     <div class="col-sm-4">
                                                         <h6 class="mb-0">Berasal Dari PAUD / TK</h6>
                                                     </div>
@@ -514,7 +515,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row mb-3 align-items-center">
+                                                <div class="mb-3 row align-items-center">
                                                     <div class="col-sm-4">
                                                         <h6 class="mb-0">Meninggalkan PAUD / TK Tanggal
                                                         </h6>
@@ -526,7 +527,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row mb-3 align-items-center">
+                                                <div class="mb-3 row align-items-center">
                                                     <div class="col-sm-4">
                                                         <h6 class="mb-0">Alasan Meninggalkan PAUD / TK
                                                         </h6>
@@ -537,8 +538,8 @@
                                                 </div>
                                             @else
                                                 <div class="row">
-                                                    <div class="row mb-3 align-items-center">
-                                                        <div class="col-12 text-center">
+                                                    <div class="mb-3 row align-items-center">
+                                                        <div class="text-center col-12">
                                                             <h6 class="mb-0 text-danger">Tidak ada data mutasi!</h6>
                                                         </div>
                                                     </div>

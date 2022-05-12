@@ -49,11 +49,11 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $student->no_identitas }}</td>
                                         <td>{{ $student->nama_lengkap }}</td>
-                                        <td>{{ $jenis_kelamin }}</td>
+                                        <td>{{ $student->jenis_kelamin }}</td>
                                         <td>{{ $student->level_id }}</td>
                                         <td class="gap-2">
-                                            <a href="/kb-tunas-aksara/profil/{{ $student->id }}" class="mx-md-1">
-                                                <span class="badge bg-secondary text-white"><i class='bx bxs-show'></i>
+                                            <a href="/kb-tunas-aksara/profil/{{ $student->slug }}" class="mx-md-1">
+                                                <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
                                             <a href="{{ route('playgroup.edit') }}" class="mx-md-1">

@@ -24,8 +24,6 @@ class PlaygroupController extends Controller
         return view('playgroup.index', [
             // get all data student by level_id = 1
             'students' => Student::where('level_id', 1)->get(),
-            // get jenis kelamin in StudentDetail table
-            'jenis_kelamin' => StudentDetail::select('jenis_kelamin')->distinct()->get(),
         ]);
     }
 

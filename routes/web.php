@@ -32,7 +32,7 @@ route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::post('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'store'])->name('playgroup.store');
 
-    Route::get('/kb-tunas-aksara/profil/{student:id}', [PlaygroupController::class, 'show'])->name('playgroup.show');
+    Route::get('/kb-tunas-aksara/profil/{student:slug}', [PlaygroupController::class, 'show'])->name('playgroup.show');
     Route::get('/kb-tunas-aksara/profil/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
     // END :: KB Tunas Aksara
 });
