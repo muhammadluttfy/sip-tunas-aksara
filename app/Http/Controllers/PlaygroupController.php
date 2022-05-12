@@ -6,10 +6,11 @@ use App\Models\Father;
 use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
-use App\Models\StudentDetail;
 use Illuminate\Http\Request;
+use App\Models\StudentDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class PlaygroupController extends Controller
 {
@@ -77,7 +78,7 @@ class PlaygroupController extends Controller
             'pendidikan_ayah' => '',
             'pekerjaan_ayah' => '',
             'alamat_ayah' => 'max:1000',
-            'no_telepon_ayah' => 'numeric',
+            'no_telepon_ayah' => '',
 
             // step 3 - validasi form identitas ibu
             'nama_lengkap_ibu' => 'required|max:255',
@@ -88,7 +89,7 @@ class PlaygroupController extends Controller
             'pendidikan_ibu' => '',
             'pekerjaan_ibu' => '',
             'alamat_ibu' => 'max:1000',
-            'no_telepon_ibu' => 'numeric',
+            'no_telepon_ibu' => '',
 
             // step 4 - validasi form mutasi (opsional)
             'tanggal_mutasi' => '',
@@ -137,44 +138,61 @@ class PlaygroupController extends Controller
             $mutation->save();
         }
 
+
+        // create data student_detail
+        $student_detail = new StudentDetail;
+        $student_detail->nama_panggilan = $data['nama_panggilan_murid'];
+        $student_detail->kelompok = $data['kelompok'];
+        $student_detail->jenis_kelamin = $data['jenis_kelamin'];
+        $student_detail->tempat_lahir = $data['tempat_lahir_murid'];
+        $student_detail->tanggal_lahir = $data['tanggal_lahir_murid'];
+        $student_detail->agama = $data['agama_murid'];
+        $student_detail->kewarganegaraan = $data['kewarganegaraan_murid'];
+        $student_detail->saudara_kandung = $data['saudara_kandung'];
+        $student_detail->saudara_tiri = $data['saudara_tiri'];
+        $student_detail->saudara_angkat = $data['saudara_angkat'];
+        $student_detail->bahasa = $data['bahasa'];
+        $student_detail->imunitas_diterima = $data['imunitas_diterima'];
+        $student_detail->ciri_khusus = $data['ciri_khusus'];
+        $student_detail->gol_darah = $data['gol_darah'];
+        $student_detail->alamat = $data['alamat_murid'];
+        $student_detail->no_telepon = $data['no_telepon_murid'];
+        $student_detail->jarak_sekolah_rumah = $data['jarak_sekolah_rumah'];
+        $student_detail->save();
+
+
         // create data student
         $student = new Student;
 
-        $father_id = Father::latest()->first()->id; // get latest id father
-        $mother_id = Mother::latest()->first()->id; // get latest id mother
-        $mutation_id = Mutation::latest()->first()->id; // get latest id mutation
+        $student_detail_id = StudentDetail::latest()->first()->id; // get latest id from StudentDetail table
+        $father_id = Father::latest()->first()->id;
+        $mother_id = Mother::latest()->first()->id;
+        $mutation_id = Mutation::latest()->first()->id;
 
         $latestStudent = Student::orderBy('created_at', 'DESC')->first();
         $year = date('Y');
         $year_id = substr($year, -2); // get last 2 digit of year
 
+        // get first name
+        $first_name = explode(' ', $data['nama_lengkap_murid']);
+        $first_name = $first_name[0];
+        // get last name
+        $last_name = explode(' ', $data['nama_lengkap_murid']);
+        $last_name = $last_name[1];
 
+        $student->student_detail_id = $student_detail_id;
         $student->level_id = 1;
         $student->father_id = $father_id;
         $student->mother_id = $mother_id;
         if (isset($data['diterima_tanggal'])) {
             $student->mutation_id = $mutation_id;
         }
-        $student->nis = str_pad($latestStudent->id + 1, 3, "0", STR_PAD_LEFT) . '/paud/' . $year_id;
+        $student->role = 'Student';
+        $student->no_identitas = str_pad($latestStudent->id + 1, 3, "0", STR_PAD_LEFT) . '/paud/' . $year_id;
         $student->nama_lengkap = $data['nama_lengkap_murid'];
-        $student->nama_panggilan = $data['nama_panggilan_murid'];
-        // $student->avatar = $data['avatar'];
-        $student->kelompok = $data['kelompok'];
-        $student->jenis_kelamin = $data['jenis_kelamin'];
-        $student->tempat_lahir = $data['tempat_lahir_murid'];
-        $student->tanggal_lahir = $data['tanggal_lahir_murid'];
-        $student->agama = $data['agama_murid'];
-        $student->kewarganegaraan = $data['kewarganegaraan_murid'];
-        $student->saudara_kandung = $data['saudara_kandung'];
-        $student->saudara_tiri = $data['saudara_tiri'];
-        $student->saudara_angkat = $data['saudara_angkat'];
-        $student->bahasa = $data['bahasa'];
-        $student->imunitas_diterima = $data['imunitas_diterima'];
-        $student->ciri_khusus = $data['ciri_khusus'];
-        $student->gol_darah = $data['gol_darah'];
-        $student->alamat = $data['alamat_murid'];
-        $student->no_telepon = $data['no_telepon_murid'];
-        $student->jarak_sekolah_rumah = $data['jarak_sekolah_rumah'];
+        $student->slug = '@' . str_replace(' ', '', strtolower($data['nama_panggilan_murid']));
+        $student->email = strtolower($first_name . '.' . $last_name) . '@paud.com';
+        $student->password = Hash::make($data['tanggal_lahir_murid']);
         $student->save();
 
 

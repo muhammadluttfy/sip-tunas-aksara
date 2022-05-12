@@ -26,6 +26,7 @@ class CreateStudentsTable extends Migration
             $table->string('nama_lengkap')->nullable();
             $table->string('slug')->nullable();
             $table->string('email')->nullable()->unique();
+            $table->string('jenis_kelamin')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('avatar')->nullable();

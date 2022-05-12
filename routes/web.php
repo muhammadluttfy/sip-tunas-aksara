@@ -20,7 +20,7 @@ route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::get('/', function () {
         return redirect()->route('login');
-    });
+    })->middleware('guest:user,student');
 
     Route::get('/dashboard', function () {
         return view('dashboard');

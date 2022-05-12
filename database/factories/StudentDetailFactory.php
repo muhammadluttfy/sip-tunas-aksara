@@ -20,7 +20,6 @@ class StudentDetailFactory extends Factory
             'nama_panggilan' => $this->faker->firstName(),
             // 'avatar' => $this->faker->imageUrl(),
             'kelompok' => $this->faker->randomElement(['A', 'B', 'C']),
-            'jenis_kelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
             'tempat_lahir' => $this->faker->city,
             'tanggal_lahir' => $this->faker->date(),
             'agama' => $this->faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha']),

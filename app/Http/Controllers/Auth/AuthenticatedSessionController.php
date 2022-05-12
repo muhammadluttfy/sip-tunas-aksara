@@ -53,6 +53,8 @@ class AuthenticatedSessionController extends Controller
         } elseif (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME);
+        } elseif (!Auth::guard('student')->attempt($credentials) && !Auth::guard('user')->attempt($credentials)) {
+            return redirect()->back();
         }
     }
 

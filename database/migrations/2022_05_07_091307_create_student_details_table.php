@@ -17,7 +17,6 @@ class CreateStudentDetailsTable extends Migration
             $table->id();
             $table->string('nama_panggilan')->nullable();
             $table->string('kelompok')->nullable();
-            $table->string('jenis_kelamin')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->string('tanggal_lahir')->nullable();
             $table->string('agama')->nullable();
