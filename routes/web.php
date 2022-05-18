@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Administrator,Student']], function () {
+Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Administrator,Student']], function () {
 
     Route::get('/', function () {
         return redirect()->route('login');

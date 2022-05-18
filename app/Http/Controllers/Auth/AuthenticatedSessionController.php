@@ -37,7 +37,8 @@ class AuthenticatedSessionController extends Controller
         // return redirect()->intended(RouteServiceProvider::HOME);
 
         $credentials = $request->validate([
-            'email' => ['required', 'string', 'email:dns'],
+            // 'email' => ['required', 'string', 'email:dns'],
+            'no_identitas' => ['required'],
             'password' => ['required', 'string'],
         ]);
 
@@ -53,9 +54,9 @@ class AuthenticatedSessionController extends Controller
         } elseif (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME);
-        } elseif (!Auth::guard('student')->attempt($credentials) && !Auth::guard('user')->attempt($credentials)) {
-            return redirect()->back();
         }
+
+        return redirect('/login')->with('error', 'Mohon coba lagi !');
     }
 
     public function logout()

@@ -228,10 +228,6 @@ class PlaygroupController extends Controller
         return view('playgroup.edit', [
             'title' => 'Edit Profil' . ' - ' . $student->nama_lengkap . ' ' . '(' . $student->username . ')',
             'student' => $student,
-            'student_detail' => $student->student_detail,
-            'father' => $student->father,
-            'mother' => $student->mother,
-            'mutation' => $student->mutation,
         ]);
     }
 

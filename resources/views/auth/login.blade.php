@@ -70,44 +70,51 @@
                                         <p>PAUD Tunas Aksara</a>
                                         </p>
                                     </div>
-                                    <div class="mb-4 text-center login-separater"> <span>SIGN IN WITH EMAIL</span>
+                                    <div class="mb-4 text-center login-separater"> <span>SEHAT - CERDAS - CERIA</span>
                                         <hr />
                                     </div>
 
-                                    {{-- if login error --}}
-                                    @if (session()->has('loginError'))
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <strong>{{ session()->get('loginError') }}</strong>
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                    {{-- login error --}}
+                                    @if (session()->has('error'))
+                                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+
+                                            <div class="ms-0 me-3">
+                                                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                                                <lottie-player
+                                                    src="https://assets8.lottiefiles.com/packages/lf20_4azG0q.json"
+                                                    background="transparent" speed="1"
+                                                    style="width: 35px; height: 35px;" loop autoplay></lottie-player>
+                                            </div>
+
+                                            <div>
+                                                <strong>Login gagal!</strong> {{ session()->get('error') }}
+                                            </div>
                                         </div>
                                     @endif
 
                                     <div class="form-body">
                                         <form action="/login" method="POST" class="row g-3">
                                             @csrf
+
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Email
-                                                    Address</label>
-                                                <input type="email"
-                                                    class="form-control @error('email') is-invalid @enderror"
-                                                    name="email" id="email" placeholder="Email Address"
-                                                    value="{{ old('email') }}">
-                                                @error('email')
+                                                <label for="email" class="form-label">Nomor Identitas</label>
+                                                <input type="text"
+                                                    class="form-control @error('no_identitas') is-invalid @enderror"
+                                                    name="no_identitas" id="no_identitas"
+                                                    placeholder="Masukkan Nomor Identitas"
+                                                    value="{{ old('no_identitas') }}">
+                                                @error('no_identitas')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
                                             <div class="col-12">
-                                                <label for="password" class="form-label">Enter
-                                                    Password</label>
+                                                <label for="password" class="form-label">Password</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0"
-                                                        name="password" id="password" placeholder="Enter Password"> <a
-                                                        href="javascript:;" class="bg-transparent input-group-text"><i
+                                                        name="password" id="password" placeholder="Masukkan Password">
+                                                    <a href="javascript:;" class="bg-transparent input-group-text"><i
                                                             class='bx bx-hide'></i></a>
                                                 </div>
                                             </div>
