@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends('layouts.app')
 
 @section('style')
     <link href="{{ asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
@@ -52,7 +52,7 @@
                                     <br>Mutasi</a>
                             </li>
                         </ul>
-                        <form action="{{ route('playgroup.store') }}" method="POST">
+                        <form action="{{ route('playgroup.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="tab-content">
                                 <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
@@ -61,6 +61,31 @@
                                             <div class="col-lg-6">
                                                 <div class="border border-3 p-4 rounded">
                                                     <div class="row g-3">
+                                                        <div class="col-12">
+                                                            <div class="input-group">
+                                                                <div class="row align-items-center">
+                                                                    <div class="col-12 col-md-2">
+                                                                        <img class="avatar-preview p-1 rounded bg-primary"
+                                                                            width="70">
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-10">
+                                                                        <input type="file"
+                                                                            class="form-control @error('avatar') is-invalid @enderror"
+                                                                            id="avatar" name="avatar"
+                                                                            onchange="previewAvatar()">
+                                                                        {{-- <label class="input-group-text" for="avatar">Upload
+                                                                        Profil</label> --}}
+                                                                        @error('avatar')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                         <div class="col-12">
                                                             <label for="nama_lengkap_murid" class="form-label">Nama
                                                                 Lengkap</label>
@@ -876,5 +901,18 @@
                 return true;
             });
         });
+
+        // avatarPreview
+        function previewAvatar() {
+            const avatar = document.querySelector('#avatar');
+            const avatarPreview = document.querySelector('.avatar-preview');
+            // avatarPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(avatar.files[0]);
+            oFReader.onload = function(oFREvent) {
+                avatarPreview.src = oFREvent.target.result;
+            }
+        }
     </script>
 @endsection

@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('nama_lengkap')->nullable();
             $table->string('slug')->nullable();
             $table->string('email')->unique();
+            $table->string('avatar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

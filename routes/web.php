@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\ParentController;
-use App\Http\Controllers\PlaygroupController;
+use App\Http\Controllers\Adminsistrator\FeedbackController;
+use App\Models\User;
+use App\Models\Student;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Adminsistrator\PlaygroupController;
+use App\Http\Controllers\Adminsistrator\PlaygroupGraduatedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,20 +28,33 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
     Route::get('/dashboard', function () {
         return view('dashboard', [
             'title' => 'Dashboard - Sistem Informasi Manajemen PAUD Tunas Aksara',
+            'kb_student' => Student::where('level_id', 1)->count(),
+            'tk_student' => Student::where('level_id', 2)->count(),
+            'count_teachers' => User::count(),
         ]);
-    });
+    })->name('dashboard');
 
     // START :: KB Tunas Aksara
-    Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
+    Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('administrator.playgroup.index');
     Route::get('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'create'])->name('playgroup.create');
 
     Route::post('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'store'])->name('playgroup.store');
 
-    Route::get('/kb-tunas-aksara/profil/{student:username}', [PlaygroupController::class, 'show'])->name('playgroup.show');
-    Route::get('/kb-tunas-aksara/profil/{student:username}/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
+    Route::get('/kb-tunas-aksara/{student:username}', [PlaygroupController::class, 'show'])->name('playgroup.show');
+    Route::get('/kb-tunas-aksara/{student:id}/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
+    Route::post('/kb-tunas-aksara/{student:id}', [PlaygroupController::class, 'update'])->name('playgroup.update');
 
-    Route::get('/kb-tunas-aksara/profil/delete/{id}', [PlaygroupController::class, 'destroy'])->name('playgroup.destroy');
+    Route::get('/kb-tunas-aksara/delete/{id}', [PlaygroupController::class, 'destroy'])->name('playgroup.destroy');
+
+    // Graduated Routes
+    Route::get('/kb-tunas-aksaraa/aa', [PlaygroupGraduatedController::class, 'index'])->name('playgroup.graduated.index');
     // END :: KB Tunas Aksara
+
+
+
+    // START :: Feedback
+    Route::get('feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+    // END :: Feedback
 });
 
 

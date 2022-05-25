@@ -51,7 +51,8 @@
                                     <br>Mutasi</a>
                             </li>
                         </ul>
-                        <form action="{{ route('playgroup.store') }}" method="POST">
+                        <form action="/kb-tunas-aksara/{{ $student->id }}" method="POST" enctype="multipart/form-data">
+                            {{-- @method('PUT') --}}
                             @csrf
                             <div class="tab-content">
                                 <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
@@ -60,6 +61,39 @@
                                             <div class="col-lg-6">
                                                 <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
+                                                        <div class="col-12">
+                                                            <div class="input-group">
+                                                                <div class="row align-items-center">
+                                                                    <div class="col-12 col-md-2">
+                                                                        <input type="hidden" name="oldAvatar"
+                                                                            value="{{ $student->avatar }}">
+                                                                        @if ($student->avatar)
+                                                                            <img src="{{ asset('storage/' . $student->avatar) }}"
+                                                                                class="avatar-preview p-1 rounded bg-primary"
+                                                                                width="70">
+                                                                        @else
+                                                                            <img class="avatar-preview p-1 rounded bg-primary"
+                                                                                width="70">
+                                                                        @endif
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-10">
+                                                                        <input type="file"
+                                                                            class="form-control @error('avatar') is-invalid @enderror"
+                                                                            id="avatar" name="avatar"
+                                                                            onchange="previewAvatar()">
+                                                                        {{-- <label class="input-group-text" for="avatar">Upload
+                                                                        Profil</label> --}}
+                                                                        @error('avatar')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                         <div class="col-12">
                                                             <label for="nama_lengkap_murid" class="form-label">Nama
                                                                 Lengkap</label>
@@ -787,8 +821,8 @@
                                                                 @if ($student->mutation_id == null) value="{{ old('ditempatkan_di_kelompok') }}"
                                                                 @else
                                                                     value="{{ old('ditempatkan_di_kelompok', $student->mutation->ditempatkan_di_kelompok) }}" @endif ">
-                                                                                @error('ditempatkan_di_kelompok')
-        <div class=" invalid-feedback">
+                                                                                                                                                                                    @error('ditempatkan_di_kelompok')
+        <div class="                    invalid-feedback">
                                                                 {{ $message }}
                                                             </div>
                                                         @enderror
@@ -804,8 +838,8 @@
                                                             @if ($student->mutation_id == null) value="{{ old('instansi_asal') }}"
                                                                 @else
                                                                     value="{{ $student->mutation->instansi_asal }}" @endif ">
-                                                                                                @error('instansi_asal')
-        <div class=" invalid-feedback">
+                                                                                                                                                                                                    @error('instansi_asal')
+        <div class="                    invalid-feedback">
                                                             {{ $message }}
                                                         </div>
                                                     @enderror
@@ -979,5 +1013,18 @@
                 return true;
             });
         });
+
+        // avatar Preview
+        function previewAvatar() {
+            const avatar = document.querySelector('#avatar');
+            const avatarPreview = document.querySelector('.avatar-preview');
+            // avatarPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(avatar.files[0]);
+            oFReader.onload = function(oFREvent) {
+                avatarPreview.src = oFREvent.target.result;
+            }
+        }
     </script>
 @endsection

@@ -76,21 +76,24 @@
 
                                     {{-- login error --}}
                                     @if (session()->has('error'))
-                                        <div class="alert alert-danger d-flex align-items-center" role="alert">
-
-                                            <div class="ms-0 me-3">
-                                                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                                                <lottie-player
-                                                    src="https://assets8.lottiefiles.com/packages/lf20_4azG0q.json"
-                                                    background="transparent" speed="1"
-                                                    style="width: 35px; height: 35px;" loop autoplay></lottie-player>
+                                        <div
+                                            class="py-2 border-0 alert alert-danger bg-danger alert-dismissible fade show">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-white font-35"><i class='bx bxs-message-square-x'></i>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h6 class="mb-0 text-white">Error</h6>
+                                                    <div class="text-white">Login Anda gagal,
+                                                        {{ session()->get('error') }}
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                            <div>
-                                                <strong>Login gagal!</strong> {{ session()->get('error') }}
-                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     @endif
+
+
 
                                     <div class="form-body">
                                         <form action="/login" method="POST" class="row g-3">

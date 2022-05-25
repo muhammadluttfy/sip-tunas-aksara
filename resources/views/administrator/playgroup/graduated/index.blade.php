@@ -1,7 +1,8 @@
-@extends("layouts.app")
+@extends('layouts.app')
 
 @section('style')
     <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/notifications/css/lobibox.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('wrapper')
@@ -9,6 +10,24 @@
     <div class="page-wrapper">
         <div class="page-content">
             <!--breadcrumb-->
+            <div class="row">
+                <div class=" ms-auto col-5">
+                    @if (session()->has('success'))
+                        <div class="py-2 border-0 alert alert-success bg-success alert-dismissible fade show">
+                            <div class="d-flex align-items-center">
+                                <div class="text-white font-35"><i class='bx bxs-check-circle'></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-white">Selamat!</h6>
+                                    <div class="text-white">{{ session()->get('success') }}</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
+                </div>
+            </div>
             <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
                 <div class="breadcrumb-title pe-3">KB Tunas Aksara</div>
                 <div class="ps-3">
@@ -52,12 +71,11 @@
                                         <td>{{ $student->jenis_kelamin }}</td>
                                         <td>{{ $student->level_id }}</td>
                                         <td class="gap-2">
-                                            <a href="/kb-tunas-aksara/profil/{{ $student->username }}"
-                                                class="mx-md-1">
+                                            <a href="/kb-tunas-aksara/{{ $student->username }}" class="mx-md-1">
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
-                                            <a href="/kb-tunas-aksara/profil/{{ $student->username }}/edit"
+                                            <a href="/kb-tunas-aksara/{{ $student->username }}/edit"
                                                 class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
@@ -104,7 +122,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/kb-tunas-aksara/profil/delete/" + studentId + "";
+                        window.location = "/kb-tunas-aksara/delete/" + studentId + "";
                         swal("Selamat! Data berhasil dihapus!", {
                             icon: "success",
                         });
@@ -133,4 +151,10 @@
                 .appendTo('#example2_wrapper .col-md-6:eq(0)');
         });
     </script>
+
+    @parent
+    <!--notification js -->
+    <script src="{{ asset('assets/plugins/notifications/js/lobibox.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/notifications/js/notifications.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/notifications/js/notification-custom-script.js') }}"></script>
 @endsection

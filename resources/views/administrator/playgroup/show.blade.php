@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends('layouts.app')
 @section('wrapper')
     <div class="page-wrapper">
         <div class="page-content">
@@ -8,7 +8,7 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="p-0 mb-0 breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('playgroup.index') }}"><i
+                            <li class="breadcrumb-item"><a href="{{ route('administrator.playgroup.index') }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $student->nama_lengkap }}</li>
@@ -24,16 +24,24 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="text-center d-flex flex-column align-items-center">
-                                        <img src="{{ $student->avatar }}" alt="{{ $student->nama_lengkap }}"
-                                            class="p-1 rounded-circle bg-primary" width="110">
-                                        {{-- <img src="{{ asset('assets/images/avatars/avatar-1.png') }}"
-                                            alt="{{ $student->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
-                                            width="110"> --}}
+                                        {{-- <img src="{{ $student->avatar }}" alt="{{ $student->nama_lengkap }}"
+                                            class="p-1 rounded-circle bg-primary" width="110"> --}}
+
+                                        @if ($student->avatar)
+                                            <img src="{{ asset('storage/' . $student->avatar) }}"
+                                                alt="{{ $student->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
+                                                width="110">
+                                        @else
+                                            <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
+                                                alt="{{ $student->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
+                                                width="110">
+                                        @endif
+
                                         <div class="mt-3">
                                             <h4>{{ $student->nama_lengkap }}</h4>
                                             <p class="mb-1 text-secondary">{{ $student->no_identitas }}</p>
                                             <p class="text-muted font-size-sm">Kelompok
-                                                <strong>{{ $student_detail->kelompok }}</strong>
+                                                <strong>{{ $student->student_detail->kelompok }}</strong>
                                             </p>
                                             <button class="btn btn-primary">Edit</button>
                                             <button class="btn btn-outline-primary">Kirim Pesan</button>
@@ -60,7 +68,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" class="form-control"
-                                                value="{{ $student_detail->nama_panggilan }}" disabled />
+                                                value="{{ $student->student_detail->nama_panggilan }}" disabled />
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
@@ -78,7 +86,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" class="form-control"
-                                                value="{{ $student_detail->tempat_lahir }}, {{ date('d F Y', strtotime($student->tanggal_lahir)) }}"
+                                                value="{{ $student->student_detail->tempat_lahir }}, {{ date('d F Y', strtotime($student->tanggal_lahir)) }}"
                                                 disabled />
                                         </div>
                                     </div>
@@ -88,7 +96,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" class="form-control"
-                                                value="{{ $student_detail->agama }}" disabled />
+                                                value="{{ $student->student_detail->agama }}" disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +117,8 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->kewarganegaraan }}" disabled />
+                                                        value="{{ $student->student_detail->kewarganegaraan }}"
+                                                        disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +130,8 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->saudara_kandung }}" disabled />
+                                                        value="{{ $student->student_detail->saudara_kandung }}"
+                                                        disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -133,7 +143,7 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->saudara_tiri }}" disabled />
+                                                        value="{{ $student->student_detail->saudara_tiri }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -145,7 +155,8 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->saudara_angkat }}" disabled />
+                                                        value="{{ $student->student_detail->saudara_angkat }}"
+                                                        disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -157,7 +168,7 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->bahasa }}" disabled />
+                                                        value="{{ $student->student_detail->bahasa }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +180,8 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->imunitas_diterima }}" disabled />
+                                                        value="{{ $student->student_detail->imunitas_diterima }}"
+                                                        disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -181,7 +193,7 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->ciri_khusus }}" disabled />
+                                                        value="{{ $student->student_detail->ciri_khusus }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -193,7 +205,7 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->gol_darah }}" disabled />
+                                                        value="{{ $student->student_detail->gol_darah }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -205,7 +217,7 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <textarea class="form-control" name="alamat" id="alamat" rows="3"
-                                                        disabled>{{ $student_detail->alamat }}</textarea>
+                                                        disabled>{{ $student->student_detail->alamat }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,7 +229,7 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->no_telepon }}" disabled />
+                                                        value="{{ $student->student_detail->no_telepon }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -229,7 +241,8 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
                                                     <input type="text" class="form-control"
-                                                        value="{{ $student_detail->jarak_sekolah_rumah }} KM" disabled />
+                                                        value="{{ $student->student_detail->jarak_sekolah_rumah }} KM"
+                                                        disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -290,7 +303,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $father->nama_lengkap }}" disabled />
+                                                                value="{{ $student->father->nama_lengkap }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -302,7 +315,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $father->tempat_lahir }}, {{ date('d F Y', strtotime($father->tangal_lahir)) }}"
+                                                                value="{{ $student->father->tempat_lahir }}, {{ date('d F Y', strtotime($student->father->tangal_lahir)) }}"
                                                                 disabled />
                                                         </div>
                                                     </div>
@@ -315,7 +328,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $father->agama }}" disabled />
+                                                                value="{{ $student->father->agama }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -327,7 +340,8 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $father->kewarganegaraan }}" disabled />
+                                                                value="{{ $student->father->kewarganegaraan }}"
+                                                                disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -339,7 +353,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $father->pendidikan }}" disabled />
+                                                                value="{{ $student->father->pendidikan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -351,7 +365,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $father->pekerjaan }}" disabled />
+                                                                value="{{ $student->father->pekerjaan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -362,7 +376,7 @@
                                                             <h6 class="mb-0">Alamat Rumah</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <textarea class="form-control" rows="3" disabled>{{ $father->alamat }}</textarea>
+                                                            <textarea class="form-control" rows="3" disabled>{{ $student->father->alamat }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -374,7 +388,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $father->no_telepon }}" disabled />
+                                                                value="{{ $student->father->no_telepon }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -389,7 +403,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $mother->nama_lengkap }}" disabled />
+                                                                value="{{ $student->mother->nama_lengkap }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -401,7 +415,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $mother->tempat_lahir }}, {{ date('d F Y', strtotime($mother->tanggal_lahir)) }}"
+                                                                value="{{ $student->mother->tempat_lahir }}, {{ date('d F Y', strtotime($student->mother->tanggal_lahir)) }}"
                                                                 disabled />
                                                         </div>
                                                     </div>
@@ -414,7 +428,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $mother->agama }}" disabled />
+                                                                value="{{ $student->mother->agama }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -426,7 +440,8 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $mother->kewarganegaraan }}" disabled />
+                                                                value="{{ $student->mother->kewarganegaraan }}"
+                                                                disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -438,7 +453,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $mother->pendidikan }}" disabled />
+                                                                value="{{ $student->mother->pendidikan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -450,7 +465,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $mother->pekerjaan }}" disabled />
+                                                                value="{{ $student->mother->pekerjaan }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -461,7 +476,7 @@
                                                             <h6 class="mb-0">Alamat Rumah</h6>
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
-                                                            <textarea class="form-control" rows="3" disabled>{{ $mother->alamat }}</textarea>
+                                                            <textarea class="form-control" rows="3" disabled>{{ $student->mother->alamat }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -473,7 +488,7 @@
                                                         </div>
                                                         <div class="col-sm-7 text-secondary">
                                                             <input type="text" class="form-control"
-                                                                value="{{ $mother->no_telepon }}" disabled />
+                                                                value="{{ $student->mother->no_telepon }}" disabled />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -490,7 +505,7 @@
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
                                                         <input type="text" class="form-control"
-                                                            value="{{ date('d F Y', strtotime($mutation->diterima_tanggal)) }}"
+                                                            value="{{ date('d F Y', strtotime($student->mutation->diterima_tanggal)) }}"
                                                             disabled />
                                                     </div>
                                                 </div>
@@ -501,7 +516,8 @@
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
                                                         <input type="text" class="form-control"
-                                                            value="{{ $mutation->ditempatkan_di_kelompok }}" disabled />
+                                                            value="{{ $student->mutation->ditempatkan_di_kelompok }}"
+                                                            disabled />
                                                     </div>
                                                 </div>
 
@@ -511,7 +527,7 @@
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
                                                         <input type="text" class="form-control"
-                                                            value="{{ $mutation->instansi_asal }}" disabled />
+                                                            value="{{ $student->mutation->instansi_asal }}" disabled />
                                                     </div>
                                                 </div>
 
@@ -522,7 +538,7 @@
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
                                                         <input type="text" class="form-control"
-                                                            value="{{ date('d F Y', strtotime($mutation->tgl_meninggalkan_instansi)) }}"
+                                                            value="{{ date('d F Y', strtotime($student->mutation->tgl_meninggalkan_instansi)) }}"
                                                             disabled />
                                                     </div>
                                                 </div>
@@ -533,7 +549,8 @@
                                                         </h6>
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
-                                                        <textarea class="form-control" name="alasan" id="alasan" rows="3" disabled>{{ $mutation->alasan }}</textarea>
+                                                        <textarea class="form-control" name="alasan" id="alasan" rows="3"
+                                                            disabled>{{ $student->mutation->alasan }}</textarea>
                                                     </div>
                                                 </div>
                                             @else
