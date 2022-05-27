@@ -29,7 +29,7 @@
             <nav class="bg-white rounded shadow-sm navbar navbar-expand-lg navbar-light fixed-top rounded-0">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        <img src="{{ asset('assets/images/logo-img.png') }}" width="140" alt="" />
+                        {{-- <img src="{{ asset('assets/images/logo-img.png') }}" width="140" alt="" /> --}}
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1"

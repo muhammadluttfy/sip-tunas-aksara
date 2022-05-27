@@ -69,10 +69,10 @@
                                                                             value="{{ $student->avatar }}">
                                                                         @if ($student->avatar)
                                                                             <img src="{{ asset('storage/' . $student->avatar) }}"
-                                                                                class="avatar-preview p-1 rounded bg-primary"
+                                                                                class="p-1 rounded avatar-preview bg-primary"
                                                                                 width="70">
                                                                         @else
-                                                                            <img class="avatar-preview p-1 rounded bg-primary"
+                                                                            <img class="p-1 rounded avatar-preview bg-primary"
                                                                                 width="70">
                                                                         @endif
                                                                     </div>
@@ -95,6 +95,42 @@
                                                         </div>
 
                                                         <div class="col-12">
+                                                            <label for="tanggal_lulus_kb" class="form-label">Tanggal
+                                                                Kelulusan <strong class="text-danger">*</strong>(Diisi
+                                                                jika peserta didik telah dinyatakan
+                                                                lulus)</label>
+                                                            <input type="date"
+                                                                class="form-control @error('tanggal_lulus_kb') is-invalid @enderror"
+                                                                name="tanggal_lulus_kb" id="tanggal_lulus_kb">
+                                                            @error('tanggal_lulus_kb')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label for="jenjang_pendidikan" class="form-label">Jenjang
+                                                                Pendidikan</label>
+                                                            <select
+                                                                class="form-select @error('jenjang_pendidikan') is-invalid @enderror"
+                                                                name="jenjang_pendidikan" id="jenjang_pendidikan">
+                                                                @if (old('jenjang_pendidikan', $student->level->jenjang_pendidikan) == 'KB Tunas Aksara')
+                                                                    <option value="1" selected>KB Tunas Aksara</option>
+                                                                    <option value="2">TK Tunas Aksara</option>
+                                                                @else
+                                                                    <option value="1">KB Tunas Aksara</option>
+                                                                    <option value="2" selected>TK Tunas Aksara</option>
+                                                                @endif
+                                                            </select>
+                                                            @error('jenjang_pendidikan')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="col-12">
                                                             <label for="nama_lengkap_murid" class="form-label">Nama
                                                                 Lengkap</label>
                                                             <input type="text"
@@ -109,7 +145,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-6">
+                                                        <div class="col-md-6">
                                                             <label for="nama_panggilan_murid" class="form-label">Nama
                                                                 Panggilan</label>
                                                             <input type="text"
@@ -124,7 +160,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-6">
+                                                        <div class="col-md-6">
                                                             <label for="kelompok" class="form-label">Kelompok</label>
                                                             <input type="text"
                                                                 class="form-control @error('kelompok') is-invalid @enderror"
@@ -268,8 +304,7 @@
                                                                 Lahir</label>
                                                             <input type="date"
                                                                 class="form-control @error('tanggal_lahir_murid') is-invalid @enderror"
-                                                                name="tanggal_lahir_murid" id="tanggal_lahir_murid"
-                                                                placeholder="dd-mm-yyyy" required
+                                                                name="tanggal_lahir_murid" id="tanggal_lahir_murid" required
                                                                 value="{{ old('tanggal_lahir_murid', $student->student_detail->tanggal_lahir) }}">
                                                             @error('tanggal_lahir_murid')
                                                                 <div class="invalid-feedback">
@@ -394,7 +429,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="imunitas_diterima" class="form-label">Imunitas
                                                                 yang pernah
                                                                 diterima</label>
@@ -410,7 +445,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="ciri_khusus" class="form-label">Ciri - ciri
                                                                 Khusus</label>
                                                             <input type="text"
@@ -425,7 +460,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="alamat_murid" class="form-label">Alamat</label>
                                                             <textarea class="form-control @error('alamat_murid') is-invalid @enderror" name="alamat_murid" id="alamat_murid"
                                                                 rows="3"
@@ -514,8 +549,7 @@
                                                                 Lahir</label>
                                                             <input type="date"
                                                                 class="form-control @error('tanggal_lahir_ayah') is-invalid @enderror"
-                                                                name="tanggal_lahir_ayah" id="tanggal_lahir_ayah"
-                                                                placeholder="dd-mm-yyyy" required
+                                                                name="tanggal_lahir_ayah" id="tanggal_lahir_ayah" required
                                                                 value="{{ old('tanggal_lahir_ayah', $student->father->tanggal_lahir) }}">
                                                             @error('tanggal_lahir_ayah')
                                                                 <div class="invalid-feedback">
@@ -596,7 +630,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="alamat_ayah" class="form-label">Alamat</label>
                                                             <textarea class="form-control @error('alamat_ayah') is-invalid @enderror" name="alamat_ayah" id="alamat_ayah" rows="3"
                                                                 placeholder="Masukkan detail alamat atau nama jalan..."
@@ -608,7 +642,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="no_telepon_ayah" class="form-label">Nomor
                                                                 Telepon</label>
                                                             <input type="text"
@@ -672,8 +706,7 @@
                                                                 Lahir</label>
                                                             <input type="date"
                                                                 class="form-control @error('tanggal_lahir_ibu') is-invalid @enderror"
-                                                                name="tanggal_lahir_ibu" id="tanggal_lahir_ibu"
-                                                                placeholder="dd-mm-yyyy" required
+                                                                name="tanggal_lahir_ibu" id="tanggal_lahir_ibu" required
                                                                 value="{{ old('tanggal_lahir_ibu', $student->mother->tanggal_lahir) }}">
                                                             @error('tanggal_lahir_ibu')
                                                                 <div class="invalid-feedback">
@@ -754,7 +787,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="alamat_ibu" class="form-label">Alamat</label>
                                                             <textarea class="form-control @error('alamat_ibu') is-invalid @enderror" name="alamat_ibu" id="alamat_ibu" rows="3"
                                                                 placeholder="Masukkan detail alamat atau nama jalan..."
@@ -766,7 +799,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="no_telepon_ibu" class="form-label">Nomor
                                                                 Telepon</label>
                                                             <input type="text"
@@ -794,13 +827,12 @@
                                             <div class="col-lg-6">
                                                 <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="diterima_tanggal" class="form-label">Diterima
                                                                 Tanggal</label>
                                                             <input type="date"
                                                                 class="form-control @error('diterima_tanggal') is-invalid @enderror"
                                                                 name="diterima_tanggal" id="diterima_tanggal"
-                                                                placeholder="dd-mm-yyyy"
                                                                 @if ($student->mutation_id == null) value="{{ old('diterima_tanggal', $student->diterima_tanggal) }}"
                                                                 @else
                                                                     value="{{ old('diterima_tanggal', $student->mutation->diterima_tanggal) }}" @endif>
@@ -811,7 +843,7 @@
                                                             @enderror
                                                         </div>
 
-                                                        <div class="col-md-12">
+                                                        <div class="col-12">
                                                             <label for="ditempatkan_di_kelompok"
                                                                 class="form-label">Ditempatkan di Kelompok</label>
                                                             <input type="text"
@@ -821,14 +853,14 @@
                                                                 @if ($student->mutation_id == null) value="{{ old('ditempatkan_di_kelompok') }}"
                                                                 @else
                                                                     value="{{ old('ditempatkan_di_kelompok', $student->mutation->ditempatkan_di_kelompok) }}" @endif ">
-                                                                                                                                                                                    @error('ditempatkan_di_kelompok')
-        <div class="                    invalid-feedback">
+                                                                                                                                                                                                                                                                                                @error('ditempatkan_di_kelompok')
+        <div class=" invalid-feedback">
                                                                 {{ $message }}
                                                             </div>
                                                         @enderror
                                                     </div>
 
-                                                    <div class="col-md-12">
+                                                    <div class="col-12">
                                                         <label for="instansi_asal" class="form-label">Berasal dari
                                                             PAUD / TK</label>
                                                         <input type="text"
@@ -838,8 +870,8 @@
                                                             @if ($student->mutation_id == null) value="{{ old('instansi_asal') }}"
                                                                 @else
                                                                     value="{{ $student->mutation->instansi_asal }}" @endif ">
-                                                                                                                                                                                                    @error('instansi_asal')
-        <div class="                    invalid-feedback">
+                                                                                                                                                                                                                                                                                                                @error('instansi_asal')
+        <div class=" invalid-feedback">
                                                             {{ $message }}
                                                         </div>
                                                     @enderror
@@ -850,14 +882,13 @@
                                     <div class="col-lg-6">
                                         <div class="p-4 border rounded border-3">
                                             <div class="row g-3">
-                                                <div class="col-md-12">
+                                                <div class="col-12">
                                                     <label for="tgl_meninggalkan_instansi" class="form-label">Tanggal
                                                         Meninggalkan PAUD / TK
                                                         Lama</label>
                                                     <input type="date"
                                                         class="form-control @error('tgl_meninggalkan_instansi') is-invalid @enderror"
                                                         name="tgl_meninggalkan_instansi" id="tgl_meninggalkan_instansi"
-                                                        placeholder="dd-mm-yyyy"
                                                         @if ($student->mutation_id == null) value="{{ old('tgl_meninggalkan_instansi') }}"
                                                                     
                                                                 @elseif($student->mutation_id != null)
@@ -869,7 +900,7 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="col-md-12">
+                                                <div class="col-12">
                                                     <label for="alasan" class="form-label">Alasan</label>
                                                     <textarea class="form-control @error('alasan') is-invalid @enderror" name="alasan" id="alasan" rows="5"
                                                         placeholder="Alasan meninggalkan PAUD / TK...">

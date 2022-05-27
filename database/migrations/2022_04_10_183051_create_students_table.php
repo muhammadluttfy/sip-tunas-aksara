@@ -20,7 +20,6 @@ class CreateStudentsTable extends Migration
             $table->string('father_id')->nullable();
             $table->string('mother_id')->nullable();
             $table->string('mutation_id')->nullable();
-
             $table->string('role')->nullable();
             $table->string('no_identitas')->nullable();
             $table->string('nama_lengkap')->nullable();

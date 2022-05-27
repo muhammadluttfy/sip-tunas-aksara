@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Adminsistrator;
+namespace App\Http\Controllers\Administrator;
 
 use App\Models\Father;
 use App\Models\Mother;
@@ -51,6 +51,7 @@ class PlaygroupController extends Controller
 
         $request->validate([
             // step 1 - validasi form peserta didik
+            'jenjang_pendidikan' => '',
             'avatar' => 'image|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'nama_lengkap_murid' => 'required|max:255',
             'nama_panggilan_murid' => 'required|max:64',
@@ -68,6 +69,7 @@ class PlaygroupController extends Controller
             'alamat_murid' => 'required',
             'no_telepon_murid' => '',
             'jarak_sekolah_rumah' => '',
+            'tanggal_lulus_kb' => 'date',
 
             // step 2 - validasi form identitas ayah
             'nama_lengkap_ayah' => 'required|max:255',
@@ -201,7 +203,7 @@ class PlaygroupController extends Controller
         $student->save();
 
 
-        return redirect()->route('administrator.playgroup.index')->with('success', 'Data peserta didik berhasil di tambahkan!');
+        return redirect()->route('playgroup.index')->with('success', 'Data peserta didik berhasil di tambahkan!');
     }
 
     /**
@@ -371,7 +373,7 @@ class PlaygroupController extends Controller
         $last_name = $last_name[1];
 
         $student->student_detail_id = $student_detail_id;
-        $student->level_id = 1;
+        $student->level_id = $data['jenjang_pendidikan'];
         $student->father_id = $father_id;
         $student->mother_id = $mother_id;
         if (isset($data['diterima_tanggal'])) {
@@ -397,7 +399,7 @@ class PlaygroupController extends Controller
         $student->save();
 
 
-        return redirect()->route('administrator.playgroup.index')->with('success', 'Data peserta didik berhasil di update!');
+        return redirect()->route('playgroup.index')->with('success', 'Data peserta didik berhasil di update!');
     }
 
     /**
@@ -415,6 +417,6 @@ class PlaygroupController extends Controller
         }
 
         $data->delete();
-        return redirect()->route('administrator.playgroup.index')->with('success', 'Data peserta didik berhasil dihapus!');
+        return redirect()->route('playgroup.index')->with('success', 'Data peserta didik berhasil dihapus!');
     }
 }

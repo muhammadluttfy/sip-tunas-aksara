@@ -10,6 +10,7 @@ use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
 use App\Models\Position;
+use App\Models\SocialMedia;
 use App\Models\StudentDetail;
 use Illuminate\Database\Seeder;
 
@@ -33,10 +34,12 @@ class DatabaseSeeder extends Seeder
         User::insert([
             [
                 'role' => 'Kepala Sekolah',
+                'social_media_id' => 1,
                 'no_identitas' => '18083000124',
                 'nama_lengkap' => 'Muhammad Lutfi',
-                'slug' => 'muhammad-lutfi',
                 'email' => 'creativedevelopment.id@gmail.com',
+                'username' => 'muhammad-lutfi',
+                'tanggal_lahir' => '1996-08-30',
                 'password' => bcrypt('password'),
                 'avatar' => 'https://i.pravatar.cc/300',
                 'remember_token' => '',
@@ -44,9 +47,11 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'role' => 'Administrator',
+                'social_media_id' => 2,
                 'no_identitas' => '18083000125',
                 'nama_lengkap' => 'Nurhidayatul Hikmah',
-                'slug' => 'nurhidayatul-hikmah',
+                'username' => 'nurhidayatul-hikmah',
+                'tanggal_lahir' => '1996-08-30',
                 'email' => 'dayah@gmail.com',
                 'password' => bcrypt('password'),
                 'avatar' => 'https://i.pravatar.cc/300',
@@ -70,6 +75,19 @@ class DatabaseSeeder extends Seeder
             [
                 'jenjang_pendidikan' => 'TK Tunas Aksara',
                 'slug' => 'tk-tunas-aksara',
+            ],
+        ]);
+
+        SocialMedia::insert([
+            [
+                'instagram' => 'muhammadluttfy',
+                'facebook' => 'Muhammad Lutfi',
+                'whatsapp' => '082340378657',
+            ],
+            [
+                'instagram' => 'ochnafis',
+                'facebook' => 'Ahla Ainin',
+                'whatsapp' => '082340378657',
             ],
         ]);
     }
