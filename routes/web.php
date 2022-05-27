@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Adminsistrator\FeedbackController;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Adminsistrator\PlaygroupController;
-use App\Http\Controllers\Adminsistrator\PlaygroupGraduatedController;
+use App\Http\Controllers\Administrator\TeacherController;
+use App\Http\Controllers\Administrator\FeedbackController;
+use App\Http\Controllers\Administrator\PlaygroupController;
+use App\Http\Controllers\Administrator\PlaygroupGraduatedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,20 +36,30 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
     })->name('dashboard');
 
     // START :: KB Tunas Aksara
-    Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('administrator.playgroup.index');
-    Route::get('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'create'])->name('playgroup.create');
+    Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
 
+    Route::get('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'create'])->name('playgroup.create');
     Route::post('/kb-tunas-aksara/tambah-data-peserta-didik', [PlaygroupController::class, 'store'])->name('playgroup.store');
 
     Route::get('/kb-tunas-aksara/{student:username}', [PlaygroupController::class, 'show'])->name('playgroup.show');
+
     Route::get('/kb-tunas-aksara/{student:id}/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
     Route::post('/kb-tunas-aksara/{student:id}', [PlaygroupController::class, 'update'])->name('playgroup.update');
 
     Route::get('/kb-tunas-aksara/delete/{id}', [PlaygroupController::class, 'destroy'])->name('playgroup.destroy');
 
-    // Graduated Routes
-    Route::get('/kb-tunas-aksaraa/aa', [PlaygroupGraduatedController::class, 'index'])->name('playgroup.graduated.index');
     // END :: KB Tunas Aksara
+
+
+    // START :: Teacher
+    Route::get('/tenaga-pendidik', [TeacherController::class, 'index'])->name('teacher.index');
+    Route::get('/tenaga-pendidik/{user:username}', [TeacherController::class, 'show'])->name('teacher.show');
+
+    Route::get('/guru/tambah-data-tenaga-pendidik', [TeacherController::class, 'create'])->name('teacher.create');
+    Route::post('/guru/tambah-data-tenaga-pendidik', [TeacherController::class, 'store'])->name('teacher.store');
+
+    Route::get('/tenaga-pendidik/delete/{id}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+    // END :: Teacher
 
 
 

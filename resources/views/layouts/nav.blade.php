@@ -25,14 +25,14 @@
 
         <li class="menu-label">KB Tunas Aksara</li>
         <li>
-            <a href="{{ route('administrator.playgroup.index') }}">
+            <a href="{{ route('playgroup.index') }}">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
                 <div class="menu-title">Peserta Didik Aktif</div>
             </a>
         </li>
         <li>
-            <a href="{{ route('playgroup.graduated.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
                 <div class="menu-title">Peserta Didik Tidak Aktif</div>
@@ -71,7 +71,7 @@
 
         <li class="menu-label">Tenaga Pendidik</li>
         <li>
-            <a href="{{ url('form-wizard') }}">
+            <a href="{{ route('teacher.index') }}">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
                 <div class="menu-title">Data Guru</div>
