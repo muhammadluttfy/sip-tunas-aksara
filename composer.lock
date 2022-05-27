@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "645eff60efc259304aa1d1baaff9b3f5",
+    "content-hash": "02f03357241b11b6e105f06062d9c7d0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1016,7 +1016,76 @@
             "time": "2022-03-20T21:55:58+00:00"
         },
         {
+            "name": "itsgoingd/clockwork",
+            "version": "v5.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itsgoingd/clockwork.git",
+                "reference": "9df41432da1d8cb39c7fda383ddcc02231c83ff3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/9df41432da1d8cb39c7fda383ddcc02231c83ff3",
+                "reference": "9df41432da1d8cb39c7fda383ddcc02231c83ff3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Clockwork\\Support\\Laravel\\ClockworkServiceProvider"
+                    ],
+                    "aliases": {
+                        "Clockwork": "Clockwork\\Support\\Laravel\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Clockwork\\": "Clockwork/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "itsgoingd",
+                    "email": "itsgoingd@luzer.sk",
+                    "homepage": "https://twitter.com/itsgoingd"
+                }
+            ],
+            "description": "php dev tools in your browser",
+            "homepage": "https://underground.works/clockwork",
+            "keywords": [
+                "Devtools",
+                "debugging",
+                "laravel",
+                "logging",
+                "lumen",
+                "profiling",
+                "slim"
+            ],
+            "support": {
+                "issues": "https://github.com/itsgoingd/clockwork/issues",
+                "source": "https://github.com/itsgoingd/clockwork/tree/v5.1.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/itsgoingd",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-12T21:35:47+00:00"
+        },
+        {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v8.83.14",
             "source": {
                 "type": "git",
@@ -1027,6 +1096,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/141cf126f1746c7264f59aa78c923a84eaab501e",
                 "reference": "141cf126f1746c7264f59aa78c923a84eaab501e",
+=======
+            "version": "v8.83.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "2af2314989845db68dfbb65a54b8748ffaf26204"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2af2314989845db68dfbb65a54b8748ffaf26204",
+                "reference": "2af2314989845db68dfbb65a54b8748ffaf26204",
+>>>>>>> 3b5bfe0c3d9b15f45ad68d836b6747831ddc3df4
                 "shasum": ""
             },
             "require": {
@@ -1186,7 +1267,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
             "time": "2022-05-24T14:04:02+00:00"
+=======
+            "time": "2022-05-10T13:57:07+00:00"
+>>>>>>> 3b5bfe0c3d9b15f45ad68d836b6747831ddc3df4
         },
         {
             "name": "laravel/serializable-closure",
@@ -5986,6 +6071,7 @@
         },
         {
             "name": "laravel/sail",
+<<<<<<< HEAD
             "version": "v1.14.7",
             "source": {
                 "type": "git",
@@ -5996,6 +6082,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/c049316f9bcb02598607307f18b514b66202b639",
                 "reference": "c049316f9bcb02598607307f18b514b66202b639",
+=======
+            "version": "v1.14.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "cee088fbe57432dd15678e3f7b6a8259f3073c46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/cee088fbe57432dd15678e3f7b6a8259f3073c46",
+                "reference": "cee088fbe57432dd15678e3f7b6a8259f3073c46",
+>>>>>>> 3b5bfe0c3d9b15f45ad68d836b6747831ddc3df4
                 "shasum": ""
             },
             "require": {
@@ -6042,7 +6140,11 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+<<<<<<< HEAD
             "time": "2022-05-21T17:14:14+00:00"
+=======
+            "time": "2022-05-10T12:58:49+00:00"
+>>>>>>> 3b5bfe0c3d9b15f45ad68d836b6747831ddc3df4
         },
         {
             "name": "mockery/mockery",

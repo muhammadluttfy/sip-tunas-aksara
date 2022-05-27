@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
-    <link rel="icon" href="{{ asset('assets/images/favicon-32x32.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png" />
     <!--plugins-->
     <link href="{{ asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
@@ -58,6 +58,10 @@
             <div class="container-fluid">
                 <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
                     <div class="mx-auto col">
+                        <div class="my-5 logo d-flex justify-content-center">
+                            <img src="{{ asset('assets/images/logo-img.svg') }}" class="img-fluid"
+                                alt="Logo PAUD Tunas Aksara" style="width: 300px">
+                        </div>
                         <div class="mt-5 card mt-lg-0">
                             <div class="card-body">
                                 <div class="p-4 border rounded">
@@ -66,44 +70,54 @@
                                         <p>PAUD Tunas Aksara</a>
                                         </p>
                                     </div>
-                                    <div class="mb-4 text-center login-separater"> <span>SIGN IN WITH EMAIL</span>
+                                    <div class="mb-4 text-center login-separater"> <span>SEHAT - CERDAS - CERIA</span>
                                         <hr />
                                     </div>
 
-                                    {{-- if login error --}}
-                                    @if (session()->has('loginError'))
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <strong>{{ session()->get('loginError') }}</strong>
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                    {{-- login error --}}
+                                    @if (session()->has('error'))
+                                        <div
+                                            class="py-2 border-0 alert alert-danger bg-danger alert-dismissible fade show">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-white font-35"><i class='bx bxs-message-square-x'></i>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h6 class="mb-0 text-white">Error</h6>
+                                                    <div class="text-white">Login Anda gagal,
+                                                        {{ session()->get('error') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     @endif
+
+
 
                                     <div class="form-body">
                                         <form action="/login" method="POST" class="row g-3">
                                             @csrf
+
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Email
-                                                    Address</label>
-                                                <input type="email"
-                                                    class="form-control @error('email') is-invalid @enderror"
-                                                    name="email" id="email" placeholder="Email Address"
-                                                    value="{{ old('email') }}">
-                                                @error('email')
+                                                <label for="email" class="form-label">Nomor Identitas</label>
+                                                <input type="text"
+                                                    class="form-control @error('no_identitas') is-invalid @enderror"
+                                                    name="no_identitas" id="no_identitas"
+                                                    placeholder="Masukkan Nomor Identitas"
+                                                    value="{{ old('no_identitas') }}">
+                                                @error('no_identitas')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
                                             <div class="col-12">
-                                                <label for="password" class="form-label">Enter
-                                                    Password</label>
+                                                <label for="password" class="form-label">Password</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0"
-                                                        name="password" id="password" placeholder="Enter Password"> <a
-                                                        href="javascript:;" class="bg-transparent input-group-text"><i
+                                                        name="password" id="password" placeholder="Masukkan Password">
+                                                    <a href="javascript:;" class="bg-transparent input-group-text"><i
                                                             class='bx bx-hide'></i></a>
                                                 </div>
                                             </div>
