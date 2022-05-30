@@ -13,11 +13,11 @@
     <div class="page-wrapper">
         <div class="page-content">
             <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
                 <div class="breadcrumb-title pe-3">KB Tunas Aksara</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
+                        <ol class="p-0 mb-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Tambah Data</li>
@@ -28,7 +28,7 @@
             <!--end breadcrumb-->
 
             <div class="card">
-                <div class="card-body p-4">
+                <div class="p-4 card-body">
                     <h5 class="card-title">Tambah Data Peserta Didik</h5>
                     <hr />
 
@@ -56,16 +56,16 @@
                             @csrf
                             <div class="tab-content">
                                 <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
-                                    <div class="form-body mt-4">
+                                    <div class="mt-4 form-body">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <div class="border border-3 p-4 rounded">
+                                                <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
                                                         <div class="col-12">
                                                             <div class="input-group">
                                                                 <div class="row align-items-center">
                                                                     <div class="col-12 col-md-2">
-                                                                        <img class="avatar-preview p-1 rounded bg-primary"
+                                                                        <img class="p-1 rounded avatar-preview bg-primary"
                                                                             width="70">
                                                                     </div>
 
@@ -258,7 +258,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="border border-3 p-4 rounded">
+                                                <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label for="bahasa" class="form-label">Bahasa Sehari -
@@ -375,10 +375,10 @@
                                     </div>
                                 </div>
                                 <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
-                                    <div class="form-body mt-4">
+                                    <div class="mt-4 form-body">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <div class="border border-3 p-4 rounded">
+                                                <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
                                                         <div class="col-12">
                                                             <label for="nama_lengkap_ayah" class="form-label">Nama
@@ -465,7 +465,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="border border-3 p-4 rounded">
+                                                <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label for="pendidikan_ayah"
@@ -533,10 +533,10 @@
                                 </div>
 
                                 <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
-                                    <div class="form-body mt-4">
+                                    <div class="mt-4 form-body">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <div class="border border-3 p-4 rounded">
+                                                <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
                                                         <div class="col-12">
                                                             <label for="nama_lengkap_ibu" class="form-label">Nama
@@ -623,7 +623,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="border border-3 p-4 rounded">
+                                                <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label for="pendidikan_ibu"
@@ -690,10 +690,10 @@
                                 </div>
 
                                 <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
-                                    <div class="form-body mt-4">
+                                    <div class="mt-4 form-body">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <div class="border border-3 p-4 rounded">
+                                                <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
                                                         <div class="col-md-12">
                                                             <label for="diterima_tanggal" class="form-label">Diterima
@@ -743,7 +743,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="border border-3 p-4 rounded">
+                                                <div class="p-4 border rounded border-3">
                                                     <div class="row g-3">
                                                         <div class="col-md-12">
                                                             <label for="tgl_meninggalkan_instansi"

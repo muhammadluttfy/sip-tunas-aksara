@@ -13,13 +13,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
-                <div class="breadcrumb-title pe-3">KB Tunas Aksara</div>
+                <div class="breadcrumb-title pe-3">Edit Data</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="p-0 mb-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Data</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $student->nama_lengkap }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -94,7 +94,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-12">
+                                                        {{-- <div class="col-12">
                                                             <label for="tanggal_lulus_kb" class="form-label">Tanggal
                                                                 Kelulusan <strong class="text-danger">*</strong>(Diisi
                                                                 jika peserta didik telah dinyatakan
@@ -128,7 +128,7 @@
                                                                     {{ $message }}
                                                                 </div>
                                                             @enderror
-                                                        </div>
+                                                        </div> --}}
 
                                                         <div class="col-12">
                                                             <label for="nama_lengkap_murid" class="form-label">Nama
@@ -833,28 +833,29 @@
                                                             <input type="date"
                                                                 class="form-control @error('diterima_tanggal') is-invalid @enderror"
                                                                 name="diterima_tanggal" id="diterima_tanggal"
-                                                                @if ($student->mutation_id == null) value="{{ old('diterima_tanggal', $student->diterima_tanggal) }}"
+                                                                @if ($student->mutation_id != null) value="{{ old('diterima_tanggal', $student->mutation->diterima_tanggal) }}
                                                                 @else
-                                                                    value="{{ old('diterima_tanggal', $student->mutation->diterima_tanggal) }}" @endif>
-                                                            @error('diterima_tanggal')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                        </div>
+                                                                    value="{{ old('diterima_tanggal') }} @endif ">
 
-                                                        <div class="col-12">
-                                                            <label for="ditempatkan_di_kelompok"
-                                                                class="form-label">Ditempatkan di Kelompok</label>
-                                                            <input type="text"
-                                                                class="form-control @error('ditempatkan_di_kelompok') is-invalid @enderror"
-                                                                name="ditempatkan_di_kelompok" id="ditempatkan_di_kelompok"
-                                                                placeholder="Kelompok"
-                                                                @if ($student->mutation_id == null) value="{{ old('ditempatkan_di_kelompok') }}"
-                                                                @else
-                                                                    value="{{ old('ditempatkan_di_kelompok', $student->mutation->ditempatkan_di_kelompok) }}" @endif ">
-                                                                                                                                                                                                                                                                                                @error('ditempatkan_di_kelompok')
+                                                                                        @error('diterima_tanggal')
         <div class=" invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label for="ditempatkan_di_kelompok"
+                                                            class="form-label">Ditempatkan di Kelompok</label>
+                                                        <input type="text"
+                                                            class="form-control @error('ditempatkan_di_kelompok') is-invalid @enderror"
+                                                            name="ditempatkan_di_kelompok" id="ditempatkan_di_kelompok"
+                                                            placeholder="Kelompok"
+                                                            @if ($student->mutation_id != null) value="{{ old('ditempatkan_di_kelompok', $student->mutation->ditempatkan_di_kelompok) }}"
+                                                            @else
+                                                                value="{{ old('ditempatkan_di_kelompok') }}" @endif>
+                                                        @error('ditempatkan_di_kelompok')
+                                                            <div class=" invalid-feedback">
                                                                 {{ $message }}
                                                             </div>
                                                         @enderror
@@ -867,78 +868,80 @@
                                                             class="form-control @error('instansi_asal') is-invalid @enderror"
                                                             name="instansi_asal" id="instansi_asal"
                                                             placeholder="PAUD / TK Asal"
-                                                            @if ($student->mutation_id == null) value="{{ old('instansi_asal') }}"
-                                                                @else
-                                                                    value="{{ $student->mutation->instansi_asal }}" @endif ">
-                                                                                                                                                                                                                                                                                                                @error('instansi_asal')
-        <div class=" invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="p-4 border rounded border-3">
-                                            <div class="row g-3">
-                                                <div class="col-12">
-                                                    <label for="tgl_meninggalkan_instansi" class="form-label">Tanggal
-                                                        Meninggalkan PAUD / TK
-                                                        Lama</label>
-                                                    <input type="date"
-                                                        class="form-control @error('tgl_meninggalkan_instansi') is-invalid @enderror"
-                                                        name="tgl_meninggalkan_instansi" id="tgl_meninggalkan_instansi"
-                                                        @if ($student->mutation_id == null) value="{{ old('tgl_meninggalkan_instansi') }}"
-                                                                    
-                                                                @elseif($student->mutation_id != null)
-                                                                    value="{{ old('tgl_meninggalkan_instansi', $student->mutation->tgl_meninggalkan_instansi) }}" @endif>
-                                                    @error('tgl_meninggalkan_instansi')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="alasan" class="form-label">Alasan</label>
-                                                    <textarea class="form-control @error('alasan') is-invalid @enderror" name="alasan" id="alasan" rows="5"
-                                                        placeholder="Alasan meninggalkan PAUD / TK...">
-@if ($student->mutation_id == null)
-{{ old('alasan') }}@else{{ old('alasan', $student->mutation->alasan) }}
-@endif
-</textarea>
-                                                    @error('alasan')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="d-grid">
-                                                        <button type="submit" id="submit" class="btn btn-primary">
-                                                            Tambah Peserta Didik
-                                                        </button>
+                                                            @if ($student->mutation_id != null) value="{{ old('instansi_asal', $student->mutation->instansi_asal) }}"
+                                                            @else
+                                                                value="{{ old('instansi_asal') }}" @endif>
+                                                        @error('instansi_asal')
+                                                            <div class=" invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
-                                                    <p><strong class="text-danger">Catatan :</strong> kosongkan
-                                                        form mutasi jika calon peserta didik bukan pindahan dari
-                                                        PAUD / TK lain.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="p-4 border rounded border-3">
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <label for="tgl_meninggalkan_instansi"
+                                                            class="form-label">Tanggal
+                                                            Meninggalkan PAUD / TK
+                                                            Lama</label>
+                                                        <input type="date"
+                                                            class="form-control @error('tgl_meninggalkan_instansi') is-invalid @enderror"
+                                                            name="tgl_meninggalkan_instansi" id="tgl_meninggalkan_instansi"
+                                                            @if ($student->mutation_id != null) value="{{ old('tgl_meninggalkan_instansi', $student->mutation->tgl_meninggalkan_instansi) }}"
+                                                            @else
+                                                                value="{{ old('tgl_meninggalkan_instansi') }}" @endif>
+                                                        @error('tgl_meninggalkan_instansi')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label for="alasan" class="form-label">Alasan</label>
+                                                        <textarea class="form-control @error('alasan') is-invalid @enderror" name="alasan" id="alasan" rows="5"
+                                                            placeholder="Alasan meninggalkan PAUD / TK...">
+@if ($student->mutation_id != null)
+{{ old('alasan', $student->mutation->alasan) }}
+@else{{ old('alasan') }}
+@endif
+</textarea>
+
+                                                        @error('alasan')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="d-grid">
+                                                            <button type="submit" id="submit" class="btn btn-primary">
+                                                                Tambah Peserta Didik
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <p><strong class="text-danger">Catatan :</strong> kosongkan
+                                                            form mutasi jika calon peserta didik bukan pindahan dari
+                                                            PAUD / TK lain.</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!--end row-->
                                 </div>
-                                <!--end row-->
                             </div>
                     </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
-    </div>
 
     </div>
     </div>

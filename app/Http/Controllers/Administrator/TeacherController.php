@@ -67,7 +67,7 @@ class TeacherController extends Controller
             'whatsapp' => 'nullable|string|max:255',
         ]);
 
-        // create data spcialMedia
+        // create data socialMedia
         $socialMedia = new SocialMedia;
         $socialMedia->instagram = $request->instagram;
         $socialMedia->facebook = $request->facebook;

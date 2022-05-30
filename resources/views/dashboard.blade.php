@@ -61,8 +61,8 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <p class="mb-0 text-secondary">Lulus</p>
-                                    <h4 class="my-1 text-warning">8.4K</h4>
-                                    <p class="mb-0 font-13">Peserta DIdik Lulus</p>
+                                    <h4 class="my-1 text-warning">{{ $count_graduated }}</h4>
+                                    <p class="mb-0 font-13">Peserta Didik Lulus</p>
                                 </div>
                                 <div class="text-white widgets-icons-2 rounded-circle bg-gradient-blooker ms-auto"><i
                                         class='bx bxs-group'></i>

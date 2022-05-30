@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Administrator\TeacherController;
 use App\Http\Controllers\Administrator\FeedbackController;
 use App\Http\Controllers\Administrator\PlaygroupController;
-use App\Http\Controllers\Administrator\PlaygroupGraduatedController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,14 +26,7 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
         return redirect()->route('login');
     })->middleware('guest:user,student');
 
-    Route::get('/dashboard', function () {
-        return view('dashboard', [
-            'title' => 'Dashboard - Sistem Informasi Manajemen PAUD Tunas Aksara',
-            'kb_student' => Student::where('level_id', 1)->count(),
-            'tk_student' => Student::where('level_id', 2)->count(),
-            'count_teachers' => User::count(),
-        ]);
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // START :: KB Tunas Aksara
     Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
@@ -48,6 +41,9 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::get('/kb-tunas-aksara/delete/{id}', [PlaygroupController::class, 'destroy'])->name('playgroup.destroy');
 
+    // Peserta didik lulus
+    Route::get('/kb-tunas-aksara/peserta-didik-lulus/{student:id}/edit', [PlaygroupController::class, 'graduated'])->name('playgroup.graduated');
+    Route::post('/kb-tunas-aksara/peserta-didik-lulus/{student:id}', [PlaygroupController::class, 'graduatedUpdate'])->name('playgroup.graduatedUpdate');
     // END :: KB Tunas Aksara
 
 

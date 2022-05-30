@@ -498,7 +498,7 @@
                                         <div class="tab-pane fade" id="primarycontact" role="tabpanel">
 
                                             {{-- get data if mutation not empty --}}
-                                            @if (!empty($mutation))
+                                            @if ($student->mutation_id != null)
                                                 <div class="mb-3 row align-items-center">
                                                     <div class="col-sm-4">
                                                         <h6 class="mb-0">Diterima Tanggal</h6>
