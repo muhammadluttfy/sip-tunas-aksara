@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administrator\CategoryController;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Support\Facades\Route;
@@ -59,9 +60,15 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
 
 
-    // START :: Feedback
-    Route::get('feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-    // END :: Feedback
+    // START :: Forum PAUD
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store');
+
+    Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+
+    Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    // END :: Forum PAUD
 });
 
 

@@ -22,6 +22,33 @@
         </li>
         {{-- @endif --}}
 
+        <li class="menu-label">Main Master</li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Tenaga Pendidik</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('teacher.index') }}"><i class="bx bx-right-arrow-alt"></i>Data Guru</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Forum PAUD</div>
+            </a>
+            <ul>
+                <li> <a href="{{ url('ecommerce-products-details') }}"><i
+                            class="bx bx-right-arrow-alt"></i>Postingan</a>
+                </li>
+                <li> <a href="{{ route('categories.index') }}"><i class="bx bx-right-arrow-alt"></i>Kategori</a>
+                </li>
+            </ul>
+        </li>
+
 
         <li class="menu-label">KB Tunas Aksara</li>
         <li>
@@ -67,31 +94,6 @@
                 </div>
                 <div class="menu-title">Nilai Raport</div>
             </a>
-        </li>
-
-        <li class="menu-label">Tenaga Pendidik</li>
-        <li>
-            <a href="{{ route('teacher.index') }}">
-                <div class="parent-icon"><i class="bx bx-category"></i>
-                </div>
-                <div class="menu-title">Data Guru</div>
-            </a>
-        </li>
-        <li class="menu-label">Feedback</li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="bx bx-category"></i>
-                </div>
-                <div class="menu-title">Feedback</div>
-            </a>
-            <ul>
-                <li> <a href="/feedback"><i class="bx bx-right-arrow-alt"></i>KB Tunas
-                        Aksara</a>
-                </li>
-                <li> <a href="{{ url('ecommerce-products-details') }}"><i class="bx bx-right-arrow-alt"></i>TK Tunas
-                        Aksara</a>
-                </li>
-            </ul>
         </li>
     </ul>
     <!--end navigation-->

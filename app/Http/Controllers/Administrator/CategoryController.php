@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
-class FeedbackController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,9 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        return view('administrator.feedback.index', [
-            'title' => 'Feedback - Sistem Informasi Manajemen PAUD Tunas Aksara',
+        return view('administrator.forum.index', [
+            'title' => 'Semua Kategori',
+            'categories' => Category::all()
         ]);
     }
 
@@ -26,7 +29,9 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        //
+        return view('administrator.forum.create', [
+            'title' => 'Tambah Kategori',
+        ]);
     }
 
     /**
@@ -37,7 +42,14 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+        ]);
+
+        $validatedData['slug'] = str_slug($request->nama);
+
+        Category::create($validatedData);
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
     /**
@@ -59,7 +71,10 @@ class FeedbackController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('administrator.forum.edit', [
+            'title' => 'Edit Kategori',
+            'category' => Category::findOrFail($id)
+        ]);
     }
 
     /**
@@ -71,7 +86,13 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+        ]);
+        Category::where('id', $id)->update([
+            'nama' => $request->nama,
+            'slug' => str_slug($request->nama)
+        ]);
     }
 
     /**
@@ -82,6 +103,8 @@ class FeedbackController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Category::find($id);
+        $data->delete();
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus!');
     }
 }

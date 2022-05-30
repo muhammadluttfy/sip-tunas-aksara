@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Level;
@@ -88,6 +89,21 @@ class DatabaseSeeder extends Seeder
                 'instagram' => 'ochnafis',
                 'facebook' => 'Ahla Ainin',
                 'whatsapp' => '082340378657',
+            ],
+        ]);
+
+        Category::insert([
+            [
+                'nama' => 'Informasi Libur',
+                'slug' => 'informasi-libur',
+            ],
+            [
+                'nama' => 'Pengumuman',
+                'slug' => 'pengumuman',
+            ],
+            [
+                'nama' => 'Event',
+                'slug' => 'event',
             ],
         ]);
     }
