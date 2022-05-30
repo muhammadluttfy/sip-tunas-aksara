@@ -75,6 +75,8 @@ class CategoryController extends Controller
             'title' => 'Edit Kategori',
             'category' => Category::findOrFail($id)
         ]);
+        return "berhasil";
+        // return redirect()->route('categories.index')->with('success', 'Kategori berhasil diubah!');
     }
 
     /**
@@ -86,6 +88,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
         ]);
@@ -93,6 +96,8 @@ class CategoryController extends Controller
             'nama' => $request->nama,
             'slug' => str_slug($request->nama)
         ]);
+
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil diubah!');
     }
 
     /**

@@ -22,10 +22,10 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('categories.store') }}" method="POST"
+                                    <form action="{{ route('categories.update', $category->id) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
-
+                                        {{-- @method('PUT') --}}
                                         <div class="mb-3 row align-items-center">
                                             <div class="col-sm-3">
                                                 <h6 class="mb-2 mb-md-0">Nama Kategori</h6>
@@ -59,18 +59,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // avatarPreview
-        function previewAvatar() {
-            const avatar = document.querySelector('#avatar');
-            const avatarPreview = document.querySelector('.avatar-preview');
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(avatar.files[0]);
-            oFReader.onload = function(oFREvent) {
-                avatarPreview.src = oFREvent.target.result;
-            }
-        }
-    </script>
 @endsection

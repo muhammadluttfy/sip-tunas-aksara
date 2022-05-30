@@ -94,42 +94,6 @@
                                                             </div>
                                                         </div>
 
-                                                        {{-- <div class="col-12">
-                                                            <label for="tanggal_lulus_kb" class="form-label">Tanggal
-                                                                Kelulusan <strong class="text-danger">*</strong>(Diisi
-                                                                jika peserta didik telah dinyatakan
-                                                                lulus)</label>
-                                                            <input type="date"
-                                                                class="form-control @error('tanggal_lulus_kb') is-invalid @enderror"
-                                                                name="tanggal_lulus_kb" id="tanggal_lulus_kb">
-                                                            @error('tanggal_lulus_kb')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="jenjang_pendidikan" class="form-label">Jenjang
-                                                                Pendidikan</label>
-                                                            <select
-                                                                class="form-select @error('jenjang_pendidikan') is-invalid @enderror"
-                                                                name="jenjang_pendidikan" id="jenjang_pendidikan">
-                                                                @if (old('jenjang_pendidikan', $student->level->jenjang_pendidikan) == 'KB Tunas Aksara')
-                                                                    <option value="1" selected>KB Tunas Aksara</option>
-                                                                    <option value="2">TK Tunas Aksara</option>
-                                                                @else
-                                                                    <option value="1">KB Tunas Aksara</option>
-                                                                    <option value="2" selected>TK Tunas Aksara</option>
-                                                                @endif
-                                                            </select>
-                                                            @error('jenjang_pendidikan')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                        </div> --}}
-
                                                         <div class="col-12">
                                                             <label for="nama_lengkap_murid" class="form-label">Nama
                                                                 Lengkap</label>
@@ -837,7 +801,7 @@
                                                                 @else
                                                                     value="{{ old('diterima_tanggal') }} @endif ">
 
-                                                                                        @error('diterima_tanggal')
+                                                                                            @error('diterima_tanggal')
         <div class=" invalid-feedback">
                                                                 {{ $message }}
                                                             </div>
