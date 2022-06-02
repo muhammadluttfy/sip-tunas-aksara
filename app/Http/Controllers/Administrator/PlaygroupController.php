@@ -240,7 +240,7 @@ class PlaygroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student, StudentDetail $student_detail, Mutation $mutation)
+    public function update(Request $request, Student $student, Mutation $mutation)
     {
         $request->validate([
             // step 1 - validasi form peserta didik

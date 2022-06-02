@@ -45,4 +45,24 @@ class User extends Authenticatable
     {
         return $this->belongsTo(SocialMedia::class);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // ===== Handler untuk menghapus data relasi jika data paret di hapus ===== 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            $user->social_media()->delete();
+        });
+    }
 }

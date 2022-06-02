@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('administrator.forum.index', [
+        return view('administrator.category.index', [
             'title' => 'Semua Kategori',
             'categories' => Category::all()
         ]);
@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('administrator.forum.create', [
+        return view('administrator.category.create', [
             'title' => 'Tambah Kategori',
         ]);
     }
@@ -71,7 +71,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('administrator.forum.edit', [
+        return view('administrator.category.edit', [
             'title' => 'Edit Kategori',
             'category' => Category::findOrFail($id)
         ]);
@@ -88,7 +88,6 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $request->validate([
             'nama' => 'required|string|max:255',
         ]);

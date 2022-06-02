@@ -23,9 +23,15 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="text-center d-flex flex-column align-items-center">
-                                        <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
-                                            alt="{{ $teacher->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
-                                            width="110">
+                                        @if ($teacher->avatar == null)
+                                            <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
+                                                alt="{{ $teacher->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
+                                                width="110">
+                                        @else
+                                            <img src="{{ asset('storage/' . $teacher->avatar) }}"
+                                                alt="{{ $teacher->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
+                                                width="110">
+                                        @endif
                                         <div class="mt-3">
                                             <h4>{{ $teacher->nama_lengkap }}</h4>
                                             {{-- <p class="mb-1 text-secondary">{{ $teacher->role }}</p> --}}

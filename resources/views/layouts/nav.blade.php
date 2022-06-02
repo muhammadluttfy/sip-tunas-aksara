@@ -41,8 +41,7 @@
                 <div class="menu-title">Forum PAUD</div>
             </a>
             <ul>
-                <li> <a href="{{ url('ecommerce-products-details') }}"><i
-                            class="bx bx-right-arrow-alt"></i>Postingan</a>
+                <li> <a href="{{ route('posts.index') }}"><i class="bx bx-right-arrow-alt"></i>Postingan</a>
                 </li>
                 <li> <a href="{{ route('categories.index') }}"><i class="bx bx-right-arrow-alt"></i>Kategori</a>
                 </li>

@@ -8,7 +8,7 @@
     <!--favicon-->
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png" />
     <!--plugins-->
-    @yield("style")
+    @yield('style')
     <link href="{{ asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
@@ -25,6 +25,16 @@
     <link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
+
+    {{-- Trix Editor --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">
+    <style>
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none;
+        }
+
+    </style>
+
     <title>{{ $title }}</title>
 </head>
 
@@ -38,7 +48,7 @@
         @include('layouts.nav')
         <!--end navigation-->
         <!--start page wrapper -->
-        @yield("wrapper")
+        @yield('wrapper')
         <!--end page wrapper -->
         <!--start overlay-->
         <div class="overlay toggle-icon"></div>
@@ -149,7 +159,6 @@
     <!--end switcher-->
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     <!-- Bootstrap JS -->
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <!--plugins-->
@@ -160,7 +169,16 @@
     <!--app JS-->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <!--app JS-->
-    @yield("script")
+
+    {{-- Trix Editor --}}
+    <script type="text/javascript" src="{{ asset('js/trix.js') }}"></script>
+    <script>
+        document.addEventListener('trix-file-accept', function(e) {
+            e.preventDefault();
+        })
+    </script>
+
+    @yield('script')
 </body>
 
 </html>

@@ -11,6 +11,7 @@ use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
 use App\Models\Position;
+use App\Models\Post;
 use App\Models\SocialMedia;
 use App\Models\StudentDetail;
 use Illuminate\Database\Seeder;
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
         Father::factory(10)->create();
         Mother::factory(10)->create();
         Mutation::factory(10)->create();
+        Post::factory(10)->create();
 
         User::insert([
             [
@@ -42,7 +44,6 @@ class DatabaseSeeder extends Seeder
                 'username' => 'muhammad-lutfi',
                 'tanggal_lahir' => '1996-08-30',
                 'password' => bcrypt('password'),
-                'avatar' => 'https://i.pravatar.cc/300',
                 'remember_token' => '',
                 'created_at' => now(),
             ],
@@ -55,7 +56,6 @@ class DatabaseSeeder extends Seeder
                 'tanggal_lahir' => '1996-08-30',
                 'email' => 'dayah@gmail.com',
                 'password' => bcrypt('password'),
-                'avatar' => 'https://i.pravatar.cc/300',
                 'remember_token' => '',
                 'created_at' => now(),
             ],

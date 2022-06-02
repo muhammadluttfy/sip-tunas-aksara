@@ -29,24 +29,24 @@
                 </div>
             </div>
             <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
-                <div class="breadcrumb-title pe-3">Data Guru</div>
+                <div class="breadcrumb-title pe-3">Forum PAUD</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="p-0 mb-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">tenaga Pendidik</li>
+                            <li class="breadcrumb-item active" aria-current="page">Postingan</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="ms-auto">
                     <div class="btn-group">
-                        <a href="{{ route('teacher.create') }}" class="btn btn-primary">Tambah Data</a>
+                        <a href="{{ route('posts.create') }}" class="btn btn-primary">Tambah Postingan</a>
                     </div>
                 </div>
             </div>
             <!--end breadcrumb-->
-            <h6 class="mb-0 text-uppercase">Semua Tenaga Pendidik</h6>
+            <h6 class="mb-0 text-uppercase">Semua Postingan</h6>
             <hr />
             <div class="card">
                 <div class="card-body">
@@ -54,33 +54,28 @@
                         <table id="example2" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th width="10%">No. Urut</th>
-                                    <th width="15%">No. Identitas</th>
-                                    <th width="30%">Nama Lengkap</th>
-                                    <th width="15%">Jabatan</th>
-                                    <th width="10%">Email</th>
-                                    <th width="20%">Aksi</th>
+                                    <th width="10%">No.</th>
+                                    <th width="35%">Judul</th>
+                                    <th width="25%">Kategori</th>
+                                    <th width="15%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($teachers as $teacher)
+                                @foreach ($posts as $post)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $teacher->no_identitas }}</td>
-                                        <td>{{ $teacher->nama_lengkap }}</td>
-                                        <td>{{ $teacher->role }}</td>
-                                        <td>{{ $teacher->email }}</td>
+                                        <td>{{ $post->judul }}</td>
+                                        <td>{{ $post->category->nama }}</td>
                                         <td class="gap-2">
-                                            <a href="{{ route('teacher.show', $teacher->username) }}"
-                                                class="mx-md-1">
+                                            <a href="{{ route('posts.show', $post->slug) }}" class="mx-md-1">
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
-                                                    Detail</span>
+                                                    Preview</span>
                                             </a>
-                                            <a href="{{ route('teacher.edit', $teacher->id) }}" class="mx-md-1">
+                                            <a href="{{ route('posts.edit', $post->id) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
-                                            <a href="#" class="mx-md-1 delete" data-id="{{ $teacher->id }}"
-                                                data-name="{{ $teacher->username }}">
+                                            <a href="#" class="mx-md-1 delete" data-id="{{ $post->id }}"
+                                                data-name="{{ $post->judul }}">
                                                 <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
                                             </a>
                                         </td>
@@ -90,11 +85,9 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>No. Urut</th>
-                                    <th>No. Identitas</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Jabatan</th>
-                                    <th>Email</th>
+                                    <th>No.</th>
+                                    <th>Judul</th>
+                                    <th>Slug</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -111,18 +104,18 @@
     {{-- sweet alert --}}
     <script>
         $('.delete').click(function() {
-            var teacherId = $(this).attr('data-id');
-            var teacherName = $(this).attr('data-name');
+            var postId = $(this).attr('data-id');
+            var postName = $(this).attr('data-name');
             swal({
                     title: "Apakah kamu yakin ?",
-                    text: "Kamu akan menghapus data " + teacherName + " !",
+                    text: "Kamu akan menghapus postingan " + postName + " !",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/tenaga-pendidik/delete/" + teacherId + "";
+                        window.location = "/posts/delete/" + postId + "";
                         swal("Selamat! Data berhasil dihapus!", {
                             icon: "success",
                         });
@@ -144,7 +137,7 @@
         $(document).ready(function() {
             var table = $('#example2').DataTable({
                 lengthChange: false,
-                buttons: ['copy', 'excel', 'pdf', 'print']
+                // buttons: ['copy', 'excel', 'pdf', 'print']
             });
 
             table.buttons().container()

@@ -74,8 +74,6 @@
                                                                             class="form-control @error('avatar') is-invalid @enderror"
                                                                             id="avatar" name="avatar"
                                                                             onchange="previewAvatar()">
-                                                                        {{-- <label class="input-group-text" for="avatar">Upload
-                                                                        Profil</label> --}}
                                                                         @error('avatar')
                                                                             <div class="invalid-feedback">
                                                                                 {{ $message }}

@@ -67,6 +67,11 @@ class Student extends Authenticatable
         return $this->belongsTo(Level::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 
     // ===== Handler untuk menghapus data relasi jika data paret di hapus ===== 
     public static function boot()
