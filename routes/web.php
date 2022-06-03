@@ -9,6 +9,7 @@ use App\Http\Controllers\Administrator\TeacherController;
 use App\Http\Controllers\Administrator\CategoryController;
 use App\Http\Controllers\Administrator\FeedbackController;
 use App\Http\Controllers\Administrator\PlaygroupController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
         return redirect()->route('login');
     })->middleware('guest:user,student');
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
 
     // START :: KB Tunas Aksara
     Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
@@ -93,6 +94,12 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
     Route::post('/posts/comment/{post:id}', [PostController::class, 'comment'])->name('posts.comment');
     // END :: Forum PAUD
 });
+
+
+// START :: Profil Tenaga Pendidik
+// Route::get('/profil-tenaga-pendidik', [Controller::class, 'profiles'])->name('profiles');
+Route::get('/profil/{user:username}', [Controller::class, 'profile'])->name('profile');
+// END :: Profil Tenaga Pendidik
 
 
 

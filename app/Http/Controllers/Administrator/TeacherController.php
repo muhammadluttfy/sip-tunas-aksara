@@ -53,7 +53,7 @@ class TeacherController extends Controller
             // validasi user / teacher            
             'nama_lengkap' => ['required', 'string', 'max:255'],
             'username' => 'required|string|max:255|unique:users',
-            'no_identitas' => [],
+            'no_identitas' => ['unique:users'],
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email' => ['required', 'email:dns', 'max:255', 'unique:users'],
             'jabatan' => [],
@@ -77,7 +77,7 @@ class TeacherController extends Controller
         $user = User::create([
             'social_media_id' => $socialMedia->id,
             'nama_lengkap' => $request->nama_lengkap,
-            'no_identitas' => str_pad(User::orderBy('created_at', 'DESC')->first()->id + 1, 3, "0", STR_PAD_LEFT) . '/paud/' . date('Y'),
+            'no_identitas' => str_pad(User::orderBy('created_at', 'DESC')->first()->id + 1, 3, "0", STR_PAD_LEFT) . '/tendik/' . date('Y'),
             'username' => $request->username,
             'avatar' => $request->file('avatar')->store('avatars'),
             'email' => $request->email,
