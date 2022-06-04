@@ -80,7 +80,7 @@
                                                 <select class="form-select @error('kategori') is-invalid @enderror"
                                                     name="kategori" id="kategori">
                                                     @foreach ($categories as $category)
-                                                        @if (old('kategori', $post->category_id) == $category->id)
+                                                        @if (old('kategori', $post->post_category_id) == $category->id)
                                                             <option value="{{ $category->id }}" selected>
                                                                 {{ $category->nama }}</option>
                                                         @else

@@ -65,7 +65,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $post->judul }}</td>
-                                        <td>{{ $post->category->nama }}</td>
+                                        <td>{{ $post->post_category->nama }}</td>
                                         <td class="gap-2">
                                             <a href="{{ route('posts.show', $post->slug) }}" class="mx-md-1">
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>

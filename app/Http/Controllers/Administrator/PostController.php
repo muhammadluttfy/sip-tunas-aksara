@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Models\Post;
 use App\Models\Comment;
-use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +37,7 @@ class PostController extends Controller
     {
         return view('administrator.post.create', [
             'title' => 'Tambah Postingan',
-            'categories' => Category::all(),
+            'categories' => PostCategory::all(),
         ]);
     }
 
@@ -59,7 +59,7 @@ class PostController extends Controller
         if ($request->file('image')) {
             Post::create([
                 'user_id' => auth()->user()->id,
-                'category_id' => $request->kategori,
+                'post_category_id' => $request->kategori,
 
                 'judul' => $request->judul,
                 'slug' => str_slug($request->judul),
@@ -70,7 +70,7 @@ class PostController extends Controller
         } else {
             Post::create([
                 'user_id' => auth()->user()->id,
-                'category_id' => $request->kategori,
+                'post_category_id' => $request->kategori,
 
                 'judul' => $request->judul,
                 'slug' => str_slug($request->judul),
@@ -135,7 +135,7 @@ class PostController extends Controller
         return view('administrator.post.edit', [
             'title' => 'Edit Postingan',
             'post' => Post::findOrFail($id),
-            'categories' => Category::all(),
+            'categories' => PostCategory::all(),
         ]);
     }
 
@@ -166,7 +166,7 @@ class PostController extends Controller
 
             Post::where('id', $post->id)->update([
                 'user_id' => auth()->user()->id,
-                'category_id' => $request->kategori,
+                'post_category_id' => $request->kategori,
 
                 'judul' => $request->judul,
                 'slug' => str_slug($request->judul),
@@ -177,7 +177,7 @@ class PostController extends Controller
         } else {
             Post::where('id', $post->id)->update([
                 'user_id' => auth()->user()->id,
-                'category_id' => $request->kategori,
+                'post_category_id' => $request->kategori,
 
                 'judul' => $request->judul,
                 'slug' => str_slug($request->judul),

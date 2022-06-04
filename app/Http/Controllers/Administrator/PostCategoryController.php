@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Models\Category;
+use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 
-class CategoryController extends Controller
+class PostCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +17,7 @@ class CategoryController extends Controller
     {
         return view('administrator.category.index', [
             'title' => 'Semua Kategori',
-            'categories' => Category::all()
+            'categories' => PostCategory::all()
         ]);
     }
 
@@ -48,7 +47,7 @@ class CategoryController extends Controller
 
         $validatedData['slug'] = str_slug($request->nama);
 
-        Category::create($validatedData);
+        PostCategory::create($validatedData);
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
@@ -73,7 +72,7 @@ class CategoryController extends Controller
     {
         return view('administrator.category.edit', [
             'title' => 'Edit Kategori',
-            'category' => Category::findOrFail($id)
+            'category' => PostCategory::findOrFail($id)
         ]);
         return "berhasil";
         // return redirect()->route('categories.index')->with('success', 'Kategori berhasil diubah!');
@@ -91,7 +90,7 @@ class CategoryController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
         ]);
-        Category::where('id', $id)->update([
+        PostCategory::where('id', $id)->update([
             'nama' => $request->nama,
             'slug' => str_slug($request->nama)
         ]);
@@ -107,7 +106,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $data = Category::find($id);
+        $data = PostCategory::find($id);
         $data->delete();
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus!');
     }

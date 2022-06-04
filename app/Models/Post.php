@@ -9,9 +9,9 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function category()
+    public function post_category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(PostCategory::class);
     }
 
     public function user()

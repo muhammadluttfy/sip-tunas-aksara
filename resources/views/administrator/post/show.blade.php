@@ -32,7 +32,7 @@
                         <div class="card-body bg-light">
                             <div class="post-detail">
                                 <span class="mb-2 badge bg-warning">
-                                    <a href="#" class="text-white">{{ $post->category->nama }}</a>
+                                    <a href="#" class="text-white">{{ $post->post_category->nama }}</a>
                                 </span>
 
                                 <h5 class="card-title">{{ $post->judul }}</h5>

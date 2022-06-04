@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Administrator\PostController;
 use App\Http\Controllers\Administrator\TeacherController;
-use App\Http\Controllers\Administrator\CategoryController;
+use App\Http\Controllers\Administrator\PostCategoryController;
 use App\Http\Controllers\Administrator\FeedbackController;
 use App\Http\Controllers\Administrator\PlaygroupController;
 use App\Http\Controllers\Controller;
@@ -67,14 +67,14 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     // START :: Forum PAUD
     // ==== Categories
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories', [PostCategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [PostCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/create', [PostCategoryController::class, 'store'])->name('categories.store');
 
-    Route::get('/categories/{category:id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::post('/categories/{category:id}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::get('/categories/{category:id}/edit', [PostCategoryController::class, 'edit'])->name('categories.edit');
+    Route::post('/categories/{category:id}', [PostCategoryController::class, 'update'])->name('categories.update');
 
-    Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/categories/delete/{id}', [PostCategoryController::class, 'destroy'])->name('categories.destroy');
 
 
     // ==== Posts

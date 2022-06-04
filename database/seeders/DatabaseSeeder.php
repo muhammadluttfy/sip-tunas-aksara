@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\Post;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Level;
@@ -10,9 +10,8 @@ use App\Models\Father;
 use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
-use App\Models\Position;
-use App\Models\Post;
 use App\Models\SocialMedia;
+use App\Models\PostCategory;
 use App\Models\StudentDetail;
 use Illuminate\Database\Seeder;
 
@@ -92,7 +91,7 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        Category::insert([
+        PostCategory::insert([
             [
                 'nama' => 'Informasi Libur',
                 'slug' => 'informasi-libur',
