@@ -11,7 +11,7 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="row">
-                <div class=" ms-auto col-5">
+                <div class=" ms-auto col-md-5">
                     @if (session()->has('success'))
                         <div class="py-2 border-0 alert alert-success bg-success alert-dismissible fade show">
                             <div class="d-flex align-items-center">

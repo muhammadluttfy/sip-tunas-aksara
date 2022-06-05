@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Models\PostCategory;
 use Illuminate\Http\Request;
+use App\Models\LetterCategory;
 use App\Http\Controllers\Controller;
 
-class PostCategoryController extends Controller
+class LetterCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class PostCategoryController extends Controller
      */
     public function index()
     {
-        return view('administrator.post-category.index', [
-            'title' => 'Semua Kategori',
-            'categories' => PostCategory::all()
+        return view('administrator.letter-category.index', [
+            'title' => 'Kategori Surat - Manajemen Surat',
+            'letter_categories' => LetterCategory::all()
         ]);
     }
 
@@ -28,8 +28,8 @@ class PostCategoryController extends Controller
      */
     public function create()
     {
-        return view('administrator.post-category.create', [
-            'title' => 'Tambah Kategori',
+        return view('administrator.letter-category.create', [
+            'title' => 'Tambah Kategori Surat - Manajemen Surat',
         ]);
     }
 
@@ -42,13 +42,13 @@ class PostCategoryController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => 'required|string|max:255|unique:post_categories,nama',
+            'nama' => 'required|string|max:255|unique:letter_categories,nama',
         ]);
 
         $validatedData['slug'] = str_slug($request->nama);
 
-        PostCategory::create($validatedData);
-        return redirect()->route('categories.index')->with('success', 'Kategori berhasil ditambahkan!');
+        LetterCategory::create($validatedData);
+        return redirect()->route('letters.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
     /**
@@ -70,9 +70,9 @@ class PostCategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('administrator.post-category.edit', [
-            'title' => 'Edit Kategori',
-            'category' => PostCategory::findOrFail($id)
+        return view('administrator.letter-category.edit', [
+            'title' => 'Edit Kategori Surat - Manajemen Surat',
+            'letter_category' => LetterCategory::findOrFail($id)
         ]);
     }
 
@@ -83,24 +83,23 @@ class PostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, PostCategory $post_category)
+    public function update(Request $request, $id, LetterCategory $letter_category)
     {
         $request->validate([
             'nama' => 'required|string|max:255',
         ]);
-
-        if ($request->nama != $post_category->nama) {
+        if ($request->nama != $letter_category->nama) {
             $request->validate([
-                'nama' => 'required|string|max:255|unique:post_categories,nama',
+                'nama' => 'required|string|max:255|unique:letter_categories,nama',
             ]);
         }
 
-        PostCategory::where('id', $id)->update([
+        LetterCategory::where('id', $id)->update([
             'nama' => $request->nama,
             'slug' => str_slug($request->nama)
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Kategori berhasil diubah!');
+        return redirect()->route('letters.index')->with('success', 'Kategori berhasil diubah!');
     }
 
     /**
@@ -111,8 +110,8 @@ class PostCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $data = PostCategory::find($id);
+        $data = LetterCategory::find($id);
         $data->delete();
-        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus!');
+        return redirect()->route('letters.index')->with('success', 'Kategori berhasil dihapus!');
     }
 }

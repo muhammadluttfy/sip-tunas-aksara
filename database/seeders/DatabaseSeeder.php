@@ -13,6 +13,7 @@ use App\Models\Mutation;
 use App\Models\SocialMedia;
 use App\Models\PostCategory;
 use App\Models\StudentDetail;
+use App\Models\LetterCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -60,13 +61,6 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        // Role::insert([
-        //     // ['name' => 'Ketua Yayasan',],
-        //     ['name' => 'Kepala Sekolah',],
-        //     ['name' => 'Administrator',],
-        //     ['name' => 'Tenaga Pendidik',],
-        // ]);
-
         Level::insert([
             [
                 'jenjang_pendidikan' => 'KB Tunas Aksara',
@@ -103,6 +97,25 @@ class DatabaseSeeder extends Seeder
             [
                 'nama' => 'Event',
                 'slug' => 'event',
+            ],
+        ]);
+
+        LetterCategory::insert([
+            [
+                'nama' => 'Surat Pengantar',
+                'slug' => 'surat-pengantar',
+            ],
+            [
+                'nama' => 'Surat Keterangan',
+                'slug' => 'surat-keterangan',
+            ],
+            [
+                'nama' => 'Surat Keputusan',
+                'slug' => 'surat-keputusan',
+            ],
+            [
+                'nama' => 'Surat Undangan',
+                'slug' => 'surat-undangan',
             ],
         ]);
     }

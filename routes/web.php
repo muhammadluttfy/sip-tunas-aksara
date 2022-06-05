@@ -1,13 +1,10 @@
 <?php
 
-use App\Models\User;
-use App\Models\Student;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Administrator\PostController;
 use App\Http\Controllers\Administrator\TeacherController;
 use App\Http\Controllers\Administrator\PostCategoryController;
-use App\Http\Controllers\Administrator\FeedbackController;
+use App\Http\Controllers\Administrator\LetterCategoryController;
 use App\Http\Controllers\Administrator\PlaygroupController;
 use App\Http\Controllers\Controller;
 
@@ -78,7 +75,6 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
 
     // ==== Posts
-    // Route::resource('/posts', PostController::class);
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
@@ -93,6 +89,20 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::post('/posts/comment/{post:id}', [PostController::class, 'comment'])->name('posts.comment');
     // END :: Forum PAUD
+
+
+    // START :: Management Surat
+    // ==== Kategori Surat
+    Route::get('/surat/kategori', [LetterCategoryController::class, 'index'])->name('letters.index');
+
+    Route::get('/surat/kategori/create', [LetterCategoryController::class, 'create'])->name('letters.create');
+    Route::post('/surat/kategori/create', [LetterCategoryController::class, 'store'])->name('letters.store');
+
+    Route::get('/surat/kategori/{category:id}/edit', [LetterCategoryController::class, 'edit'])->name('letters.edit');
+    Route::post('/surat/kategori/{category:id}', [LetterCategoryController::class, 'update'])->name('letters.update');
+
+    Route::get('/surat/delete/{id}', [LetterCategoryController::class, 'destroy'])->name('letters.destroy');
+    // END :: Management Surat
 });
 
 

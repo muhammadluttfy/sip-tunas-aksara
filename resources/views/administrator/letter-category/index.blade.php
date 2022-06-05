@@ -11,7 +11,7 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="row">
-                <div class=" ms-auto col-5">
+                <div class=" ms-auto col-md-5">
                     @if (session()->has('success'))
                         <div class="py-2 border-0 alert alert-success bg-success alert-dismissible fade show">
                             <div class="d-flex align-items-center">
@@ -29,19 +29,19 @@
                 </div>
             </div>
             <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
-                <div class="breadcrumb-title pe-3">Forum PAUD</div>
+                <div class="breadcrumb-title pe-3">Manajemen Surat</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="p-0 mb-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Kategori</li>
+                            <li class="breadcrumb-item active" aria-current="page">Kategori Surat</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="ms-auto">
                     <div class="btn-group">
-                        <a href="{{ route('categories.create') }}" class="btn btn-primary">Tambah Kategori</a>
+                        <a href="{{ route('letters.create') }}" class="btn btn-primary">Tambah Kategori</a>
                     </div>
                 </div>
             </div>
@@ -61,13 +61,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($letter_categories as $category)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $category->nama }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td class="gap-2">
-                                            <a href="/categories/{{ $category->id }}/edit" class="mx-md-1">
+                                            <a href="/surat/kategori/{{ $category->id }}/edit" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
                                             <a href="#" class="mx-md-1 delete" data-id="{{ $category->id }}"
@@ -111,7 +111,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/categories/delete/" + categoryId + "";
+                        window.location = "/surat/delete/" + categoryId + "";
                         swal("Selamat! Data berhasil dihapus!", {
                             icon: "success",
                         });
