@@ -46,7 +46,7 @@
                                             <div class="col-sm-3">
                                                 <h6 class="mb-2 mb-md-0">Banner</h6>
                                             </div>
-                                            <div class="col-sm-9 text-secondary @error('banner') is-invalid @enderror">
+                                            <div class="col-sm-9 text-secondary @error('image') is-invalid @enderror">
                                                 <input type="hidden" name="oldImage" value="{{ $post->image }}">
 
                                                 @if ($post->image)
@@ -65,7 +65,7 @@
                                                 @enderror
                                             </div>
 
-                                            @error('banner')
+                                            @error('image')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>

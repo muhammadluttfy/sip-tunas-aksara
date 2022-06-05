@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administrator\IncomingLetterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Administrator\PostController;
 use App\Http\Controllers\Administrator\TeacherController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Administrator\PostCategoryController;
 use App\Http\Controllers\Administrator\LetterCategoryController;
 use App\Http\Controllers\Administrator\PlaygroupController;
 use App\Http\Controllers\Controller;
+use PHPUnit\Framework\IncompleteTest;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +104,20 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
     Route::post('/surat/kategori/{category:id}', [LetterCategoryController::class, 'update'])->name('letters.update');
 
     Route::get('/surat/delete/{id}', [LetterCategoryController::class, 'destroy'])->name('letters.destroy');
+
+
+    // ==== Surat Masuk
+    Route::get('/surat-masuk', [IncomingLetterController::class, 'index'])->name('incoming.index');
+
+    Route::get('/surat-masuk/create', [IncomingLetterController::class, 'create'])->name('incoming.create');
+    Route::post('/surat-masuk/create', [IncomingLetterController::class, 'store'])->name('incoming.store');
+
+    Route::get('/surat-masuk/{letter:id}/edit', [IncomingLetterController::class, 'edit'])->name('incoming.edit');
+    Route::post('/surat-masuk/{letter:id}', [IncomingLetterController::class, 'update'])->name('incoming.update');
+
+    Route::get('/surat-masuk/{letter:id}', [IncomingLetterController::class, 'show'])->name('incoming.show');
+
+    Route::get('/surat-masuk/{id}', [IncomingLetterController::class, 'destroy'])->name('incoming.destroy');
     // END :: Management Surat
 });
 

@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory;
 use App\Models\Post;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Level;
 use App\Models\Father;
+use App\Models\Letter;
 use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
@@ -33,6 +35,7 @@ class DatabaseSeeder extends Seeder
         Mother::factory(10)->create();
         Mutation::factory(10)->create();
         Post::factory(10)->create();
+        Letter::factory(10)->create();
 
         User::insert([
             [

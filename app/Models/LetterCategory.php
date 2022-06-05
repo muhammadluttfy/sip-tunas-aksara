@@ -10,4 +10,9 @@ class LetterCategory extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function letter()
+    {
+        return $this->hasMany(Letter::class);
+    }
 }

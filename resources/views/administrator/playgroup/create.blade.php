@@ -196,7 +196,7 @@
 
                                                         <div class="col-md-6">
                                                             <label for="tanggal_lahir_murid" class="form-label">Tanggal
-                                                                Lahir</label>
+                                                                Surat</label>
                                                             <input type="date"
                                                                 class="form-control @error('tanggal_lahir_murid') is-invalid @enderror"
                                                                 name="tanggal_lahir_murid" id="tanggal_lahir_murid"

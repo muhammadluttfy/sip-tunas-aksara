@@ -72,7 +72,7 @@
                 <div class="menu-title">Main Data</div>
             </a>
             <ul>
-                <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Surat Masuk</a>
+                <li> <a href="{{ route('incoming.index') }}"><i class="bx bx-right-arrow-alt"></i>Surat Masuk</a>
                 </li>
                 <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Surat Keluar</a>
                 </li>

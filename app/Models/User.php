@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function letter()
+    {
+        return $this->hasMany(Letter::class);
+    }
+
     // ===== Handler untuk menghapus data relasi jika data paret di hapus ===== 
     public static function boot()
     {
