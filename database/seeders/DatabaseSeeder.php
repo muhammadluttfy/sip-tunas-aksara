@@ -16,6 +16,8 @@ use App\Models\SocialMedia;
 use App\Models\PostCategory;
 use App\Models\StudentDetail;
 use App\Models\LetterCategory;
+use App\Models\Predicate;
+use App\Models\Semester;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -119,6 +121,52 @@ class DatabaseSeeder extends Seeder
             [
                 'nama' => 'Surat Undangan',
                 'slug' => 'surat-undangan',
+            ],
+        ]);
+
+        Semester::insert([
+            [
+                'nama' => 'Semester 1',
+            ],
+            [
+                'nama' => 'Semester 2',
+            ],
+            [
+                'nama' => 'Semester 3',
+            ],
+            [
+                'nama' => 'Semester 4',
+            ],
+            [
+                'nama' => 'Semester 5',
+            ],
+            [
+                'nama' => 'Semester 6',
+            ],
+            [
+                'nama' => 'Semester 7',
+            ],
+            [
+                'nama' => 'Semester 8',
+            ],
+        ]);
+
+        Predicate::insert([
+            [
+                'nama' => 'Belum Berkembang (BB)',
+                'created_at' => now(),
+            ],
+            [
+                'nama' => 'Mulai Berkembang (MB)',
+                'created_at' => now(),
+            ],
+            [
+                'nama' => 'Berkembang Sesuai Harapan (BSH)',
+                'created_at' => now(),
+            ],
+            [
+                'nama' => 'Berkembang Sangat Baik (BSB)',
+                'created_at' => now(),
             ],
         ]);
     }

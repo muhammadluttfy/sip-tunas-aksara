@@ -18,7 +18,7 @@ class IncomingLetterController extends Controller
      */
     public function index()
     {
-        return view('administrator.incoming-letter.index', [
+        return view('administrator.letter-incoming.index', [
             'title' => 'Surat Masuk - Manajemen Surat',
             'letters' => Letter::where('tipe_surat', 'Surat Masuk')->get(),
         ]);
@@ -31,7 +31,7 @@ class IncomingLetterController extends Controller
      */
     public function create()
     {
-        return view('administrator.incoming-letter.create', [
+        return view('administrator.letter-incoming.create', [
             'title' => 'Tambah Surat Masuk - Manajemen Surat',
             'letters' => Letter::all(),
             'categories' => LetterCategory::all(),
@@ -99,7 +99,7 @@ class IncomingLetterController extends Controller
      */
     public function show($id)
     {
-        return view('administrator.incoming-letter.show', [
+        return view('administrator.letter-incoming.show', [
             'title' => 'Detail Surat Masuk - Manajemen Surat',
             'letter' => Letter::findOrFail($id),
             'categories' => LetterCategory::all(),
@@ -114,7 +114,7 @@ class IncomingLetterController extends Controller
      */
     public function edit($id)
     {
-        return view('administrator.incoming-letter.edit', [
+        return view('administrator.letter-incoming.edit', [
             'title' => 'Ubah Surat Masuk - Manajemen Surat',
             'letter' => Letter::findOrFail($id),
             'categories' => LetterCategory::all(),

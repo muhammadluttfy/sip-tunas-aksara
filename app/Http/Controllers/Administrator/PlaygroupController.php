@@ -9,6 +9,7 @@ use App\Models\Mutation;
 use Illuminate\Http\Request;
 use App\Models\StudentDetail;
 use App\Http\Controllers\Controller;
+use App\Models\Semester;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,7 @@ class PlaygroupController extends Controller
      */
     public function index()
     {
-        return view('administrator.playgroup.index', [
+        return view('administrator.playgroup-data.index', [
             'title' => 'KB Tunas Aksara - Semua Peserta Didik',
             // get all data student by level_id = 1
             'students' => Student::where('level_id', 1)->get(),
@@ -36,7 +37,7 @@ class PlaygroupController extends Controller
      */
     public function create()
     {
-        return view('administrator.playgroup.create', [
+        return view('administrator.playgroup-data.create', [
             'title' => 'KB Tunas Aksara - Tambah Peserta Didik',
         ]);
     }
@@ -212,7 +213,7 @@ class PlaygroupController extends Controller
      */
     public function show(Student $student)
     {
-        return view('administrator.playgroup.show', [
+        return view('administrator.playgroup-data.show', [
             // get data by id
             'title' => $student->nama_lengkap . ' ' . '(' . $student->username . ')',
             'student' => $student,
@@ -227,7 +228,7 @@ class PlaygroupController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('administrator.playgroup.edit', [
+        return view('administrator.playgroup-data.edit', [
             'title' => 'Edit Profil' . ' - ' . $student->nama_lengkap . ' ' . '(' . $student->username . ')',
             'student' => $student,
         ]);
@@ -414,12 +415,13 @@ class PlaygroupController extends Controller
 
     // ================= graduated KB Tunas Aksara function controller =================
 
-    public function graduated(Student $student)
+    public function graduated(Student $student, Semester $semester)
     {
-        return view('administrator.playgroup.graduated', [
+        return view('administrator.playgroup-data.graduated', [
             'title' => 'Edit Profil' . ' - ' . $student->nama_lengkap . ' ' . '(' . $student->username . ')',
             // student by id
             'student' => $student,
+            // get all semesters
         ]);
     }
 

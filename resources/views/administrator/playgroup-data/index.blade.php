@@ -83,10 +83,10 @@
                                                 <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
                                             </a>
 
-                                            <a href="/kb-tunas-aksara/peserta-didik-lulus/{{ $student->id }}/edit"
+                                            <a href="{{ route('playgroup.raport.show', $student->id) }}"
                                                 class="mx-md-1">
                                                 <span class="badge bg-success"><i class='lni lni-graduation'></i>
-                                                    Lulus</span>
+                                                    Nilai Raport </span>
                                             </a>
 
                                         </td>

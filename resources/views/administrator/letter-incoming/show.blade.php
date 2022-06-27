@@ -104,16 +104,14 @@
                                             <div class="col-sm-3">
                                                 <h6 class="mb-2 mb-md-0">Foto Surat</h6>
                                             </div>
-                                            <div class="col-sm-9 text-secondary @error('image') is-invalid @enderror">
-                                                <img src="{{ asset('storage/' . $letter->image) }}"
-                                                    class="mb-3 img-preview img-fluid col-sm-5">
+                                            <div class="col-sm-9 text-secondary">
+                                                @if ($letter->image)
+                                                    <img src="{{ asset('storage/' . $letter->image) }}"
+                                                        class="mb-3 img-preview img-fluid col-sm-5">
+                                                @else
+                                                    <p class="text-danger">*Tidak ada gambar</p>
+                                                @endif
                                             </div>
-
-                                            @error('image')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
                                         </div>
                                     </form>
                                 </div>

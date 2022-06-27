@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\Administrator\IncomingLetterController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Administrator\PostController;
 use App\Http\Controllers\Administrator\TeacherController;
-use App\Http\Controllers\Administrator\PostCategoryController;
-use App\Http\Controllers\Administrator\LetterCategoryController;
 use App\Http\Controllers\Administrator\PlaygroupController;
-use App\Http\Controllers\Controller;
-use PHPUnit\Framework\IncompleteTest;
+use App\Http\Controllers\Administrator\PostCategoryController;
+use App\Http\Controllers\Administrator\IncomingLetterController;
+use App\Http\Controllers\Administrator\LetterCategoryController;
+use App\Http\Controllers\Administrator\RaportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +43,27 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::get('/kb-tunas-aksara/delete/{id}', [PlaygroupController::class, 'destroy'])->name('playgroup.destroy');
 
-    // Peserta didik lulus
-    Route::get('/kb-tunas-aksara/peserta-didik-lulus/{student:id}/edit', [PlaygroupController::class, 'graduated'])->name('playgroup.graduated');
-    Route::post('/kb-tunas-aksara/peserta-didik-lulus/{student:id}', [PlaygroupController::class, 'graduatedUpdate'])->name('playgroup.graduatedUpdate');
+
+    // Nilai Raport
+    Route::get('/nilai-raport/{student:id}', [RaportController::class, 'show'])->name('playgroup.raport.show');
+
+    Route::get('/tambah-nilai-raport/{student:id}/create', [RaportController::class, 'create'])->name('playgroup.raport.create');
+    Route::post('/tambah-nilai-raport/{student:id}/create', [RaportController::class, 'store'])->name('playgroup.raport.store');
+
+    Route::get('/nilai-raport/semester-1/{student:id}/edit', [RaportController::class, 'editSemester1'])->name('playgroup.raport.editSemester1');
+    Route::post('/nilai-raport/semester-1/{student:id}', [RaportController::class, 'updateSemester1'])->name('playgroup.raport.updateSemester1');
+
+    Route::get('/nilai-raport/semester-2/{student:id}/edit', [RaportController::class, 'editSemester2'])->name('playgroup.raport.editSemester2');
+    Route::post('/nilai-raport/semester-2/{student:id}', [RaportController::class, 'updateSemester2'])->name('playgroup.raport.updateSemester2');
+
+    Route::get('/nilai-raport/semester-3/{student:id}/edit', [RaportController::class, 'editSemester3'])->name('playgroup.raport.editSemester3');
+    Route::post('/nilai-raport/semester-3/{student:id}', [RaportController::class, 'updateSemester3'])->name('playgroup.raport.updateSemester3');
+
+    Route::get('/nilai-raport/semester-4/{student:id}/edit', [RaportController::class, 'editSemester4'])->name('playgroup.raport.editSemester4');
+    Route::post('/nilai-raport/semester-4/{student:id}', [RaportController::class, 'updateSemester4'])->name('playgroup.raport.updateSemester4');
+
+    Route::get('/nilai-raport/delete/{id}', [RaportController::class, 'destroy'])->name('playgroup.raport.destroy');
+
     // END :: KB Tunas Aksara
 
 
@@ -117,7 +135,7 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::get('/surat-masuk/{letter:id}', [IncomingLetterController::class, 'show'])->name('incoming.show');
 
-    Route::get('/surat-masuk/{id}', [IncomingLetterController::class, 'destroy'])->name('incoming.destroy');
+    Route::get('/surat-masuk/delete/{id}', [IncomingLetterController::class, 'destroy'])->name('incoming.destroy');
     // END :: Management Surat
 });
 

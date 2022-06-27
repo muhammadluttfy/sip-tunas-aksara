@@ -121,7 +121,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/surat-masuk/" + lettertId + "";
+                        window.location = "/surat-masuk/delete/" + lettertId + "";
                         swal("Selamat! Data berhasil dihapus!", {
                             icon: "success",
                         });

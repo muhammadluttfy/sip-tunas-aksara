@@ -50,17 +50,11 @@
 
         <li class="menu-label">KB Tunas Aksara</li>
         <li>
-            <a href="javascript:;" class="has-arrow">
+            <a href="{{ route('playgroup.index') }}">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
-                <div class="menu-title">Main Data</div>
+                <div class="menu-title">Peserta Didik</div>
             </a>
-            <ul>
-                <li> <a href="{{ route('playgroup.index') }}"><i class="bx bx-right-arrow-alt"></i>Peserta Didik</a>
-                </li>
-                <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Raport</a>
-                </li>
-            </ul>
         </li>
 
 

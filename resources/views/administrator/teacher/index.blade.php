@@ -22,8 +22,7 @@
                                     <div class="text-white">{{ session()->get('success') }}</div>
                                 </div>
                             </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
                 </div>
@@ -71,8 +70,7 @@
                                         <td>{{ $teacher->role }}</td>
                                         <td>{{ $teacher->email }}</td>
                                         <td class="gap-2">
-                                            <a href="{{ route('teacher.show', $teacher->username) }}"
-                                                class="mx-md-1">
+                                            <a href="{{ route('teacher.show', $teacher->username) }}" class="mx-md-1">
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
