@@ -6,9 +6,10 @@ use App\Http\Controllers\Administrator\PostController;
 use App\Http\Controllers\Administrator\TeacherController;
 use App\Http\Controllers\Administrator\PlaygroupController;
 use App\Http\Controllers\Administrator\PostCategoryController;
-use App\Http\Controllers\Administrator\IncomingLetterController;
+use App\Http\Controllers\Administrator\LetterController;
 use App\Http\Controllers\Administrator\LetterCategoryController;
 use App\Http\Controllers\Administrator\RaportController;
+use App\Http\Controllers\OutLetterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,29 +114,30 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     // START :: Management Surat
     // ==== Kategori Surat
-    Route::get('/surat/kategori', [LetterCategoryController::class, 'index'])->name('letters.index');
+    Route::get('/manajemen-surat/kategori', [LetterCategoryController::class, 'index'])->name('letter.category.index');
 
-    Route::get('/surat/kategori/create', [LetterCategoryController::class, 'create'])->name('letters.create');
-    Route::post('/surat/kategori/create', [LetterCategoryController::class, 'store'])->name('letters.store');
+    Route::get('/manajemen-surat/kategori/create', [LetterCategoryController::class, 'create'])->name('letter.category.create');
+    Route::post('/manajemen-surat/kategori/create', [LetterCategoryController::class, 'store'])->name('letter.category.store');
 
-    Route::get('/surat/kategori/{category:id}/edit', [LetterCategoryController::class, 'edit'])->name('letters.edit');
-    Route::post('/surat/kategori/{category:id}', [LetterCategoryController::class, 'update'])->name('letters.update');
+    Route::get('/manajemen-surat/kategori/{category:id}/edit', [LetterCategoryController::class, 'edit'])->name('letter.category.edit');
+    Route::post('/manajemen-surat/kategori/{category:id}', [LetterCategoryController::class, 'update'])->name('letter.category.update');
 
-    Route::get('/surat/delete/{id}', [LetterCategoryController::class, 'destroy'])->name('letters.destroy');
+    Route::get('/management-surat/delete/{id}', [LetterCategoryController::class, 'destroy'])->name('letter.category.destroy');
 
 
     // ==== Surat Masuk
-    Route::get('/surat-masuk', [IncomingLetterController::class, 'index'])->name('incoming.index');
+    Route::get('/manajemen-surat/surat-masuk', [LetterController::class, 'index'])->name('incoming.letter.index');
+    Route::get('/manajemen-surat/surat-keluar', [LetterController::class, 'indexOutLetter'])->name('out.letter.index');
 
-    Route::get('/surat-masuk/create', [IncomingLetterController::class, 'create'])->name('incoming.create');
-    Route::post('/surat-masuk/create', [IncomingLetterController::class, 'store'])->name('incoming.store');
+    Route::get('/manajemen-surat/create', [LetterController::class, 'create'])->name('incoming.letter.create');
+    Route::post('/manajemen-surat/create', [LetterController::class, 'store'])->name('incoming.letter.store');
 
-    Route::get('/surat-masuk/{letter:id}/edit', [IncomingLetterController::class, 'edit'])->name('incoming.edit');
-    Route::post('/surat-masuk/{letter:id}', [IncomingLetterController::class, 'update'])->name('incoming.update');
+    Route::get('/manajemen-surat/{letter:id}/edit', [LetterController::class, 'edit'])->name('letter.edit');
+    Route::post('/manajemen-surat/{letter:id}', [LetterController::class, 'update'])->name('letter.update');
 
-    Route::get('/surat-masuk/{letter:id}', [IncomingLetterController::class, 'show'])->name('incoming.show');
+    Route::get('/manajemen-surat/tampilkan-surat/{letter:id}', [LetterController::class, 'show'])->name('letter.show');
+    Route::get('/manajemen-surat/delete/{id}', [LetterController::class, 'destroy'])->name('letter.destroy');
 
-    Route::get('/surat-masuk/delete/{id}', [IncomingLetterController::class, 'destroy'])->name('incoming.destroy');
     // END :: Management Surat
 });
 

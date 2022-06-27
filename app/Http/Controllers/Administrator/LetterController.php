@@ -6,10 +6,9 @@ use App\Models\Letter;
 use Illuminate\Http\Request;
 use App\Models\LetterCategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class IncomingLetterController extends Controller
+class LetterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +17,17 @@ class IncomingLetterController extends Controller
      */
     public function index()
     {
-        return view('administrator.letter-incoming.index', [
+        return view('administrator.letter.incoming-letter-index', [
             'title' => 'Surat Masuk - Manajemen Surat',
             'letters' => Letter::where('tipe_surat', 'Surat Masuk')->get(),
+        ]);
+    }
+
+    public function indexOutLetter()
+    {
+        return view('administrator.letter.out-letter-index', [
+            'title' => 'Surat Keluar - Manajemen Surat',
+            'letters' => Letter::where('tipe_surat', 'Surat Keluar')->get(),
         ]);
     }
 
@@ -31,7 +38,7 @@ class IncomingLetterController extends Controller
      */
     public function create()
     {
-        return view('administrator.letter-incoming.create', [
+        return view('administrator.letter.create', [
             'title' => 'Tambah Surat Masuk - Manajemen Surat',
             'letters' => Letter::all(),
             'categories' => LetterCategory::all(),
@@ -53,6 +60,7 @@ class IncomingLetterController extends Controller
             'tujuan' => ['required', 'string'],
             'tanggal_surat' => ['required', 'date'],
             'jenis_surat' => ['required', 'string'],
+            'tipe_surat' => ['required', 'string'],
             'keterangan' => ['required', 'string'],
             'image' => ['image', 'mimes:jpeg,png,jpg|max:2048'],
         ]);
@@ -69,6 +77,7 @@ class IncomingLetterController extends Controller
                 'perihal' => $request->perihal,
                 'tujuan' => $request->tujuan,
                 'tanggal_surat' => $request->tanggal_surat,
+                'tipe_surat' => $request->tipe_surat,
                 'keterangan' => $request->keterangan,
                 'image' => $request->file('image')->store('letter-images'),
             ]);
@@ -88,7 +97,12 @@ class IncomingLetterController extends Controller
             ]);
         }
 
-        return redirect()->route('incoming.index')->with('success', 'Surat Masuk berhasil ditambahkan');
+        // if tipe_surat == Surat Masuk redirect to incoming.letter.index
+        if ($request->tipe_surat == 'Surat Masuk') {
+            return redirect()->route('incoming.letter.index')->with('success', 'Surat Masuk berhasil ditambahkan');
+        } else {
+            return redirect()->route('out.letter.index')->with('success', 'Surat Keluar berhasil ditambahkan');
+        }
     }
 
     /**
@@ -99,7 +113,7 @@ class IncomingLetterController extends Controller
      */
     public function show($id)
     {
-        return view('administrator.letter-incoming.show', [
+        return view('administrator.letter.show', [
             'title' => 'Detail Surat Masuk - Manajemen Surat',
             'letter' => Letter::findOrFail($id),
             'categories' => LetterCategory::all(),
@@ -114,7 +128,7 @@ class IncomingLetterController extends Controller
      */
     public function edit($id)
     {
-        return view('administrator.letter-incoming.edit', [
+        return view('administrator.letter.edit', [
             'title' => 'Ubah Surat Masuk - Manajemen Surat',
             'letter' => Letter::findOrFail($id),
             'categories' => LetterCategory::all(),
@@ -137,6 +151,7 @@ class IncomingLetterController extends Controller
             'tujuan' => ['required', 'string'],
             'tanggal_surat' => ['required', 'date'],
             'jenis_surat' => ['required', 'string'],
+            'tipe_surat' => ['required', 'string'],
             'keterangan' => ['required', 'string'],
             'image' => ['image', 'mimes:jpeg,png,jpg|max:2048'],
         ]);
@@ -179,11 +194,17 @@ class IncomingLetterController extends Controller
                 'perihal' => $request->perihal,
                 'tujuan' => $request->tujuan,
                 'tanggal_surat' => $request->tanggal_surat,
+                'tipe_surat' => $request->tipe_surat,
                 'keterangan' => $request->keterangan,
             ]);
         }
 
-        return redirect()->route('incoming.index')->with('success', 'Surat Masuk berhasil diubah');
+        // if tipe_surat == Surat Masuk redirect to incoming.letter.index
+        if ($request->tipe_surat == 'Surat Masuk') {
+            return redirect()->route('incoming.letter.index')->with('success', 'Surat Masuk berhasil diubah');
+        } else {
+            return redirect()->route('out.letter.index')->with('success', 'Surat Keluar berhasil diubah');
+        }
     }
 
     /**
@@ -194,8 +215,13 @@ class IncomingLetterController extends Controller
      */
     public function destroy($id)
     {
-        $data = Letter::find($id);
+        $data = Letter::findOrFail($id);
         $data->delete();
-        return redirect()->route('incoming.index')->with('success', 'Surat berhasil dihapus!');
+
+        if ($data->tipe_surat == 'Surat Masuk') {
+            return redirect()->route('incoming.letter.index')->with('success', 'Surat berhasil dihapus!');
+        } else {
+            return redirect()->route('out.letter.index')->with('success', 'Surat berhasil dihapus!');
+        }
     }
 }

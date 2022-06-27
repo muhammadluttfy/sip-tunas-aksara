@@ -22,7 +22,7 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="{{ route('incoming.store') }}" method="POST"
+                                        <form action="{{ route('incoming.letter.store') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
 
@@ -48,8 +48,8 @@
                                                 </div>
                                                 <div
                                                     class="col-sm-9 text-secondary @error('no_surat') is-invalid @enderror">
-                                                    <input type="text" name="no_surat" id="no_surat" class="form-control"
-                                                        value="{{ old('no_surat') }}" />
+                                                    <input type="text" name="no_surat" id="no_surat"
+                                                        class="form-control" value="{{ old('no_surat') }}" />
                                                 </div>
                                                 @error('no_surat')
                                                     <div class="invalid-feedback">
@@ -134,6 +134,24 @@
 
                                             <div class="mb-3 row align-items-center">
                                                 <div class="col-sm-3">
+                                                    <h6 class="mb-2 mb-md-0">Tipe Surat</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                    <select class="form-select @error('tipe_surat') is-invalid @enderror"
+                                                        name="tipe_surat" id="tipe_surat">
+                                                        <option value="Surat Masuk">Surat Masuk</option>
+                                                        <option value="Surat Keluar">Surat Keluar</option>
+                                                    </select>
+                                                </div>
+                                                @error('tipe_surat')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-3 row align-items-center">
+                                                <div class="col-sm-3">
                                                     <h6 class="mb-2 mb-md-0">Keterangan</h6>
                                                 </div>
                                                 <div
@@ -158,7 +176,8 @@
                                                 <div class="col-sm-9 text-secondary @error('banner') is-invalid @enderror">
                                                     <img class="mb-3 img-preview img-fluid col-sm-5">
                                                     <input class="form-control @error('image') is-invalid @enderror"
-                                                        type="file" id="image" name="image" onchange="previewImage()">
+                                                        type="file" id="image" name="image"
+                                                        onchange="previewImage()">
 
                                                     @error('image')
                                                         <div class="invalid-feedback">

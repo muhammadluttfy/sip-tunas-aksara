@@ -48,7 +48,7 @@ class LetterCategoryController extends Controller
         $validatedData['slug'] = str_slug($request->nama);
 
         LetterCategory::create($validatedData);
-        return redirect()->route('letters.index')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('letter.category.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
     /**
@@ -99,7 +99,7 @@ class LetterCategoryController extends Controller
             'slug' => str_slug($request->nama)
         ]);
 
-        return redirect()->route('letters.index')->with('success', 'Kategori berhasil diubah!');
+        return redirect()->route('letter.category.index')->with('success', 'Kategori berhasil diubah!');
     }
 
     /**
@@ -112,6 +112,6 @@ class LetterCategoryController extends Controller
     {
         $data = LetterCategory::find($id);
         $data->delete();
-        return redirect()->route('letters.index')->with('success', 'Kategori berhasil dihapus!');
+        return redirect()->route('letter.category.index')->with('success', 'Kategori berhasil dihapus!');
     }
 }

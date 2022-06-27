@@ -22,7 +22,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('incoming.update', $letter->id) }}" method="POST"
+                                    <form action="{{ route('letter.update', $letter->id) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
 
@@ -125,6 +125,24 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                        </div>
+
+                                        <div class="mb-3 row align-items-center">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-2 mb-md-0">Tipe Surat</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <select class="form-select @error('tipe_surat') is-invalid @enderror"
+                                                    name="tipe_surat" id="tipe_surat">
+                                                    @if (old('tipe_surat', $letter->tipe_surat) == 'Surat Masuk')
+                                                        <option value="Surat Masuk" selected>Surat Masuk</option>
+                                                        <option value="Surat Keluar">Surat Keluar</option>
+                                                    @else
+                                                        <option value="Surat Masuk">Surat Masuk</option>
+                                                        <option value="Surat Keluar" selected>Surat Keluar</option>
+                                                    @endif
+                                                </select>
+                                            </div>
 
                                             @error('jenis_surat')
                                                 <div class="invalid-feedback">
@@ -163,8 +181,9 @@
                                                 @else
                                                     <img class="mb-3 img-preview img-fluid col-sm-5">
                                                 @endif
-                                                <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                                    id="image" name="image" onchange="previewImage()">
+                                                <input class="form-control @error('image') is-invalid @enderror"
+                                                    type="file" id="image" name="image"
+                                                    onchange="previewImage()">
 
                                                 @error('image')
                                                     <div class="invalid-feedback">

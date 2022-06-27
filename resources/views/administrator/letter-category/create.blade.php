@@ -22,7 +22,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('letters.store') }}" method="POST">
+                                    <form action="{{ route('letter.category.store') }}" method="POST">
                                         @csrf
 
                                         <div class="mb-3 row align-items-center">

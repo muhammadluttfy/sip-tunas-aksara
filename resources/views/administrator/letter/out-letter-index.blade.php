@@ -22,8 +22,7 @@
                                     <div class="text-white">{{ session()->get('success') }}</div>
                                 </div>
                             </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
                 </div>
@@ -41,7 +40,7 @@
                 </div>
                 <div class="ms-auto">
                     <div class="btn-group">
-                        <a href="{{ route('incoming.create') }}" class="btn btn-primary">Tambah Surat Masuk</a>
+                        <a href="{{ route('incoming.letter.create') }}" class="btn btn-primary">Tambah Surat</a>
                     </div>
                 </div>
             </div>
@@ -71,15 +70,15 @@
                                         <td>{{ $letter->perihal }}</td>
                                         <td>{{ $letter->tujuan }}</td>
                                         <td class="gap-2">
-                                            <a href="{{ route('incoming.show', $letter->id) }}" class="mx-md-1">
+                                            <a href="{{ route('letter.show', $letter->id) }}" class="mx-md-1">
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
-                                            <a href="{{ route('incoming.edit', $letter->id) }}" class="mx-md-1">
+                                            <a href="{{ route('letter.edit', $letter->id) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
                                             <a href="#" class="mx-md-1 delete" data-id="{{ $letter->id }}"
-                                                data-name="{{ $letter->prihal }}">
+                                                data-number="{{ $letter->no_surat }}">
                                                 <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
                                             </a>
                                         </td>
@@ -111,17 +110,17 @@
     <script>
         $('.delete').click(function() {
             var lettertId = $(this).attr('data-id');
-            var letterName = $(this).attr('data-name');
+            var letterNumber = $(this).attr('data-number');
             swal({
                     title: "Apakah kamu yakin ?",
-                    text: "Kamu akan menghapus postingan " + letterName + " !",
+                    text: "Kamu akan menghapus surat keluar " + letterNumber + " !",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/surat-masuk/delete/" + lettertId + "";
+                        window.location = "/manajemen-surat/delete/" + lettertId + "";
                         swal("Selamat! Data berhasil dihapus!", {
                             icon: "success",
                         });

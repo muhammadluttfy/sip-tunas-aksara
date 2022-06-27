@@ -34,18 +34,18 @@
                         <ol class="p-0 mb-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Kategori Surat</li>
+                            <li class="breadcrumb-item active" aria-current="page">Surat Masuk</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="ms-auto">
                     <div class="btn-group">
-                        <a href="{{ route('letter.category.create') }}" class="btn btn-primary">Tambah Kategori</a>
+                        <a href="{{ route('incoming.letter.create') }}" class="btn btn-primary">Tambah Surat</a>
                     </div>
                 </div>
             </div>
             <!--end breadcrumb-->
-            <h6 class="mb-0 text-uppercase">Semua Kategori</h6>
+            <h6 class="mb-0 text-uppercase">Semua Surat Masuk</h6>
             <hr />
             <div class="card">
                 <div class="card-body">
@@ -53,24 +53,32 @@
                         <table id="example2" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th width="10%">No.</th>
-                                    <th width="35%">Nama</th>
-                                    <th width="25%">Slug</th>
-                                    <th width="15%">Aksi</th>
+                                    <th width="">No.</th>
+                                    <th width="">No. Surat</th>
+                                    <th width="">Asal Surat</th>
+                                    <th width="">Prihal</th>
+                                    <th width="">Tujuan</th>
+                                    <th width="">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($letter_categories as $category)
+                                @foreach ($letters as $letter)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $category->nama }}</td>
-                                        <td>{{ $category->slug }}</td>
+                                        <td>{{ $letter->no_surat }}</td>
+                                        <td>{{ $letter->asal_surat }}</td>
+                                        <td>{{ $letter->perihal }}</td>
+                                        <td>{{ $letter->tujuan }}</td>
                                         <td class="gap-2">
-                                            <a href="{{ route('letter.category.edit', $category->id) }}" class="mx-md-1">
+                                            <a href="{{ route('letter.show', $letter->id) }}" class="mx-md-1">
+                                                <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
+                                                    Detail</span>
+                                            </a>
+                                            <a href="{{ route('letter.edit', $letter->id) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
-                                            <a href="#" class="mx-md-1 delete" data-id="{{ $category->id }}"
-                                                data-name="{{ $category->nama }}">
+                                            <a href="#" class="mx-md-1 delete" data-id="{{ $letter->id }}"
+                                                data-number="{{ $letter->no_surat }}">
                                                 <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
                                             </a>
                                         </td>
@@ -81,8 +89,10 @@
                             <tfoot>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Nama</th>
-                                    <th>Slug</th>
+                                    <th>No. Surat</th>
+                                    <th>Asal Surat</th>
+                                    <th>Prihal</th>
+                                    <th>Tujuan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -99,18 +109,18 @@
     {{-- sweet alert --}}
     <script>
         $('.delete').click(function() {
-            var categoryId = $(this).attr('data-id');
-            var categoryName = $(this).attr('data-name');
+            var lettertId = $(this).attr('data-id');
+            var letterNumber = $(this).attr('data-number');
             swal({
                     title: "Apakah kamu yakin ?",
-                    text: "Kamu akan menghapus kategori " + categoryName + " !",
+                    text: "Kamu akan menghapus surat dengan nomor " + letterNumber + " !",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/management-surat/delete/" + categoryId + "";
+                        window.location = "/manajemen-surat/delete/" + lettertId + "";
                         swal("Selamat! Data berhasil dihapus!", {
                             icon: "success",
                         });
@@ -132,7 +142,7 @@
         $(document).ready(function() {
             var table = $('#example2').DataTable({
                 lengthChange: false,
-                buttons: ['copy', 'excel', 'pdf', 'print']
+                // buttons: ['copy', 'excel', 'pdf', 'print']
             });
 
             table.buttons().container()

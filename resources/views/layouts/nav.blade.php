@@ -66,11 +66,13 @@
                 <div class="menu-title">Main Data</div>
             </a>
             <ul>
-                <li> <a href="{{ route('incoming.index') }}"><i class="bx bx-right-arrow-alt"></i>Surat Masuk</a>
+                <li> <a href="{{ route('incoming.letter.index') }}"><i class="bx bx-right-arrow-alt"></i>Surat
+                        Masuk</a>
                 </li>
-                <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Surat Keluar</a>
+                <li> <a href="{{ route('out.letter.index') }}"><i class="bx bx-right-arrow-alt"></i>Surat Keluar</a>
                 </li>
-                <li> <a href="{{ route('letters.index') }}"><i class="bx bx-right-arrow-alt"></i>Kategori Surat</a>
+                <li> <a href="{{ route('letter.category.index') }}"><i class="bx bx-right-arrow-alt"></i>Kategori
+                        Surat</a>
                 </li>
             </ul>
         </li>
