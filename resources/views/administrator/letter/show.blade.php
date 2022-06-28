@@ -8,7 +8,12 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="p-0 mb-0 breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item">
+                                @if ($letter->tipe_surat == 'Surat Masuk')
+                                    <a href="{{ route('incoming.letter.index') }}"><i class="bx bx-home-alt"></i></a>
+                                @else
+                                    <a href="{{ route('out.letter.index') }}"><i class="bx bx-home-alt"></i></a>
+                                @endif
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $letter->no_surat }}</li>
                         </ol>
@@ -93,7 +98,7 @@
                                                 <h6 class="mb-2 mb-md-0">Keterangan</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <div class="mx-1 p-2 rounded border text-dark"
+                                                <div class="p-2 mx-1 border rounded text-dark"
                                                     style="background-color: #E9ECEF">
                                                     <p>{!! $letter->keterangan !!}</p>
                                                 </div>

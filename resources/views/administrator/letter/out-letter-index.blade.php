@@ -113,7 +113,7 @@
             var letterNumber = $(this).attr('data-number');
             swal({
                     title: "Apakah kamu yakin ?",
-                    text: "Kamu akan menghapus surat keluar " + letterNumber + " !",
+                    text: "Kamu akan menghapus surat dengan nomor " + letterNumber + " !",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
