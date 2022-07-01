@@ -115,11 +115,11 @@ Route::group(['middleware' => ['auth:user,student', 'roleCheck:Kepala Sekolah,Ad
     // START :: Forum PAUD
     // ==== Categories
     Route::get('/forum-paud/categories', [PostCategoryController::class, 'index'])->name('categories.index');
-    Route::get('/forum-paud/categories/create', [PostCategoryController::class, 'create'])->name('categories.create');
-    Route::post('/forum-paud/categories/create', [PostCategoryController::class, 'store'])->name('categories.store');
+    Route::get('/forum-paud/category/create', [PostCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/forum-paud/category/create', [PostCategoryController::class, 'store'])->name('categories.store');
 
-    Route::get('/forum-paud/categories/{category:id}/edit', [PostCategoryController::class, 'edit'])->name('categories.edit');
-    Route::post('/forum-paud/categories/{category:id}', [PostCategoryController::class, 'update'])->name('categories.update');
+    Route::get('/forum-paud/category/{category:id}/edit', [PostCategoryController::class, 'edit'])->name('categories.edit');
+    Route::post('/forum-paud/category/{category:id}', [PostCategoryController::class, 'update'])->name('categories.update');
 
     Route::get('/forum-paud/categories/delete/{id}', [PostCategoryController::class, 'destroy'])->name('categories.destroy');
 
@@ -132,8 +132,8 @@ Route::group(['middleware' => ['auth:user,student', 'roleCheck:Kepala Sekolah,Ad
 
     Route::get('/forum-paud/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
-    Route::get('/forum-paud/{post:id}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::post('/forum-paud/{post:id}', [PostController::class, 'update'])->name('posts.update');
+    Route::get('/forum-paud/{post:slug}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::post('/forum-paud/{post:slug}', [PostController::class, 'update'])->name('posts.update');
 
     Route::get('/forum-paud/delete/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 

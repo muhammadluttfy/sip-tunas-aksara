@@ -130,11 +130,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
         return view('administrator.post.edit', [
             'title' => 'Edit Postingan',
-            'post' => Post::findOrFail($id),
+            'post' => Post::findOrFail($post->id),
             'categories' => PostCategory::all(),
         ]);
     }

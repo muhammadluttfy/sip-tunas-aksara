@@ -66,7 +66,7 @@
                                         <td>{{ $category->nama }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td class="gap-2">
-                                            <a href="/categories/{{ $category->id }}/edit" class="mx-md-1">
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
                                             <a href="#" class="mx-md-1 delete" data-id="{{ $category->id }}"

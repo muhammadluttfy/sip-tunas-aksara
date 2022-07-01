@@ -22,7 +22,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('posts.update', $post->id) }}" method="POST"
+                                    <form action="{{ route('posts.update', $post->slug) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
 
@@ -55,8 +55,8 @@
                                                 @else
                                                     <img class="mb-3 img-preview img-fluid col-sm-5">
                                                 @endif
-                                                <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                                    id="image" name="image" onchange="previewImage()">
+                                                <input class="form-control @error('image') is-invalid @enderror"
+                                                    type="file" id="image" name="image" onchange="previewImage()">
 
                                                 @error('image')
                                                     <div class="invalid-feedback">

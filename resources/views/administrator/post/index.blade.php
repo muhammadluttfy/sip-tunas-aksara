@@ -70,7 +70,7 @@
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Preview</span>
                                             </a>
-                                            <a href="{{ route('posts.edit', $post->id) }}" class="mx-md-1">
+                                            <a href="{{ route('posts.edit', $post->slug) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
                                             <a href="#" class="mx-md-1 delete" data-id="{{ $post->id }}"

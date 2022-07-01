@@ -70,6 +70,7 @@ class PostCategoryController extends Controller
      */
     public function edit($id)
     {
+        // return "wkwkwk";
         return view('administrator.post-category.edit', [
             'title' => 'Edit Kategori',
             'category' => PostCategory::findOrFail($id)
