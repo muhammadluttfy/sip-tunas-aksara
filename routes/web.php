@@ -143,13 +143,13 @@ Route::group(['middleware' => ['auth:user,student', 'roleCheck:Kepala Sekolah,Ad
 
     // START :: Management Surat
     // ==== Kategori Surat
-    Route::get('/manajemen-surat/kategori', [LetterCategoryController::class, 'index'])->name('letter.category.index');
+    Route::get('/manajemen-surat/categories', [LetterCategoryController::class, 'index'])->name('letter.category.index');
 
     Route::get('/manajemen-surat/kategori/create', [LetterCategoryController::class, 'create'])->name('letter.category.create');
     Route::post('/manajemen-surat/kategori/create', [LetterCategoryController::class, 'store'])->name('letter.category.store');
 
-    Route::get('/manajemen-surat/kategori/{category:id}/edit', [LetterCategoryController::class, 'edit'])->name('letter.category.edit');
-    Route::post('/manajemen-surat/kategori/{category:id}', [LetterCategoryController::class, 'update'])->name('letter.category.update');
+    Route::get('/manajemen-surat/kategori/{letter_category:slug}/edit', [LetterCategoryController::class, 'edit'])->name('letter.category.edit');
+    Route::post('/manajemen-surat/kategori/{letter_category:slug}', [LetterCategoryController::class, 'update'])->name('letter.category.update');
 
     Route::get('/management-surat/delete/{id}', [LetterCategoryController::class, 'destroy'])->name('letter.category.destroy');
 

@@ -23,7 +23,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('letter.category.update', $letter_category->id) }}"
+                                    <form action="{{ route('letter.category.update', $letter_category->slug) }}"
                                         method="POST" enctype="multipart/form-data">
                                         @csrf
                                         {{-- @method('PUT') --}}

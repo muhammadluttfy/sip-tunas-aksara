@@ -68,11 +68,11 @@ class LetterCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(LetterCategory $letter_category)
     {
         return view('administrator.letter-category.edit', [
             'title' => 'Edit Kategori Surat - Manajemen Surat',
-            'letter_category' => LetterCategory::findOrFail($id)
+            'letter_category' => LetterCategory::findOrFail($letter_category->id)
         ]);
     }
 
@@ -83,7 +83,7 @@ class LetterCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, LetterCategory $letter_category)
+    public function update(Request $request, LetterCategory $letter_category)
     {
         $request->validate([
             'nama' => 'required|string|max:255',
@@ -94,7 +94,7 @@ class LetterCategoryController extends Controller
             ]);
         }
 
-        LetterCategory::where('id', $id)->update([
+        LetterCategory::where('id', $letter_category->id)->update([
             'nama' => $request->nama,
             'slug' => str_slug($request->nama)
         ]);
