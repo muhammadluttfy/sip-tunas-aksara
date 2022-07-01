@@ -1,15 +1,15 @@
 <?php
 
+use App\Http\Controllers\Administrator\KindergartenController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Administrator\PostController;
+use App\Http\Controllers\Administrator\LetterController;
+use App\Http\Controllers\Administrator\RaportController;
 use App\Http\Controllers\Administrator\TeacherController;
 use App\Http\Controllers\Administrator\PlaygroupController;
 use App\Http\Controllers\Administrator\PostCategoryController;
-use App\Http\Controllers\Administrator\LetterController;
 use App\Http\Controllers\Administrator\LetterCategoryController;
-use App\Http\Controllers\Administrator\RaportController;
-use App\Http\Controllers\OutLetterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,9 @@ use App\Http\Controllers\OutLetterController;
 */
 
 
-Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Administrator,Student']], function () {
+Route::group(['middleware' => ['auth:user,student', 'roleCheck:Kepala Sekolah,Administrator,Student']], function () {
+
+    Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
 
     Route::get('/', function () {
         return redirect()->route('login');
@@ -39,33 +41,61 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::get('/kb-tunas-aksara/{student:username}', [PlaygroupController::class, 'show'])->name('playgroup.show');
 
-    Route::get('/kb-tunas-aksara/{student:id}/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
-    Route::post('/kb-tunas-aksara/{student:id}', [PlaygroupController::class, 'update'])->name('playgroup.update');
+    Route::get('/kb-tunas-aksara/{student:username}/edit', [PlaygroupController::class, 'edit'])->name('playgroup.edit');
+    Route::post('/kb-tunas-aksara/{student:username}', [PlaygroupController::class, 'update'])->name('playgroup.update');
 
     Route::get('/kb-tunas-aksara/delete/{id}', [PlaygroupController::class, 'destroy'])->name('playgroup.destroy');
-
-
-    // Nilai Raport
-    Route::get('/nilai-raport/{student:id}', [RaportController::class, 'show'])->name('playgroup.raport.show');
-
-    Route::get('/tambah-nilai-raport/{student:id}/create', [RaportController::class, 'create'])->name('playgroup.raport.create');
-    Route::post('/tambah-nilai-raport/{student:id}/create', [RaportController::class, 'store'])->name('playgroup.raport.store');
-
-    Route::get('/nilai-raport/semester-1/{student:id}/edit', [RaportController::class, 'editSemester1'])->name('playgroup.raport.editSemester1');
-    Route::post('/nilai-raport/semester-1/{student:id}', [RaportController::class, 'updateSemester1'])->name('playgroup.raport.updateSemester1');
-
-    Route::get('/nilai-raport/semester-2/{student:id}/edit', [RaportController::class, 'editSemester2'])->name('playgroup.raport.editSemester2');
-    Route::post('/nilai-raport/semester-2/{student:id}', [RaportController::class, 'updateSemester2'])->name('playgroup.raport.updateSemester2');
-
-    Route::get('/nilai-raport/semester-3/{student:id}/edit', [RaportController::class, 'editSemester3'])->name('playgroup.raport.editSemester3');
-    Route::post('/nilai-raport/semester-3/{student:id}', [RaportController::class, 'updateSemester3'])->name('playgroup.raport.updateSemester3');
-
-    Route::get('/nilai-raport/semester-4/{student:id}/edit', [RaportController::class, 'editSemester4'])->name('playgroup.raport.editSemester4');
-    Route::post('/nilai-raport/semester-4/{student:id}', [RaportController::class, 'updateSemester4'])->name('playgroup.raport.updateSemester4');
-
-    Route::get('/nilai-raport/delete/{id}', [RaportController::class, 'destroy'])->name('playgroup.raport.destroy');
-
     // END :: KB Tunas Aksara
+
+
+
+    // START :: TK Tunas Aksara
+    Route::get('/tk-tunas-aksara', [KindergartenController::class, 'index'])->name('kindergarten.index');
+
+    Route::get('/tk-tunas-aksara/tambah-data-peserta-didik', [KindergartenController::class, 'create'])->name('kindergarten.create');
+    Route::post('/tk-tunas-aksara/tambah-data-peserta-didik', [KindergartenController::class, 'store'])->name('kindergarten.store');
+
+    Route::get('/tk-tunas-aksara/{student:username}', [KindergartenController::class, 'show'])->name('kindergarten.show');
+
+    Route::get('/tk-tunas-aksara/{student:id}/edit', [KindergartenController::class, 'edit'])->name('kindergarten.edit');
+    Route::post('/tk-tunas-aksara/{student:id}', [KindergartenController::class, 'update'])->name('kindergarten.update');
+
+    Route::get('/tk-tunas-aksara/delete/{id}', [KindergartenController::class, 'destroy'])->name('kindergarten.destroy');
+    // END :: TK Tunas Aksara
+
+
+    // START :: Nilai Raport
+    Route::get('/nilai-raport/{student:username}', [RaportController::class, 'show'])->name('raport.show');
+
+    Route::get('/tambah-nilai-raport/{student:username}/create', [RaportController::class, 'create'])->name('raport.create');
+    Route::post('/tambah-nilai-raport/{student:username}/create', [RaportController::class, 'store'])->name('raport.store');
+
+    Route::get('/nilai-raport/semester-1/{student:username}/edit', [RaportController::class, 'editSemester1'])->name('raport.editSemester1');
+    Route::post('/nilai-raport/semester-1/{student:username}', [RaportController::class, 'updateSemester1'])->name('raport.updateSemester1');
+
+    Route::get('/nilai-raport/semester-2/{student:username}/edit', [RaportController::class, 'editSemester2'])->name('raport.editSemester2');
+    Route::post('/nilai-raport/semester-2/{student:username}', [RaportController::class, 'updateSemester2'])->name('raport.updateSemester2');
+
+    Route::get('/nilai-raport/semester-3/{student:username}/edit', [RaportController::class, 'editSemester3'])->name('raport.editSemester3');
+    Route::post('/nilai-raport/semester-3/{student:username}', [RaportController::class, 'updateSemester3'])->name('raport.updateSemester3');
+
+    Route::get('/nilai-raport/semester-4/{student:username}/edit', [RaportController::class, 'editSemester4'])->name('raport.editSemester4');
+    Route::post('/nilai-raport/semester-4/{student:username}', [RaportController::class, 'updateSemester4'])->name('raport.updateSemester4');
+
+    Route::get('/nilai-raport/semester-5/{student:username}/edit', [RaportController::class, 'editSemester5'])->name('raport.editSemester5');
+    Route::post('/nilai-raport/semester-5/{student:username}', [RaportController::class, 'updateSemester5'])->name('raport.updateSemester5');
+
+    Route::get('/nilai-raport/semester-6/{student:username}/edit', [RaportController::class, 'editSemester6'])->name('raport.editSemester6');
+    Route::post('/nilai-raport/semester-6/{student:username}', [RaportController::class, 'updateSemester6'])->name('raport.updateSemester6');
+
+    Route::get('/nilai-raport/semester-7/{student:username}/edit', [RaportController::class, 'editSemester7'])->name('raport.editSemester7');
+    Route::post('/nilai-raport/semester-7/{student:username}', [RaportController::class, 'updateSemester7'])->name('raport.updateSemester7');
+
+    Route::get('/nilai-raport/semester-8/{student:username}/edit', [RaportController::class, 'editSemester8'])->name('raport.editSemester8');
+    Route::post('/nilai-raport/semester-8/{student:username}', [RaportController::class, 'updateSemester8'])->name('raport.updateSemester8');
+
+    Route::get('/nilai-raport/delete/{id}', [RaportController::class, 'destroy'])->name('raport.destroy');
+    // END :: Nilai Raport
 
 
     // START :: Teacher
@@ -75,40 +105,39 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
     Route::get('/tambah-tenaga-pendidik', [TeacherController::class, 'create'])->name('teacher.create');
     Route::post('/tambah-tenaga-pendidik', [TeacherController::class, 'store'])->name('teacher.store');
 
-    Route::get('/tenaga-pendidik/{user:id}/edit', [TeacherController::class, 'edit'])->name('teacher.edit');
-    Route::post('/tenaga-pendidik/{user:id}', [TeacherController::class, 'update'])->name('teacher.update');
+    Route::get('/tenaga-pendidik/{user:username}/edit', [TeacherController::class, 'edit'])->name('teacher.edit');
+    Route::post('/tenaga-pendidik/{user:username}', [TeacherController::class, 'update'])->name('teacher.update');
 
     Route::get('/tenaga-pendidik/delete/{id}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
     // END :: Teacher
 
 
-
     // START :: Forum PAUD
     // ==== Categories
-    Route::get('/categories', [PostCategoryController::class, 'index'])->name('categories.index');
-    Route::get('/categories/create', [PostCategoryController::class, 'create'])->name('categories.create');
-    Route::post('/categories/create', [PostCategoryController::class, 'store'])->name('categories.store');
+    Route::get('/forum-paud/categories', [PostCategoryController::class, 'index'])->name('categories.index');
+    Route::get('/forum-paud/categories/create', [PostCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/forum-paud/categories/create', [PostCategoryController::class, 'store'])->name('categories.store');
 
-    Route::get('/categories/{category:id}/edit', [PostCategoryController::class, 'edit'])->name('categories.edit');
-    Route::post('/categories/{category:id}', [PostCategoryController::class, 'update'])->name('categories.update');
+    Route::get('/forum-paud/categories/{category:id}/edit', [PostCategoryController::class, 'edit'])->name('categories.edit');
+    Route::post('/forum-paud/categories/{category:id}', [PostCategoryController::class, 'update'])->name('categories.update');
 
-    Route::get('/categories/delete/{id}', [PostCategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/forum-paud/categories/delete/{id}', [PostCategoryController::class, 'destroy'])->name('categories.destroy');
 
 
     // ==== Posts
-    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/forum-paud', [PostController::class, 'index'])->name('posts.index');
 
-    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-    Route::post('/posts/create', [PostController::class, 'store'])->name('posts.store');
+    Route::get('/forum-paud/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/forum-paud/create', [PostController::class, 'store'])->name('posts.store');
 
-    Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/forum-paud/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
-    Route::get('/posts/{post:id}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::post('/posts/{post:id}', [PostController::class, 'update'])->name('posts.update');
+    Route::get('/forum-paud/{post:id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::post('/forum-paud/{post:id}', [PostController::class, 'update'])->name('posts.update');
 
-    Route::get('/posts/delete/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::get('/forum-paud/delete/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-    Route::post('/posts/comment/{post:id}', [PostController::class, 'comment'])->name('posts.comment');
+    Route::post('/forum-paud/comment/{post:id}', [PostController::class, 'comment'])->name('posts.comment');
     // END :: Forum PAUD
 
 
@@ -142,12 +171,10 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 });
 
 
+
 // START :: Profil Tenaga Pendidik
-// Route::get('/profil-tenaga-pendidik', [Controller::class, 'profiles'])->name('profiles');
 Route::get('/profil/{user:username}', [Controller::class, 'profile'])->name('profile');
 // END :: Profil Tenaga Pendidik
-
-
 
 
 

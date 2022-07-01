@@ -22,8 +22,7 @@
                                     <div class="text-white">{{ session()->get('success') }}</div>
                                 </div>
                             </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
                 </div>
@@ -75,7 +74,7 @@
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
-                                            <a href="/kb-tunas-aksara/{{ $student->id }}/edit" class="mx-md-1">
+                                            <a href="{{ route('playgroup.edit', $student->username) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
                                             <a href="#" class="mx-md-1 delete" data-id="{{ $student->id }}"
@@ -83,8 +82,7 @@
                                                 <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
                                             </a>
 
-                                            <a href="{{ route('playgroup.raport.show', $student->id) }}"
-                                                class="mx-md-1">
+                                            <a href="{{ route('raport.show', $student->username) }}" class="mx-md-1">
                                                 <span class="badge bg-success"><i class='lni lni-graduation'></i>
                                                     Nilai Raport </span>
                                             </a>

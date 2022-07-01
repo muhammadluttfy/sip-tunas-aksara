@@ -30,28 +30,15 @@ class AuthenticatedSessionController extends Controller
     public function store(Request $request)
     {
 
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
-
-        // return redirect()->intended(RouteServiceProvider::HOME);
-
         $credentials = $request->validate([
-            // 'email' => ['required', 'string', 'email:dns'],
             'no_identitas' => ['required'],
             'password' => ['required', 'string'],
         ]);
 
-        // if (Auth::attempt($credentials)) {
-        //     $request->session()->regenerate();
-
-        //     return redirect()->intended(RouteServiceProvider::HOME);
-        // }
-
-        if (Auth::guard('student')->attempt($credentials)) {
+        if (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME);
-        } elseif (Auth::guard('user')->attempt($credentials)) {
+        } elseif (Auth::guard('student')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME);
         }
@@ -61,10 +48,10 @@ class AuthenticatedSessionController extends Controller
 
     public function logout()
     {
-        if (Auth::guard('student')->check()) {
-            Auth::guard('student')->logout();
-        } elseif (Auth::guard('user')->check()) {
+        if (Auth::guard('user')->check()) {
             Auth::guard('user')->logout();
+        } elseif (Auth::guard('student')->check()) {
+            Auth::guard('student')->logout();
         }
         // return redirect()->route('login');
         return redirect('/');

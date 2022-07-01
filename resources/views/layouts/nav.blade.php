@@ -11,8 +11,8 @@
         </div>
     </div>
     <!--navigation-->
+
     <ul class="metismenu" id="menu">
-        {{-- @if (auth()->user()->role == 'Kepala Sekolah') --}}
         <li>
             <a href="{{ url('dashboard') }}">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
@@ -20,7 +20,6 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-        {{-- @endif --}}
 
         <li class="menu-label">Tenaga Pendidik</li>
         <li>
@@ -32,6 +31,8 @@
         </li>
 
 
+        {{-- @if (Str::length(Auth::guard('student')->user()) > 0) --}}
+        {{-- @if (Auth::guard('student')->user()->role == 'student') --}}
         <li class="menu-label">Forum PAUD</li>
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -46,11 +47,22 @@
                 </li>
             </ul>
         </li>
+        {{-- @endif --}}
+        {{-- @endif --}}
 
 
         <li class="menu-label">KB Tunas Aksara</li>
         <li>
             <a href="{{ route('playgroup.index') }}">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Peserta Didik</div>
+            </a>
+        </li>
+
+        <li class="menu-label">TK Tunas Aksara</li>
+        <li>
+            <a href="{{ route('kindergarten.index') }}">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
                 <div class="menu-title">Peserta Didik</div>
@@ -69,7 +81,8 @@
                 <li> <a href="{{ route('incoming.letter.index') }}"><i class="bx bx-right-arrow-alt"></i>Surat
                         Masuk</a>
                 </li>
-                <li> <a href="{{ route('out.letter.index') }}"><i class="bx bx-right-arrow-alt"></i>Surat Keluar</a>
+                <li> <a href="{{ route('out.letter.index') }}"><i class="bx bx-right-arrow-alt"></i>Surat
+                        Keluar</a>
                 </li>
                 <li> <a href="{{ route('letter.category.index') }}"><i class="bx bx-right-arrow-alt"></i>Kategori
                         Surat</a>
@@ -77,6 +90,7 @@
             </ul>
         </li>
     </ul>
+
     <!--end navigation-->
 </div>
 <!--end sidebar wrapper -->

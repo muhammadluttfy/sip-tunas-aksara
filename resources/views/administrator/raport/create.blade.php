@@ -1,3 +1,4 @@
+{{-- {{ dd($student) }} --}}
 @extends('layouts.app')
 @section('wrapper')
     <div class="page-wrapper">
@@ -8,7 +9,7 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="p-0 mb-0 breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('playgroup.raport.show', $student->id) }}"><i
+                            <li class="breadcrumb-item"><a href="{{ route('raport.show', $student->id) }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $student->nama_lengkap }}</li>
@@ -23,7 +24,7 @@
                     <hr>
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('playgroup.raport.store', $student->id) }}" method="post">
+                            <form action="{{ route('raport.store', $student->username) }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="mb-3 col-md-3 mb-lg-0">
@@ -43,11 +44,14 @@
                                                 class="form-control @error('semester') is-invalid @enderror" required>
                                                 <option selected disabled>-- Pilih Semester --
                                                 </option>
-                                                <option value="1">Semester 1
-                                                </option>
+                                                <option value="1">Semester 1</option>
                                                 <option value="2">Semester 2</option>
                                                 <option value="3">Semester 3</option>
                                                 <option value="4">Semester 4</option>
+                                                <option value="5">Semester 5</option>
+                                                <option value="6">Semester 6</option>
+                                                <option value="7">Semester 7</option>
+                                                <option value="8">Semester 8</option>
                                             </select>
                                             @error('semester')
                                                 <div class="invalid-feedback">

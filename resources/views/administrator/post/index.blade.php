@@ -22,8 +22,7 @@
                                     <div class="text-white">{{ session()->get('success') }}</div>
                                 </div>
                             </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
                 </div>
@@ -115,7 +114,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/posts/delete/" + postId + "";
+                        window.location = "/forum-paud/delete/" + postId + "";
                         swal("Selamat! Data berhasil dihapus!", {
                             icon: "success",
                         });

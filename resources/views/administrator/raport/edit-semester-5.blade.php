@@ -8,7 +8,7 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="p-0 mb-0 breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('playgroup.raport.show', $student->id) }}"><i
+                            <li class="breadcrumb-item"><a href="{{ route('raport.show', $student->id) }}"><i
                                         class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $student->nama_lengkap }}</li>
@@ -23,7 +23,7 @@
                     <hr />
                     <div class="card">
                         <div class="card-body">
-                            <form action="/nilai-raport/semester-4/{{ $student->id }}" method="post">
+                            <form action="{{ route('raport.updateSemester5', $student->username) }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="mb-3 col-md-3 mb-lg-0">
@@ -41,11 +41,14 @@
                                             </label>
                                             <select name="semester" id="semester"
                                                 class="form-control @error('semester') is-invalid @enderror" required>
-                                                <option value="1">Semester 1
-                                                </option>
+                                                <option value="1">Semester 1</option>
                                                 <option value="2">Semester 2</option>
                                                 <option value="3">Semester 3</option>
-                                                <option value="4" selected>Semester 4</option>
+                                                <option value="4">Semester 4</option>
+                                                <option value="5" selected>Semester 5</option>
+                                                <option value="6">Semester 6</option>
+                                                <option value="7">Semester 7</option>
+                                                <option value="8">Semester 8</option>
                                             </select>
                                             @error('semester')
                                                 <div class="invalid-feedback">
@@ -63,8 +66,8 @@
                                                 class="form-control @error('tahun_ajaran') is-invalid @enderror" required>
                                                 <option value="1" selected disabled>-- Pilih Tahun Ajaran --
                                                 </option>
-                                                <option value="{{ $raport_4->tahun_ajaran }}" selected>
-                                                    {{ $raport_4->tahun_ajaran }}</option>
+                                                <option value="{{ $raport_5->tahun_ajaran }}" selected>
+                                                    {{ $raport_5->tahun_ajaran }}</option>
                                                 @foreach ($years as &$year)
                                                     <option value="{{ $year = $year . '/' . ($year + 1) }}">
                                                         {{ $year }}
@@ -86,7 +89,7 @@
                                             <input type="date"
                                                 class="form-control @error('tanggal_mulai') is-invalid @enderror"
                                                 name="tanggal_mulai" id="tanggal_mulai" placeholder="dd-mm-yyyy" required
-                                                value="{{ old('tanggal_mulai', $raport_4->tanggal_mulai) }}">
+                                                value="{{ old('tanggal_mulai', $raport_5->tanggal_mulai) }}">
                                             @error('tanggal_mulai')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -103,7 +106,7 @@
                                                 class="form-control @error('tanggal_selesai') is-invalid @enderror"
                                                 name="tanggal_selesai" id="tanggal_selesai" placeholder="dd-mm-yyyy"
                                                 required
-                                                value="{{ old('tanggal_selesai', $raport_4->tanggal_selesai) }}">
+                                                value="{{ old('tanggal_selesai', $raport_5->tanggal_selesai) }}">
                                             @error('tanggal_selesai')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -150,7 +153,7 @@
                                                             </td>
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_1" name="point_1" class="form-select">
-                                                                    @if (old('point_1', $raport_4->behavior_formation->point_1) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_1', $raport_5->behavior_formation->point_1) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -163,7 +166,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_1', $raport_4->behavior_formation->point_1) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_1', $raport_5->behavior_formation->point_1) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -176,7 +179,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_1', $raport_4->behavior_formation->point_1) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_1', $raport_5->behavior_formation->point_1) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -190,7 +193,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_1', $raport_4->behavior_formation->point_1) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_1', $raport_5->behavior_formation->point_1) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -217,7 +220,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_2" name="point_2"
                                                                     class="form-select">
-                                                                    @if (old('point_2', $raport_4->behavior_formation->point_2) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_2', $raport_5->behavior_formation->point_2) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -230,7 +233,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_1', $raport_4->behavior_formation->point_2) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_1', $raport_5->behavior_formation->point_2) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -243,7 +246,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_1', $raport_4->behavior_formation->point_2) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_1', $raport_5->behavior_formation->point_2) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -257,7 +260,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_1', $raport_4->behavior_formation->point_2) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_1', $raport_5->behavior_formation->point_2) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -284,7 +287,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_3" name="point_3"
                                                                     class="form-select">
-                                                                    @if (old('point_3', $raport_4->behavior_formation->point_3) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_3', $raport_5->behavior_formation->point_3) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -297,7 +300,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_3', $raport_4->behavior_formation->point_3) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_3', $raport_5->behavior_formation->point_3) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -310,7 +313,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_3', $raport_4->behavior_formation->point_3) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_3', $raport_5->behavior_formation->point_3) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -324,7 +327,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_3', $raport_4->behavior_formation->point_3) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_3', $raport_5->behavior_formation->point_3) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -351,7 +354,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_4" name="point_4"
                                                                     class="form-select">
-                                                                    @if (old('point_4', $raport_4->behavior_formation->point_4) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_4', $raport_5->behavior_formation->point_4) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -364,7 +367,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_4', $raport_4->behavior_formation->point_4) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_4', $raport_5->behavior_formation->point_4) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -377,7 +380,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_4', $raport_4->behavior_formation->point_4) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_4', $raport_5->behavior_formation->point_4) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -391,7 +394,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_4', $raport_4->behavior_formation->point_4) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_4', $raport_5->behavior_formation->point_4) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -417,7 +420,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_5" name="point_5"
                                                                     class="form-select">
-                                                                    @if (old('point_5', $raport_4->behavior_formation->point_5) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_5', $raport_5->behavior_formation->point_5) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -430,7 +433,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_5', $raport_4->behavior_formation->point_5) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_5', $raport_5->behavior_formation->point_5) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -443,7 +446,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_5', $raport_4->behavior_formation->point_5) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_5', $raport_5->behavior_formation->point_5) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -457,7 +460,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_5', $raport_4->behavior_formation->point_5) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_5', $raport_5->behavior_formation->point_5) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -482,7 +485,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_6" name="point_6"
                                                                     class="form-select">
-                                                                    @if (old('point_6', $raport_4->behavior_formation->point_6) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_6', $raport_5->behavior_formation->point_6) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -495,7 +498,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_6', $raport_4->behavior_formation->point_6) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_6', $raport_5->behavior_formation->point_6) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -508,7 +511,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_6', $raport_4->behavior_formation->point_6) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_6', $raport_5->behavior_formation->point_6) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -522,7 +525,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_6', $raport_4->behavior_formation->point_6) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_6', $raport_5->behavior_formation->point_6) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -549,7 +552,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_7" name="point_7"
                                                                     class="form-select">
-                                                                    @if (old('point_7', $raport_4->behavior_formation->point_7) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_7', $raport_5->behavior_formation->point_7) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -562,7 +565,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_7', $raport_4->behavior_formation->point_7) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_7', $raport_5->behavior_formation->point_7) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -575,7 +578,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_7', $raport_4->behavior_formation->point_7) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_7', $raport_5->behavior_formation->point_7) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -589,7 +592,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_7', $raport_4->behavior_formation->point_7) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_7', $raport_5->behavior_formation->point_7) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -617,7 +620,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_8" name="point_8"
                                                                     class="form-select">
-                                                                    @if (old('point_8', $raport_4->behavior_formation->point_8) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_8', $raport_5->behavior_formation->point_8) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -630,7 +633,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_8', $raport_4->behavior_formation->point_8) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_8', $raport_5->behavior_formation->point_8) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -643,7 +646,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_8', $raport_4->behavior_formation->point_8) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_8', $raport_5->behavior_formation->point_8) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -657,7 +660,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_8', $raport_4->behavior_formation->point_8) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_8', $raport_5->behavior_formation->point_8) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -684,7 +687,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_9" name="point_9"
                                                                     class="form-select">
-                                                                    @if (old('point_9', $raport_4->behavior_formation->point_9) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_9', $raport_5->behavior_formation->point_9) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -697,7 +700,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_9', $raport_4->behavior_formation->point_9) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_9', $raport_5->behavior_formation->point_9) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -710,7 +713,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_9', $raport_4->behavior_formation->point_9) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_9', $raport_5->behavior_formation->point_9) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -724,7 +727,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_9', $raport_4->behavior_formation->point_9) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_9', $raport_5->behavior_formation->point_9) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -751,7 +754,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_10" name="point_10"
                                                                     class="form-select">
-                                                                    @if (old('point_10', $raport_4->behavior_formation->point_10) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_10', $raport_5->behavior_formation->point_10) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -764,7 +767,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_10', $raport_4->behavior_formation->point_10) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_10', $raport_5->behavior_formation->point_10) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -777,7 +780,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_10', $raport_4->behavior_formation->point_10) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_10', $raport_5->behavior_formation->point_10) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -791,7 +794,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_10', $raport_4->behavior_formation->point_10) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_10', $raport_5->behavior_formation->point_10) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -818,7 +821,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_11" name="point_11"
                                                                     class="form-select">
-                                                                    @if (old('point_11', $raport_4->behavior_formation->point_11) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_11', $raport_5->behavior_formation->point_11) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -831,7 +834,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_11', $raport_4->behavior_formation->point_11) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_11', $raport_5->behavior_formation->point_11) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -844,7 +847,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_11', $raport_4->behavior_formation->point_11) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_11', $raport_5->behavior_formation->point_11) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -858,7 +861,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_11', $raport_4->behavior_formation->point_11) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_11', $raport_5->behavior_formation->point_11) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -885,7 +888,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_12" name="point_12"
                                                                     class="form-select">
-                                                                    @if (old('point_12', $raport_4->behavior_formation->point_12) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_12', $raport_5->behavior_formation->point_12) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -898,7 +901,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_12', $raport_4->behavior_formation->point_12) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_12', $raport_5->behavior_formation->point_12) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -911,7 +914,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_12', $raport_4->behavior_formation->point_12) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_12', $raport_5->behavior_formation->point_12) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -925,7 +928,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_12', $raport_4->behavior_formation->point_12) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_12', $raport_5->behavior_formation->point_12) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -952,7 +955,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_13" name="point_13"
                                                                     class="form-select">
-                                                                    @if (old('point_13', $raport_4->behavior_formation->point_13) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_13', $raport_5->behavior_formation->point_13) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -965,7 +968,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_13', $raport_4->behavior_formation->point_13) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_13', $raport_5->behavior_formation->point_13) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -978,7 +981,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_13', $raport_4->behavior_formation->point_13) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_13', $raport_5->behavior_formation->point_13) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -992,7 +995,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_13', $raport_4->behavior_formation->point_13) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_13', $raport_5->behavior_formation->point_13) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1017,7 +1020,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_14" name="point_14"
                                                                     class="form-select">
-                                                                    @if (old('point_14', $raport_4->behavior_formation->point_14) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_14', $raport_5->behavior_formation->point_14) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1030,7 +1033,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_14', $raport_4->behavior_formation->point_14) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_14', $raport_5->behavior_formation->point_14) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1043,7 +1046,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_14', $raport_4->behavior_formation->point_14) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_14', $raport_5->behavior_formation->point_14) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1057,7 +1060,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_14', $raport_4->behavior_formation->point_14) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_14', $raport_5->behavior_formation->point_14) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1082,7 +1085,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_15" name="point_15"
                                                                     class="form-select">
-                                                                    @if (old('point_15', $raport_4->behavior_formation->point_15) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_15', $raport_5->behavior_formation->point_15) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1095,7 +1098,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_15', $raport_4->behavior_formation->point_15) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_15', $raport_5->behavior_formation->point_15) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1108,7 +1111,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_15', $raport_4->behavior_formation->point_15) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_15', $raport_5->behavior_formation->point_15) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1122,7 +1125,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_15', $raport_4->behavior_formation->point_15) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_15', $raport_5->behavior_formation->point_15) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1147,7 +1150,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_16" name="point_16"
                                                                     class="form-select">
-                                                                    @if (old('point_16', $raport_4->behavior_formation->point_16) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_16', $raport_5->behavior_formation->point_16) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1160,7 +1163,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_16', $raport_4->behavior_formation->point_16) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_16', $raport_5->behavior_formation->point_16) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1173,7 +1176,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_16', $raport_4->behavior_formation->point_16) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_16', $raport_5->behavior_formation->point_16) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1187,7 +1190,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_16', $raport_4->behavior_formation->point_16) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_16', $raport_5->behavior_formation->point_16) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1212,7 +1215,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_17" name="point_17"
                                                                     class="form-select">
-                                                                    @if (old('point_17', $raport_4->behavior_formation->point_17) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_17', $raport_5->behavior_formation->point_17) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1225,7 +1228,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_17', $raport_4->behavior_formation->point_17) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_17', $raport_5->behavior_formation->point_17) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1238,7 +1241,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_17', $raport_4->behavior_formation->point_17) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_17', $raport_5->behavior_formation->point_17) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1252,7 +1255,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_17', $raport_4->behavior_formation->point_17) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_17', $raport_5->behavior_formation->point_17) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1277,7 +1280,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_18" name="point_18"
                                                                     class="form-select">
-                                                                    @if (old('point_18', $raport_4->behavior_formation->point_18) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_18', $raport_5->behavior_formation->point_18) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1290,7 +1293,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_18', $raport_4->behavior_formation->point_18) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_18', $raport_5->behavior_formation->point_18) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1303,7 +1306,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_18', $raport_4->behavior_formation->point_18) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_18', $raport_5->behavior_formation->point_18) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1317,7 +1320,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_18', $raport_4->behavior_formation->point_18) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_18', $raport_5->behavior_formation->point_18) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1342,7 +1345,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_19" name="point_19"
                                                                     class="form-select">
-                                                                    @if (old('point_19', $raport_4->behavior_formation->point_19) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_19', $raport_5->behavior_formation->point_19) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1355,7 +1358,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_19', $raport_4->behavior_formation->point_19) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_19', $raport_5->behavior_formation->point_19) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1368,7 +1371,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_19', $raport_4->behavior_formation->point_19) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_19', $raport_5->behavior_formation->point_19) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1382,7 +1385,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_19', $raport_4->behavior_formation->point_19) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_19', $raport_5->behavior_formation->point_19) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1407,7 +1410,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_20" name="point_20"
                                                                     class="form-select">
-                                                                    @if (old('point_20', $raport_4->behavior_formation->point_20) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_20', $raport_5->behavior_formation->point_20) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1420,7 +1423,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_20', $raport_4->behavior_formation->point_20) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_20', $raport_5->behavior_formation->point_20) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1433,7 +1436,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_20', $raport_4->behavior_formation->point_20) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_20', $raport_5->behavior_formation->point_20) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1447,7 +1450,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_20', $raport_4->behavior_formation->point_20) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_20', $raport_5->behavior_formation->point_20) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1472,7 +1475,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_21" name="point_21"
                                                                     class="form-select">
-                                                                    @if (old('point_21', $raport_4->behavior_formation->point_21) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_21', $raport_5->behavior_formation->point_21) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1485,7 +1488,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_21', $raport_4->behavior_formation->point_21) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_21', $raport_5->behavior_formation->point_21) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1498,7 +1501,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_21', $raport_4->behavior_formation->point_21) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_21', $raport_5->behavior_formation->point_21) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1512,7 +1515,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_21', $raport_4->behavior_formation->point_21) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_21', $raport_5->behavior_formation->point_21) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1537,7 +1540,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_22" name="point_22"
                                                                     class="form-select">
-                                                                    @if (old('point_22', $raport_4->behavior_formation->point_22) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_22', $raport_5->behavior_formation->point_22) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1550,7 +1553,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_22', $raport_4->behavior_formation->point_22) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_22', $raport_5->behavior_formation->point_22) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1563,7 +1566,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_22', $raport_4->behavior_formation->point_22) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_22', $raport_5->behavior_formation->point_22) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1577,7 +1580,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_22', $raport_4->behavior_formation->point_22) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_22', $raport_5->behavior_formation->point_22) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1603,7 +1606,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_23" name="point_23"
                                                                     class="form-select">
-                                                                    @if (old('point_23', $raport_4->behavior_formation->point_23) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_23', $raport_5->behavior_formation->point_23) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1616,7 +1619,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_23', $raport_4->behavior_formation->point_23) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_23', $raport_5->behavior_formation->point_23) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1629,7 +1632,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_23', $raport_4->behavior_formation->point_23) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_23', $raport_5->behavior_formation->point_23) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1643,7 +1646,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_23', $raport_4->behavior_formation->point_23) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_23', $raport_5->behavior_formation->point_23) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1668,7 +1671,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_24" name="point_24"
                                                                     class="form-select">
-                                                                    @if (old('point_24', $raport_4->behavior_formation->point_24) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_24', $raport_5->behavior_formation->point_24) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1681,7 +1684,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_24', $raport_4->behavior_formation->point_24) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_24', $raport_5->behavior_formation->point_24) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1694,7 +1697,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_24', $raport_4->behavior_formation->point_24) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_24', $raport_5->behavior_formation->point_24) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1708,7 +1711,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_24', $raport_4->behavior_formation->point_24) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_24', $raport_5->behavior_formation->point_24) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1733,7 +1736,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_25" name="point_25"
                                                                     class="form-select">
-                                                                    @if (old('point_25', $raport_4->behavior_formation->point_25) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_25', $raport_5->behavior_formation->point_25) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1746,7 +1749,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_25', $raport_4->behavior_formation->point_25) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_25', $raport_5->behavior_formation->point_25) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1759,7 +1762,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_25', $raport_4->behavior_formation->point_25) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_25', $raport_5->behavior_formation->point_25) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1773,7 +1776,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_25', $raport_4->behavior_formation->point_25) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_25', $raport_5->behavior_formation->point_25) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1800,7 +1803,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_26" name="point_26"
                                                                     class="form-select">
-                                                                    @if (old('point_26', $raport_4->behavior_formation->point_26) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_26', $raport_5->behavior_formation->point_26) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1813,7 +1816,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_26', $raport_4->behavior_formation->point_26) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_26', $raport_5->behavior_formation->point_26) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1826,7 +1829,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_26', $raport_4->behavior_formation->point_26) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_26', $raport_5->behavior_formation->point_26) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1840,7 +1843,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_26', $raport_4->behavior_formation->point_26) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_26', $raport_5->behavior_formation->point_26) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1867,7 +1870,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_27" name="point_27"
                                                                     class="form-select">
-                                                                    @if (old('point_27', $raport_4->behavior_formation->point_27) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_27', $raport_5->behavior_formation->point_27) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1880,7 +1883,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_27', $raport_4->behavior_formation->point_27) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_27', $raport_5->behavior_formation->point_27) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1893,7 +1896,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_27', $raport_4->behavior_formation->point_27) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_27', $raport_5->behavior_formation->point_27) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1907,7 +1910,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_27', $raport_4->behavior_formation->point_27) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_27', $raport_5->behavior_formation->point_27) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1934,7 +1937,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_28" name="point_28"
                                                                     class="form-select">
-                                                                    @if (old('point_28', $raport_4->behavior_formation->point_28) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_28', $raport_5->behavior_formation->point_28) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1947,7 +1950,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_28', $raport_4->behavior_formation->point_28) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_28', $raport_5->behavior_formation->point_28) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1960,7 +1963,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_28', $raport_4->behavior_formation->point_28) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_28', $raport_5->behavior_formation->point_28) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1974,7 +1977,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_28', $raport_4->behavior_formation->point_28) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_28', $raport_5->behavior_formation->point_28) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -1999,7 +2002,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_29" name="point_29"
                                                                     class="form-select">
-                                                                    @if (old('point_29', $raport_4->behavior_formation->point_29) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_29', $raport_5->behavior_formation->point_29) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2012,7 +2015,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_29', $raport_4->behavior_formation->point_29) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_29', $raport_5->behavior_formation->point_29) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2025,7 +2028,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_29', $raport_4->behavior_formation->point_29) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_29', $raport_5->behavior_formation->point_29) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2039,7 +2042,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_29', $raport_4->behavior_formation->point_29) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_29', $raport_5->behavior_formation->point_29) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2064,7 +2067,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_30" name="point_30"
                                                                     class="form-select">
-                                                                    @if (old('point_30', $raport_4->behavior_formation->point_30) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_30', $raport_5->behavior_formation->point_30) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2077,7 +2080,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_30', $raport_4->behavior_formation->point_30) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_30', $raport_5->behavior_formation->point_30) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2090,7 +2093,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_30', $raport_4->behavior_formation->point_30) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_30', $raport_5->behavior_formation->point_30) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2104,7 +2107,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_30', $raport_4->behavior_formation->point_30) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_30', $raport_5->behavior_formation->point_30) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2129,7 +2132,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_31" name="point_31"
                                                                     class="form-select">
-                                                                    @if (old('point_31', $raport_4->behavior_formation->point_31) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_31', $raport_5->behavior_formation->point_31) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2142,7 +2145,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_31', $raport_4->behavior_formation->point_31) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_31', $raport_5->behavior_formation->point_31) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2155,7 +2158,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_31', $raport_4->behavior_formation->point_31) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_31', $raport_5->behavior_formation->point_31) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2169,7 +2172,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_31', $raport_4->behavior_formation->point_31) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_31', $raport_5->behavior_formation->point_31) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2194,7 +2197,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_32" name="point_32"
                                                                     class="form-select">
-                                                                    @if (old('point_32', $raport_4->behavior_formation->point_32) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_32', $raport_5->behavior_formation->point_32) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2207,7 +2210,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_32', $raport_4->behavior_formation->point_32) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_32', $raport_5->behavior_formation->point_32) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2220,7 +2223,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_32', $raport_4->behavior_formation->point_32) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_32', $raport_5->behavior_formation->point_32) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2234,7 +2237,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_32', $raport_4->behavior_formation->point_32) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_32', $raport_5->behavior_formation->point_32) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2259,7 +2262,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_33" name="point_33"
                                                                     class="form-select">
-                                                                    @if (old('point_33', $raport_4->behavior_formation->point_33) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_33', $raport_5->behavior_formation->point_33) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2272,7 +2275,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_33', $raport_4->behavior_formation->point_33) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_33', $raport_5->behavior_formation->point_33) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2285,7 +2288,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_33', $raport_4->behavior_formation->point_33) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_33', $raport_5->behavior_formation->point_33) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2299,7 +2302,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_33', $raport_4->behavior_formation->point_33) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_33', $raport_5->behavior_formation->point_33) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2324,7 +2327,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_34" name="point_34"
                                                                     class="form-select">
-                                                                    @if (old('point_34', $raport_4->behavior_formation->point_34) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_34', $raport_5->behavior_formation->point_34) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2337,7 +2340,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_34', $raport_4->behavior_formation->point_34) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_34', $raport_5->behavior_formation->point_34) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2350,7 +2353,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_34', $raport_4->behavior_formation->point_34) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_34', $raport_5->behavior_formation->point_34) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2364,7 +2367,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_34', $raport_4->behavior_formation->point_34) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_34', $raport_5->behavior_formation->point_34) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2389,7 +2392,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_35" name="point_35"
                                                                     class="form-select">
-                                                                    @if (old('point_35', $raport_4->behavior_formation->point_35) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_35', $raport_5->behavior_formation->point_35) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2402,7 +2405,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_35', $raport_4->behavior_formation->point_35) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_35', $raport_5->behavior_formation->point_35) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2415,7 +2418,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_35', $raport_4->behavior_formation->point_35) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_35', $raport_5->behavior_formation->point_35) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2429,7 +2432,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_35', $raport_4->behavior_formation->point_35) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_35', $raport_5->behavior_formation->point_35) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2454,7 +2457,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_36" name="point_36"
                                                                     class="form-select">
-                                                                    @if (old('point_36', $raport_4->behavior_formation->point_36) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_36', $raport_5->behavior_formation->point_36) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2467,7 +2470,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_36', $raport_4->behavior_formation->point_36) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_36', $raport_5->behavior_formation->point_36) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2480,7 +2483,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_36', $raport_4->behavior_formation->point_36) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_36', $raport_5->behavior_formation->point_36) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2494,7 +2497,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_36', $raport_4->behavior_formation->point_36) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_36', $raport_5->behavior_formation->point_36) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2519,7 +2522,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_37" name="point_37"
                                                                     class="form-select">
-                                                                    @if (old('point_37', $raport_4->behavior_formation->point_37) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_37', $raport_5->behavior_formation->point_37) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2532,7 +2535,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_37', $raport_4->behavior_formation->point_37) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_37', $raport_5->behavior_formation->point_37) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2545,7 +2548,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_37', $raport_4->behavior_formation->point_37) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_37', $raport_5->behavior_formation->point_37) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2559,7 +2562,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_37', $raport_4->behavior_formation->point_37) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_37', $raport_5->behavior_formation->point_37) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2586,7 +2589,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_38" name="point_38"
                                                                     class="form-select">
-                                                                    @if (old('point_38', $raport_4->behavior_formation->point_38) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_38', $raport_5->behavior_formation->point_38) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2599,7 +2602,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_38', $raport_4->behavior_formation->point_38) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_38', $raport_5->behavior_formation->point_38) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2612,7 +2615,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_38', $raport_4->behavior_formation->point_38) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_38', $raport_5->behavior_formation->point_38) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2626,7 +2629,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_38', $raport_4->behavior_formation->point_38) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_38', $raport_5->behavior_formation->point_38) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2653,7 +2656,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_39" name="point_39"
                                                                     class="form-select">
-                                                                    @if (old('point_39', $raport_4->behavior_formation->point_39) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_39', $raport_5->behavior_formation->point_39) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2666,7 +2669,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_39', $raport_4->behavior_formation->point_39) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_39', $raport_5->behavior_formation->point_39) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2679,7 +2682,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_39', $raport_4->behavior_formation->point_39) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_39', $raport_5->behavior_formation->point_39) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2693,7 +2696,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_39', $raport_4->behavior_formation->point_39) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_39', $raport_5->behavior_formation->point_39) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2718,7 +2721,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_40" name="point_40"
                                                                     class="form-select">
-                                                                    @if (old('point_40', $raport_4->behavior_formation->point_40) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_40', $raport_5->behavior_formation->point_40) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2731,7 +2734,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_40', $raport_4->behavior_formation->point_40) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_40', $raport_5->behavior_formation->point_40) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2744,7 +2747,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_40', $raport_4->behavior_formation->point_40) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_40', $raport_5->behavior_formation->point_40) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2758,7 +2761,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_40', $raport_4->behavior_formation->point_40) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_40', $raport_5->behavior_formation->point_40) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2784,7 +2787,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_41" name="point_41"
                                                                     class="form-select">
-                                                                    @if (old('point_41', $raport_4->behavior_formation->point_41) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_41', $raport_5->behavior_formation->point_41) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2797,7 +2800,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_41', $raport_4->behavior_formation->point_41) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_41', $raport_5->behavior_formation->point_41) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2810,7 +2813,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_41', $raport_4->behavior_formation->point_41) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_41', $raport_5->behavior_formation->point_41) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2824,7 +2827,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_41', $raport_4->behavior_formation->point_41) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_41', $raport_5->behavior_formation->point_41) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2859,7 +2862,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_42" name="point_42"
                                                                     class="form-select">
-                                                                    @if (old('point_42', $raport_4->language_ability->point_1) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_42', $raport_5->language_ability->point_1) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2872,7 +2875,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_42', $raport_4->language_ability->point_1) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_42', $raport_5->language_ability->point_1) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2885,7 +2888,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_42', $raport_4->language_ability->point_1) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_42', $raport_5->language_ability->point_1) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2899,7 +2902,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_42', $raport_4->language_ability->point_1) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_42', $raport_5->language_ability->point_1) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2924,7 +2927,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_43" name="point_43"
                                                                     class="form-select">
-                                                                    @if (old('point_43', $raport_4->language_ability->point_2) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_43', $raport_5->language_ability->point_2) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2937,7 +2940,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_43', $raport_4->language_ability->point_2) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_43', $raport_5->language_ability->point_2) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2950,7 +2953,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_43', $raport_4->language_ability->point_2) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_43', $raport_5->language_ability->point_2) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2964,7 +2967,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_43', $raport_4->language_ability->point_2) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_43', $raport_5->language_ability->point_2) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -2991,7 +2994,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_44" name="point_44"
                                                                     class="form-select">
-                                                                    @if (old('point_44', $raport_4->language_ability->point_3) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_44', $raport_5->language_ability->point_3) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3004,7 +3007,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_44', $raport_4->language_ability->point_3) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_44', $raport_5->language_ability->point_3) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3017,7 +3020,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_44', $raport_4->language_ability->point_3) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_44', $raport_5->language_ability->point_3) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3031,7 +3034,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_44', $raport_4->language_ability->point_3) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_44', $raport_5->language_ability->point_3) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3056,7 +3059,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_45" name="point_45"
                                                                     class="form-select">
-                                                                    @if (old('point_45', $raport_4->language_ability->point_4) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_45', $raport_5->language_ability->point_4) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3069,7 +3072,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_45', $raport_4->language_ability->point_4) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_45', $raport_5->language_ability->point_4) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3082,7 +3085,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_45', $raport_4->language_ability->point_4) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_45', $raport_5->language_ability->point_4) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3096,7 +3099,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_45', $raport_4->language_ability->point_4) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_45', $raport_5->language_ability->point_4) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3122,7 +3125,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_46" name="point_46"
                                                                     class="form-select">
-                                                                    @if (old('point_46', $raport_4->language_ability->point_5) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_46', $raport_5->language_ability->point_5) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3135,7 +3138,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_46', $raport_4->language_ability->point_5) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_46', $raport_5->language_ability->point_5) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3148,7 +3151,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_46', $raport_4->language_ability->point_5) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_46', $raport_5->language_ability->point_5) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3162,7 +3165,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_46', $raport_4->language_ability->point_5) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_46', $raport_5->language_ability->point_5) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3188,7 +3191,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_47" name="point_47"
                                                                     class="form-select">
-                                                                    @if (old('point_47', $raport_4->language_ability->point_6) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_47', $raport_5->language_ability->point_6) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3201,7 +3204,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_47', $raport_4->language_ability->point_6) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_47', $raport_5->language_ability->point_6) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3214,7 +3217,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_47', $raport_4->language_ability->point_6) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_47', $raport_5->language_ability->point_6) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3228,7 +3231,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_47', $raport_4->language_ability->point_6) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_47', $raport_5->language_ability->point_6) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3254,7 +3257,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_48" name="point_48"
                                                                     class="form-select">
-                                                                    @if (old('point_48', $raport_4->language_ability->point_7) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_48', $raport_5->language_ability->point_7) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3267,7 +3270,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_48', $raport_4->language_ability->point_7) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_48', $raport_5->language_ability->point_7) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3280,7 +3283,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_48', $raport_4->language_ability->point_7) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_48', $raport_5->language_ability->point_7) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3294,7 +3297,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_48', $raport_4->language_ability->point_7) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_48', $raport_5->language_ability->point_7) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3320,7 +3323,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_49" name="point_49"
                                                                     class="form-select">
-                                                                    @if (old('point_49', $raport_4->language_ability->point_8) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_49', $raport_5->language_ability->point_8) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3333,7 +3336,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_49', $raport_4->language_ability->point_8) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_49', $raport_5->language_ability->point_8) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3346,7 +3349,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_49', $raport_4->language_ability->point_8) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_49', $raport_5->language_ability->point_8) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3360,7 +3363,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_49', $raport_4->language_ability->point_8) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_49', $raport_5->language_ability->point_8) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3385,7 +3388,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_50" name="point_50"
                                                                     class="form-select">
-                                                                    @if (old('point_50', $raport_4->language_ability->point_9) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_50', $raport_5->language_ability->point_9) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3398,7 +3401,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_50', $raport_4->language_ability->point_9) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_50', $raport_5->language_ability->point_9) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3411,7 +3414,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_50', $raport_4->language_ability->point_9) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_50', $raport_5->language_ability->point_9) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3425,7 +3428,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_50', $raport_4->language_ability->point_9) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_50', $raport_5->language_ability->point_9) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3452,7 +3455,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_51" name="point_51"
                                                                     class="form-select">
-                                                                    @if (old('point_51', $raport_4->language_ability->point_10) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_51', $raport_5->language_ability->point_10) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3465,7 +3468,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_51', $raport_4->language_ability->point_10) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_51', $raport_5->language_ability->point_10) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3478,7 +3481,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_51', $raport_4->language_ability->point_10) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_51', $raport_5->language_ability->point_10) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3492,7 +3495,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_51', $raport_4->language_ability->point_10) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_51', $raport_5->language_ability->point_10) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3519,7 +3522,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_52" name="point_52"
                                                                     class="form-select">
-                                                                    @if (old('point_52', $raport_4->language_ability->point_11) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_52', $raport_5->language_ability->point_11) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3532,7 +3535,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_52', $raport_4->language_ability->point_11) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_52', $raport_5->language_ability->point_11) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3545,7 +3548,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_52', $raport_4->language_ability->point_11) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_52', $raport_5->language_ability->point_11) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3559,7 +3562,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_52', $raport_4->language_ability->point_11) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_52', $raport_5->language_ability->point_11) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3584,7 +3587,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_53" name="point_53"
                                                                     class="form-select">
-                                                                    @if (old('point_53', $raport_4->language_ability->point_12) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_53', $raport_5->language_ability->point_12) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3597,7 +3600,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_53', $raport_4->language_ability->point_12) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_53', $raport_5->language_ability->point_12) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3610,7 +3613,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_53', $raport_4->language_ability->point_12) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_53', $raport_5->language_ability->point_12) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3624,7 +3627,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_53', $raport_4->language_ability->point_12) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_53', $raport_5->language_ability->point_12) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3649,7 +3652,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_54" name="point_54"
                                                                     class="form-select">
-                                                                    @if (old('point_54', $raport_4->language_ability->point_13) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_54', $raport_5->language_ability->point_13) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3662,7 +3665,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_54', $raport_4->language_ability->point_13) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_54', $raport_5->language_ability->point_13) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3675,7 +3678,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_54', $raport_4->language_ability->point_13) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_54', $raport_5->language_ability->point_13) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3689,7 +3692,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_54', $raport_4->language_ability->point_13) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_54', $raport_5->language_ability->point_13) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3715,7 +3718,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_55" name="point_55"
                                                                     class="form-select">
-                                                                    @if (old('point_55', $raport_4->language_ability->point_14) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_55', $raport_5->language_ability->point_14) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3728,7 +3731,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_55', $raport_4->language_ability->point_14) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_55', $raport_5->language_ability->point_14) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3741,7 +3744,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_55', $raport_4->language_ability->point_14) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_55', $raport_5->language_ability->point_14) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3755,7 +3758,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_55', $raport_4->language_ability->point_14) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_55', $raport_5->language_ability->point_14) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3781,7 +3784,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_56" name="point_56"
                                                                     class="form-select">
-                                                                    @if (old('point_56', $raport_4->language_ability->point_15) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_56', $raport_5->language_ability->point_15) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3794,7 +3797,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_56', $raport_4->language_ability->point_15) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_56', $raport_5->language_ability->point_15) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3807,7 +3810,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_56', $raport_4->language_ability->point_15) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_56', $raport_5->language_ability->point_15) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3821,7 +3824,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_56', $raport_4->language_ability->point_15) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_56', $raport_5->language_ability->point_15) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3847,7 +3850,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_57" name="point_57"
                                                                     class="form-select">
-                                                                    @if (old('point_57', $raport_4->language_ability->point_16) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_57', $raport_5->language_ability->point_16) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3860,7 +3863,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_57', $raport_4->language_ability->point_16) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_57', $raport_5->language_ability->point_16) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3873,7 +3876,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_57', $raport_4->language_ability->point_16) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_57', $raport_5->language_ability->point_16) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3887,7 +3890,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_57', $raport_4->language_ability->point_16) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_57', $raport_5->language_ability->point_16) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3912,7 +3915,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_58" name="point_58"
                                                                     class="form-select">
-                                                                    @if (old('point_58', $raport_4->language_ability->point_17) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_58', $raport_5->language_ability->point_17) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3925,7 +3928,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_58', $raport_4->language_ability->point_17) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_58', $raport_5->language_ability->point_17) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3938,7 +3941,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_58', $raport_4->language_ability->point_17) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_58', $raport_5->language_ability->point_17) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3952,7 +3955,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_58', $raport_4->language_ability->point_17) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_58', $raport_5->language_ability->point_17) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3978,7 +3981,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_59" name="point_59"
                                                                     class="form-select">
-                                                                    @if (old('point_59', $raport_4->language_ability->point_18) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_59', $raport_5->language_ability->point_18) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -3991,7 +3994,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_59', $raport_4->language_ability->point_18) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_59', $raport_5->language_ability->point_18) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4004,7 +4007,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_59', $raport_4->language_ability->point_18) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_59', $raport_5->language_ability->point_18) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4018,7 +4021,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_59', $raport_4->language_ability->point_18) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_59', $raport_5->language_ability->point_18) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4044,7 +4047,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_60" name="point_60"
                                                                     class="form-select">
-                                                                    @if (old('point_60', $raport_4->language_ability->point_19) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_60', $raport_5->language_ability->point_19) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4057,7 +4060,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_60', $raport_4->language_ability->point_19) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_60', $raport_5->language_ability->point_19) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4070,7 +4073,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_60', $raport_4->language_ability->point_19) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_60', $raport_5->language_ability->point_19) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4084,7 +4087,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_60', $raport_4->language_ability->point_19) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_60', $raport_5->language_ability->point_19) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4110,7 +4113,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_61" name="point_61"
                                                                     class="form-select">
-                                                                    @if (old('point_61', $raport_4->language_ability->point_20) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_61', $raport_5->language_ability->point_20) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4123,7 +4126,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_61', $raport_4->language_ability->point_20) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_61', $raport_5->language_ability->point_20) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4136,7 +4139,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_61', $raport_4->language_ability->point_20) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_61', $raport_5->language_ability->point_20) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4150,7 +4153,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_61', $raport_4->language_ability->point_20) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_61', $raport_5->language_ability->point_20) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4186,7 +4189,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_62" name="point_62"
                                                                     class="form-select">
-                                                                    @if (old('point_62', $raport_4->cognitive->point_1) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_62', $raport_5->cognitive->point_1) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4199,7 +4202,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_62', $raport_4->cognitive->point_1) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_62', $raport_5->cognitive->point_1) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4212,7 +4215,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_62', $raport_4->cognitive->point_1) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_62', $raport_5->cognitive->point_1) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4226,7 +4229,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_62', $raport_4->cognitive->point_1) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_62', $raport_5->cognitive->point_1) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4253,7 +4256,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_63" name="point_63"
                                                                     class="form-select">
-                                                                    @if (old('point_63', $raport_4->cognitive->point_2) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_63', $raport_5->cognitive->point_2) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4266,7 +4269,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_63', $raport_4->cognitive->point_2) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_63', $raport_5->cognitive->point_2) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4279,7 +4282,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_63', $raport_4->cognitive->point_2) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_63', $raport_5->cognitive->point_2) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4293,7 +4296,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_63', $raport_4->cognitive->point_2) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_63', $raport_5->cognitive->point_2) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4320,7 +4323,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_64" name="point_64"
                                                                     class="form-select">
-                                                                    @if (old('point_64', $raport_4->cognitive->point_3) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_64', $raport_5->cognitive->point_3) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4333,7 +4336,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_64', $raport_4->cognitive->point_3) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_64', $raport_5->cognitive->point_3) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4346,7 +4349,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_64', $raport_4->cognitive->point_3) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_64', $raport_5->cognitive->point_3) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4360,7 +4363,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_64', $raport_4->cognitive->point_3) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_64', $raport_5->cognitive->point_3) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4385,7 +4388,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_65" name="point_65"
                                                                     class="form-select">
-                                                                    @if (old('point_65', $raport_4->cognitive->point_4) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_65', $raport_5->cognitive->point_4) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4398,7 +4401,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_65', $raport_4->cognitive->point_4) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_65', $raport_5->cognitive->point_4) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4411,7 +4414,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_65', $raport_4->cognitive->point_4) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_65', $raport_5->cognitive->point_4) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4425,7 +4428,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_65', $raport_4->cognitive->point_4) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_65', $raport_5->cognitive->point_4) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4450,7 +4453,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_66" name="point_66"
                                                                     class="form-select">
-                                                                    @if (old('point_66', $raport_4->cognitive->point_5) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_66', $raport_5->cognitive->point_5) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4463,7 +4466,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_66', $raport_4->cognitive->point_5) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_66', $raport_5->cognitive->point_5) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4476,7 +4479,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_66', $raport_4->cognitive->point_5) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_66', $raport_5->cognitive->point_5) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4490,7 +4493,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_66', $raport_4->cognitive->point_5) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_66', $raport_5->cognitive->point_5) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4528,7 +4531,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_67" name="point_67"
                                                                     class="form-select">
-                                                                    @if (old('point_67', $raport_4->cognitive->point_6) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_67', $raport_5->cognitive->point_6) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4541,7 +4544,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_67', $raport_4->cognitive->point_6) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_67', $raport_5->cognitive->point_6) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4554,7 +4557,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_67', $raport_4->cognitive->point_6) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_67', $raport_5->cognitive->point_6) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4568,7 +4571,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_67', $raport_4->cognitive->point_6) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_67', $raport_5->cognitive->point_6) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4594,7 +4597,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_68" name="point_68"
                                                                     class="form-select">
-                                                                    @if (old('point_68', $raport_4->cognitive->point_7) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_68', $raport_5->cognitive->point_7) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4607,7 +4610,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_68', $raport_4->cognitive->point_7) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_68', $raport_5->cognitive->point_7) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4620,7 +4623,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_68', $raport_4->cognitive->point_7) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_68', $raport_5->cognitive->point_7) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4634,7 +4637,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_68', $raport_4->cognitive->point_7) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_68', $raport_5->cognitive->point_7) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4660,7 +4663,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_69" name="point_69"
                                                                     class="form-select">
-                                                                    @if (old('point_69', $raport_4->cognitive->point_8) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_69', $raport_5->cognitive->point_8) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4673,7 +4676,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_69', $raport_4->cognitive->point_8) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_69', $raport_5->cognitive->point_8) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4686,7 +4689,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_69', $raport_4->cognitive->point_8) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_69', $raport_5->cognitive->point_8) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4700,7 +4703,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_69', $raport_4->cognitive->point_8) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_69', $raport_5->cognitive->point_8) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4726,7 +4729,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_70" name="point_70"
                                                                     class="form-select">
-                                                                    @if (old('point_70', $raport_4->cognitive->point_9) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_70', $raport_5->cognitive->point_9) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4739,7 +4742,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_70', $raport_4->cognitive->point_9) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_70', $raport_5->cognitive->point_9) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4752,7 +4755,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_70', $raport_4->cognitive->point_9) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_70', $raport_5->cognitive->point_9) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4766,7 +4769,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_70', $raport_4->cognitive->point_9) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_70', $raport_5->cognitive->point_9) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4793,7 +4796,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_71" name="point_71"
                                                                     class="form-select">
-                                                                    @if (old('point_71', $raport_4->cognitive->point_10) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_71', $raport_5->cognitive->point_10) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4806,7 +4809,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_71', $raport_4->cognitive->point_10) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_71', $raport_5->cognitive->point_10) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4819,7 +4822,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_71', $raport_4->cognitive->point_10) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_71', $raport_5->cognitive->point_10) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4833,7 +4836,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_71', $raport_4->cognitive->point_10) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_71', $raport_5->cognitive->point_10) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4859,7 +4862,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_72" name="point_72"
                                                                     class="form-select">
-                                                                    @if (old('point_72', $raport_4->cognitive->point_11) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_72', $raport_5->cognitive->point_11) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4872,7 +4875,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_72', $raport_4->cognitive->point_11) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_72', $raport_5->cognitive->point_11) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4885,7 +4888,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_72', $raport_4->cognitive->point_11) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_72', $raport_5->cognitive->point_11) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4899,7 +4902,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_72', $raport_4->cognitive->point_11) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_72', $raport_5->cognitive->point_11) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4925,7 +4928,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_73" name="point_73"
                                                                     class="form-select">
-                                                                    @if (old('point_73', $raport_4->cognitive->point_13) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_73', $raport_5->cognitive->point_13) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4938,7 +4941,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_73', $raport_4->cognitive->point_13) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_73', $raport_5->cognitive->point_13) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4951,7 +4954,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_73', $raport_4->cognitive->point_13) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_73', $raport_5->cognitive->point_13) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4965,7 +4968,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_73', $raport_4->cognitive->point_13) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_73', $raport_5->cognitive->point_13) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -4990,7 +4993,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_74" name="point_74"
                                                                     class="form-select">
-                                                                    @if (old('point_74', $raport_4->cognitive->point_13) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_74', $raport_5->cognitive->point_13) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5003,7 +5006,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_74', $raport_4->cognitive->point_13) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_74', $raport_5->cognitive->point_13) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5016,7 +5019,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_74', $raport_4->cognitive->point_13) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_74', $raport_5->cognitive->point_13) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5030,7 +5033,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_74', $raport_4->cognitive->point_13) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_74', $raport_5->cognitive->point_13) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5056,7 +5059,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_75" name="point_75"
                                                                     class="form-select">
-                                                                    @if (old('point_75', $raport_4->cognitive->point_14) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_75', $raport_5->cognitive->point_14) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5069,7 +5072,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_75', $raport_4->cognitive->point_14) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_75', $raport_5->cognitive->point_14) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5082,7 +5085,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_75', $raport_4->cognitive->point_14) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_75', $raport_5->cognitive->point_14) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5096,7 +5099,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_75', $raport_4->cognitive->point_14) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_75', $raport_5->cognitive->point_14) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5122,7 +5125,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_76" name="point_76"
                                                                     class="form-select">
-                                                                    @if (old('point_76', $raport_4->cognitive->point_15) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_76', $raport_5->cognitive->point_15) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5135,7 +5138,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_76', $raport_4->cognitive->point_15) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_76', $raport_5->cognitive->point_15) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5148,7 +5151,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_76', $raport_4->cognitive->point_15) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_76', $raport_5->cognitive->point_15) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5162,7 +5165,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_76', $raport_4->cognitive->point_15) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_76', $raport_5->cognitive->point_15) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5188,7 +5191,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_77" name="point_77"
                                                                     class="form-select">
-                                                                    @if (old('point_77', $raport_4->cognitive->point_16) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_77', $raport_5->cognitive->point_16) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5201,7 +5204,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_77', $raport_4->cognitive->point_16) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_77', $raport_5->cognitive->point_16) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5214,7 +5217,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_77', $raport_4->cognitive->point_16) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_77', $raport_5->cognitive->point_16) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5228,7 +5231,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_77', $raport_4->cognitive->point_16) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_77', $raport_5->cognitive->point_16) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5254,7 +5257,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_78" name="point_78"
                                                                     class="form-select">
-                                                                    @if (old('point_78', $raport_4->cognitive->point_17) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_78', $raport_5->cognitive->point_17) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5267,7 +5270,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_78', $raport_4->cognitive->point_17) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_78', $raport_5->cognitive->point_17) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5280,7 +5283,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_78', $raport_4->cognitive->point_17) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_78', $raport_5->cognitive->point_17) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5294,7 +5297,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_78', $raport_4->cognitive->point_17) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_78', $raport_5->cognitive->point_17) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5319,7 +5322,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_79" name="point_79"
                                                                     class="form-select">
-                                                                    @if (old('point_79', $raport_4->cognitive->point_18) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_79', $raport_5->cognitive->point_18) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5332,7 +5335,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_79', $raport_4->cognitive->point_18) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_79', $raport_5->cognitive->point_18) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5345,7 +5348,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_79', $raport_4->cognitive->point_18) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_79', $raport_5->cognitive->point_18) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5359,7 +5362,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_79', $raport_4->cognitive->point_18) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_79', $raport_5->cognitive->point_18) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5384,7 +5387,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_80" name="point_80"
                                                                     class="form-select">
-                                                                    @if (old('point_80', $raport_4->cognitive->point_19) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_80', $raport_5->cognitive->point_19) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5397,7 +5400,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_80', $raport_4->cognitive->point_19) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_80', $raport_5->cognitive->point_19) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5410,7 +5413,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_80', $raport_4->cognitive->point_19) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_80', $raport_5->cognitive->point_19) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5424,7 +5427,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_80', $raport_4->cognitive->point_19) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_80', $raport_5->cognitive->point_19) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5450,7 +5453,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_81" name="point_81"
                                                                     class="form-select">
-                                                                    @if (old('point_81', $raport_4->cognitive->point_19) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_81', $raport_5->cognitive->point_19) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5463,7 +5466,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_81', $raport_4->cognitive->point_19) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_81', $raport_5->cognitive->point_19) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5476,7 +5479,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_81', $raport_4->cognitive->point_19) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_81', $raport_5->cognitive->point_19) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5490,7 +5493,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_81', $raport_4->cognitive->point_19) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_81', $raport_5->cognitive->point_19) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5516,7 +5519,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_82" name="point_82"
                                                                     class="form-select">
-                                                                    @if (old('point_82', $raport_4->cognitive->point_21) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_82', $raport_5->cognitive->point_21) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5529,7 +5532,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_82', $raport_4->cognitive->point_21) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_82', $raport_5->cognitive->point_21) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5542,7 +5545,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_82', $raport_4->cognitive->point_21) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_82', $raport_5->cognitive->point_21) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5556,7 +5559,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_82', $raport_4->cognitive->point_21) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_82', $raport_5->cognitive->point_21) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5582,7 +5585,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_83" name="point_83"
                                                                     class="form-select">
-                                                                    @if (old('point_83', $raport_4->cognitive->point_22) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_83', $raport_5->cognitive->point_22) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5595,7 +5598,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_83', $raport_4->cognitive->point_22) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_83', $raport_5->cognitive->point_22) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5608,7 +5611,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_83', $raport_4->cognitive->point_22) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_83', $raport_5->cognitive->point_22) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5622,7 +5625,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_83', $raport_4->cognitive->point_22) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_83', $raport_5->cognitive->point_22) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5649,7 +5652,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_84" name="point_84"
                                                                     class="form-select">
-                                                                    @if (old('point_84', $raport_4->cognitive->point_23) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_84', $raport_5->cognitive->point_23) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5662,7 +5665,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_84', $raport_4->cognitive->point_23) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_84', $raport_5->cognitive->point_23) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5675,7 +5678,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_84', $raport_4->cognitive->point_23) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_84', $raport_5->cognitive->point_23) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5689,7 +5692,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_84', $raport_4->cognitive->point_23) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_84', $raport_5->cognitive->point_23) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5717,7 +5720,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_85" name="point_85"
                                                                     class="form-select">
-                                                                    @if (old('point_85', $raport_4->cognitive->point_24) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_85', $raport_5->cognitive->point_24) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5730,7 +5733,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_85', $raport_4->cognitive->point_24) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_85', $raport_5->cognitive->point_24) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5743,7 +5746,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_85', $raport_4->cognitive->point_24) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_85', $raport_5->cognitive->point_24) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5757,7 +5760,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_85', $raport_4->cognitive->point_24) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_85', $raport_5->cognitive->point_24) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5795,7 +5798,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_86" name="point_86"
                                                                     class="form-select">
-                                                                    @if (old('point_86', $raport_4->physical_motoric->point_1) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_86', $raport_5->physical_motoric->point_1) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5808,7 +5811,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_86', $raport_4->physical_motoric->point_1) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_86', $raport_5->physical_motoric->point_1) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5821,7 +5824,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_86', $raport_4->physical_motoric->point_1) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_86', $raport_5->physical_motoric->point_1) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5835,7 +5838,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_86', $raport_4->physical_motoric->point_1) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_86', $raport_5->physical_motoric->point_1) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5861,7 +5864,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_87" name="point_87"
                                                                     class="form-select">
-                                                                    @if (old('point_87', $raport_4->physical_motoric->point_2) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_87', $raport_5->physical_motoric->point_2) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5874,7 +5877,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_87', $raport_4->physical_motoric->point_2) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_87', $raport_5->physical_motoric->point_2) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5887,7 +5890,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_87', $raport_4->physical_motoric->point_2) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_87', $raport_5->physical_motoric->point_2) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5901,7 +5904,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_87', $raport_4->physical_motoric->point_2) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_87', $raport_5->physical_motoric->point_2) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5927,7 +5930,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_88" name="point_88"
                                                                     class="form-select">
-                                                                    @if (old('point_88', $raport_4->physical_motoric->point_3) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_88', $raport_5->physical_motoric->point_3) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5940,7 +5943,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_88', $raport_4->physical_motoric->point_3) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_88', $raport_5->physical_motoric->point_3) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5953,7 +5956,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_88', $raport_4->physical_motoric->point_3) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_88', $raport_5->physical_motoric->point_3) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5967,7 +5970,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_88', $raport_4->physical_motoric->point_3) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_88', $raport_5->physical_motoric->point_3) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -5992,7 +5995,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_89" name="point_89"
                                                                     class="form-select">
-                                                                    @if (old('point_89', $raport_4->physical_motoric->point_4) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_89', $raport_5->physical_motoric->point_4) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6005,7 +6008,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_89', $raport_4->physical_motoric->point_4) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_89', $raport_5->physical_motoric->point_4) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6018,7 +6021,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_89', $raport_4->physical_motoric->point_4) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_89', $raport_5->physical_motoric->point_4) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6032,7 +6035,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_89', $raport_4->physical_motoric->point_4) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_89', $raport_5->physical_motoric->point_4) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6057,7 +6060,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_90" name="point_90"
                                                                     class="form-select">
-                                                                    @if (old('point_90', $raport_4->physical_motoric->point_5) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_90', $raport_5->physical_motoric->point_5) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6070,7 +6073,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_90', $raport_4->physical_motoric->point_5) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_90', $raport_5->physical_motoric->point_5) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6083,7 +6086,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_90', $raport_4->physical_motoric->point_5) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_90', $raport_5->physical_motoric->point_5) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6097,7 +6100,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_90', $raport_4->physical_motoric->point_5) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_90', $raport_5->physical_motoric->point_5) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6122,7 +6125,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_91" name="point_91"
                                                                     class="form-select">
-                                                                    @if (old('point_91', $raport_4->physical_motoric->point_6) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_91', $raport_5->physical_motoric->point_6) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6135,7 +6138,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_91', $raport_4->physical_motoric->point_6) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_91', $raport_5->physical_motoric->point_6) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6148,7 +6151,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_91', $raport_4->physical_motoric->point_6) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_91', $raport_5->physical_motoric->point_6) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6162,7 +6165,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_91', $raport_4->physical_motoric->point_6) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_91', $raport_5->physical_motoric->point_6) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6187,7 +6190,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_92" name="point_92"
                                                                     class="form-select">
-                                                                    @if (old('point_92', $raport_4->physical_motoric->point_7) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_92', $raport_5->physical_motoric->point_7) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6200,7 +6203,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_92', $raport_4->physical_motoric->point_7) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_92', $raport_5->physical_motoric->point_7) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6213,7 +6216,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_92', $raport_4->physical_motoric->point_7) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_92', $raport_5->physical_motoric->point_7) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6227,7 +6230,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_92', $raport_4->physical_motoric->point_7) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_92', $raport_5->physical_motoric->point_7) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6252,7 +6255,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_93" name="point_93"
                                                                     class="form-select">
-                                                                    @if (old('point_93', $raport_4->physical_motoric->point_8) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_93', $raport_5->physical_motoric->point_8) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6265,7 +6268,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_93', $raport_4->physical_motoric->point_8) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_93', $raport_5->physical_motoric->point_8) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6278,7 +6281,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_93', $raport_4->physical_motoric->point_8) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_93', $raport_5->physical_motoric->point_8) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6292,7 +6295,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_93', $raport_4->physical_motoric->point_8) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_93', $raport_5->physical_motoric->point_8) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6317,7 +6320,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_94" name="point_94"
                                                                     class="form-select">
-                                                                    @if (old('point_94', $raport_4->physical_motoric->point_9) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_94', $raport_5->physical_motoric->point_9) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6330,7 +6333,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_94', $raport_4->physical_motoric->point_9) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_94', $raport_5->physical_motoric->point_9) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6343,7 +6346,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_94', $raport_4->physical_motoric->point_9) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_94', $raport_5->physical_motoric->point_9) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6357,7 +6360,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_94', $raport_4->physical_motoric->point_9) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_94', $raport_5->physical_motoric->point_9) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6382,7 +6385,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_95" name="point_95"
                                                                     class="form-select">
-                                                                    @if (old('point_95', $raport_4->physical_motoric->point_10) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_95', $raport_5->physical_motoric->point_10) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6395,7 +6398,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_95', $raport_4->physical_motoric->point_10) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_95', $raport_5->physical_motoric->point_10) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6408,7 +6411,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_95', $raport_4->physical_motoric->point_10) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_95', $raport_5->physical_motoric->point_10) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6422,7 +6425,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_95', $raport_4->physical_motoric->point_10) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_95', $raport_5->physical_motoric->point_10) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6448,7 +6451,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_96" name="point_96"
                                                                     class="form-select">
-                                                                    @if (old('point_96', $raport_4->physical_motoric->point_11) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_96', $raport_5->physical_motoric->point_11) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6461,7 +6464,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_96', $raport_4->physical_motoric->point_11) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_96', $raport_5->physical_motoric->point_11) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6474,7 +6477,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_96', $raport_4->physical_motoric->point_11) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_96', $raport_5->physical_motoric->point_11) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6488,7 +6491,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_96', $raport_4->physical_motoric->point_11) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_96', $raport_5->physical_motoric->point_11) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6513,7 +6516,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_97" name="point_97"
                                                                     class="form-select">
-                                                                    @if (old('point_97', $raport_4->physical_motoric->point_12) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_97', $raport_5->physical_motoric->point_12) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6526,7 +6529,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_97', $raport_4->physical_motoric->point_12) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_97', $raport_5->physical_motoric->point_12) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6539,7 +6542,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_97', $raport_4->physical_motoric->point_12) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_97', $raport_5->physical_motoric->point_12) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6553,7 +6556,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_97', $raport_4->physical_motoric->point_12) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_97', $raport_5->physical_motoric->point_12) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6579,7 +6582,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_98" name="point_98"
                                                                     class="form-select">
-                                                                    @if (old('point_98', $raport_4->physical_motoric->point_13) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_98', $raport_5->physical_motoric->point_13) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6592,7 +6595,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_98', $raport_4->physical_motoric->point_13) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_98', $raport_5->physical_motoric->point_13) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6605,7 +6608,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_98', $raport_4->physical_motoric->point_13) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_98', $raport_5->physical_motoric->point_13) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6619,7 +6622,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_98', $raport_4->physical_motoric->point_13) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_98', $raport_5->physical_motoric->point_13) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6644,7 +6647,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_99" name="point_99"
                                                                     class="form-select">
-                                                                    @if (old('point_99', $raport_4->physical_motoric->point_14) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_99', $raport_5->physical_motoric->point_14) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6657,7 +6660,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_99', $raport_4->physical_motoric->point_14) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_99', $raport_5->physical_motoric->point_14) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6670,7 +6673,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_99', $raport_4->physical_motoric->point_14) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_99', $raport_5->physical_motoric->point_14) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6684,7 +6687,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_99', $raport_4->physical_motoric->point_14) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_99', $raport_5->physical_motoric->point_14) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6710,7 +6713,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_100" name="point_100"
                                                                     class="form-select">
-                                                                    @if (old('point_100', $raport_4->physical_motoric->point_15) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_100', $raport_5->physical_motoric->point_15) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6723,7 +6726,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_100', $raport_4->physical_motoric->point_15) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_100', $raport_5->physical_motoric->point_15) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6736,7 +6739,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_100', $raport_4->physical_motoric->point_15) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_100', $raport_5->physical_motoric->point_15) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6750,7 +6753,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_100', $raport_4->physical_motoric->point_15) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_100', $raport_5->physical_motoric->point_15) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6776,7 +6779,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_101" name="point_101"
                                                                     class="form-select">
-                                                                    @if (old('point_101', $raport_4->physical_motoric->point_16) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_101', $raport_5->physical_motoric->point_16) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6789,7 +6792,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_101', $raport_4->physical_motoric->point_16) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_101', $raport_5->physical_motoric->point_16) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6802,7 +6805,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_101', $raport_4->physical_motoric->point_16) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_101', $raport_5->physical_motoric->point_16) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6816,7 +6819,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_101', $raport_4->physical_motoric->point_16) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_101', $raport_5->physical_motoric->point_16) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6841,7 +6844,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_102" name="point_102"
                                                                     class="form-select">
-                                                                    @if (old('point_102', $raport_4->physical_motoric->point_17) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_102', $raport_5->physical_motoric->point_17) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6854,7 +6857,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_102', $raport_4->physical_motoric->point_17) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_102', $raport_5->physical_motoric->point_17) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6867,7 +6870,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_102', $raport_4->physical_motoric->point_17) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_102', $raport_5->physical_motoric->point_17) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6881,7 +6884,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_102', $raport_4->physical_motoric->point_17) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_102', $raport_5->physical_motoric->point_17) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6906,7 +6909,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_103" name="point_103"
                                                                     class="form-select">
-                                                                    @if (old('point_103', $raport_4->physical_motoric->point_18) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_103', $raport_5->physical_motoric->point_18) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6919,7 +6922,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_103', $raport_4->physical_motoric->point_18) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_103', $raport_5->physical_motoric->point_18) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6932,7 +6935,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_103', $raport_4->physical_motoric->point_18) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_103', $raport_5->physical_motoric->point_18) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6946,7 +6949,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_103', $raport_4->physical_motoric->point_18) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_103', $raport_5->physical_motoric->point_18) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6971,7 +6974,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_104" name="point_104"
                                                                     class="form-select">
-                                                                    @if (old('point_104', $raport_4->physical_motoric->point_19) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_104', $raport_5->physical_motoric->point_19) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6984,7 +6987,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_104', $raport_4->physical_motoric->point_19) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_104', $raport_5->physical_motoric->point_19) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -6997,7 +7000,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_104', $raport_4->physical_motoric->point_19) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_104', $raport_5->physical_motoric->point_19) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7011,7 +7014,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_104', $raport_4->physical_motoric->point_19) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_104', $raport_5->physical_motoric->point_19) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7036,7 +7039,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_105" name="point_105"
                                                                     class="form-select">
-                                                                    @if (old('point_105', $raport_4->physical_motoric->point_20) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_105', $raport_5->physical_motoric->point_20) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7049,7 +7052,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_105', $raport_4->physical_motoric->point_20) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_105', $raport_5->physical_motoric->point_20) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7062,7 +7065,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_105', $raport_4->physical_motoric->point_20) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_105', $raport_5->physical_motoric->point_20) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7076,7 +7079,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_105', $raport_4->physical_motoric->point_20) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_105', $raport_5->physical_motoric->point_20) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7101,7 +7104,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_106" name="point_106"
                                                                     class="form-select">
-                                                                    @if (old('point_106', $raport_4->physical_motoric->point_21) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_106', $raport_5->physical_motoric->point_21) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7114,7 +7117,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_106', $raport_4->physical_motoric->point_21) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_106', $raport_5->physical_motoric->point_21) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7127,7 +7130,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_106', $raport_4->physical_motoric->point_21) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_106', $raport_5->physical_motoric->point_21) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7141,7 +7144,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_106', $raport_4->physical_motoric->point_21) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_106', $raport_5->physical_motoric->point_21) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7166,7 +7169,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_107" name="point_107"
                                                                     class="form-select">
-                                                                    @if (old('point_107', $raport_4->physical_motoric->point_22) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_107', $raport_5->physical_motoric->point_22) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7179,7 +7182,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_107', $raport_4->physical_motoric->point_22) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_107', $raport_5->physical_motoric->point_22) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7192,7 +7195,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_107', $raport_4->physical_motoric->point_22) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_107', $raport_5->physical_motoric->point_22) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7206,7 +7209,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_107', $raport_4->physical_motoric->point_22) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_107', $raport_5->physical_motoric->point_22) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7232,7 +7235,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_108" name="point_108"
                                                                     class="form-select">
-                                                                    @if (old('point_108', $raport_4->physical_motoric->point_23) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_108', $raport_5->physical_motoric->point_23) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7245,7 +7248,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_108', $raport_4->physical_motoric->point_23) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_108', $raport_5->physical_motoric->point_23) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7258,7 +7261,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_108', $raport_4->physical_motoric->point_23) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_108', $raport_5->physical_motoric->point_23) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7272,7 +7275,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_108', $raport_4->physical_motoric->point_23) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_108', $raport_5->physical_motoric->point_23) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7297,7 +7300,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_109" name="point_109"
                                                                     class="form-select">
-                                                                    @if (old('point_109', $raport_4->physical_motoric->point_24) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_109', $raport_5->physical_motoric->point_24) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7310,7 +7313,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_109', $raport_4->physical_motoric->point_24) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_109', $raport_5->physical_motoric->point_24) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7323,7 +7326,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_109', $raport_4->physical_motoric->point_24) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_109', $raport_5->physical_motoric->point_24) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7337,7 +7340,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_109', $raport_4->physical_motoric->point_24) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_109', $raport_5->physical_motoric->point_24) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7363,7 +7366,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_110" name="point_110"
                                                                     class="form-select">
-                                                                    @if (old('point_110', $raport_4->physical_motoric->point_25) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_110', $raport_5->physical_motoric->point_25) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7376,7 +7379,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_110', $raport_4->physical_motoric->point_25) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_110', $raport_5->physical_motoric->point_25) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7389,7 +7392,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_110', $raport_4->physical_motoric->point_25) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_110', $raport_5->physical_motoric->point_25) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7403,7 +7406,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_110', $raport_4->physical_motoric->point_25) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_110', $raport_5->physical_motoric->point_25) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7428,7 +7431,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_111" name="point_111"
                                                                     class="form-select">
-                                                                    @if (old('point_111', $raport_4->physical_motoric->point_26) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_111', $raport_5->physical_motoric->point_26) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7441,7 +7444,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_111', $raport_4->physical_motoric->point_26) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_111', $raport_5->physical_motoric->point_26) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7454,7 +7457,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_111', $raport_4->physical_motoric->point_26) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_111', $raport_5->physical_motoric->point_26) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7468,7 +7471,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_111', $raport_4->physical_motoric->point_26) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_111', $raport_5->physical_motoric->point_26) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7503,7 +7506,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_112" name="point_112"
                                                                     class="form-select">
-                                                                    @if (old('point_112', $raport_4->art->point_1) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_112', $raport_5->art->point_1) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7516,7 +7519,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_112', $raport_4->art->point_1) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_112', $raport_5->art->point_1) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7529,7 +7532,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_112', $raport_4->art->point_1) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_112', $raport_5->art->point_1) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7543,7 +7546,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_112', $raport_4->art->point_1) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_112', $raport_5->art->point_1) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7569,7 +7572,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_113" name="point_113"
                                                                     class="form-select">
-                                                                    @if (old('point_113', $raport_4->art->point_2) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_113', $raport_5->art->point_2) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7582,7 +7585,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_113', $raport_4->art->point_2) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_113', $raport_5->art->point_2) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7595,7 +7598,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_113', $raport_4->art->point_2) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_113', $raport_5->art->point_2) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7609,7 +7612,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_113', $raport_4->art->point_2) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_113', $raport_5->art->point_2) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7635,7 +7638,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_114" name="point_114"
                                                                     class="form-select">
-                                                                    @if (old('point_114', $raport_4->art->point_3) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_114', $raport_5->art->point_3) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7648,7 +7651,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_114', $raport_4->art->point_3) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_114', $raport_5->art->point_3) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7661,7 +7664,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_114', $raport_4->art->point_3) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_114', $raport_5->art->point_3) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7675,7 +7678,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_114', $raport_4->art->point_3) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_114', $raport_5->art->point_3) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7701,7 +7704,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_115" name="point_115"
                                                                     class="form-select">
-                                                                    @if (old('point_115', $raport_4->art->point_4) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_115', $raport_5->art->point_4) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7714,7 +7717,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_115', $raport_4->art->point_4) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_115', $raport_5->art->point_4) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7727,7 +7730,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_115', $raport_4->art->point_4) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_115', $raport_5->art->point_4) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7741,7 +7744,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_115', $raport_4->art->point_4) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_115', $raport_5->art->point_4) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7766,7 +7769,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_116" name="point_116"
                                                                     class="form-select">
-                                                                    @if (old('point_116', $raport_4->art->point_5) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_116', $raport_5->art->point_5) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7779,7 +7782,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_116', $raport_4->art->point_5) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_116', $raport_5->art->point_5) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7792,7 +7795,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_116', $raport_4->art->point_5) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_116', $raport_5->art->point_5) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7806,7 +7809,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_116', $raport_4->art->point_5) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_116', $raport_5->art->point_5) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7832,7 +7835,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_117" name="point_117"
                                                                     class="form-select">
-                                                                    @if (old('point_117', $raport_4->art->point_6) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_117', $raport_5->art->point_6) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7845,7 +7848,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_117', $raport_4->art->point_6) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_117', $raport_5->art->point_6) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7858,7 +7861,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_117', $raport_4->art->point_6) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_117', $raport_5->art->point_6) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7872,7 +7875,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_117', $raport_4->art->point_6) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_117', $raport_5->art->point_6) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7897,7 +7900,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_118" name="point_118"
                                                                     class="form-select">
-                                                                    @if (old('point_118', $raport_4->art->point_7) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_118', $raport_5->art->point_7) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7910,7 +7913,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_118', $raport_4->art->point_7) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_118', $raport_5->art->point_7) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7923,7 +7926,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_118', $raport_4->art->point_7) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_118', $raport_5->art->point_7) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7937,7 +7940,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_118', $raport_4->art->point_7) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_118', $raport_5->art->point_7) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7962,7 +7965,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_119" name="point_119"
                                                                     class="form-select">
-                                                                    @if (old('point_119', $raport_4->art->point_8) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_119', $raport_5->art->point_8) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7975,7 +7978,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_119', $raport_4->art->point_8) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_119', $raport_5->art->point_8) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -7988,7 +7991,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_119', $raport_4->art->point_8) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_119', $raport_5->art->point_8) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8002,7 +8005,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_119', $raport_4->art->point_8) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_119', $raport_5->art->point_8) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8027,7 +8030,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_120" name="point_120"
                                                                     class="form-select">
-                                                                    @if (old('point_120', $raport_4->art->point_9) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_120', $raport_5->art->point_9) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8040,7 +8043,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_120', $raport_4->art->point_9) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_120', $raport_5->art->point_9) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8053,7 +8056,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_120', $raport_4->art->point_9) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_120', $raport_5->art->point_9) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8067,7 +8070,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_120', $raport_4->art->point_9) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_120', $raport_5->art->point_9) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8092,7 +8095,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_121" name="point_121"
                                                                     class="form-select">
-                                                                    @if (old('point_121', $raport_4->art->point_10) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_121', $raport_5->art->point_10) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8105,7 +8108,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_121', $raport_4->art->point_10) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_121', $raport_5->art->point_10) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8118,7 +8121,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_121', $raport_4->art->point_10) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_121', $raport_5->art->point_10) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8132,7 +8135,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_121', $raport_4->art->point_10) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_121', $raport_5->art->point_10) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8157,7 +8160,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_122" name="point_122"
                                                                     class="form-select">
-                                                                    @if (old('point_122', $raport_4->art->point_11) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_122', $raport_5->art->point_11) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8170,7 +8173,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_122', $raport_4->art->point_11) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_122', $raport_5->art->point_11) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8183,7 +8186,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_122', $raport_4->art->point_11) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_122', $raport_5->art->point_11) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8197,7 +8200,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_122', $raport_4->art->point_11) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_122', $raport_5->art->point_11) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8222,7 +8225,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_123" name="point_123"
                                                                     class="form-select">
-                                                                    @if (old('point_123', $raport_4->art->point_12) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_123', $raport_5->art->point_12) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8235,7 +8238,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_123', $raport_4->art->point_12) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_123', $raport_5->art->point_12) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8248,7 +8251,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_123', $raport_4->art->point_12) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_123', $raport_5->art->point_12) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8262,7 +8265,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_123', $raport_4->art->point_12) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_123', $raport_5->art->point_12) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8287,7 +8290,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_124" name="point_124"
                                                                     class="form-select">
-                                                                    @if (old('point_124', $raport_4->art->point_13) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_124', $raport_5->art->point_13) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8300,7 +8303,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_124', $raport_4->art->point_13) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_124', $raport_5->art->point_13) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8313,7 +8316,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_124', $raport_4->art->point_13) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_124', $raport_5->art->point_13) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8327,7 +8330,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_124', $raport_4->art->point_13) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_124', $raport_5->art->point_13) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8352,7 +8355,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_125" name="point_125"
                                                                     class="form-select">
-                                                                    @if (old('point_125', $raport_4->art->point_14) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_125', $raport_5->art->point_14) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8365,7 +8368,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_125', $raport_4->art->point_14) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_125', $raport_5->art->point_14) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8378,7 +8381,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_125', $raport_4->art->point_14) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_125', $raport_5->art->point_14) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8392,7 +8395,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_125', $raport_4->art->point_14) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_125', $raport_5->art->point_14) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8417,7 +8420,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_126" name="point_126"
                                                                     class="form-select">
-                                                                    @if (old('point_126', $raport_4->art->point_15) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_126', $raport_5->art->point_15) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8430,7 +8433,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_126', $raport_4->art->point_15) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_126', $raport_5->art->point_15) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8443,7 +8446,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_126', $raport_4->art->point_15) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_126', $raport_5->art->point_15) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8457,7 +8460,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_126', $raport_4->art->point_15) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_126', $raport_5->art->point_15) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8482,7 +8485,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_127" name="point_127"
                                                                     class="form-select">
-                                                                    @if (old('point_127', $raport_4->art->point_16) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_127', $raport_5->art->point_16) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8495,7 +8498,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_127', $raport_4->art->point_16) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_127', $raport_5->art->point_16) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8508,7 +8511,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_127', $raport_4->art->point_16) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_127', $raport_5->art->point_16) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8522,7 +8525,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_127', $raport_4->art->point_16) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_127', $raport_5->art->point_16) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8547,7 +8550,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_128" name="point_128"
                                                                     class="form-select">
-                                                                    @if (old('point_128', $raport_4->art->point_17) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_128', $raport_5->art->point_17) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8560,7 +8563,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_128', $raport_4->art->point_17) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_128', $raport_5->art->point_17) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8573,7 +8576,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_128', $raport_4->art->point_17) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_128', $raport_5->art->point_17) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8587,7 +8590,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_128', $raport_4->art->point_17) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_128', $raport_5->art->point_17) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8612,7 +8615,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_129" name="point_129"
                                                                     class="form-select">
-                                                                    @if (old('point_129', $raport_4->art->point_18) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_129', $raport_5->art->point_18) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8625,7 +8628,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_129', $raport_4->art->point_18) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_129', $raport_5->art->point_18) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8638,7 +8641,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_129', $raport_4->art->point_18) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_129', $raport_5->art->point_18) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8652,7 +8655,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_129', $raport_4->art->point_18) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_129', $raport_5->art->point_18) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8678,7 +8681,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_130" name="point_130"
                                                                     class="form-select">
-                                                                    @if (old('point_130', $raport_4->art->point_19) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_130', $raport_5->art->point_19) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8691,7 +8694,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_130', $raport_4->art->point_19) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_130', $raport_5->art->point_19) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8704,7 +8707,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_130', $raport_4->art->point_19) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_130', $raport_5->art->point_19) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8718,7 +8721,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_130', $raport_4->art->point_19) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_130', $raport_5->art->point_19) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8744,7 +8747,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_131" name="point_131"
                                                                     class="form-select">
-                                                                    @if (old('point_131', $raport_4->art->point_20) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_131', $raport_5->art->point_20) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8757,7 +8760,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_131', $raport_4->art->point_20) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_131', $raport_5->art->point_20) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8770,7 +8773,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_131', $raport_4->art->point_20) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_131', $raport_5->art->point_20) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8784,7 +8787,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_131', $raport_4->art->point_20) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_131', $raport_5->art->point_20) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8810,7 +8813,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_132" name="point_132"
                                                                     class="form-select">
-                                                                    @if (old('point_132', $raport_4->art->point_21) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_132', $raport_5->art->point_21) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8823,7 +8826,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_132', $raport_4->art->point_21) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_132', $raport_5->art->point_21) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8836,7 +8839,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_132', $raport_4->art->point_21) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_132', $raport_5->art->point_21) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8850,7 +8853,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_132', $raport_4->art->point_21) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_132', $raport_5->art->point_21) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8875,7 +8878,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_133" name="point_133"
                                                                     class="form-select">
-                                                                    @if (old('point_133', $raport_4->art->point_22) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_133', $raport_5->art->point_22) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8888,7 +8891,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_133', $raport_4->art->point_22) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_133', $raport_5->art->point_22) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8901,7 +8904,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_133', $raport_4->art->point_22) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_133', $raport_5->art->point_22) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8915,7 +8918,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_133', $raport_4->art->point_22) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_133', $raport_5->art->point_22) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8940,7 +8943,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_134" name="point_134"
                                                                     class="form-select">
-                                                                    @if (old('point_134', $raport_4->art->point_23) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_134', $raport_5->art->point_23) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8953,7 +8956,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_134', $raport_4->art->point_23) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_134', $raport_5->art->point_23) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8966,7 +8969,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_134', $raport_4->art->point_23) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_134', $raport_5->art->point_23) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -8980,7 +8983,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_134', $raport_4->art->point_23) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_134', $raport_5->art->point_23) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9006,7 +9009,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_135" name="point_135"
                                                                     class="form-select">
-                                                                    @if (old('point_135', $raport_4->art->point_24) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_135', $raport_5->art->point_24) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9019,7 +9022,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_135', $raport_4->art->point_24) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_135', $raport_5->art->point_24) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9032,7 +9035,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_135', $raport_4->art->point_24) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_135', $raport_5->art->point_24) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9046,7 +9049,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_135', $raport_4->art->point_24) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_135', $raport_5->art->point_24) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9071,7 +9074,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_136" name="point_136"
                                                                     class="form-select">
-                                                                    @if (old('point_136', $raport_4->art->point_25) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_136', $raport_5->art->point_25) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9084,7 +9087,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_136', $raport_4->art->point_25) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_136', $raport_5->art->point_25) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9097,7 +9100,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_136', $raport_4->art->point_25) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_136', $raport_5->art->point_25) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9111,7 +9114,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_136', $raport_4->art->point_25) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_136', $raport_5->art->point_25) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9136,7 +9139,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_137" name="point_137"
                                                                     class="form-select">
-                                                                    @if (old('point_137', $raport_4->art->point_26) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_137', $raport_5->art->point_26) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9149,7 +9152,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_137', $raport_4->art->point_26) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_137', $raport_5->art->point_26) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9162,7 +9165,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_137', $raport_4->art->point_26) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_137', $raport_5->art->point_26) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9176,7 +9179,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_137', $raport_4->art->point_26) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_137', $raport_5->art->point_26) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9201,7 +9204,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_138" name="point_138"
                                                                     class="form-select">
-                                                                    @if (old('point_138', $raport_4->art->point_27) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_138', $raport_5->art->point_27) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9214,7 +9217,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_138', $raport_4->art->point_27) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_138', $raport_5->art->point_27) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9227,7 +9230,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_138', $raport_4->art->point_27) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_138', $raport_5->art->point_27) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9241,7 +9244,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_138', $raport_4->art->point_27) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_138', $raport_5->art->point_27) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9266,7 +9269,7 @@
                                                             <td class="text-center" colspan="4">
                                                                 <select id="point_139" name="point_139"
                                                                     class="form-select">
-                                                                    @if (old('point_139', $raport_4->art->point_28) == 'Belum Berkembang (BB)')
+                                                                    @if (old('point_139', $raport_5->art->point_28) == 'Belum Berkembang (BB)')
                                                                         <option value="Belum Berkembang (BB)" selected>
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9279,7 +9282,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_139', $raport_4->art->point_28) == 'Mulai Berkembang (MB)')
+                                                                    @elseif(old('point_139', $raport_5->art->point_28) == 'Mulai Berkembang (MB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9292,7 +9295,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_139', $raport_4->art->point_28) == 'Berkembang Sesuai Harapan (BSH)')
+                                                                    @elseif(old('point_139', $raport_5->art->point_28) == 'Berkembang Sesuai Harapan (BSH)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>
@@ -9306,7 +9309,7 @@
                                                                         <option value="Berkembang Sangat Baik (BSB)">
                                                                             Berkembang Sangat Baik (BSB)
                                                                         </option>
-                                                                    @elseif(old('point_139', $raport_4->art->point_28) == 'Berkembang Sangat Baik (BSB)')
+                                                                    @elseif(old('point_139', $raport_5->art->point_28) == 'Berkembang Sangat Baik (BSB)')
                                                                         <option value="Belum Berkembang (BB)">
                                                                             Belum Berkembang (BB)
                                                                         </option>

@@ -74,7 +74,7 @@
             </div>
             <!--end row-->
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-12 col-lg-8">
                     <div class="card radius-10">
                         <div class="card-body">
@@ -83,7 +83,8 @@
                                     <h6 class="mb-0">Sales Overview</h6>
                                 </div>
                                 <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i
+                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#"
+                                        data-bs-toggle="dropdown"><i
                                             class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -127,8 +128,8 @@
                             <div class="col">
                                 <div class="p-3">
                                     <h5 class="mb-0">639.82</h5>
-                                    <small class="mb-0">Pages/Visit <span> <i
-                                                class="align-middle bx bx-up-arrow-alt"></i> 5.62%</span></small>
+                                    <small class="mb-0">Pages/Visit <span> <i class="align-middle bx bx-up-arrow-alt"></i>
+                                            5.62%</span></small>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +143,8 @@
                                     <h6 class="mb-0">Trending Products</h6>
                                 </div>
                                 <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i
+                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#"
+                                        data-bs-toggle="dropdown"><i
                                             class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -178,7 +180,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--end row-->
 
         </div>

@@ -28,24 +28,24 @@
                 </div>
             </div>
             <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
-                <div class="breadcrumb-title pe-3">Forum PAUD</div>
+                <div class="breadcrumb-title pe-3">KB Tunas Aksara</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="p-0 mb-0 breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Kategori</li>
+                            <li class="breadcrumb-item active" aria-current="page">Semua Peserta Didik</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="ms-auto">
                     <div class="btn-group">
-                        <a href="{{ route('categories.create') }}" class="btn btn-primary">Tambah Kategori</a>
+                        <a href="{{ route('playgroup.create') }}" class="btn btn-primary">Tambah Data</a>
                     </div>
                 </div>
             </div>
             <!--end breadcrumb-->
-            <h6 class="mb-0 text-uppercase">Semua Kategori</h6>
+            <h6 class="mb-0 text-uppercase">Semua Peserta Didik</h6>
             <hr />
             <div class="card">
                 <div class="card-body">
@@ -53,26 +53,41 @@
                         <table id="example2" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th width="10%">No.</th>
-                                    <th width="35%">Nama</th>
-                                    <th width="25%">Slug</th>
-                                    <th width="15%">Aksi</th>
+                                    <th width="10%">No. Urut</th>
+                                    <th width="15%">NIS</th>
+                                    <th width="30%">Nama Lengkap</th>
+                                    <th width="10%">Jenis Kelamin</th>
+                                    <th width="15%">Kelas</th>
+                                    <th width="20%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($students as $student)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $category->nama }}</td>
-                                        <td>{{ $category->slug }}</td>
+                                        <td>{{ $student->no_identitas }}</td>
+                                        <td>{{ $student->nama_lengkap }}</td>
+                                        <td>{{ $student->jenis_kelamin }}</td>
+                                        <td>{{ $student->level_id }}</td>
                                         <td class="gap-2">
-                                            <a href="/categories/{{ $category->id }}/edit" class="mx-md-1">
+                                            <a href="{{ route('kindergarten.show', $student->username) }}"
+                                                class="mx-md-1">
+                                                <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
+                                                    Detail</span>
+                                            </a>
+                                            <a href="{{ route('kindergarten.edit', $student->id) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
-                                            <a href="#" class="mx-md-1 delete" data-id="{{ $category->id }}"
-                                                data-name="{{ $category->nama }}">
+                                            <a href="#" class="mx-md-1 delete" data-id="{{ $student->id }}"
+                                                data-name="{{ $student->username }}">
                                                 <span class="badge bg-danger"><i class='bx bxs-trash'></i> Delete</span>
                                             </a>
+
+                                            <a href="{{ route('raport.show', $student->username) }}" class="mx-md-1">
+                                                <span class="badge bg-success"><i class='lni lni-graduation'></i>
+                                                    Nilai Raport </span>
+                                            </a>
+
                                         </td>
 
                                     </tr>
@@ -80,9 +95,11 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Nama</th>
-                                    <th>Slug</th>
+                                    <th>No. Urut</th>
+                                    <th>NIS</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Kelas</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -99,18 +116,18 @@
     {{-- sweet alert --}}
     <script>
         $('.delete').click(function() {
-            var categoryId = $(this).attr('data-id');
-            var categoryName = $(this).attr('data-name');
+            var studentId = $(this).attr('data-id');
+            var studentName = $(this).attr('data-name');
             swal({
                     title: "Apakah kamu yakin ?",
-                    text: "Kamu akan menghapus data " + categoryName + " !",
+                    text: "Kamu akan menghapus data " + studentName + " !",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/forum-paud/categories/delete/" + categoryId + "";
+                        window.location = "/tk-tunas-aksara/delete/" + studentId + "";
                         swal("Selamat! Data berhasil dihapus!", {
                             icon: "success",
                         });

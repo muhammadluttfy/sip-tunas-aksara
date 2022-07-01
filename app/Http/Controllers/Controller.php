@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Faker\Factory;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -22,6 +21,11 @@ class Controller extends BaseController
             'tk_student' => Student::where('level_id', 2)->count(),
             'count_teachers' => User::count(),
             'count_graduated' => '200' + Student::where('level_id', 3)->count(),
+
+            // get data student where level_id = 1 to json 
+            'kb_student_json' => Student::where('level_id', 1)->get()->toJson(),
+            // get data student where level_id = 2 to json
+            'tk_student_json' => Student::where('level_id', 2)->get()->toJson(),
         ]);
     }
 

@@ -6,6 +6,7 @@ use App\Models\Father;
 use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Models\StudentDetail;
 use App\Http\Controllers\Controller;
@@ -13,19 +14,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Storage;
 
-class PlaygroupController extends Controller
+class KindergartenController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        return view('administrator.playgroup.index', [
+        return view('administrator.kindergarten.index', [
             'title' => 'KB Tunas Aksara - Semua Peserta Didik',
             // get all data student by level_id = 1
-            'students' => Student::where('level_id', 1)->get(),
+            'students' => Student::where('level_id', 2)->get(),
         ]);
     }
 
@@ -36,7 +38,7 @@ class PlaygroupController extends Controller
      */
     public function create()
     {
-        return view('administrator.playgroup.create', [
+        return view('administrator.kindergarten.create', [
             'title' => 'KB Tunas Aksara - Tambah Peserta Didik',
         ]);
     }
@@ -182,7 +184,7 @@ class PlaygroupController extends Controller
         $last_name = $last_name[1];
 
         $student->student_detail_id = $student_detail_id;
-        $student->level_id = 1;
+        $student->level_id = 2;
         $student->father_id = $father_id;
         $student->mother_id = $mother_id;
         if (isset($request->diterima_tanggal)) {
@@ -212,7 +214,7 @@ class PlaygroupController extends Controller
      */
     public function show(Student $student)
     {
-        return view('administrator.playgroup.show', [
+        return view('administrator.kindergarten.show', [
             // get data by id
             'title' => $student->nama_lengkap . ' ' . '(' . $student->username . ')',
             'student' => $student,
@@ -227,7 +229,7 @@ class PlaygroupController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('administrator.playgroup.edit', [
+        return view('administrator.kindergarten.edit', [
             'title' => 'Edit Profil' . ' - ' . $student->nama_lengkap . ' ' . '(' . $student->username . ')',
             'student' => $student,
         ]);
@@ -408,6 +410,6 @@ class PlaygroupController extends Controller
         }
 
         $data->delete();
-        return redirect()->route('playgroup.index')->with('success', 'Data peserta didik berhasil dihapus!');
+        return redirect()->route('kindergarten.index')->with('success', 'Data peserta didik berhasil dihapus!');
     }
 }

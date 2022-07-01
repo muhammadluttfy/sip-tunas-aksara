@@ -31,22 +31,22 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Student::factory(10)->create();
-        StudentDetail::factory(10)->create();
-        Father::factory(10)->create();
-        Mother::factory(10)->create();
-        Mutation::factory(10)->create();
-        Post::factory(10)->create();
-        Letter::factory(10)->create();
+        Student::factory(20)->create();
+        StudentDetail::factory(20)->create();
+        Father::factory(20)->create();
+        Mother::factory(20)->create();
+        Mutation::factory(20)->create();
+        Post::factory(20)->create();
+        Letter::factory(20)->create();
 
         User::insert([
             [
                 'role' => 'Kepala Sekolah',
                 'social_media_id' => 1,
                 'no_identitas' => '18083000124',
-                'nama_lengkap' => 'Muhammad Lutfi',
+                'nama_lengkap' => 'Suriyani,S.Pd',
                 'email' => 'creativedevelopment.id@gmail.com',
-                'username' => 'muhammad-lutfi',
+                'username' => 'suriyani_84',
                 'tanggal_lahir' => '1996-08-30',
                 'password' => bcrypt('password'),
                 'remember_token' => '',
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
                 'social_media_id' => 2,
                 'no_identitas' => '18083000125',
                 'nama_lengkap' => 'Nurhidayatul Hikmah',
-                'username' => 'nurhidayatul-hikmah',
+                'username' => 'dayah.hikmah',
                 'tanggal_lahir' => '1996-08-30',
                 'email' => 'dayah@gmail.com',
                 'password' => bcrypt('password'),
@@ -74,6 +74,10 @@ class DatabaseSeeder extends Seeder
             [
                 'jenjang_pendidikan' => 'TK Tunas Aksara',
                 'slug' => 'tk-tunas-aksara',
+            ],
+            [
+                'jenjang_pendidikan' => 'Lulus',
+                'slug' => 'lulus',
             ],
         ]);
 

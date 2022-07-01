@@ -43,7 +43,8 @@
                                             <p class="text-muted font-size-sm">Kelompok
                                                 <strong>{{ $student->student_detail->kelompok }}</strong>
                                             </p>
-                                            <button class="btn btn-primary">Edit</button>
+                                            <a href="{{ route('playgroup.edit', $student->id) }}"
+                                                class="btn btn-primary">Edit</a>
                                             <button class="btn btn-outline-primary">Kirim Pesan</button>
                                         </div>
                                     </div>
@@ -58,8 +59,8 @@
                                             <h6 class="mb-0">Nama Lengkap</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="{{ $student->nama_lengkap }}"
-                                                disabled />
+                                            <input type="text" class="form-control"
+                                                value="{{ $student->nama_lengkap }}" disabled />
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
@@ -216,8 +217,7 @@
                                                     <h6 class="mb-0">Alamat</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary">
-                                                    <textarea class="form-control" name="alamat" id="alamat" rows="3"
-                                                        disabled>{{ $student->student_detail->alamat }}</textarea>
+                                                    <textarea class="form-control" name="alamat" id="alamat" rows="3" disabled>{{ $student->student_detail->alamat }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,8 +261,8 @@
                                 <div class="card-body">
                                     <ul class="mb-0 nav nav-tabs nav-primary" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab"
-                                                aria-selected="true">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome"
+                                                role="tab" aria-selected="true">
                                                 <div class="d-flex align-items-center">
                                                     <div class="tab-icon"><i
                                                             class='bx bx-comment-detail font-18 me-1'></i>
@@ -275,8 +275,7 @@
                                             <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile"
                                                 role="tab" aria-selected="false">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="tab-icon"><i
-                                                            class='bx bx-bookmark-alt font-18 me-1'></i>
+                                                    <div class="tab-icon"><i class='bx bx-bookmark-alt font-18 me-1'></i>
                                                     </div>
                                                     <div class="tab-title">Identitas Ibu</div>
                                                 </div>
@@ -549,8 +548,7 @@
                                                         </h6>
                                                     </div>
                                                     <div class="col-sm-8 text-secondary">
-                                                        <textarea class="form-control" name="alasan" id="alasan" rows="3"
-                                                            disabled>{{ $student->mutation->alasan }}</textarea>
+                                                        <textarea class="form-control" name="alasan" id="alasan" rows="3" disabled>{{ $student->mutation->alasan }}</textarea>
                                                     </div>
                                                 </div>
                                             @else
