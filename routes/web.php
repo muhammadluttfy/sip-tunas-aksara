@@ -118,8 +118,8 @@ Route::group(['middleware' => ['auth:user,student', 'roleCheck:Kepala Sekolah,Ad
     Route::get('/forum-paud/category/create', [PostCategoryController::class, 'create'])->name('categories.create');
     Route::post('/forum-paud/category/create', [PostCategoryController::class, 'store'])->name('categories.store');
 
-    Route::get('/forum-paud/category/{category:id}/edit', [PostCategoryController::class, 'edit'])->name('categories.edit');
-    Route::post('/forum-paud/category/{category:id}', [PostCategoryController::class, 'update'])->name('categories.update');
+    Route::get('/forum-paud/category/{post_category:slug}/edit', [PostCategoryController::class, 'edit'])->name('categories.edit');
+    Route::post('/forum-paud/category/{post_category:slug}', [PostCategoryController::class, 'update'])->name('categories.update');
 
     Route::get('/forum-paud/categories/delete/{id}', [PostCategoryController::class, 'destroy'])->name('categories.destroy');
 

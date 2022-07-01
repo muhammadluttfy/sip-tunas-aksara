@@ -68,12 +68,12 @@ class PostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PostCategory $post_category)
     {
         // return "wkwkwk";
         return view('administrator.post-category.edit', [
             'title' => 'Edit Kategori',
-            'category' => PostCategory::findOrFail($id)
+            'category' => PostCategory::findOrFail($post_category->id)
         ]);
     }
 
@@ -84,7 +84,7 @@ class PostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, PostCategory $post_category)
+    public function update(Request $request, PostCategory $post_category)
     {
         $request->validate([
             'nama' => 'required|string|max:255',
@@ -96,7 +96,7 @@ class PostCategoryController extends Controller
             ]);
         }
 
-        PostCategory::where('id', $id)->update([
+        PostCategory::where('id', $post_category->id)->update([
             'nama' => $request->nama,
             'slug' => str_slug($request->nama)
         ]);

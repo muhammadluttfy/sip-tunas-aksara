@@ -22,7 +22,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('categories.update', $category->id) }}" method="POST"
+                                    <form action="{{ route('categories.update', $category->slug) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         {{-- @method('PUT') --}}
@@ -46,7 +46,7 @@
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-9 text-secondary">
                                                 <button type="submit" id="submit" class="px-4 btn btn-primary">
-                                                    Tambah Kategori
+                                                    Update Kategori
                                                 </button>
                                             </div>
                                         </div>
