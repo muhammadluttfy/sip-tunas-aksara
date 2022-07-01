@@ -74,7 +74,7 @@
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
-                                            <a href="{{ route('teacher.edit', $teacher->id) }}" class="mx-md-1">
+                                            <a href="{{ route('teacher.edit', $teacher->username) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
                                             <a href="#" class="mx-md-1 delete" data-id="{{ $teacher->id }}"

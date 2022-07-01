@@ -22,7 +22,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('teacher.update', $teacher->id) }}" method="POST"
+                                    <form action="{{ route('teacher.update', $teacher->username) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="mb-3 row align-items-center">
@@ -209,7 +209,7 @@
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-9 text-secondary">
                                                 <button type="submit" id="submit" class="px-4 btn btn-primary">
-                                                    Tambah Tenaga Pendidik
+                                                    Update Data
                                                 </button>
                                             </div>
                                         </div>

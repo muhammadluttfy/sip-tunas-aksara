@@ -112,12 +112,12 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         return view('administrator.teacher.edit', [
             'title' => 'Edit Tenaga Pendidik - PAUD Tunas Aksara',
-            'teacher' => User::findOrFail($id),
-            'socialMedia' => SocialMedia::findOrFail($id),
+            'teacher' => User::findOrFail($user->id),
+            'socialMedia' => SocialMedia::findOrFail($user->id),
         ]);
     }
 
