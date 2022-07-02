@@ -121,7 +121,6 @@
                                                     <option value="Sekretaris">Sekretaris</option>
                                                     <option value="Bendahara">Bendahara</option>
                                                     <option value="Guru">Guru</option>
-                                                    <option value="Peserta Didik">Peserta Didik</option>
                                                 </select>
                                             </div>
 

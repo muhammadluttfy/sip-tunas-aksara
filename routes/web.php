@@ -10,6 +10,7 @@ use App\Http\Controllers\Administrator\TeacherController;
 use App\Http\Controllers\Administrator\PlaygroupController;
 use App\Http\Controllers\Administrator\PostCategoryController;
 use App\Http\Controllers\Administrator\LetterCategoryController;
+use App\Http\Controllers\Student\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ use App\Http\Controllers\Administrator\LetterCategoryController;
 */
 
 
-Route::group(['middleware' => ['auth:user,student', 'roleCheck:Kepala Sekolah,Administrator,Student']], function () {
+Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Administrator,Sekretaris,Bendahara,Guru,Student']], function () {
 
     Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
 
@@ -166,10 +167,13 @@ Route::group(['middleware' => ['auth:user,student', 'roleCheck:Kepala Sekolah,Ad
 
     Route::get('/manajemen-surat/tampilkan-surat/{letter:id}', [LetterController::class, 'show'])->name('letter.show');
     Route::get('/manajemen-surat/delete/{id}', [LetterController::class, 'destroy'])->name('letter.destroy');
-
     // END :: Management Surat
-});
 
+
+    // Student :: Forum PAUD
+    Route::get('/student/forum-paud/', [StudentController::class, 'index'])->name('student.forum.index');
+    Route::get('/student/forum-paud/{post:slug}', [StudentController::class, 'show'])->name('student.forum.show');
+});
 
 
 // START :: Profil Tenaga Pendidik

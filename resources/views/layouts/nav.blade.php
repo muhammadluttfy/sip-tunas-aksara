@@ -89,6 +89,15 @@
                 </li>
             </ul>
         </li>
+
+        <li class="menu-label">Forum PAUD</li>
+        <li>
+            <a href="{{ route('student.forum.index') }}">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Lihat Informasi</div>
+            </a>
+        </li>
     </ul>
 
     <!--end navigation-->
