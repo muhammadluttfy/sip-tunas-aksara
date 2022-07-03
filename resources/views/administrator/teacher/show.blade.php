@@ -25,19 +25,16 @@
                                     <div class="text-center d-flex flex-column align-items-center">
                                         @if ($teacher->avatar == null)
                                             <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
-                                                alt="{{ $teacher->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
-                                                width="110">
+                                                alt="{{ $teacher->nama_lengkap }}"
+                                                class="p-1 rounded-circle bg-{{ $color }}" width="110">
                                         @else
                                             <img src="{{ asset('storage/' . $teacher->avatar) }}"
-                                                alt="{{ $teacher->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
-                                                width="110">
+                                                alt="{{ $teacher->nama_lengkap }}"
+                                                class="p-1 rounded-circle bg-{{ $color }}" width="110">
                                         @endif
                                         <div class="mt-3">
                                             <h4>{{ $teacher->nama_lengkap }}</h4>
-                                            {{-- <p class="mb-1 text-secondary">{{ $teacher->role }}</p> --}}
                                             <p class="text-muted font-size-sm">{{ $teacher->role }}</p>
-                                            {{-- <button class="btn btn-primary">Follow</button>
-                                            <button class="btn btn-outline-primary">Message</button> --}}
                                         </div>
                                     </div>
                                     <hr class="my-4" />
@@ -48,9 +45,11 @@
                                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                                     class="feather feather-instagram me-2 icon-inline text-danger">
-                                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                                    <rect x="2" y="2" width="20" height="20"
+                                                        rx="5" ry="5"></rect>
                                                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5">
+                                                    </line>
                                                 </svg>Instagram</h6>
                                             <span class="text-secondary">{{ $teacher->social_media->instagram }}</span>
                                         </li>
@@ -90,8 +89,8 @@
                                             <h6 class="mb-2 mb-md-0">Nama Lengkap</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="{{ $teacher->nama_lengkap }}"
-                                                disabled />
+                                            <input type="text" class="form-control"
+                                                value="{{ $teacher->nama_lengkap }}" disabled />
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">

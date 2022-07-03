@@ -116,8 +116,8 @@
                                         <div class="notify bg-light-info text-info"><i class="bx bx-home-circle"></i>
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">New Product Approved <span
-                                                    class="msg-time float-end">2 hrs ago</span></h6>
+                                            <h6 class="msg-name">New Product Approved <span class="msg-time float-end">2
+                                                    hrs ago</span></h6>
                                             <p class="msg-info">Your new product has approved</p>
                                         </div>
                                     </div>
@@ -150,7 +150,8 @@
                                 </a>
                                 <a class="dropdown-item" href="javascript:;">
                                     <div class="d-flex align-items-center">
-                                        <div class="notify bg-light-primary text-primary"><i class='bx bx-user-pin'></i>
+                                        <div class="notify bg-light-primary text-primary"><i
+                                                class='bx bx-user-pin'></i>
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="msg-name">New 24 authors<span class="msg-time float-end">1
@@ -166,8 +167,8 @@
                                                 class='bx bx-door-open'></i>
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">Defense Alerts <span
-                                                    class="msg-time float-end">2 weeks
+                                            <h6 class="msg-name">Defense Alerts <span class="msg-time float-end">2
+                                                    weeks
                                                     ago</span></h6>
                                             <p class="msg-info">45% less alerts last 4 weeks</p>
                                         </div>
@@ -200,8 +201,7 @@
                                                 class="msg-avatar" alt="user avatar">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">Daisy Anderson <span
-                                                    class="msg-time float-end">5 sec
+                                            <h6 class="msg-name">Daisy Anderson <span class="msg-time float-end">5 sec
                                                     ago</span></h6>
                                             <p class="msg-info">The standard chunk of lorem</p>
                                         </div>
@@ -214,8 +214,7 @@
                                                 class="msg-avatar" alt="user avatar">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">Althea Cabardo <span
-                                                    class="msg-time float-end">14
+                                            <h6 class="msg-name">Althea Cabardo <span class="msg-time float-end">14
                                                     sec ago</span></h6>
                                             <p class="msg-info">Many desktop publishing packages</p>
                                         </div>
@@ -242,8 +241,7 @@
                                                 class="msg-avatar" alt="user avatar">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">Katherine Pechon <span
-                                                    class="msg-time float-end">15
+                                            <h6 class="msg-name">Katherine Pechon <span class="msg-time float-end">15
                                                     min ago</span></h6>
                                             <p class="msg-info">Making this the first true generator</p>
                                         </div>
@@ -270,8 +268,7 @@
                                                 class="msg-avatar" alt="user avatar">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">Cristina Jhons <span
-                                                    class="msg-time float-end">2 hrs
+                                            <h6 class="msg-name">Cristina Jhons <span class="msg-time float-end">2 hrs
                                                     ago</span></h6>
                                             <p class="msg-info">The passage is attributed to an unknown</p>
                                         </div>
@@ -284,8 +281,7 @@
                                                 class="msg-avatar" alt="user avatar">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">James Caviness <span
-                                                    class="msg-time float-end">4 hrs
+                                            <h6 class="msg-name">James Caviness <span class="msg-time float-end">4 hrs
                                                     ago</span></h6>
                                             <p class="msg-info">The point of using Lorem</p>
                                         </div>
@@ -298,8 +294,7 @@
                                                 class="msg-avatar" alt="user avatar">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">Peter Costanzo <span
-                                                    class="msg-time float-end">6 hrs
+                                            <h6 class="msg-name">Peter Costanzo <span class="msg-time float-end">6 hrs
                                                     ago</span></h6>
                                             <p class="msg-info">It was popularised in the 1960s</p>
                                         </div>
@@ -312,8 +307,7 @@
                                                 class="msg-avatar" alt="user avatar">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">David Buckley <span
-                                                    class="msg-time float-end">2 hrs
+                                            <h6 class="msg-name">David Buckley <span class="msg-time float-end">2 hrs
                                                     ago</span></h6>
                                             <p class="msg-info">Various versions have evolved over</p>
                                         </div>
@@ -326,8 +320,8 @@
                                                 class="msg-avatar" alt="user avatar">
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">Thomas Wheeler <span
-                                                    class="msg-time float-end">2 days
+                                            <h6 class="msg-name">Thomas Wheeler <span class="msg-time float-end">2
+                                                    days
                                                     ago</span></h6>
                                             <p class="msg-info">If you are going to use a passage</p>
                                         </div>
@@ -377,20 +371,10 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="javascript:;"><i
-                                class="bx bx-user"></i><span>Profile</span></a>
+                    <li><a class="dropdown-item" href="javascript"><i class="bx bx-user"></i><span>Profile</span></a>
                     </li>
-                    <li><a class="dropdown-item" href="javascript:;"><i
-                                class="bx bx-cog"></i><span>Settings</span></a>
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;"><i
-                                class='bx bx-home-circle'></i><span>Dashboard</span></a>
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;"><i
-                                class='bx bx-dollar-circle'></i><span>Earnings</span></a>
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:;"><i
-                                class='bx bx-download'></i><span>Downloads</span></a>
+                    <li><a class="dropdown-item" href="{{ route('student.password.edit') }}"><i
+                                class="bx bx-cog"></i><span>Ubah Password</span></a>
                     </li>
                     <li>
                         <div class="mb-0 dropdown-divider"></div>

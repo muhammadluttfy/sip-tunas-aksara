@@ -100,9 +100,13 @@ class TeacherController extends Controller
      */
     public function show(User $user)
     {
+        $colors = ['primary', 'success', 'info', 'warning', 'danger'];
+        // random colors
+        $color = $colors[array_rand($colors)];
         return view('administrator.teacher.show', [
             'title' => $user->nama_lengkap . ' ' . '(' . $user->username . ')',
             'teacher' => $user,
+            'color' => $color,
         ]);
     }
 

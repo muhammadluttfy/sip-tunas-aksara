@@ -10,6 +10,7 @@ use App\Http\Controllers\Administrator\TeacherController;
 use App\Http\Controllers\Administrator\PlaygroupController;
 use App\Http\Controllers\Administrator\PostCategoryController;
 use App\Http\Controllers\Administrator\LetterCategoryController;
+use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Student\StudentController;
 
 /*
@@ -173,6 +174,13 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
     // Student :: Forum PAUD
     Route::get('/student/forum-paud/', [StudentController::class, 'index'])->name('student.forum.index');
     Route::get('/student/forum-paud/{post:slug}', [StudentController::class, 'show'])->name('student.forum.show');
+
+    // Student :: Nilai Raport
+    Route::get('/student/nilai-raport/', [StudentController::class, 'showNilaiRaport'])->name('student.nilai-raport.index');
+
+    // Student :: Settings
+    Route::get('/student/password/edit', [UpdatePasswordController::class, 'edit'])->name('student.password.edit');
+    Route::post('/student/password/edit', [UpdatePasswordController::class, 'update'])->name('student.password.update');
 });
 
 

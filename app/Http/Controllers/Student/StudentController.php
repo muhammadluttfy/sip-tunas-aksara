@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\Post;
+use App\Models\Raport;
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class StudentController extends Controller
 {
@@ -28,6 +29,24 @@ class StudentController extends Controller
             'post' => $post,
             'comments' => Comment::latest()->where('post_id', $post->id)->get(),
             'count_comments' => Comment::where('post_id', $post->id)->count(),
+        ]);
+    }
+
+    // create function for show data raport student login
+    public function showNilaiRaport()
+    {
+        return view('student.raport.index', [
+            'title' => 'Nilai Raport',
+            'student' => auth()->guard('student')->user(),
+            'raport_1' => Raport::where('student_id', auth()->guard('student')->user()->id)->where('semester_id', 1)->first(),
+            'raport_2' => Raport::where('student_id', auth()->guard('student')->user()->id)->where('semester_id', 2)->first(),
+            'raport_3' => Raport::where('student_id', auth()->guard('student')->user()->id)->where('semester_id', 3)->first(),
+            'raport_4' => Raport::where('student_id', auth()->guard('student')->user()->id)->where('semester_id', 4)->first(),
+            'raport_5' => Raport::where('student_id', auth()->guard('student')->user()->id)->where('semester_id', 5)->first(),
+            'raport_6' => Raport::where('student_id', auth()->guard('student')->user()->id)->where('semester_id', 6)->first(),
+            'raport_7' => Raport::where('student_id', auth()->guard('student')->user()->id)->where('semester_id', 7)->first(),
+            'raport_8' => Raport::where('student_id', auth()->guard('student')->user()->id)->where('semester_id', 8)->first(),
+            'years' => range(date('Y') - 2, date('Y')),
         ]);
     }
 }
