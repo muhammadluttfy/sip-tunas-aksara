@@ -174,13 +174,14 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
     // Student :: Forum PAUD
     Route::get('/student/forum-paud/', [StudentController::class, 'index'])->name('student.forum.index');
     Route::get('/student/forum-paud/{post:slug}', [StudentController::class, 'show'])->name('student.forum.show');
-
     // Student :: Nilai Raport
     Route::get('/student/nilai-raport/', [StudentController::class, 'showNilaiRaport'])->name('student.nilai-raport.index');
 
-    // Student :: Settings
-    Route::get('/student/password/edit', [UpdatePasswordController::class, 'edit'])->name('student.password.edit');
-    Route::post('/student/password/edit', [UpdatePasswordController::class, 'update'])->name('student.password.update');
+
+    // ====== GLOBAL ROUTES ======
+    // Student :: Update Password
+    Route::get('/settings/password/edit', [UpdatePasswordController::class, 'edit'])->name('settings.password.edit');
+    Route::post('/settings/password/edit', [UpdatePasswordController::class, 'update'])->name('settings.password.update');
 });
 
 

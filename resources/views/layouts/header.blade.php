@@ -373,8 +373,14 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="javascript"><i class="bx bx-user"></i><span>Profile</span></a>
                     </li>
-                    <li><a class="dropdown-item" href="{{ route('student.password.edit') }}"><i
-                                class="bx bx-cog"></i><span>Ubah Password</span></a>
+                    <li>
+                        {{-- @if (Str::length(Auth::guard('student')->user()) > 0) --}}
+                        <a class="dropdown-item" href="{{ route('settings.password.edit') }}">
+                            <i class="bx bx-cog"></i><span>Ubah Password</span></a>
+                        {{-- @elseif(Str::length(Auth::guard('user')->user()) > 0)
+                            <a class="dropdown-item" href="{{ route('teacher.password.edit') }}">
+                                <i class="bx bx-cog"></i><span>Ubah Password</span></a>
+                        @endif --}}
                     </li>
                     <li>
                         <div class="mb-0 dropdown-divider"></div>

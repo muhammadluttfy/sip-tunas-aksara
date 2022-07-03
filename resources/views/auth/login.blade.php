@@ -75,6 +75,23 @@
                                     </div>
 
                                     {{-- login error --}}
+                                    @if (session()->has('success'))
+                                        <div
+                                            class="py-2 border-0 alert alert-success bg-success alert-dismissible fade show">
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-white font-35"><i class='bx bxs-message-square-x'></i>
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h6 class="mb-0 text-white">Selamat</h6>
+                                                    <div class="text-white">
+                                                        {{ session()->get('success') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
                                     @if (session()->has('error'))
                                         <div
                                             class="py-2 border-0 alert alert-danger bg-danger alert-dismissible fade show">
@@ -116,7 +133,8 @@
                                                 <label for="password" class="form-label">Password</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0"
-                                                        name="password" id="password" placeholder="Masukkan Password">
+                                                        name="password" id="password"
+                                                        placeholder="Masukkan Password">
                                                     <a href="javascript:;" class="bg-transparent input-group-text"><i
                                                             class='bx bx-hide'></i></a>
                                                 </div>
