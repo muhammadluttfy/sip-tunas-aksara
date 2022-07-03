@@ -4,8 +4,7 @@
     <link href="{{ asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
 
     {{-- Wizard Style --}}
-    <link href="{{ asset('assets/plugins/smart-wizard/css/smart_wizard_all.min.css') }}" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('assets/plugins/smart-wizard/css/smart_wizard_all.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('wrapper')
@@ -84,7 +83,22 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-12">
+                                                        <div class="col-4">
+                                                            <label for="tanggal_masuk" class="form-label">Tanggal
+                                                                Masuk</label>
+                                                            <input type="date"
+                                                                class="form-control @error('tanggal_masuk') is-invalid @enderror"
+                                                                name="tanggal_masuk" id="tanggal_masuk"
+                                                                placeholder="dd-mm-yyyy" required
+                                                                value="{{ old('tanggal_masuk') }}">
+                                                            @error('tanggal_masuk')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="col-8">
                                                             <label for="nama_lengkap_murid" class="form-label">Nama
                                                                 Lengkap</label>
                                                             <input type="text"
@@ -196,7 +210,7 @@
 
                                                         <div class="col-md-6">
                                                             <label for="tanggal_lahir_murid" class="form-label">Tanggal
-                                                                Surat</label>
+                                                                Lahir</label>
                                                             <input type="date"
                                                                 class="form-control @error('tanggal_lahir_murid') is-invalid @enderror"
                                                                 name="tanggal_lahir_murid" id="tanggal_lahir_murid"
@@ -229,8 +243,8 @@
                                                                 Tiri</label>
                                                             <input type="number"
                                                                 class="form-control @error('saudara_tiri') is-invalid @enderror"
-                                                                name="saudara_tiri" id="saudara_tiri" placeholder="Jumlah"
-                                                                value="{{ old('saudara_tiri') }}">
+                                                                name="saudara_tiri" id="saudara_tiri"
+                                                                placeholder="Jumlah" value="{{ old('saudara_tiri') }}">
                                                             @error('saudara_tiri')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}
@@ -244,7 +258,8 @@
                                                             <input type="number"
                                                                 class="form-control @error('saudara_angkat') is-invalid @enderror"
                                                                 name="saudara_angkat" id="saudara_angkat"
-                                                                placeholder="Jumlah" value="{{ old('saudara_angkat') }}">
+                                                                placeholder="Jumlah"
+                                                                value="{{ old('saudara_angkat') }}">
                                                             @error('saudara_angkat')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}
@@ -326,9 +341,7 @@
                                                         <div class="col-md-12">
                                                             <label for="alamat_murid" class="form-label">Alamat</label>
                                                             <textarea class="form-control @error('alamat_murid') is-invalid @enderror" name="alamat_murid" id="alamat_murid"
-                                                                rows="3"
-                                                                placeholder="Masukkan detail alamat atau nama jalan..."
-                                                                required
+                                                                rows="3" placeholder="Masukkan detail alamat atau nama jalan..." required
                                                                 value="{{ old('alamat_murid') }}"></textarea>
                                                             @error('alamat_murid')
                                                                 <div class="invalid-feedback">
@@ -497,9 +510,9 @@
 
                                                         <div class="col-md-12">
                                                             <label for="alamat_ayah" class="form-label">Alamat</label>
-                                                            <textarea class="form-control @error('alamat_ayah') is-invalid @enderror" name="alamat_ayah" id="alamat_ayah" rows="3"
-                                                                placeholder="Masukkan detail alamat atau nama jalan..."
-                                                                required value="{{ old('alamat_ayah') }}"></textarea>
+                                                            <textarea class="form-control @error('alamat_ayah') is-invalid @enderror" name="alamat_ayah" id="alamat_ayah"
+                                                                rows="3" placeholder="Masukkan detail alamat atau nama jalan..." required
+                                                                value="{{ old('alamat_ayah') }}"></textarea>
                                                             @error('alamat_ayah')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}
@@ -655,9 +668,9 @@
 
                                                         <div class="col-md-12">
                                                             <label for="alamat_ibu" class="form-label">Alamat</label>
-                                                            <textarea class="form-control @error('alamat_ibu') is-invalid @enderror" name="alamat_ibu" id="alamat_ibu" rows="3"
-                                                                placeholder="Masukkan detail alamat atau nama jalan..."
-                                                                required value="{{ old('alamat_ibu') }}"></textarea>
+                                                            <textarea class="form-control @error('alamat_ibu') is-invalid @enderror" name="alamat_ibu" id="alamat_ibu"
+                                                                rows="3" placeholder="Masukkan detail alamat atau nama jalan..." required
+                                                                value="{{ old('alamat_ibu') }}"></textarea>
                                                             @error('alamat_ibu')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}
@@ -713,8 +726,8 @@
                                                                 class="form-label">Ditempatkan di Kelompok</label>
                                                             <input type="text"
                                                                 class="form-control @error('ditempatkan_di_kelompok') is-invalid @enderror"
-                                                                name="ditempatkan_di_kelompok" id="ditempatkan_di_kelompok"
-                                                                placeholder="Kelompok"
+                                                                name="ditempatkan_di_kelompok"
+                                                                id="ditempatkan_di_kelompok" placeholder="Kelompok"
                                                                 value="{{ old('ditempatkan_di_kelompok') }}">
                                                             @error('ditempatkan_di_kelompok')
                                                                 <div class="invalid-feedback">
@@ -772,7 +785,8 @@
 
                                                         <div class="col-12">
                                                             <div class="d-grid">
-                                                                <button type="submit" id="submit" class="btn btn-primary">
+                                                                <button type="submit" id="submit"
+                                                                    class="btn btn-primary">
                                                                     Tambah Peserta Didik
                                                                 </button>
                                                             </div>

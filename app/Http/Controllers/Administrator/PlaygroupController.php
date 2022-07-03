@@ -70,7 +70,7 @@ class PlaygroupController extends Controller
             'alamat_murid' => 'required',
             'no_telepon_murid' => '',
             'jarak_sekolah_rumah' => '',
-            'tanggal_lulus_kb' => 'date',
+            'tanggal_masuk' => 'date',
 
             // step 2 - validasi form identitas ayah
             'nama_lengkap_ayah' => 'required|max:255',
@@ -159,6 +159,7 @@ class PlaygroupController extends Controller
         $student_detail->alamat = $request->alamat_murid;
         $student_detail->no_telepon = $request->no_telepon_murid;
         $student_detail->jarak_sekolah_rumah = $request->jarak_sekolah_rumah;
+        $student_detail->tanggal_masuk = $request->tanggal_masuk;
         $student_detail->save();
 
 
@@ -362,7 +363,7 @@ class PlaygroupController extends Controller
             'alamat' => $request->alamat_murid,
             'no_telepon' => $request->no_telepon_murid,
             'jarak_sekolah_rumah' => $request->jarak_sekolah_rumah,
-            'tanggal_lulus_kb' => $request->tanggal_lulus_kb,
+            'tanggal_masuk' => $request->tanggal_masuk,
         ]);
 
 

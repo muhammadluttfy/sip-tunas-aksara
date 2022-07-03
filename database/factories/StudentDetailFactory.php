@@ -33,6 +33,7 @@ class StudentDetailFactory extends Factory
             'alamat' => $this->faker->address,
             'no_telepon' => $this->faker->phoneNumber,
             'jarak_sekolah_rumah' => $this->faker->numberBetween(0, 10),
+            'tanggal_masuk' => $this->faker->randomElement(['2021-01-10', '2021-06-10', '2021-12-10', '2022-01-10', '2022-06-10']),
 
         ];
     }

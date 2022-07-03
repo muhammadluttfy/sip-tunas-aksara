@@ -70,10 +70,10 @@
                                                                             value="{{ $student->avatar }}">
                                                                         @if ($student->avatar)
                                                                             <img src="{{ asset('storage/' . $student->avatar) }}"
-                                                                                class="p-1 rounded avatar-preview bg-primary"
+                                                                                class="p-1 rounded avatar-preview bg-gradient-scooter"
                                                                                 width="70">
                                                                         @else
-                                                                            <img class="p-1 rounded avatar-preview bg-primary"
+                                                                            <img class="p-1 rounded avatar-preview bg-gradient-scooter"
                                                                                 width="70">
                                                                         @endif
                                                                     </div>
@@ -95,7 +95,21 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-12">
+                                                        <div class="col-4">
+                                                            <label for="tanggal_masuk" class="form-label">Tanggal
+                                                                Masuk</label>
+                                                            <input type="date"
+                                                                class="form-control @error('tanggal_masuk') is-invalid @enderror"
+                                                                name="tanggal_masuk" id="tanggal_masuk" required
+                                                                value="{{ old('tanggal_masuk', $student->student_detail->tanggal_masuk) }}">
+                                                            @error('tanggal_masuk')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="col-8">
                                                             <label for="nama_lengkap_murid" class="form-label">Nama
                                                                 Lengkap</label>
                                                             <input type="text"
@@ -129,7 +143,8 @@
                                                             <label for="kelompok" class="form-label">Kelompok</label>
                                                             <input type="text"
                                                                 class="form-control @error('kelompok') is-invalid @enderror"
-                                                                name="kelompok" id="kelompok" placeholder="Kelompok Murid"
+                                                                name="kelompok" id="kelompok"
+                                                                placeholder="Kelompok Murid"
                                                                 value="{{ old('kelompok', $student->student_detail->kelompok) }}">
                                                             @error('kelompok')
                                                                 <div class="invalid-feedback">
@@ -800,228 +815,228 @@
                                                                 @else
                                                                     value="{{ old('diterima_tanggal') }} @endif ">
 
-                                                                                                    @error('diterima_tanggal')
+                                                                                                                    @error('diterima_tanggal')
         <div class=" invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
+                                                                                                                {{ $message }}
+                                                                                                            </div>
     @enderror
-                                                            </div>
+                                                                            </div>
 
-                                                            <div class="col-12">
-                                                                <label for="ditempatkan_di_kelompok"
-                                                                    class="form-label">Ditempatkan di Kelompok</label>
-                                                                <input type="text"
-                                                                    class="form-control @error('ditempatkan_di_kelompok') is-invalid @enderror"
-                                                                    name="ditempatkan_di_kelompok" id="ditempatkan_di_kelompok"
-                                                                    placeholder="Kelompok"
-                                                                    @if ($student->mutation_id != null) value="{{ old('ditempatkan_di_kelompok', $student->mutation->ditempatkan_di_kelompok) }}"
+                                                                            <div class="col-12">
+                                                                                <label for="ditempatkan_di_kelompok"
+                                                                                    class="form-label">Ditempatkan di Kelompok</label>
+                                                                                <input type="text"
+                                                                                    class="form-control @error('ditempatkan_di_kelompok') is-invalid @enderror"
+                                                                                    name="ditempatkan_di_kelompok" id="ditempatkan_di_kelompok"
+                                                                                    placeholder="Kelompok"
+                                                                                    @if ($student->mutation_id != null) value="{{ old('ditempatkan_di_kelompok', $student->mutation->ditempatkan_di_kelompok) }}"
                                                             @else
                                                                 value="{{ old('ditempatkan_di_kelompok') }}" @endif>
-                                                                @error('ditempatkan_di_kelompok')
+                                                                                @error('ditempatkan_di_kelompok')
         <div class=" invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
+                                                                                                                {{ $message }}
+                                                                                                            </div>
     @enderror
-                                                            </div>
+                                                                            </div>
 
-                                                            <div class="col-12">
-                                                                <label for="instansi_asal" class="form-label">Berasal dari
-                                                                    PAUD / TK</label>
-                                                                <input type="text"
-                                                                    class="form-control @error('instansi_asal') is-invalid @enderror"
-                                                                    name="instansi_asal" id="instansi_asal"
-                                                                    placeholder="PAUD / TK Asal"
-                                                                    @if ($student->mutation_id != null) value="{{ old('instansi_asal', $student->mutation->instansi_asal) }}"
+                                                                            <div class="col-12">
+                                                                                <label for="instansi_asal" class="form-label">Berasal dari
+                                                                                    PAUD / TK</label>
+                                                                                <input type="text"
+                                                                                    class="form-control @error('instansi_asal') is-invalid @enderror"
+                                                                                    name="instansi_asal" id="instansi_asal"
+                                                                                    placeholder="PAUD / TK Asal"
+                                                                                    @if ($student->mutation_id != null) value="{{ old('instansi_asal', $student->mutation->instansi_asal) }}"
                                                             @else
                                                                 value="{{ old('instansi_asal') }}" @endif>
-                                                                @error('instansi_asal')
+                                                                                @error('instansi_asal')
         <div class=" invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
+                                                                                                                {{ $message }}
+                                                                                                            </div>
     @enderror
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="p-4 border rounded border-3">
-                                                        <div class="row g-3">
-                                                            <div class="col-12">
-                                                                <label for="tgl_meninggalkan_instansi"
-                                                                    class="form-label">Tanggal
-                                                                    Meninggalkan PAUD / TK
-                                                                    Lama</label>
-                                                                <input type="date"
-                                                                    class="form-control @error('tgl_meninggalkan_instansi') is-invalid @enderror"
-                                                                    name="tgl_meninggalkan_instansi" id="tgl_meninggalkan_instansi"
-                                                                    @if ($student->mutation_id != null) value="{{ old('tgl_meninggalkan_instansi', $student->mutation->tgl_meninggalkan_instansi) }}"
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="p-4 border rounded border-3">
+                                                                        <div class="row g-3">
+                                                                            <div class="col-12">
+                                                                                <label for="tgl_meninggalkan_instansi"
+                                                                                    class="form-label">Tanggal
+                                                                                    Meninggalkan PAUD / TK
+                                                                                    Lama</label>
+                                                                                <input type="date"
+                                                                                    class="form-control @error('tgl_meninggalkan_instansi') is-invalid @enderror"
+                                                                                    name="tgl_meninggalkan_instansi" id="tgl_meninggalkan_instansi"
+                                                                                    @if ($student->mutation_id != null) value="{{ old('tgl_meninggalkan_instansi', $student->mutation->tgl_meninggalkan_instansi) }}"
                                                             @else
                                                                 value="{{ old('tgl_meninggalkan_instansi') }}" @endif>
-                                                                @error('tgl_meninggalkan_instansi')
+                                                                                @error('tgl_meninggalkan_instansi')
         <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
+                                                                                                                {{ $message }}
+                                                                                                            </div>
     @enderror
-                                                            </div>
+                                                                            </div>
 
-                                                            <div class="col-12">
-                                                                <label for="alasan" class="form-label">Alasan</label>
-                                                                <textarea class="form-control @error('alasan') is-invalid @enderror" name="alasan" id="alasan" rows="5"
-                                                                    placeholder="Alasan meninggalkan PAUD / TK...">
+                                                                            <div class="col-12">
+                                                                                <label for="alasan" class="form-label">Alasan</label>
+                                                                                <textarea class="form-control @error('alasan') is-invalid @enderror" name="alasan" id="alasan" rows="5"
+                                                                                    placeholder="Alasan meninggalkan PAUD / TK...">
 @if ($student->mutation_id != null)
 {{ old('alasan', $student->mutation->alasan) }}
 @else{{ old('alasan') }}
 @endif
 </textarea>
 
-                                                                @error('alasan')
+                                                                                @error('alasan')
         <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
+                                                                                                                {{ $message }}
+                                                                                                            </div>
     @enderror
-                                                            </div>
+                                                                            </div>
 
-                                                            <div class="col-12">
-                                                                <div class="d-grid">
-                                                                    <button type="submit" id="submit" class="btn btn-primary">
-                                                                        Tambah Peserta Didik
-                                                                    </button>
+                                                                            <div class="col-12">
+                                                                                <div class="d-grid">
+                                                                                    <button type="submit" id="submit" class="btn btn-primary">
+                                                                                        Tambah Peserta Didik
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-12">
+                                                                                <p><strong class="text-danger">Catatan :</strong> kosongkan
+                                                                                    form mutasi jika calon peserta didik bukan pindahan dari
+                                                                                    PAUD / TK lain.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12">
-                                                                <p><strong class="text-danger">Catatan :</strong> kosongkan
-                                                                    form mutasi jika calon peserta didik bukan pindahan dari
-                                                                    PAUD / TK lain.</p>
-                                                            </div>
+                                                            <!--end row-->
                                                         </div>
                                                     </div>
-                                                </div>
                                             </div>
-                                            <!--end row-->
+                                            </form>
                                         </div>
                                     </div>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                                </div>
 
-            </div>
-            </div>
-            <!--end page wrapper -->
+                            </div>
+                            </div>
+                            <!--end page wrapper -->
 @endsection
 
 @section('script')
     <script src="{{ asset('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
-            <script>
-                $(document).ready(function() {
-                    $('#image-uploadify').imageuploadify();
-                });
-            </script>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#image-uploadify').imageuploadify();
+                                });
+                            </script>
 
 
 
-            {{-- wizard scripts --}}
-            <script src="{{ asset('assets/plugins/smart-wizard/js/jquery.smartWizard.min.js') }}"></script>
-            <script>
-                $(document).ready(function() {
-                    // Toolbar extra buttons
-                    var btnFinish = $('<button></button>').text('Finish').addClass('btn btn-primary').on('click',
-                        function() {
-                            alert('Finish Clicked');
-                        });
-                    var btnCancel = $('<button></button>').text('Cancel').addClass('btn btn-danger').on('click',
-                        function() {
-                            $('#smartwizard').smartWizard("reset");
-                        });
-                    // Step show event
-                    $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
-                        $("#prev-btn").removeClass('disabled');
-                        $("#next-btn").removeClass('disabled');
-                        if (stepPosition === 'first') {
-                            $("#prev-btn").addClass('disabled');
-                        } else if (stepPosition === 'last') {
-                            $("#next-btn").addClass('disabled');
-                        } else {
-                            $("#prev-btn").removeClass('disabled');
-                            $("#next-btn").removeClass('disabled');
-                        }
-                    });
-                    // Smart Wizard
-                    $('#smartwizard').smartWizard({
-                        selected: 0,
-                        theme: 'dots',
-                        transition: {
-                            animation: 'slide-horizontal', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
-                        },
-                        toolbarSettings: {
-                            toolbarPosition: 'both', // both bottom
-                            // toolbarExtraButtons: [btnFinish, btnCancel]
-                            toolbarExtraButtons: []
-                        }
-                    });
-                    // External Button Events
-                    $("#reset-btn").on("click", function() {
-                        // Reset wizard
-                        $('#smartwizard').smartWizard("reset");
-                        return true;
-                    });
-                    $("#prev-btn").on("click", function() {
-                        // Navigate previous
-                        $('#smartwizard').smartWizard("prev");
-                        return true;
-                    });
-                    $("#next-btn").on("click", function() {
-                        // Navigate next
-                        $('#smartwizard').smartWizard("next");
-                        return true;
-                    });
-                    // Demo Button Events
-                    $("#got_to_step").on("change", function() {
-                        // Go to step
-                        var step_index = $(this).val() - 1;
-                        $('#smartwizard').smartWizard("goToStep", step_index);
-                        return true;
-                    });
-                    $("#is_justified").on("click", function() {
-                        // Change Justify
-                        var options = {
-                            justified: $(this).prop("checked")
-                        };
-                        $('#smartwizard').smartWizard("setOptions", options);
-                        return true;
-                    });
-                    $("#animation").on("change", function() {
-                        // Change theme
-                        var options = {
-                            transition: {
-                                animation: $(this).val()
-                            },
-                        };
-                        $('#smartwizard').smartWizard("setOptions", options);
-                        return true;
-                    });
-                    $("#theme_selector").on("change", function() {
-                        // Change theme
-                        var options = {
-                            theme: $(this).val()
-                        };
-                        $('#smartwizard').smartWizard("setOptions", options);
-                        return true;
-                    });
-                });
+                            {{-- wizard scripts --}}
+                            <script src="{{ asset('assets/plugins/smart-wizard/js/jquery.smartWizard.min.js') }}"></script>
+                            <script>
+                                $(document).ready(function() {
+                                    // Toolbar extra buttons
+                                    var btnFinish = $('<button></button>').text('Finish').addClass('btn btn-primary').on('click',
+                                        function() {
+                                            alert('Finish Clicked');
+                                        });
+                                    var btnCancel = $('<button></button>').text('Cancel').addClass('btn btn-danger').on('click',
+                                        function() {
+                                            $('#smartwizard').smartWizard("reset");
+                                        });
+                                    // Step show event
+                                    $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
+                                        $("#prev-btn").removeClass('disabled');
+                                        $("#next-btn").removeClass('disabled');
+                                        if (stepPosition === 'first') {
+                                            $("#prev-btn").addClass('disabled');
+                                        } else if (stepPosition === 'last') {
+                                            $("#next-btn").addClass('disabled');
+                                        } else {
+                                            $("#prev-btn").removeClass('disabled');
+                                            $("#next-btn").removeClass('disabled');
+                                        }
+                                    });
+                                    // Smart Wizard
+                                    $('#smartwizard').smartWizard({
+                                        selected: 0,
+                                        theme: 'dots',
+                                        transition: {
+                                            animation: 'slide-horizontal', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+                                        },
+                                        toolbarSettings: {
+                                            toolbarPosition: 'both', // both bottom
+                                            // toolbarExtraButtons: [btnFinish, btnCancel]
+                                            toolbarExtraButtons: []
+                                        }
+                                    });
+                                    // External Button Events
+                                    $("#reset-btn").on("click", function() {
+                                        // Reset wizard
+                                        $('#smartwizard').smartWizard("reset");
+                                        return true;
+                                    });
+                                    $("#prev-btn").on("click", function() {
+                                        // Navigate previous
+                                        $('#smartwizard').smartWizard("prev");
+                                        return true;
+                                    });
+                                    $("#next-btn").on("click", function() {
+                                        // Navigate next
+                                        $('#smartwizard').smartWizard("next");
+                                        return true;
+                                    });
+                                    // Demo Button Events
+                                    $("#got_to_step").on("change", function() {
+                                        // Go to step
+                                        var step_index = $(this).val() - 1;
+                                        $('#smartwizard').smartWizard("goToStep", step_index);
+                                        return true;
+                                    });
+                                    $("#is_justified").on("click", function() {
+                                        // Change Justify
+                                        var options = {
+                                            justified: $(this).prop("checked")
+                                        };
+                                        $('#smartwizard').smartWizard("setOptions", options);
+                                        return true;
+                                    });
+                                    $("#animation").on("change", function() {
+                                        // Change theme
+                                        var options = {
+                                            transition: {
+                                                animation: $(this).val()
+                                            },
+                                        };
+                                        $('#smartwizard').smartWizard("setOptions", options);
+                                        return true;
+                                    });
+                                    $("#theme_selector").on("change", function() {
+                                        // Change theme
+                                        var options = {
+                                            theme: $(this).val()
+                                        };
+                                        $('#smartwizard').smartWizard("setOptions", options);
+                                        return true;
+                                    });
+                                });
 
-                // avatar Preview
-                function previewAvatar() {
-                    const avatar = document.querySelector('#avatar');
-                    const avatarPreview = document.querySelector('.avatar-preview');
-                    // avatarPreview.style.display = 'block';
+                                // avatar Preview
+                                function previewAvatar() {
+                                    const avatar = document.querySelector('#avatar');
+                                    const avatarPreview = document.querySelector('.avatar-preview');
+                                    // avatarPreview.style.display = 'block';
 
-                    const oFReader = new FileReader();
-                    oFReader.readAsDataURL(avatar.files[0]);
-                    oFReader.onload = function(oFREvent) {
-                        avatarPreview.src = oFREvent.target.result;
-                    }
-                }
-            </script>
+                                    const oFReader = new FileReader();
+                                    oFReader.readAsDataURL(avatar.files[0]);
+                                    oFReader.onload = function(oFREvent) {
+                                        avatarPreview.src = oFREvent.target.result;
+                                    }
+                                }
+                            </script>
 @endsection

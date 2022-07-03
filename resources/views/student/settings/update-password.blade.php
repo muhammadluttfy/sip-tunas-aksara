@@ -52,55 +52,69 @@
                 <div class="main-body">
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="card">
+                            <div class="card radius-10">
                                 <div class="card-body">
                                     <div class="text-center d-flex flex-column align-items-center">
                                         @if ($user->avatar == null)
                                             <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
                                                 alt="{{ $user->nama_lengkap }}"
-                                                class="p-1 rounded-circle bg-{{ $color }}" width="110">
+                                                class="p-1 rounded-circle bg-gradient-scooter" width="110">
                                         @else
                                             <img src="{{ asset('storage/' . $user->avatar) }}"
                                                 alt="{{ $user->nama_lengkap }}"
-                                                class="p-1 rounded-circle bg-{{ $color }}" width="110">
+                                                class="p-1 rounded-circle bg-gradient-scooter" width="110">
                                         @endif
 
-                                        <div class="mt-3">
+                                        {{-- <div class="mt-3">
                                             <h4>{{ $user->nama_lengkap }}</h4>
                                             <p class="mb-1 text-secondary">
                                                 {{ $user->no_identitas }}</p>
-                                        </div>
+                                        </div> --}}
                                     </div>
-                                    <hr class="my-4" />
+                                    <hr class="mt-4" />
 
                                     @if (Str::length(Auth::guard('student')->user()) > 0)
-                                        <ul class="list-group list-group-flush">
+                                        <ul class="list-group list-group-flush gap-1">
                                             <li
                                                 class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
                                                 <h6 class="mb-0">
-                                                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                        height="24" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M20 12.875v5.068c0 2.754-5.789 4.057-9 4.057-3.052 0-9-1.392-9-4.057v-6.294l9 4.863 9-3.637zm-8.083-10.875l-12.917 5.75 12 6.5 11-4.417v7.167h2v-8.25l-12.083-6.75zm13.083 20h-4c.578-1 1-2.5 1-4h2c0 1.516.391 2.859 1 4z" />
-                                                    </svg>
-                                                    Jenjang Pendidikan
+                                                    No Identitas
                                                 </h6>
-                                                <span
-                                                    class="text-secondary">{{ $user->level->jenjang_pendidikan }}</span>
+                                                <span class="text-secondary">{{ $user->no_identitas }}</span>
                                             </li>
 
                                             <li
                                                 class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
                                                 <h6 class="mb-0">
-                                                    <svg class="me-1" width="24" height="24"
-                                                        xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                                                        clip-rule="evenodd">
-                                                        <path
-                                                            d="M13 2h2v2h1v19h1v-15l6 3v12h1v1h-24v-1h1v-11h7v11h1v-19h1v-2h2v-2h1v2zm8 21v-2h-2v2h2zm-15 0v-2h-3v2h3zm8 0v-2h-3v2h3zm-2-4v-13h-1v13h1zm9 0v-1h-2v1h2zm-18 0v-2h-1v2h1zm4 0v-2h-1v2h1zm-2 0v-2h-1v2h1zm9 0v-13h-1v13h1zm7-2v-1h-2v1h2zm-18-1v-2h-1v2h1zm2 0v-2h-1v2h1zm2 0v-2h-1v2h1zm14-1v-1h-2v1h2zm0-2.139v-1h-2v1h2z" />
-                                                    </svg>
-                                                    Semester
+                                                    Nama Lengkap
                                                 </h6>
-                                                <span class="text-secondary">Semester {{ $semester }}</span>
+                                                <span class="text-secondary">{{ $user->nama_lengkap }}</span>
+                                            </li>
+
+                                            <li
+                                                class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                <h6 class="mb-0">
+                                                    Nama Panggilan
+                                                </h6>
+                                                <span
+                                                    class="text-secondary">{{ $user->student_detail->nama_panggilan }}</span>
+                                            </li>
+
+                                            <li
+                                                class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                <h6 class="mb-0">
+                                                    Username
+                                                </h6>
+                                                <span class="text-secondary">{{ $user->username }}</span>
+                                            </li>
+
+                                            <li
+                                                class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                <h6 class="mb-0">
+                                                    Kelompok
+                                                </h6>
+                                                <span class="text-secondary">Kelompok
+                                                    {{ $user->student_detail->kelompok }}</span>
                                             </li>
                                         </ul>
                                     @else
@@ -174,8 +188,9 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-8">
-                            <div class="card">
+                            <div class="card radius-10">
                                 <div class="card-body">
                                     <form action="{{ route('settings.password.update') }}" method="post">
                                         @csrf

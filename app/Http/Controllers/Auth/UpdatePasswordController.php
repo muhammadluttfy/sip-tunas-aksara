@@ -5,31 +5,27 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Raport;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Clockwork\Request\RequestType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Dotenv\Exception\ValidationException;
 
 class UpdatePasswordController extends Controller
 {
     public function edit()
     {
-        $colors = ['primary', 'success', 'info', 'warning', 'danger'];
-        $color = $colors[array_rand($colors)];
-
-        global $semester, $level;
-
-        if (Str::length(Auth::guard('student')->user()) > 0) {
+        $raport_1 = Raport::where('student_id', Auth::user()->id)->where('semester_id', 1)->first();
+        if ($raport_1 != null) {
             $semester = Raport::where('student_id', auth()->guard('student')->user()->id)->latest()->first()->semester_id;
             $level = Raport::where('student_id', auth()->guard('student')->user()->id)->latest()->first()->level_id;
+        } else {
+            $semester = 1;
+            $level = null;
         }
 
 
-        return view('student.setting.index', [
+        return view('student.settings.update-password', [
             'title' => 'Ubah password | ' . Auth()->user()->nama_lengkap,
             'user' => Auth::user(),
-            'color' => $color,
             'semester' => $semester,
             'level' => $level,
         ]);

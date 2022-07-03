@@ -24,17 +24,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="text-center d-flex flex-column align-items-center">
-                                        {{-- <img src="{{ $student->avatar }}" alt="{{ $student->nama_lengkap }}"
-                                            class="p-1 rounded-circle bg-primary" width="110"> --}}
-
                                         @if ($student->avatar)
                                             <img src="{{ asset('storage/' . $student->avatar) }}"
-                                                alt="{{ $student->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
-                                                width="110">
+                                                alt="{{ $student->nama_lengkap }}"
+                                                class="p-1 rounded-circle bg-gradient-scooter" width="110">
                                         @else
                                             <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
-                                                alt="{{ $student->nama_lengkap }}" class="p-1 rounded-circle bg-primary"
-                                                width="110">
+                                                alt="{{ $student->nama_lengkap }}"
+                                                class="p-1 rounded-circle bg-gradient-scooter" width="110">
                                         @endif
 
                                         <div class="mt-3">
@@ -54,6 +51,16 @@
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
+                                    <div class="mb-3 row align-items-center">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Tanggal Masuk</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" class="form-control"
+                                                value="{{ date('d F Y', strtotime($student->student_detail->tanggal_masuk)) }}"
+                                                disabled />
+                                        </div>
+                                    </div>
                                     <div class="mb-3 row align-items-center">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Nama Lengkap</h6>

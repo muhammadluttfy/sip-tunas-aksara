@@ -28,12 +28,14 @@ use App\Http\Controllers\Student\StudentController;
 Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Administrator,Sekretaris,Bendahara,Guru,Student']], function () {
 
     Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
+    // Route::get('/dashboard/admin', [Controller::class, 'dashboardAdmin'])->name('dashboardAdmin');
+    // Route::get('/student/dashboard', [Controller::class, 'dashboardStudent'])->name('dashboardStudent');
 
     Route::get('/', function () {
         return redirect()->route('login');
     })->middleware('guest:user,student');
 
-    Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
+    // Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
 
     // START :: KB Tunas Aksara
     Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');

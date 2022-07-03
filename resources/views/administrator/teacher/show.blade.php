@@ -26,11 +26,11 @@
                                         @if ($teacher->avatar == null)
                                             <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
                                                 alt="{{ $teacher->nama_lengkap }}"
-                                                class="p-1 rounded-circle bg-{{ $color }}" width="110">
+                                                class="p-1 rounded-circle bg-gradient-scooter" width="110">
                                         @else
                                             <img src="{{ asset('storage/' . $teacher->avatar) }}"
                                                 alt="{{ $teacher->nama_lengkap }}"
-                                                class="p-1 rounded-circle bg-{{ $color }}" width="110">
+                                                class="p-1 rounded-circle bg-gradient-scooter" width="110">
                                         @endif
                                         <div class="mt-3">
                                             <h4>{{ $teacher->nama_lengkap }}</h4>

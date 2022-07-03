@@ -74,113 +74,140 @@
             </div>
             <!--end row-->
 
-            {{-- <div class="row">
-                <div class="col-12 col-lg-8">
-                    <div class="card radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h6 class="mb-0">Sales Overview</h6>
+            @if (Auth::user()->role == 'Student')
+                <div class="row">
+                    <div class="container">
+                        <div class="main-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card radius-10">
+                                        <div class="card-body">
+                                            <div class="text-center d-flex flex-column align-items-center">
+                                                @if ($user->avatar == null)
+                                                    <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
+                                                        alt="{{ $user->nama_lengkap }}"
+                                                        class="p-1 rounded-circle bg-gradient-scooter" width="110">
+                                                @else
+                                                    <img src="{{ asset('storage/' . $user->avatar) }}"
+                                                        alt="{{ $user->nama_lengkap }}"
+                                                        class="p-1 rounded-circle bg-gradient-scooter" width="110">
+                                                @endif
+                                            </div>
+                                            <hr class="mt-4" />
+
+                                            <ul class="list-group list-group-flush gap-1">
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        No Identitas
+                                                    </h6>
+                                                    <span class="text-secondary">{{ $user->no_identitas }}</span>
+                                                </li>
+
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        Nama Lengkap
+                                                    </h6>
+                                                    <span class="text-secondary">{{ $user->nama_lengkap }}</span>
+                                                </li>
+
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        Nama Panggilan
+                                                    </h6>
+                                                    <span
+                                                        class="text-secondary">{{ $user->student_detail->nama_panggilan }}</span>
+                                                </li>
+
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        Username
+                                                    </h6>
+                                                    <span class="text-secondary">{{ $user->username }}</span>
+                                                </li>
+
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        Kelompok
+                                                    </h6>
+                                                    <span class="text-secondary">Kelompok
+                                                        {{ $user->student_detail->kelompok }}</span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#"
-                                        data-bs-toggle="dropdown"><i
-                                            class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="gap-2 my-3 d-flex align-items-center ms-auto font-13">
-                                <span class="px-1 border rounded cursor-pointer"><i class="bx bxs-circle me-1"
-                                        style="color: #14abef"></i>Sales</span>
-                                <span class="px-1 border rounded cursor-pointer"><i class="bx bxs-circle me-1"
-                                        style="color: #ffc107"></i>Visits</span>
-                            </div>
-                            <div class="chart-container-1">
-                                <canvas id="chart1"></canvas>
-                            </div>
-                        </div>
-                        <div class="text-center row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group border-top">
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">24.15M</h5>
-                                    <small class="mb-0">Overall Visitor <span> <i
-                                                class="align-middle bx bx-up-arrow-alt"></i> 2.43%</span></small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">12:38</h5>
-                                    <small class="mb-0">Visitor Duration <span> <i
-                                                class="align-middle bx bx-up-arrow-alt"></i> 12.65%</span></small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">639.82</h5>
-                                    <small class="mb-0">Pages/Visit <span> <i class="align-middle bx bx-up-arrow-alt"></i>
-                                            5.62%</span></small>
+
+                                <div class="col-lg-8">
+                                    <div class="row">
+                                        <div class="col-6 col-md-4">
+                                            <div class="card radius-10">
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <div
+                                                            class="mx-auto mb-3 widgets-icons rounded-circle bg-light-primary text-primary">
+                                                            <i class='lni lni-graduation'></i>
+                                                        </div>
+                                                        <h5 class="my-1">{{ $user->level->jenjang_pendidikan }}</h5>
+                                                        <p class="mb-0 text-secondary">Jenjang Pendidikan</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <div class="card radius-10">
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <div
+                                                            class="mx-auto mb-3 widgets-icons rounded-circle bg-light-danger text-danger">
+                                                            <i class='fadeIn animated bx bx-buildings'></i>
+                                                        </div>
+                                                        <h5 class="my-1">Semester {{ $semester }}</h5>
+                                                        <p class="mb-0 text-secondary">Semester</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <div class="card radius-10">
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <div
+                                                            class="mx-auto mb-3 widgets-icons rounded-circle bg-light-success text-success">
+                                                            <i class='lni lni-graduation'></i>
+                                                        </div>
+                                                        <h5 class="my-1">{{ $tahun_masuk }}</h5>
+                                                        <p class="mb-0 text-secondary">Angkatan</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <div class="card radius-10">
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <div
+                                                            class="mx-auto mb-3 widgets-icons rounded-circle bg-light-warning text-warning">
+                                                            <i class='lni lni-graduation'></i>
+                                                        </div>
+                                                        <h5 class="my-1">{{ $tahun_lulus }}</h5>
+                                                        <p class="mb-0 text-secondary">Tahun Kelulusan</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4">
-                    <div class="card radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h6 class="mb-0">Trending Products</h6>
-                                </div>
-                                <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#"
-                                        data-bs-toggle="dropdown"><i
-                                            class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="mt-4 chart-container-2">
-                                <canvas id="chart2"></canvas>
-                            </div>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="bg-transparent list-group-item d-flex justify-content-between align-items-center">
-                                Jeans <span class="badge bg-success rounded-pill">25</span>
-                            </li>
-                            <li class="bg-transparent list-group-item d-flex justify-content-between align-items-center">
-                                T-Shirts <span class="badge bg-danger rounded-pill">10</span>
-                            </li>
-                            <li class="bg-transparent list-group-item d-flex justify-content-between align-items-center">
-                                Shoes <span class="badge bg-primary rounded-pill">65</span>
-                            </li>
-                            <li class="bg-transparent list-group-item d-flex justify-content-between align-items-center">
-                                Lingerie <span class="badge bg-warning text-dark rounded-pill">14</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div> --}}
+            @endif
             <!--end row-->
 
         </div>

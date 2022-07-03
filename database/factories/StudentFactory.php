@@ -14,10 +14,10 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            'student_detail_id' => $this->faker->numberBetween(1, 10),
+            'student_detail_id' => $this->faker->numberBetween(1, 4),
             'level_id' => $this->faker->numberBetween(1, 2),
-            'father_id' => $this->faker->numberBetween(1, 10),
-            'mother_id' => $this->faker->numberBetween(1, 10),
+            'father_id' => $this->faker->numberBetween(1, 4),
+            'mother_id' => $this->faker->numberBetween(1, 4),
             'role' => 'Student',
             'no_identitas' => $this->faker->unique()->randomNumber(9),
             'nama_lengkap' => $this->faker->name,

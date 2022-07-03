@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
 use App\Models\Post;
-use App\Models\Role;
 use App\Models\User;
 use App\Models\Level;
 use App\Models\Father;
@@ -31,35 +29,35 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Student::factory(20)->create();
-        StudentDetail::factory(20)->create();
-        Father::factory(20)->create();
-        Mother::factory(20)->create();
-        Mutation::factory(20)->create();
-        Post::factory(20)->create();
-        Letter::factory(20)->create();
+        Student::factory(4)->create();
+        StudentDetail::factory(4)->create();
+        Father::factory(4)->create();
+        Mother::factory(4)->create();
+        Mutation::factory(4)->create();
+        Post::factory(4)->create();
+        Letter::factory(4)->create();
 
         User::insert([
             [
                 'role' => 'Kepala Sekolah',
                 'social_media_id' => 1,
                 'no_identitas' => '18083000124',
-                'nama_lengkap' => 'Suriyani,S.Pd',
+                'nama_lengkap' => 'Developer',
                 'email' => 'creativedevelopment.id@gmail.com',
-                'username' => 'suriyani_84',
-                'tanggal_lahir' => '1996-08-30',
-                'password' => bcrypt('password'),
+                'username' => 'muhammadluttfy',
+                'tanggal_lahir' => '2001-01-31',
+                'password' => bcrypt('password.'),
                 'remember_token' => '',
                 'created_at' => now(),
             ],
             [
-                'role' => 'Administrator',
+                'role' => 'Kepala Sekolah',
                 'social_media_id' => 2,
-                'no_identitas' => '18083000125',
-                'nama_lengkap' => 'Nurhidayatul Hikmah',
-                'username' => 'dayah.hikmah',
+                'no_identitas' => '001/tendik/2022',
+                'nama_lengkap' => 'Suriyani,S.Pd',
+                'email' => 'suriyani84@gmail.com',
+                'username' => 'suriyani_84',
                 'tanggal_lahir' => '1996-08-30',
-                'email' => 'dayah@gmail.com',
                 'password' => bcrypt('password'),
                 'remember_token' => '',
                 'created_at' => now(),
@@ -75,10 +73,6 @@ class DatabaseSeeder extends Seeder
                 'jenjang_pendidikan' => 'TK Tunas Aksara',
                 'slug' => 'tk-tunas-aksara',
             ],
-            [
-                'jenjang_pendidikan' => 'Lulus',
-                'slug' => 'lulus',
-            ],
         ]);
 
         SocialMedia::insert([
@@ -88,8 +82,13 @@ class DatabaseSeeder extends Seeder
                 'whatsapp' => '082340378657',
             ],
             [
-                'instagram' => 'ochnafis',
-                'facebook' => 'Ahla Ainin',
+                'instagram' => 'suriyani_84',
+                'facebook' => 'Suriyani 84',
+                'whatsapp' => '082340378657',
+            ],
+            [
+                'instagram' => 'dayah.hikmah',
+                'facebook' => 'Dayah Hikmah',
                 'whatsapp' => '082340378657',
             ],
         ]);
