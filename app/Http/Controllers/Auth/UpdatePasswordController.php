@@ -6,8 +6,9 @@ use App\Models\Raport;
 use Illuminate\Http\Request;
 use Clockwork\Request\RequestType;
 use App\Http\Controllers\Controller;
-use Dotenv\Exception\ValidationException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Dotenv\Exception\ValidationException;
 
 class UpdatePasswordController extends Controller
 {
@@ -17,7 +18,7 @@ class UpdatePasswordController extends Controller
         // random colors
         $color = $colors[array_rand($colors)];
         return view('student.setting.index', [
-            'title' => 'Pengaturan | ' . auth()->guard('student')->user()->nama_lengkap,
+            'title' => 'Ubah password | ' . auth()->guard('student')->user()->nama_lengkap,
             'student' => auth()->guard('student')->user(),
             'color' => $color,
             'semester' => Raport::where('student_id', auth()->guard('student')->user()->id)->latest()->first()->semester_id,
@@ -33,10 +34,10 @@ class UpdatePasswordController extends Controller
         ]);
 
         if (Hash::check($request->current_password, auth()->user()->password)) {
-            // update password
             auth()->user()->update([
                 'password' => Hash::make($request->password),
             ]);
+
             return back()->with('success', 'Password berhasil dirubah');
         } else {
             return back()->with('error', 'Password lama tidak sesuai');

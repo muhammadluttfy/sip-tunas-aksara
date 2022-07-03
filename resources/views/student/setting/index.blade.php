@@ -71,6 +71,7 @@
                                         </div>
                                     </div>
                                     <hr class="my-4" />
+
                                     <ul class="list-group list-group-flush">
                                         <li
                                             class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
@@ -101,6 +102,7 @@
                                             <span class="text-secondary">Semester {{ $semester }}</span>
                                         </li>
                                     </ul>
+
                                 </div>
                             </div>
                         </div>
@@ -109,9 +111,9 @@
                                 <div class="card-body">
                                     <form action="{{ route('student.password.update') }}" method="post">
                                         @csrf
-                                        <div class="mb-3 row">
+                                        <div class="mb-3 row align-items-center">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Password Lama</h6>
+                                                <h6 class="mb-2 mb-md-0">Password Lama</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                                 <input type="password"
@@ -125,9 +127,9 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="mb-3 row">
+                                        <div class="mb-3 row align-items-center">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Password Baru</h6>
+                                                <h6 class="mb-2 mb-md-0">Password Baru</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                                 <input type="password"
@@ -141,9 +143,9 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="mb-3 row">
+                                        <div class="mb-3 row align-items-center">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Konfirmasi Password Baru</h6>
+                                                <h6 class="mb-2 mb-md-0">Konfirmasi Password Baru</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                                 <input type="password"
