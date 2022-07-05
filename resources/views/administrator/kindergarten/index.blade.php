@@ -75,7 +75,8 @@
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
-                                            <a href="{{ route('kindergarten.edit', $student->id) }}" class="mx-md-1">
+                                            <a href="{{ route('kindergarten.edit', $student->username) }}"
+                                                class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
                                             <a href="#" class="mx-md-1 delete" data-id="{{ $student->id }}"
@@ -86,6 +87,11 @@
                                             <a href="{{ route('raport.show', $student->username) }}" class="mx-md-1">
                                                 <span class="badge bg-success"><i class='lni lni-graduation'></i>
                                                     Nilai Raport </span>
+                                            </a>
+
+                                            <a href="{{ route('graduate.create', $student->username) }}" class="mx-md-1">
+                                                <span class="badge bg-gradient-scooter"><i class='lni lni-graduation'></i>
+                                                    Lulus </span>
                                             </a>
 
                                         </td>

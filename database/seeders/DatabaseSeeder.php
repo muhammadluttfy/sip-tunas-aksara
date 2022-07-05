@@ -73,6 +73,14 @@ class DatabaseSeeder extends Seeder
                 'jenjang_pendidikan' => 'TK Tunas Aksara',
                 'slug' => 'tk-tunas-aksara',
             ],
+            [
+                'jenjang_pendidikan' => 'Pindah PAUD',
+                'slug' => 'pindah-paud',
+            ],
+            [
+                'jenjang_pendidikan' => 'Lulus PAUD Tunas Aksara',
+                'slug' => 'lulus-paud-tunas-aksara',
+            ],
         ]);
 
         SocialMedia::insert([

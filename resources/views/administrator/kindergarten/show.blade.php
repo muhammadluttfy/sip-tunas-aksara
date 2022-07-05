@@ -43,7 +43,7 @@
                                             <p class="text-muted font-size-sm">Kelompok
                                                 <strong>{{ $student->student_detail->kelompok }}</strong>
                                             </p>
-                                            <a href="{{ route('playgroup.edit', $student->id) }}"
+                                            <a href="{{ route('playgroup.edit', $student->username) }}"
                                                 class="btn btn-primary">Edit</a>
                                             <button class="btn btn-outline-primary">Kirim Pesan</button>
                                         </div>

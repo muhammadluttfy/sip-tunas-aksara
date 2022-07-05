@@ -392,7 +392,7 @@ class KindergartenController extends Controller
         }
         // END : MASIH ERROR ID MUTATION
 
-        return redirect()->route('playgroup.index')->with('success', 'Data peserta didik berhasil di update!');
+        return redirect()->route('kindergarten.index')->with('success', 'Data peserta didik berhasil di updated!');
     }
 
     /**

@@ -87,6 +87,11 @@
                                                     Nilai Raport </span>
                                             </a>
 
+                                            <a href="{{ route('graduate.create', $student->username) }}" class="mx-md-1">
+                                                <span class="badge bg-gradient-scooter"><i class='lni lni-graduation'></i>
+                                                    Lulus </span>
+                                            </a>
+
                                         </td>
 
                                     </tr>

@@ -34,6 +34,8 @@ class CreateStudentDetailsTable extends Migration
             $table->string('tanggal_masuk')->nullable();
             $table->string('tanggal_lulus_kb')->nullable();
             $table->string('tanggal_lulus_tk')->nullable();
+            $table->string('paud_tujuan_pindah')->nullable();
+            $table->string('alasan_pindah_paud')->nullable();
             $table->timestamps();
         });
     }

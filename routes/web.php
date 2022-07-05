@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administrator\GraduatedController;
 use App\Http\Controllers\Administrator\KindergartenController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -28,14 +29,10 @@ use App\Http\Controllers\Student\StudentController;
 Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Administrator,Sekretaris,Bendahara,Guru,Student']], function () {
 
     Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
-    // Route::get('/dashboard/admin', [Controller::class, 'dashboardAdmin'])->name('dashboardAdmin');
-    // Route::get('/student/dashboard', [Controller::class, 'dashboardStudent'])->name('dashboardStudent');
 
     Route::get('/', function () {
         return redirect()->route('login');
     })->middleware('guest:user,student');
-
-    // Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
 
     // START :: KB Tunas Aksara
     Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
@@ -61,12 +58,15 @@ Route::group(['middleware' => ['auth:user,student', 'role:Kepala Sekolah,Adminis
 
     Route::get('/tk-tunas-aksara/{student:username}', [KindergartenController::class, 'show'])->name('kindergarten.show');
 
-    Route::get('/tk-tunas-aksara/{student:id}/edit', [KindergartenController::class, 'edit'])->name('kindergarten.edit');
-    Route::post('/tk-tunas-aksara/{student:id}', [KindergartenController::class, 'update'])->name('kindergarten.update');
+    Route::get('/tk-tunas-aksara/{student:username}/edit', [KindergartenController::class, 'edit'])->name('kindergarten.edit');
+    Route::post('/tk-tunas-aksara/{student:username}', [KindergartenController::class, 'update'])->name('kindergarten.update');
 
     Route::get('/tk-tunas-aksara/delete/{id}', [KindergartenController::class, 'destroy'])->name('kindergarten.destroy');
     // END :: TK Tunas Aksara
 
+    // Graduateed
+    Route::get('/paud-tunas-aksara/konfirmasi-kelulusan/{student:username}', [GraduatedController::class, 'create'])->name('graduate.create');
+    Route::post('/paud-tunas-aksara/konfirmasi-kelulusan/{student:username}', [GraduatedController::class, 'store'])->name('graduate.store');
 
     // START :: Nilai Raport
     Route::get('/nilai-raport/{student:username}', [RaportController::class, 'show'])->name('raport.show');
