@@ -11,6 +11,24 @@
     <div class="page-wrapper">
         <div class="page-content">
             <!--breadcrumb-->
+            <div class="row">
+                <div class=" ms-auto col-md-5">
+                    @if (session()->has('success'))
+                        <div class="py-2 border-0 alert alert-success bg-success alert-dismissible fade show">
+                            <div class="d-flex align-items-center">
+                                <div class="text-white font-35"><i class='bx bxs-check-circle'></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-white">Selamat!</h6>
+                                    <div class="text-white">{{ session()->get('success') }}</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
             <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
                 <div class="breadcrumb-title pe-3">Kelulusan</div>
                 <div class="ps-3">
@@ -125,7 +143,8 @@
                                         </form>
                                     @elseif($student->level_id == 3)
                                         <div class="text-center row justify-content-center">
-                                            <p class="text-center">Peserta didik <b>{{ $student->nama_lengkap }}</b> telah
+                                            <p class="text-center">Peserta didik <b>{{ $student->nama_lengkap }}</b>
+                                                telah
                                                 <span class="text-success">dinyatakan lulus KB Tunas Aksara dan
                                                     pindah</span> ke
                                                 {{ $student->student_detail->paud_tujuan_pindah }} pada tanggal

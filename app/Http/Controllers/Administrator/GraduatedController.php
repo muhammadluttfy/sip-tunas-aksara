@@ -72,7 +72,7 @@ class GraduatedController extends Controller
                 'level_id' => $request->level_id,
             ]);
 
-            return redirect()->route('kindergarten.index')->with('success', 'Peserta telah dinyatakan lulus');
+            return redirect()->back()->with('success', 'Peserta telah dinyatakan lulus');
         } else {
             return "gagal";
         }
