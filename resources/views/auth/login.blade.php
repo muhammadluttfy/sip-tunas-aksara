@@ -18,8 +18,9 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
-    <title>Login - Sistem Informasi PAUD Tunas Aksara</title>
+    <title>Login - Sistem Informasi Manajemen PAUD Tunas Aksara</title>
 </head>
 
 <body class="bg-login">
@@ -28,9 +29,6 @@
         <header class="shadow login-header">
             <nav class="bg-white rounded shadow-sm navbar navbar-expand-lg navbar-light fixed-top rounded-0">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        {{-- <img src="{{ asset('assets/images/logo-img.png') }}" width="140" alt="" /> --}}
-                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1"
                         aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
@@ -40,14 +38,14 @@
                             <li class="nav-item"> <a class="nav-link active" aria-current="page" href="#"><i
                                         class='bx bx-home-alt me-1'></i>Login SIM</a>
                             </li>
-                            <li class="nav-item"> <a class="nav-link" href="#"><i
-                                        class='bx bx-user me-1'></i>Tentang Kami</a>
+                            <li class="nav-item"> <a class="nav-link" href="https://paudtunasaksara.com/"
+                                    target="_blank"><i class='bx bx-user me-1'></i>Tentang Kami</a>
                             </li>
                             <li class="nav-item"> <a class="nav-link" href="#"><i
                                         class='bx bx-category-alt me-1'></i>Kalender</a>
                             </li>
-                            <li class="nav-item"> <a class="nav-link" href="#"><i
-                                        class='bx bx-microphone me-1'></i>Kontak</a>
+                            <li class="nav-item"> <a class="nav-link" href="https://paudtunasaksara.com/kontak/"
+                                    target="_blank"><i class='bx bx-microphone me-1'></i>Kontak</a>
                             </li>
                         </ul>
                     </div>
