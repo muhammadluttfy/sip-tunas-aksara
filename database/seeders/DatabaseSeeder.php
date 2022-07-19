@@ -39,10 +39,11 @@ class DatabaseSeeder extends Seeder
 
         User::insert([
             [
-                'role' => 'Kepala Sekolah',
+                'role' => 'Administrator',
                 'social_media_id' => 1,
                 'no_identitas' => '18083000124',
-                'nama_lengkap' => 'Developer',
+                'nama_lengkap' => 'Muhammad Lutfi',
+                'jabatan' => 'Developer',
                 'email' => 'creativedevelopment.id@gmail.com',
                 'username' => 'muhammadluttfy',
                 'tanggal_lahir' => '2001-01-31',
@@ -51,10 +52,11 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
             ],
             [
-                'role' => 'Kepala Sekolah',
+                'role' => 'Administrator',
                 'social_media_id' => 2,
                 'no_identitas' => '001/tendik/2022',
                 'nama_lengkap' => 'Suriyani,S.Pd',
+                'jabatan' => 'Kepala Sekolah',
                 'email' => 'suriyani84@gmail.com',
                 'username' => 'suriyani_84',
                 'tanggal_lahir' => '1996-08-30',

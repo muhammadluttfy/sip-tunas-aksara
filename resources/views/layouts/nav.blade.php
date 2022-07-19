@@ -22,7 +22,7 @@
         </li>
 
         {{-- ifelse guard Kepala Sekolah and Administrator --}}
-        @if (Auth::user()->role == 'Kepala Sekolah' || Auth::user()->role == 'Administrator')
+        @if (Auth::user()->role == 'Administrator')
             <li class="menu-label">Tenaga Pendidik</li>
             <li>
                 <a href="{{ route('teacher.index') }}">

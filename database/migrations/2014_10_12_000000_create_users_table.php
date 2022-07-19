@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('no_identitas')->nullable();
             $table->string('nama_lengkap')->nullable();
             $table->string('username')->nullable();
+            $table->string('jabatan')->nullable();
             $table->string('email')->unique();
             $table->string('avatar')->nullable();
             $table->string('tanggal_lahir')->nullable();
