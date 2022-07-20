@@ -76,13 +76,14 @@ class TeacherController extends Controller
         // create data user / teacher
         $user = User::create([
             'social_media_id' => $socialMedia->id,
+            'role' => 'Administrator',
             'nama_lengkap' => $request->nama_lengkap,
             'no_identitas' => str_pad(User::orderBy('created_at', 'DESC')->first()->id + 1, 3, "0", STR_PAD_LEFT) . '/tendik/' . date('Y'),
             'username' => $request->username,
             'avatar' => $request->file('avatar')->store('avatars'),
             'email' => $request->email,
             'tanggal_lahir' => $request->tanggal_lahir,
-            'role' => $request->jabatan,
+            'jabatan' => $request->jabatan,
             'password' => Hash::make($request->tanggal_lahir),
         ]);
 
@@ -164,7 +165,7 @@ class TeacherController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->tanggal_lahir = $request->tanggal_lahir;
-        $user->role = $request->jabatan;
+        $user->jabatan = $request->jabatan;
         if ($request->oldAvatar) {
             Storage::delete($request->oldAvatar);
         }

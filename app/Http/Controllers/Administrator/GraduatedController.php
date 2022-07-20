@@ -67,6 +67,8 @@ class GraduatedController extends Controller
 
             StudentDetail::where('id', $student->student_detail_id)->update([
                 'tanggal_lulus_tk' => $request->tanggal_lulus_tk,
+                'paud_tujuan_pindah' => $request->paud_tujuan_pindah,
+                'alasan_pindah_paud' => $request->alasan_pindah_paud,
             ]);
             Student::where('id', $student->id)->update([
                 'level_id' => $request->level_id,

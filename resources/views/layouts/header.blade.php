@@ -365,7 +365,7 @@
                                 {{-- {{ Auth::guard('student')->user()->role }} --}}
                                 Peserta Didik
                             @elseif(Str::length(Auth::guard('user')->user()) > 0)
-                                {{ Auth::guard('user')->user()->role }}
+                                {{ Auth::guard('user')->user()->jabatan }}
                             @endif
                         </p>
                     </div>

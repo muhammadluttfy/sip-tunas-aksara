@@ -37,7 +37,6 @@ Route::group(['middleware' => ['auth:user,student', 'role:Administrator,Student'
 
     Route::middleware(['admin'])->group(function () {
 
-
         // START :: KB Tunas Aksara
         Route::get('/kb-tunas-aksara', [PlaygroupController::class, 'index'])->name('playgroup.index');
 
@@ -178,10 +177,10 @@ Route::group(['middleware' => ['auth:user,student', 'role:Administrator,Student'
 
     });
 
-    // Student :: Forum PAUD
+    // ======= Student :: Forum PAUD =======
     Route::get('/student/forum-paud/', [StudentController::class, 'index'])->name('student.forum.index');
     Route::get('/student/forum-paud/{post:slug}', [StudentController::class, 'show'])->name('student.forum.show');
-    // Student :: Nilai Raport
+    // ======= Student :: Nilai Raport =======
     Route::get('/student/nilai-raport/', [StudentController::class, 'showNilaiRaport'])->name('student.nilai-raport.index');
 
 

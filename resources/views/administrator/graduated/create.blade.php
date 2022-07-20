@@ -98,43 +98,44 @@
                                                             <option value="2" selected>TK Tunas Aksara</option>
                                                             <option value="3">Pindah PAUD</option>
                                                         @elseif (old('level_id', $student->level_id) == '2')
+                                                            <option value="3">Pindah PAUD</option>
                                                             <option value="4" selected>Lulus PAUD Tunas Aksara</option>
                                                         @endif
                                                     </select>
                                                 </div>
 
-                                                @if ($student->level_id == 1)
-                                                    <div class="mt-4 col-12" style="margin-top: -0px !important">
-                                                        <hr>
-                                                        <p><span class="text-danger">Catatan : </span>Form dibawah ini diisi
-                                                            jika
-                                                            peserta didik
-                                                            pindah
-                                                            PAUD
-                                                        </p>
+                                                {{-- @if ($student->level_id == 1) --}}
+                                                <div class="mt-4 col-12" style="margin-top: -0px !important">
+                                                    <hr>
+                                                    <p><span class="text-danger">Catatan : </span>Form dibawah ini diisi
+                                                        jika
+                                                        peserta didik
+                                                        pindah
+                                                        PAUD
+                                                    </p>
 
-                                                        <label for="paud_tujuan_pindah" class="form-label">Pindah ke
-                                                            PAUD</label>
-                                                        <input type="text"
-                                                            class="form-control @error('paud_tujuan_pindah') is-invalid @enderror"
-                                                            name="paud_tujuan_pindah" id="paud_tujuan_pindah"">
-                                                        @error('paud_tujuan_pindah')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label for="alasan_pindah_paud" class="form-label">Alasan</label>
-                                                        <textarea class="form-control @error('alasan_pindah_paud') is-invalid @enderror" name="alasan_pindah_paud"
-                                                            id="alasan_pindah_paud" rows="5" placeholder="Alasan meninggalkan PAUD Tunas Aksara..."></textarea>
-                                                        @error('alasan_pindah_paud')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-                                                @endif
+                                                    <label for="paud_tujuan_pindah" class="form-label">Pindah ke
+                                                        PAUD</label>
+                                                    <input type="text"
+                                                        class="form-control @error('paud_tujuan_pindah') is-invalid @enderror"
+                                                        name="paud_tujuan_pindah" id="paud_tujuan_pindah"">
+                                                    @error('paud_tujuan_pindah')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="alasan_pindah_paud" class="form-label">Alasan</label>
+                                                    <textarea class="form-control @error('alasan_pindah_paud') is-invalid @enderror" name="alasan_pindah_paud"
+                                                        id="alasan_pindah_paud" rows="5" placeholder="Alasan meninggalkan PAUD Tunas Aksara..."></textarea>
+                                                    @error('alasan_pindah_paud')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                {{-- @endif --}}
 
                                                 <div class="col-md-4">
                                                     <button type="submit" class="px-5 btn btn-primary">Simpan</button>
@@ -145,7 +146,7 @@
                                         <div class="text-center row justify-content-center">
                                             <p class="text-center">Peserta didik <b>{{ $student->nama_lengkap }}</b>
                                                 telah
-                                                <span class="text-success">dinyatakan lulus KB Tunas Aksara dan
+                                                <span class="text-success">dinyatakan
                                                     pindah</span> ke
                                                 {{ $student->student_detail->paud_tujuan_pindah }} pada tanggal
                                                 {{ date('d F Y', strtotime($student->student_detail->tanggal_lulus_kb)) }}
@@ -159,7 +160,7 @@
                                     @else
                                         <div class="text-center row justify-content-center">
                                             <p class="text-center">Peserta didik <b>{{ $student->nama_lengkap }}</b>
-                                                sudah
+                                                telat
                                                 <span class="text-success">dinyatakan lulus</span> PAUD Tunas Aksara pada
                                                 tanggal
                                                 {{ date('d F Y', strtotime($student->student_detail->tanggal_lulus_tk)) }}

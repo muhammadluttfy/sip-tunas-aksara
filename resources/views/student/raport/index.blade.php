@@ -2184,30 +2184,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="mt-3 col-lg-3 col-xl-2 mt-lg-0">
-                                                        <div class="float-lg-end">
-                                                            <div class="dropdown">
-                                                                <button class="btn btn-white" type="button"
-                                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                                    aria-expanded="false">
-                                                                    Lainnya <i class='bx bx-slider'></i>
-                                                                </button>
-                                                                <ul class="dropdown-menu"
-                                                                    aria-labelledby="dropdownMenuButton1">
-                                                                    <li><a class="dropdown-item"
-                                                                            href="{{ route('raport.editSemester2', $student->username) }}">Edit
-                                                                            Nilai</a>
-                                                                    </li>
-                                                                    <li><a href="#" class="dropdown-item delete"
-                                                                            data-id="{{ $raport_2->id }}"
-                                                                            semester-name="semester {{ $raport_2->semester_id }}">Hapus
-                                                                            Nilai</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -16641,28 +16617,4 @@
 @endsection
 
 @section('script')
-    {{-- sweet alert --}}
-    <script>
-        $('.delete').click(function() {
-            var raportId = $(this).attr('data-id');
-            var semesterName = $(this).attr('semester-name');
-            swal({
-                    title: "Apakah kamu yakin ?",
-                    text: "Kamu akan menghapus data " + semesterName + " !",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        window.location = "/nilai-raport/delete/" + raportId + "";
-                        swal("Selamat! Data berhasil dihapus!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Data tidak jadi dihapus!");
-                    }
-                });
-        });
-    </script>
 @endsection

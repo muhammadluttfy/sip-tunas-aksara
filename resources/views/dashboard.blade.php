@@ -74,6 +74,73 @@
             </div>
             <!--end row-->
 
+
+            @if (Auth::user()->role == 'Administrator')
+                <div class="row">
+                    <div class="container">
+                        <div class="main-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card radius-10">
+                                        <div class="card-body">
+                                            <div class="text-center d-flex flex-column align-items-center">
+                                                @if ($user->avatar == null)
+                                                    <img src="{{ asset('assets/images/avatars/avatar-default.jpg') }}"
+                                                        alt="{{ $user->nama_lengkap }}"
+                                                        class="p-1 rounded-circle bg-gradient-scooter" width="110">
+                                                @else
+                                                    <img src="{{ asset('storage/' . $user->avatar) }}"
+                                                        alt="{{ $user->nama_lengkap }}"
+                                                        class="p-1 rounded-circle bg-gradient-scooter" width="110">
+                                                @endif
+                                            </div>
+                                            <hr class="mt-4" />
+
+                                            <ul class="gap-1 list-group list-group-flush">
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        No Identitas
+                                                    </h6>
+                                                    <span class="text-secondary">{{ $user->no_identitas }}</span>
+                                                </li>
+
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        Nama Lengkap
+                                                    </h6>
+                                                    <span class="text-secondary">{{ $user->nama_lengkap }}</span>
+                                                </li>
+
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        Jabatan
+                                                    </h6>
+                                                    <span class="text-secondary">{{ $user->jabatan }}</span>
+                                                </li>
+
+                                                <li
+                                                    class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">
+                                                        Username
+                                                    </h6>
+                                                    <span class="text-secondary">{{ $user->username }}</span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            <!--end row-->
+
+
             @if (Auth::user()->role == 'Student')
                 <div class="row">
                     <div class="container">
@@ -95,7 +162,7 @@
                                             </div>
                                             <hr class="mt-4" />
 
-                                            <ul class="list-group list-group-flush gap-1">
+                                            <ul class="gap-1 list-group list-group-flush">
                                                 <li
                                                     class="flex-wrap list-group-item d-flex justify-content-between align-items-center">
                                                     <h6 class="mb-0">
@@ -159,7 +226,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6 col-md-4">
+                                        {{-- <div class="col-6 col-md-4">
                                             <div class="card radius-10">
                                                 <div class="card-body">
                                                     <div class="text-center">
@@ -172,7 +239,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-6 col-md-4">
                                             <div class="card radius-10">
                                                 <div class="card-body">
