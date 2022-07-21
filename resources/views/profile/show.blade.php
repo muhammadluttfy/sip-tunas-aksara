@@ -49,7 +49,7 @@
                                         height="110" class="p-1 bg-white shadow rounded-circle" alt="" />
                                 @endif
                                 <h5 class="mt-5 mb-0 text-white">{{ $user->nama_lengkap }}</h5>
-                                <p class="mb-3 text-white">{{ $user->role }}</p>
+                                <p class="mb-3 text-white">{{ $user->jabatan }}</p>
                                 <div class="mt-3 mb-3 list-inline contacts-social">
                                     <a href="https://www.facebook.com/{{ $user->social_media->facebook }}"
                                         target="_blank" class="border-0 list-inline-item"><i

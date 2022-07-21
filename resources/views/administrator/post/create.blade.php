@@ -47,8 +47,8 @@
                                             </div>
                                             <div class="col-sm-9 text-secondary @error('banner') is-invalid @enderror">
                                                 <img class="mb-3 img-preview img-fluid col-sm-5">
-                                                <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                                    id="image" name="image" onchange="previewImage()">
+                                                <input class="form-control @error('image') is-invalid @enderror"
+                                                    type="file" id="image" name="image" onchange="previewImage()">
 
                                                 @error('image')
                                                     <div class="invalid-feedback">
@@ -111,7 +111,7 @@
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-9 text-secondary">
                                                 <button type="submit" id="submit" class="px-4 btn btn-primary">
-                                                    Tambah Kategori
+                                                    Tambah Postingan
                                                 </button>
                                             </div>
                                         </div>

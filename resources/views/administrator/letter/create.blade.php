@@ -191,7 +191,7 @@
                                                 <div class="col-sm-3"></div>
                                                 <div class="col-sm-9 text-secondary">
                                                     <button type="submit" id="submit" class="px-4 btn btn-primary">
-                                                        Tambah Kategori
+                                                        Tambah Surat
                                                     </button>
                                                 </div>
                                             </div>

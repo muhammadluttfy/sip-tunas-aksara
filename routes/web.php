@@ -144,7 +144,6 @@ Route::group(['middleware' => ['auth:user,student', 'role:Administrator,Student'
 
         Route::get('/forum-paud/delete/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-        Route::post('/forum-paud/comment/{post:id}', [PostController::class, 'comment'])->name('posts.comment');
         // END :: Forum PAUD
 
 
@@ -185,6 +184,10 @@ Route::group(['middleware' => ['auth:user,student', 'role:Administrator,Student'
 
 
     // ====== GLOBAL ROUTES ======
+
+    // teacher & Student :: comment on post
+    Route::post('/forum-paud/comment/{post:id}', [PostController::class, 'comment'])->name('posts.comment');
+
     // Student :: Update Password
     Route::get('/settings/password/edit', [UpdatePasswordController::class, 'edit'])->name('settings.password.edit');
     Route::post('/settings/password/edit', [UpdatePasswordController::class, 'update'])->name('settings.password.update');
