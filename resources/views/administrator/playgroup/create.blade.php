@@ -258,8 +258,7 @@
                                                             <input type="number"
                                                                 class="form-control @error('saudara_angkat') is-invalid @enderror"
                                                                 name="saudara_angkat" id="saudara_angkat"
-                                                                placeholder="Jumlah"
-                                                                value="{{ old('saudara_angkat') }}">
+                                                                placeholder="Jumlah" value="{{ old('saudara_angkat') }}">
                                                             @error('saudara_angkat')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}
@@ -669,8 +668,7 @@
                                                         <div class="col-md-12">
                                                             <label for="alamat_ibu" class="form-label">Alamat</label>
                                                             <textarea class="form-control @error('alamat_ibu') is-invalid @enderror" name="alamat_ibu" id="alamat_ibu"
-                                                                rows="3" placeholder="Masukkan detail alamat atau nama jalan..." required
-                                                                value="{{ old('alamat_ibu') }}"></textarea>
+                                                                rows="3" placeholder="Masukkan detail alamat atau nama jalan..." required value="{{ old('alamat_ibu') }}"></textarea>
                                                             @error('alamat_ibu')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}

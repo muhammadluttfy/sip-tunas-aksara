@@ -14,8 +14,12 @@ use App\Models\SocialMedia;
 use App\Models\PostCategory;
 use App\Models\StudentDetail;
 use App\Models\LetterCategory;
+use App\Models\PaudProgram;
 use App\Models\Predicate;
+use App\Models\ProgramStatus;
+use App\Models\RegistrationStatus;
 use App\Models\Semester;
+use App\Models\StatusProgram;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -179,6 +183,51 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'nama' => 'Berkembang Sangat Baik (BSB)',
+                'created_at' => now(),
+            ],
+        ]);
+
+        PaudProgram::insert([
+            [
+                'nama_program' => 'KB Tunas Aksara',
+                'slug' => 'kb-tunas-aksara',
+                'status' => 'Buka',
+                'mulai_program' => '2022-06-01',
+                'selesai_program' => '2022-08-01',
+                'route' => 'registration.createKB',
+                'created_at' => now(),
+            ],
+            [
+                'nama_program' => 'TK Tunas Aksara',
+                'slug' => 'tk-tunas-aksara',
+                'status' => 'Buka',
+                'mulai_program' => '2022-06-01',
+                'selesai_program' => '2022-08-01',
+                'route' => 'registration.createTK',
+                'created_at' => now(),
+            ],
+            [
+                'nama_program' => 'Pindahan',
+                'slug' => 'pindahan',
+                'status' => 'Tutup',
+                'mulai_program' => '2022-06-01',
+                'selesai_program' => '2022-08-01',
+                'route' => 'registration.createPindahan',
+                'created_at' => now(),
+            ],
+        ]);
+
+        RegistrationStatus::insert([
+            [
+                'status' => 'Proses Seleksi',
+                'created_at' => now(),
+            ],
+            [
+                'status' => 'Diterima',
+                'created_at' => now(),
+            ],
+            [
+                'status' => 'Ditolak',
                 'created_at' => now(),
             ],
         ]);

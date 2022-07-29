@@ -20,6 +20,8 @@ class Controller extends BaseController
 
     public function dashboard()
     {
+        // get year createdat user login
+        $year = Auth::user()->created_at->format('Y');
 
         if (Auth::guard('student')->check()) {
             $raport_1 = Raport::where('student_id', Auth::user()->id)->where('semester_id', 1)->first();
@@ -50,10 +52,14 @@ class Controller extends BaseController
             'count_graduated' => '200' + Student::where('level_id', 3)->count(),
             'user' => Auth::user(),
 
-            'semester' => $semester,
-            'level' => $level,
-            'tahun_masuk' => $tahun_masuk,
-            'tahun_lulus' => $tahun_masuk + 4,
+            'semester' => null,
+            'level' => null,
+            'tahun_masuk' => $year . " - " . $year + 1,
+            'tahun_lulus' => $year + 4,
+            // 'semester' => $semester,
+            // 'level' => $level,
+            // 'tahun_masuk' => $tahun_masuk,
+            // 'tahun_lulus' => $tahun_masuk + 4,
         ]);
     }
 

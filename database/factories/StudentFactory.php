@@ -17,7 +17,8 @@ class StudentFactory extends Factory
             'student_detail_id' => $this->faker->numberBetween(1, 4),
             'level_id' => $this->faker->numberBetween(1, 2),
             'father_id' => $this->faker->numberBetween(1, 4),
-            'mother_id' => $this->faker->numberBetween(1, 4),
+            'registration_status_id' => $this->faker->numberBetween(1, 3),
+
             'role' => 'Student',
             'no_identitas' => $this->faker->unique()->randomNumber(9),
             'nama_lengkap' => $this->faker->name,

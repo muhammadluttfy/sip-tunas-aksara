@@ -32,7 +32,6 @@
         trix-toolbar [data-trix-button-group="file-tools"] {
             display: none;
         }
-
     </style>
 
     <title>{{ $title }}</title>
@@ -57,7 +56,7 @@
                 class='bx bxs-up-arrow-alt'></i></a>
         <!--End Back To Top Button-->
         <footer class="page-footer">
-            <p class="mb-0">Copyright © 2021. All right reserved.</p>
+            <p class="mb-0">Copyright © 2021 - {{ date('Y') }}. All right reserved.</p>
         </footer>
     </div>
     <!--end wrapper-->

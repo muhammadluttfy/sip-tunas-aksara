@@ -21,8 +21,22 @@
             </a>
         </li>
 
-        {{-- ifelse guard Kepala Sekolah and Administrator --}}
         @if (Auth::user()->role == 'Administrator')
+            <li class="menu-label">Main Data</li>
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    </div>
+                    <div class="menu-title">PPDB</div>
+                </a>
+                <ul>
+                    <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Peserta Daftar</a>
+                    </li>
+                    <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Program</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="menu-label">Tenaga Pendidik</li>
             <li>
                 <a href="{{ route('teacher.index') }}">
@@ -32,7 +46,6 @@
                 </a>
             </li>
 
-            {{-- @if (Str::length(Auth::guard('student')->user()) > 0) --}}
             <li class="menu-label">Forum PAUD</li>
             <li>
                 <a href="javascript:;" class="has-arrow">
@@ -47,7 +60,6 @@
                     </li>
                 </ul>
             </li>
-            {{-- @endif --}}
 
 
             <li class="menu-label">KB Tunas Aksara</li>
@@ -90,25 +102,29 @@
             </li>
         @endif
 
-        @if (Auth::user()->role == 'Student')
-            <li class="menu-label">Akademik</li>
-            <li>
-                <a href="{{ route('student.nilai-raport.index') }}">
-                    <div class="parent-icon"><i class="bx bx-category"></i>
-                    </div>
-                    <div class="menu-title">Nilai Raport</div>
-                </a>
-            </li>
+        @if (Auth::guard('student')->check() && Auth::user()->registration_status->status == 'Diterima')
+            @if (Auth::user()->role == 'Student')
+                <li class="menu-label">Akademik</li>
+                <li>
+                    <a href="{{ route('student.nilai-raport.index') }}">
+                        <div class="parent-icon"><i class="bx bx-category"></i>
+                        </div>
+                        <div class="menu-title">Nilai Raport</div>
+                    </a>
+                </li>
 
-            <li class="menu-label">Forum PAUD</li>
-            <li>
-                <a href="{{ route('student.forum.index') }}">
-                    <div class="parent-icon"><i class="bx bx-category"></i>
-                    </div>
-                    <div class="menu-title">Lihat Informasi</div>
-                </a>
-            </li>
+                <li class="menu-label">Forum PAUD</li>
+                <li>
+                    <a href="{{ route('student.forum.index') }}">
+                        <div class="parent-icon"><i class="bx bx-category"></i>
+                        </div>
+                        <div class="menu-title">Lihat Informasi</div>
+                    </a>
+                </li>
+            @endif
         @endif
+
+
     </ul>
 
     <!--end navigation-->

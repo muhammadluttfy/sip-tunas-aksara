@@ -6,6 +6,65 @@
 @section('wrapper')
     <div class="page-wrapper">
         <div class="page-content">
+            {{-- show when user login guard student --}}
+            @if (Auth::guard('student')->check())
+                <div class="px-2 row">
+                    @if (Auth::user()->registration_status->status == 'Proses Seleksi')
+                        <div class="py-2 border-0 alert alert-info bg-info alert-dismissible fade show">
+                            <div class="d-flex align-items-center">
+                                <div class="font-35 text-dark"><i class="bx bx-info-square"></i>
+                                </div>
+                                <div class="py-2 ms-3">
+                                    <h5 class=" text-dark">Perhatian!</h5>
+                                    <div class="text-dark">Anda dalam
+                                        <strong>Proses Seleksi</strong> Penerimaan Peserta
+                                        Didik
+                                        Baru PAUD
+                                        Tunas Aksara.
+                                        <br>
+                                        Nantikan informasi pengumuman kelulusan Anda dihalaaman ini.
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @elseif(Auth::user()->registration_status->status == 'Diterima')
+                        <div class="py-2 border-0 alert alert-success bg-success alert-dismissible fade show">
+                            <div class="d-flex align-items-center">
+                                <div class="text-white font-35"><i class="bx bxs-check-circle"></i>
+                                </div>
+                                <div class="py-2 ms-3">
+                                    <h5 class="text-white ">Selamat!</h5>
+                                    <div class="text-white">Anda
+                                        <strong>Dinyatakan Lulus</strong> Sebagai Peserta
+                                        Didik
+                                        Baru PAUD
+                                        Tunas Aksara.
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @else
+                        <div class="py-2 border-0 alert alert-warning bg-warning alert-dismissible fade show">
+                            <div class="d-flex align-items-center">
+                                <div class="font-35 text-dark"><i class="bx bx-info-circle"></i>
+                                </div>
+                                <div class="py-2 ms-3">
+                                    <h5 class=" text-dark">Mohon Maaf!</h5>
+                                    <div class="text-dark">
+                                        Anda <strong>belum diterima</strong> sebagai peserta didik PAUD Tunas Aksara.
+                                        <br>
+                                        Jangan menyerah dan tetap semangat!
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                </div>
+            @endif
+
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                 <div class="col">
                     <div class="border-0 card radius-10 border-start border-3 border-info">

@@ -12,6 +12,7 @@ use App\Http\Controllers\Administrator\PlaygroupController;
 use App\Http\Controllers\Administrator\PostCategoryController;
 use App\Http\Controllers\Administrator\LetterCategoryController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\RegistrationFromController;
 use App\Http\Controllers\Student\StudentController;
 
 /*
@@ -197,6 +198,21 @@ Route::group(['middleware' => ['auth:user,student', 'role:Administrator,Student'
 // START :: Profil Tenaga Pendidik
 Route::get('/profil/{user:username}', [Controller::class, 'profile'])->name('profile');
 // END :: Profil Tenaga Pendidik
+
+
+// START : Form Penerimaan Peserta Didik Baru
+// jangan merubah name route, jika dirubah, ubah dibagian DatabaseSeeder
+Route::get('/program-paud-tunas-aksara', [RegistrationFromController::class, 'index'])->name('registration.index');
+
+Route::get('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'createKB'])->name('registration.createKB');
+Route::post('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'storeTK'])->name('registration.storeTK');
+
+Route::get('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'createTK'])->name('registration.createTK');
+Route::post('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'storeTK'])->name('registration.storeTK');
+
+Route::get('/program-paud-tunas-aksara/daftar/pindahan', [RegistrationFromController::class, 'createPindahan'])->name('registration.createPindahan');
+Route::post('/program-paud-tunas-aksara/daftar/pindahan', [RegistrationFromController::class, 'storePindahan'])->name('registration.storePindahan');
+// END : Form Penerimaan Peserta Didik Baru
 
 
 
