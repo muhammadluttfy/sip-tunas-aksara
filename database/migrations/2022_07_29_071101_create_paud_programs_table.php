@@ -15,12 +15,12 @@ class CreatePaudProgramsTable extends Migration
     {
         Schema::create('paud_programs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_program');
-            $table->string('slug');
-            $table->string('status');
-            $table->string('mulai_program');
-            $table->string('selesai_program');
-            $table->string('route');
+            $table->string('nama_program')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('status')->nullable();
+            $table->string('mulai_program')->nullable();
+            $table->string('selesai_program')->nullable();
+            $table->string('route')->nullable();
             $table->timestamps();
         });
     }

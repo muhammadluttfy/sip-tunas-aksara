@@ -33,11 +33,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Student::factory(4)->create();
-        StudentDetail::factory(4)->create();
-        Father::factory(4)->create();
-        Mother::factory(4)->create();
-        Mutation::factory(4)->create();
+        Student::factory(5)->create();
+        StudentDetail::factory(5)->create();
+        Father::factory(5)->create();
+        Mother::factory(5)->create();
+        Mutation::factory(5)->create();
         Post::factory(4)->create();
         Letter::factory(4)->create();
 

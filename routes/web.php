@@ -1,19 +1,21 @@
 <?php
 
-use App\Http\Controllers\Administrator\GraduatedController;
-use App\Http\Controllers\Administrator\KindergartenController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Student\StudentController;
+use App\Http\Controllers\RegistrationFromController;
 use App\Http\Controllers\Administrator\PostController;
+use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Administrator\LetterController;
 use App\Http\Controllers\Administrator\RaportController;
 use App\Http\Controllers\Administrator\TeacherController;
+use App\Http\Controllers\Administrator\GraduatedController;
 use App\Http\Controllers\Administrator\PlaygroupController;
+use App\Http\Controllers\Administrator\KindergartenController;
 use App\Http\Controllers\Administrator\PostCategoryController;
 use App\Http\Controllers\Administrator\LetterCategoryController;
-use App\Http\Controllers\Auth\UpdatePasswordController;
-use App\Http\Controllers\RegistrationFromController;
-use App\Http\Controllers\Student\StudentController;
+use App\Http\Controllers\Administrator\DashboardRegistController;
+use App\Http\Controllers\Administrator\DashboardProgramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -174,6 +176,34 @@ Route::group(['middleware' => ['auth:user,student', 'role:Administrator,Student'
         Route::get('/manajemen-surat/tampilkan-surat/{letter:id}', [LetterController::class, 'show'])->name('letter.show');
         Route::get('/manajemen-surat/delete/{id}', [LetterController::class, 'destroy'])->name('letter.destroy');
         // END :: Management Surat
+
+
+
+        // START :: PPDB
+        Route::get('ppdb/calon-peserta-didik-baru', [DashboardRegistController::class, 'index'])->name('ppdb.index');
+
+        // ==== Diterima
+        Route::post('ppdb/diterima/{student:username}', [DashboardRegistController::class, 'updateAccepted'])->name('ppdb.updateAccepted');
+
+
+        // ==== Ditolak
+        Route::get('ppdb/ppdb/peserta-didik-tidak-lulus', [DashboardRegistController::class, 'rejected'])->name('ppdb.rejected');
+        Route::post('ppdb/ditolak/{student:username}', [DashboardRegistController::class, 'updateRejected'])->name('ppdb.updateRejected');
+
+
+        // ==== Program
+        Route::get('ppdb/program', [DashboardProgramController::class, 'program'])->name('ppdb.program');
+
+        Route::get('ppdb/program/{id}/edit', [DashboardProgramController::class, 'editProgram'])->name('ppdb.editProgram');
+        Route::post('ppdb/program/{id}', [DashboardProgramController::class, 'updateProgram'])->name('ppdb.updateProgram');
+
+        Route::get('ppdb/program/delete/{id}', [DashboardProgramController::class, 'destroyProgram'])->name('ppdb.destroyProgram');
+
+        // ==== Hapus Data
+        Route::get('/ppdb/{id}', [DashboardRegistController::class, 'destroy'])->name('ppdb.destroy');
+
+
+        // END :: PPDB
 
     });
 

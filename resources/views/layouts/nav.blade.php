@@ -22,18 +22,19 @@
         </li>
 
         @if (Auth::user()->role == 'Administrator')
-            <li class="menu-label">Main Data</li>
+            <li class="menu-label">PPDB PAUD</li>
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="bx bx-category"></i>
                     </div>
-                    <div class="menu-title">PPDB</div>
+                    <div class="menu-title">Main Data</div>
                 </a>
                 <ul>
-                    <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Peserta Daftar</a>
+                    <li> <a href="{{ route('ppdb.index') }}"><i class="bx bx-right-arrow-alt"></i>Peserta Daftar</a>
                     </li>
-                    <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Program</a>
+                    <li> <a href="{{ route('ppdb.rejected') }}"><i class="bx bx-right-arrow-alt"></i>Peserta Ditolak</a>
                     </li>
+                    <li> <a href="{{ route('ppdb.program') }}"><i class="bx bx-right-arrow-alt"></i>Program</a></li>
                 </ul>
             </li>
 

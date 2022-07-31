@@ -24,8 +24,8 @@ class PlaygroupController extends Controller
     {
         return view('administrator.playgroup.index', [
             'title' => 'KB Tunas Aksara - Semua Peserta Didik',
-            // get all data student by level_id = 1
-            'students' => Student::where('level_id', 1)->get(),
+            // get all data student by level_id = 1 and registration_status_id = 2
+            'students' => Student::where('level_id', 1)->where('registration_status_id', 2)->get(),
         ]);
     }
 
