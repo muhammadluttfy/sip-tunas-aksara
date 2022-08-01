@@ -6,11 +6,13 @@ use App\Models\Father;
 use App\Models\Mother;
 use App\Models\Student;
 use App\Models\Mutation;
+use App\Mail\EmailRegister;
 use App\Models\PaudProgram;
 use Illuminate\Http\Request;
 use App\Models\StudentDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 
 class RegistrationFromController extends Controller
@@ -124,12 +126,15 @@ class RegistrationFromController extends Controller
         $student->no_identitas = str_pad($latestStudent->id + 1, 3, "0", STR_PAD_LEFT) . '/paud/' . $year_id;
         $student->nama_lengkap = $request->nama_lengkap_murid;
         $student->username = str_replace(' ', '', strtolower($request->nama_panggilan_murid));
-        $student->email = strtolower($first_name . '.' . $last_name) . '@paud.com';
+        // $student->email = strtolower($first_name . '.' . $last_name) . '@paud.com';
+        $student->email = $request->email;
         $student->jenis_kelamin = $request->jenis_kelamin;
         $student->password = Hash::make($request->tanggal_lahir_murid);
         $student->save();
 
         event(new Registered($student));
+
+        Mail::to($student->email)->send(new EmailRegister());
 
         return "berhasil, coba login";
     }

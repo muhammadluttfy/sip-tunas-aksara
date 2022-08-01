@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Models\Student;
-use Illuminate\Http\Request;
+use App\Mail\EmailRegister;
 use App\Http\Controllers\Controller;
-use App\Models\PaudProgram;
-use Illuminate\Support\Facades\Storage;
+use App\Mail\EmailAccepted;
+use App\Mail\EmailRejected;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardRegistController extends Controller
 {
@@ -21,6 +22,20 @@ class DashboardRegistController extends Controller
     }
 
 
+
+    public function updateAccepted(Student $student)
+    {
+        Student::where('id', $student->id)->update([
+            'registration_status_id' => 2,
+        ]);
+
+        Mail::to($student->email)->send(new EmailAccepted());
+
+        return redirect()->route('ppdb.index')->with('success', 'Peserta Didik berhasil diterima, Lihat Data di halaman KB / TK Tunas Aksara');
+    }
+
+
+
     public function rejected()
     {
         return view('administrator.ppdb.rejected', [
@@ -32,24 +47,15 @@ class DashboardRegistController extends Controller
 
 
 
-    public function updateAccepted(Student $student)
-    {
-        Student::where('id', $student->id)->update([
-            'registration_status_id' => 2,
-        ]);
-
-        return redirect()->route('ppdb.index')->with('success', 'Peserta Didik berhasil diterima, Lihat Data di halaman KB / TK Tunas Aksara');
-    }
-
-
-
     public function updateRejected(Student $student)
     {
         Student::where('id', $student->id)->update([
             'registration_status_id' => 3,
         ]);
 
-        return redirect()->route('ppdb.index')->with('success', 'Peserta Didik berhasil diterima, Lihat Data di halaman KB / TK Tunas Aksara');
+        Mail::to($student->email)->send(new EmailRejected());
+
+        return redirect()->route('ppdb.rejected')->with('success', 'Peserta Didik berhasil diterima, Lihat Data di halaman KB / TK Tunas Aksara');
     }
 
 

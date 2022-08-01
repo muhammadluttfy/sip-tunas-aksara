@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\EmailRegister;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\RegistrationFromController;
@@ -235,14 +237,23 @@ Route::get('/profil/{user:username}', [Controller::class, 'profile'])->name('pro
 Route::get('/program-paud-tunas-aksara', [RegistrationFromController::class, 'index'])->name('registration.index');
 
 Route::get('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'createKB'])->name('registration.createKB');
-Route::post('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'storeTK'])->name('registration.storeTK');
+Route::post('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'storeKB'])->name('registration.storeKB');
 
-Route::get('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'createTK'])->name('registration.createTK');
-Route::post('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'storeTK'])->name('registration.storeTK');
+// Route::get('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'createTK'])->name('registration.createTK');
+// Route::post('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'storeTK'])->name('registration.storeTK');
 
 Route::get('/program-paud-tunas-aksara/daftar/pindahan', [RegistrationFromController::class, 'createPindahan'])->name('registration.createPindahan');
 Route::post('/program-paud-tunas-aksara/daftar/pindahan', [RegistrationFromController::class, 'storePindahan'])->name('registration.storePindahan');
 // END : Form Penerimaan Peserta Didik Baru
+
+
+
+
+// Testing Route
+// Route::get('/email', function () {
+//     Mail::to('muhamamdlutfi3101@gmail.com')->send(new EmailRegister());
+//     return new EmailRegister();
+// });
 
 
 

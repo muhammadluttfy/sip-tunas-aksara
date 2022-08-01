@@ -13,10 +13,10 @@
 
             <hr>
 
-            <form action="{{ route('registration.storeTK') }}" method="POST" class="row">
+            <form action="{{ route('registration.storeKB') }}" method="POST" class="row">
                 @csrf
                 <div class="gap-3 mb-3">
-                    <a href="" class="me-1 btn btn-outline-info"><i class="bx bx-share fs-6"></i> Kembali</a>
+                    <a href="#" class="me-1 btn btn-outline-info"><i class="bx bx-share fs-6"></i> Kembali</a>
 
                     <button type="submit" class="me-1 btn btn-success"><i class="lni lni-save fs-6"></i> Simpan</button>
 
@@ -86,8 +86,7 @@
                                                     <input type="text"
                                                         class="form-control @error('nama_lengkap_murid') is-invalid @enderror"
                                                         name="nama_lengkap_murid" id="nama_lengkap_murid"
-                                                        placeholder="Nama Lengkap" required
-                                                        value="{{ old('nama_lengkap_murid') }}">
+                                                        placeholder="Nama Lengkap" value="{{ old('nama_lengkap_murid') }}">
                                                     @error('nama_lengkap_murid')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -99,9 +98,20 @@
                                                     <input type="text"
                                                         class="form-control @error('nama_panggilan_murid') is-invalid @enderror"
                                                         name="nama_panggilan_murid" id="nama_panggilan_murid"
-                                                        placeholder="Nama Panggilan" required
+                                                        placeholder="Nama Panggilan"
                                                         value="{{ old('nama_panggilan_murid') }}">
                                                     @error('nama_panggilan_murid')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="email" class="form-label">Email Address</label>
+                                                    <input type="text"
+                                                        class="form-control @error('email') is-invalid @enderror"
+                                                        name="email" id="email" placeholder="Nama Panggilan"
+                                                        value="{{ old('email') }}">
+                                                    @error('email')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -170,7 +180,7 @@
                                                     <input type="text"
                                                         class="form-control @error('tempat_lahir_murid') is-invalid @enderror"
                                                         name="tempat_lahir_murid" id="tempat_lahir_murid"
-                                                        placeholder="Tempat Lahir" required
+                                                        placeholder="Tempat Lahir"
                                                         value="{{ old('tempat_lahir_murid') }}">
                                                     @error('tempat_lahir_murid')
                                                         <div class="valid-feedback">{{ $message }}</div>
@@ -229,7 +239,7 @@
                                                     <input type="text"
                                                         class="form-control @error('nama_lengkap_ayah') is-invalid @enderror"
                                                         name="nama_lengkap_ayah" id="nama_lengkap_ayah"
-                                                        placeholder="Nama Lengkap" required
+                                                        placeholder="Nama Lengkap"
                                                         value="{{ old('nama_lengkap_ayah') }}">
                                                     @error('nama_lengkap_ayah')
                                                         <div class="valid-feedback">{{ $message }}</div>
@@ -242,7 +252,7 @@
                                                     <input type="text"
                                                         class="form-control @error('tempat_lahir_ayah') is-invalid @enderror"
                                                         name="tempat_lahir_ayah" id="tempat_lahir_ayah"
-                                                        placeholder="Tempat Lahir" required
+                                                        placeholder="Tempat Lahir"
                                                         value="{{ old('tempat_lahir_ayah') }}">
                                                     @error('tempat_lahir_ayah')
                                                         <div class="valid-feedback">{{ $message }}</div>
@@ -354,8 +364,7 @@
                                                     <input type="text"
                                                         class="form-control @error('nama_lengkap_ibu') is-invalid @enderror"
                                                         name="nama_lengkap_ibu" id="nama_lengkap_ibu"
-                                                        placeholder="Nama Lengkap" required
-                                                        value="{{ old('nama_lengkap_ibu') }}">
+                                                        placeholder="Nama Lengkap" value="{{ old('nama_lengkap_ibu') }}">
                                                     @error('nama_lengkap_ibu')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -367,8 +376,7 @@
                                                     <input type="text"
                                                         class="form-control @error('tempat_lahir_ibu') is-invalid @enderror"
                                                         name="tempat_lahir_ibu" id="tempat_lahir_ibu"
-                                                        placeholder="Tempat Lahir" required
-                                                        value="{{ old('tempat_lahir_ibu') }}">
+                                                        placeholder="Tempat Lahir" value="{{ old('tempat_lahir_ibu') }}">
                                                     @error('tempat_lahir_ibu')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
