@@ -180,7 +180,7 @@
                                             style="font-size:0px;padding:10px 25px;padding-top:30px;padding-right:25px;padding-bottom:30px;padding-left:25px;word-break:break-word;">
                                             <div
                                                 style="font-family:Playfair Display, Times New Roman, serif;font-size:30px;font-weight:bold;line-height:1;text-align:center;color:#071C4D;">
-                                                Congratulation!</div>
+                                                Pemberitahuan!</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -303,51 +303,15 @@
                                                             style="font-size:0px;padding:10px 25px;padding-right:25px;padding-left:25px;word-break:break-word;">
                                                             <div
                                                                 style="font-family:Assistant, Helvetica, Arial, sans-serif;font-size:18px;line-height:20px;text-align:left;color:#071C4D;">
-                                                                Hi, Muhammad Lutfi <br><br> Kamu sudah berhasil
-                                                                melakukan pendaftaran PPDB PAUD Tunas Aksara. <br>
-                                                                Selanjutnya kamu bisa <a
-                                                                    href="{{ route('login') }}">login</a> untuk
-                                                                melihat info lebih detail terkait proses pendaftaranmu.
+                                                                Halo,..
+                                                                <br>
+                                                                Assalamu'alaikum Warohmatullahi Wabarokaatuh
+                                                                <br><br> Mohon maaf! Kamu <strong
+                                                                    style="color: red">Tidak Lulus</strong>
+                                                                pendaftaran PPDB PAUD Tunas Aksara.
+                                                                <br>
+                                                                Jangan putus asa dan tetap semangat mencari ilmu yaa!
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="left"
-                                                            style="font-size:0px;padding:10px 25px;padding-right:25px;padding-left:25px;word-break:break-word;">
-                                                            <table cellpadding="0" cellspacing="0" width="100%"
-                                                                border="0"
-                                                                style="color:#071C4D;font-family:Assistant, Helvetica, Arial, sans-serif;font-size:18px;line-height:28px;table-layout:auto;width:100%;border:none;">
-                                                                <tr>
-                                                                    <td colspan="3">Akses Login :</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><strong>Username :</strong></td>
-                                                                    <td style="text-align: right;">18083000124</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><strong>Password :</strong></td>
-                                                                    <td style="text-align: right;">Password</td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="center" vertical-align="middle"
-                                                            style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                                            <table border="0" cellpadding="0" cellspacing="0"
-                                                                role="presentation"
-                                                                style="border-collapse:separate;line-height:100%;">
-                                                                <tr>
-                                                                    <td align="center" bgcolor="#FF9E53"
-                                                                        role="presentation"
-                                                                        style="border:none;border-radius:8px;cursor:auto;mso-padding-alt:10px 25px;background:#008cff;"
-                                                                        valign="middle">
-                                                                        <a href="{{ route('dashboard') }}"
-                                                                            style="display:inline-block;background:#008cff;color:#ffffff;font-family:Assistant, Helvetica, Arial, sanf-serif;font-size:18px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:8px;">
-                                                                            Masuk Dashboard </a>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
                                                         </td>
                                                     </tr>
                                                 </table>

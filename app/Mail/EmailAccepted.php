@@ -28,6 +28,6 @@ class EmailAccepted extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.accepted')->subject('Lolos | PPDB - Calon Peserta Didik Baru');
+        return $this->markdown('emails.accepted')->subject('Selamat! Kamu dinyatakan lulus | PPDB - Calon Peserta Didik Baru');
     }
 }

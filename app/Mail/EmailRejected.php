@@ -28,6 +28,6 @@ class EmailRejected extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.rejected')->subject('Tidak Lolos | PPDB - Calon Peserta Didik Baru');
+        return $this->markdown('emails.rejected')->subject('Mohon Maaf! Kamu tidak lulus | PPDB - Calon Peserta Didik Baru');
     }
 }
