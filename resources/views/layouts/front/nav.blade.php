@@ -25,11 +25,8 @@
                 <li class="nav-item"> <a class="nav-link" href="https://paudtunasaksara.com/" target="_blank"><i
                             class='bx bx-user me-1'></i>Tentang Kami</a>
                 </li>
-                <li class="nav-item"> <a class="nav-link" href="#"><i
-                            class='bx bx-category-alt me-1'></i>Kalender</a>
-                </li>
                 <li class="nav-item"> <a class="nav-link" href="https://paudtunasaksara.com/kontak/" target="_blank"><i
-                            class='bx bx-donate-blood me-1'></i>Kontak</a>
+                            class='bx bx-category-alt me-1'></i>Kontak</a>
                 </li>
 
             </ul>

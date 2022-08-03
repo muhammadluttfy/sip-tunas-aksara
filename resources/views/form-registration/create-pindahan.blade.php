@@ -4,7 +4,7 @@
     <div class="content-center d-flex align-items-start justify-content-center mt-md-4">
         <div class="container">
             <div class="row">
-                <h4 class="">Form Pendaftarn Program TK Tunas Aksara</h4>
+                <h4 class="">Form Pendaftarn Program Pindahan Tunas Aksara</h4>
                 <p class="mb-0">Selamat datang! Silahkan mengisi formulir pendaftaran dibawah ini. <br> <a
                         href="">Lihat
                         Panduan</a>
@@ -13,7 +13,8 @@
 
             <hr>
 
-            <form action="{{ route('registration.storeTK') }}" method="POST" class="row" enctype="multipart/form-data">
+            <form action="{{ route('registration.storePindahan') }}" method="POST" class="row"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="gap-3 mb-3">
                     <a href="{{ route('registration.index') }}" class="me-1 btn btn-outline-info"><i
@@ -56,6 +57,16 @@
                                                 <div class="tab-icon"><i class='bx bx-microphone font-18 me-1'></i>
                                                 </div>
                                                 <div class="tab-title">Data Ibu</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#formPindahan" role="tab"
+                                            aria-selected="false">
+                                            <div class="d-flex align-items-center">
+                                                <div class="tab-icon"><i class='bx bx-box font-18 me-1'></i>
+                                                </div>
+                                                <div class="tab-title">Pindahan</div>
                                             </div>
                                         </a>
                                     </li>
@@ -119,6 +130,32 @@
                                                 </div>
 
                                                 <div class="col-md-4">
+                                                    <label for="level_id" class="form-label">Jenjang Pendidikan
+                                                        Pindah</label>
+                                                    <select class="form-select @error('level_id') is-invalid @enderror"
+                                                        name="level_id" id="level_id" required>
+                                                        @if (old('level_id') == 1)
+                                                            <option value="1" selected>KB Tunas Aksara</option>
+                                                            <option value="2">TK Tunas Aksara</option>
+                                                        @elseif (old('level_id') == 2)
+                                                            <option value="1">KB Tunas Aksara</option>
+                                                            <option value="2" selected>TK Tunas Aksara</option>
+                                                        @else
+                                                            <option disabled selected>Pilih Jenjang Pindah</option>
+                                                            <option value="1">KB Tunas Aksara</option>
+                                                            <option value="2">TK Tunas Aksara</option>
+                                                        @endif
+
+                                                        @error('level_id')
+                                                            <div id="level_id" class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="col-md-4">
                                                     <label for="jenis_kelamin" class="form-label">Jenis
                                                         Kelamin</label>
                                                     <select
@@ -139,7 +176,8 @@
 
                                                         @error('jenis_kelamin')
                                                             <div id="jenis_kelamin" class="invalid-feedback">
-                                                                {{ $message }}</div>
+                                                                {{ $message }}
+                                                            </div>
                                                         @enderror
                                                     </select>
                                                 </div>
@@ -206,7 +244,8 @@
 
                                                     @error('agama_murid')
                                                         <div id="agama_murid" class="invalid-feedback">
-                                                            {{ $message }}</div>
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
@@ -236,7 +275,8 @@
 
                                                     @error('kewarganegaraan_murid')
                                                         <div id="kewarganegaraan_murid" class="invalid-feedback">
-                                                            {{ $message }}</div>
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
@@ -483,7 +523,8 @@
 
                                                     @error('agama_ayah')
                                                         <div id="agama_ayah" class="invalid-feedback">
-                                                            {{ $message }}</div>
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
@@ -513,7 +554,8 @@
 
                                                     @error('kewarganegaraan_ayah')
                                                         <div id="kewarganegaraan_ayah" class="invalid-feedback">
-                                                            {{ $message }}</div>
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
@@ -665,7 +707,8 @@
 
                                                     @error('agama_ibu')
                                                         <div id="agama_ibu" class="invalid-feedback">
-                                                            {{ $message }}</div>
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
@@ -695,7 +738,8 @@
 
                                                     @error('kewarganegaraan_ibu')
                                                         <div id="kewarganegaraan_ibu" class="invalid-feedback">
-                                                            {{ $message }}</div>
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
@@ -730,6 +774,65 @@
                                                         name="no_telepon_ibu" id="no_telepon_ibu"
                                                         placeholder="08XXXXXXXXXX" value="{{ old('no_telepon_ibu') }}">
                                                     @error('no_telepon_ibu')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="tab-pane fade" id="formPindahan" role="tabpanel">
+                                        <div class="p-4 border rounded">
+                                            <div class="row g-3">
+                                                <h6 class="mb-0 text-uppercase"><i class="bx bxs-user me-2"></i>Form Data
+                                                    Ibu
+                                                </h6>
+                                                <hr class="mb-0">
+                                                <div class="col-md-4">
+                                                    <label for="tanggal_mutasi" class="form-label">Diterima
+                                                        Tanggal</label>
+                                                    <input type="date"
+                                                        class="form-control @error('tanggal_mutasi') is-invalid @enderror"
+                                                        name="tanggal_mutasi" id="tanggal_mutasi"
+                                                        placeholder="Nama Lengkap" value="{{ old('tanggal_mutasi') }}"
+                                                        required>
+                                                    @error('tanggal_mutasi')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="instansi_asal" class="form-label">Instansi Asal</label>
+                                                    <input type="text"
+                                                        class="form-control @error('instansi_asal') is-invalid @enderror"
+                                                        name="instansi_asal" id="instansi_asal"
+                                                        placeholder="Nama Lengkap" value="{{ old('instansi_asal') }}"
+                                                        required>
+                                                    @error('instansi_asal')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="tgl_meninggalkan_instansi" class="form-label">Tanggal
+                                                        Meninggalkan PAUD Lama</label>
+                                                    <input type="date"
+                                                        class="form-control @error('tgl_meninggalkan_instansi') is-invalid @enderror"
+                                                        name="tgl_meninggalkan_instansi" id="tgl_meninggalkan_instansi"
+                                                        placeholder="Nama Lengkap"
+                                                        value="{{ old('tgl_meninggalkan_instansi') }}" required>
+                                                    @error('tgl_meninggalkan_instansi')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="alasan" class="form-label">Alamat</label>
+                                                    <textarea class="form-control @error('alasan') is-invalid @enderror" name="alasan" id="alasan" rows="3"
+                                                        placeholder="Masukkan detail alamat atau nama jalan..." required>{{ old('alasan') }}</textarea>
+                                                    @error('alasan')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>

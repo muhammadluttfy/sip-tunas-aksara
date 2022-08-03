@@ -306,7 +306,17 @@
                                                                 Hi, {{ $student->nama_lengkap }} <br><br>
                                                                 Selamat!. Kamu
                                                                 berhasil
-                                                                melakukan pendaftaran PPDB PAUD Tunas Aksara. <br>
+                                                                melakukan pendaftaran PPDB PAUD Tunas Aksara Program
+                                                                @if ($student->level_id == 1)
+                                                                    KB Tunas Aksara.
+                                                                @elseif($student->level_id == 2)
+                                                                    TK Tunas Aksara
+                                                                    {{-- @elseif($student->level_id == 1 && $student->mutation_id != null)
+                                                                    Pindahan KB Tunas Aksara.
+                                                                @elseif($student->level_id == 2 && $student->mutation_id != null)
+                                                                    Pindahan TK Tunas Aksara. --}}
+                                                                @endif
+                                                                <br>
                                                                 Selanjutnya kamu bisa <a
                                                                     href="{{ route('login') }}">login</a> untuk
                                                                 melihat info lebih detail terkait proses pendaftaranmu.

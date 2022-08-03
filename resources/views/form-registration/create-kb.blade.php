@@ -4,7 +4,7 @@
     <div class="content-center d-flex align-items-start justify-content-center mt-md-4">
         <div class="container">
             <div class="row">
-                <h4 class="">Form Pendaftarn Program TK Tunas Aksara</h4>
+                <h4 class="">Form Pendaftarn Program KB Tunas Aksara</h4>
                 <p class="mb-0">Selamat datang! Silahkan mengisi formulir pendaftaran dibawah ini. <br> <a
                         href="">Lihat
                         Panduan</a>
@@ -13,7 +13,7 @@
 
             <hr>
 
-            <form action="{{ route('registration.storeTK') }}" method="POST" class="row" enctype="multipart/form-data">
+            <form action="{{ route('registration.storeKB') }}" method="POST" class="row" enctype="multipart/form-data">
                 @csrf
                 <div class="gap-3 mb-3">
                     <a href="{{ route('registration.index') }}" class="me-1 btn btn-outline-info"><i

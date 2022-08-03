@@ -239,8 +239,8 @@ Route::get('/program-paud-tunas-aksara', [RegistrationFromController::class, 'in
 Route::get('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'createKB'])->name('registration.createKB');
 Route::post('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'storeKB'])->name('registration.storeKB');
 
-// Route::get('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'createTK'])->name('registration.createTK');
-// Route::post('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'storeTK'])->name('registration.storeTK');
+Route::get('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'createTK'])->name('registration.createTK');
+Route::post('/program-paud-tunas-aksara/daftar/tk-tunas-aksara', [RegistrationFromController::class, 'storeTK'])->name('registration.storeTK');
 
 Route::get('/program-paud-tunas-aksara/daftar/pindahan', [RegistrationFromController::class, 'createPindahan'])->name('registration.createPindahan');
 Route::post('/program-paud-tunas-aksara/daftar/pindahan', [RegistrationFromController::class, 'storePindahan'])->name('registration.storePindahan');
