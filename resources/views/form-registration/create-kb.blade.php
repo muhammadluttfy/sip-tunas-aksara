@@ -8,7 +8,8 @@
                 <p class="mb-0">Selamat datang! Silahkan mengisi formulir pendaftaran dibawah ini. <br> <a
                         href="">Lihat
                         Panduan</a>
-                    atau <a href="">Tanya Admin</a> jika Anda kebingunan dalam proses pendaftaran.</p>
+                    atau <a href="https://wa.me/6285299848346">Hubungi Kami</a> jika Anda kebingunan dalam proses
+                    pendaftaran.</p>
             </div>
 
             <hr>

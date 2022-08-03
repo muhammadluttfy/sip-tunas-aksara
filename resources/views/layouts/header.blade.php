@@ -12,41 +12,30 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <div class="p-3 row row-cols-3 g-3">
-                                <div class="text-center col">
-                                    <div class="mx-auto text-white app-box bg-gradient-cosmic"><i
-                                            class='bx bx-group'></i>
+                                <a href="https://paudtunasaksara.com/galeri/" target="_blank" class="text-dark">
+                                    <div class="text-center col">
+                                        <div class="mx-auto text-white app-box bg-gradient-cosmic"><i
+                                                class='bx bx-group'></i>
+                                        </div>
+                                        <div class="app-title">Galeri</div>
                                     </div>
-                                    <div class="app-title">Teams</div>
-                                </div>
-                                <div class="text-center col">
-                                    <div class="mx-auto text-white app-box bg-gradient-burning"><i
-                                            class='bx bx-atom'></i>
+                                </a>
+                                <a href="{{ route('registration.index') }}" target="_blank" class="text-dark">
+                                    <div class="text-center col">
+                                        <div class="mx-auto app-box bg-gradient-kyoto text-dark"><i
+                                                class='bx bx-notification'></i>
+                                        </div>
+                                        <div class="app-title">Program</div>
                                     </div>
-                                    <div class="app-title">Projects</div>
-                                </div>
-                                <div class="text-center col">
-                                    <div class="mx-auto text-white app-box bg-gradient-lush"><i
-                                            class='bx bx-shield'></i>
+                                </a>
+                                <a href="{{ route('registration.panduan') }}" target="_blank" class="text-dark">
+                                    <div class="text-center col">
+                                        <div class="mx-auto app-box bg-gradient-blues text-dark"><i
+                                                class='bx bx-file'></i>
+                                        </div>
+                                        <div class="app-title">Panduan</div>
                                     </div>
-                                    <div class="app-title">Tasks</div>
-                                </div>
-                                <div class="text-center col">
-                                    <div class="mx-auto app-box bg-gradient-kyoto text-dark"><i
-                                            class='bx bx-notification'></i>
-                                    </div>
-                                    <div class="app-title">Feeds</div>
-                                </div>
-                                <div class="text-center col">
-                                    <div class="mx-auto app-box bg-gradient-blues text-dark"><i class='bx bx-file'></i>
-                                    </div>
-                                    <div class="app-title">Files</div>
-                                </div>
-                                <div class="text-center col">
-                                    <div class="mx-auto text-white app-box bg-gradient-moonlit"><i
-                                            class='bx bx-filter-alt'></i>
-                                    </div>
-                                    <div class="app-title">Alerts</div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </li>

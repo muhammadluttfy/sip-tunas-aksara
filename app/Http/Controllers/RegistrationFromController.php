@@ -477,4 +477,13 @@ class RegistrationFromController extends Controller
 
         return redirect(route('login'))->with('success', 'Pendaftaran berhasil, silahkan cek email Anda untuk mendapatkan akses login!');
     }
+
+
+
+    public function panduan()
+    {
+        return view('form-registration.panduan', [
+            'title' => 'Panduan Pendaftaran PPDB PAUD Tunas Aksara' . date('Y'),
+        ]);
+    }
 }
