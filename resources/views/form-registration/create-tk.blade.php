@@ -13,7 +13,7 @@
 
             <hr>
 
-            <form action="{{ route('registration.storeKB') }}" method="POST" class="row">
+            <form action="{{ route('registration.storeKB') }}" method="POST" class="row" enctype="multipart/form-data">
                 @csrf
                 <div class="gap-3 mb-3">
                     <a href="#" class="me-1 btn btn-outline-info"><i class="bx bx-share fs-6"></i> Kembali</a>
@@ -122,16 +122,28 @@
                                                     <select
                                                         class="form-select @error('jenis_kelamin') is-invalid @enderror"
                                                         name="jenis_kelamin" id="jenis_kelamin">
-                                                        <option selected disabled>Pilih Jenis Kelamin...
-                                                        </option>
-                                                        <option value="Laki - Laki">Laki - Laki</option>
-                                                        <option value="Perempuan">Perempuan</option>
-                                                    </select>
+                                                        @if (old('jenis_kelamin') == 'Laki - Laki')
+                                                            <option disabled>Pilih Jenis Kelamin...
+                                                            </option>
+                                                            <option value="Laki - Laki" selected>Laki - Laki</option>
+                                                            <option value="Perempuan">Perempuan</option>
+                                                        @elseif (old('jenis_kelamin') == 'Perempuan')
+                                                            <option disabled>Pilih Jenis Kelamin...
+                                                            </option>
+                                                            <option value="Laki - Laki">Laki - Laki</option>
+                                                            <option value="Perempuan" selected>Perempuan</option>
+                                                        @else
+                                                            <option selected disabled>Pilih Jenis Kelamin...
+                                                            </option>
+                                                            <option value="Laki - Laki">Laki - Laki</option>
+                                                            <option value="Perempuan">Perempuan</option>
+                                                        @endif
 
-                                                    @error('jenis_kelamin')
-                                                        <div id="jenis_kelamin" class="invalid-feedback">
-                                                            {{ $message }}</div>
-                                                    @enderror
+                                                        @error('jenis_kelamin')
+                                                            <div id="jenis_kelamin" class="invalid-feedback">
+                                                                {{ $message }}</div>
+                                                        @enderror
+                                                    </select>
                                                 </div>
 
 
@@ -142,12 +154,56 @@
                                                         <option selected="" disabled="" value="">Pilih
                                                             Agama...
                                                         </option>
-                                                        <option value="Islam">Islam</option>
-                                                        <option value="Protestan">Protestan</option>
-                                                        <option value="Katolik">Katolik</option>
-                                                        <option value="Hindu">Hindu</option>
-                                                        <option value="Buddha">Buddha</option>
-                                                        <option value="Konghucu">Konghucu</option>
+                                                        @if (old('agama_murid') == 'Islam')
+                                                            <option value="Islam" selected>Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_murid') == 'Kristen')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen" selected>Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_murid') == 'Katholik')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik" selected>Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_murid') == 'Hindu')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu" selected>Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_murid') == 'Budha')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha" selected>Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_murid') == 'Konghucu')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu" selected>Konghucu</option>
+                                                        @else
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @endif
                                                     </select>
 
                                                     @error('agama_murid')
@@ -158,14 +214,30 @@
 
                                                 <div class="col-md-4">
                                                     <label for="kewarganegaraan_murid"
-                                                        class="form-label">Kewarganegaraan_murid</label>
+                                                        class="form-label">Kewarganegaraan</label>
                                                     <select
                                                         class="form-select @error('kewarganegaraan_murid') is-invalid @enderror"
                                                         name="kewarganegaraan_murid" id="kewarganegaraan_murid">
-                                                        <option selected disabled>Pilih Kewarganegaraan_murid...
-                                                        </option>
-                                                        <option value="WNI">WNI</option>
-                                                        <option value="WNI Keturunan">WNI Keturunan</option>
+
+                                                        @if (old('kewarganegaraan_murid') == 'WNI')
+                                                            <option disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI" selected>WNI</option>
+                                                            <option value="WNI Keturunan">WNI Keturunan</option>
+                                                        @elseif (old('kewarganegaraan_murid') == 'WNI Keturunan')
+                                                            <option selected disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI">WNI</option>
+                                                            <option value="WNI Keturunan">WNI Keturunan</option>
+                                                        @else
+                                                            <option disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI">WNI</option>
+                                                            <option value="WNI Keturunan" selected>WNI Keturunan</option>
+                                                        @endif
+
+
+
                                                     </select>
 
                                                     @error('kewarganegaraan_murid')
@@ -193,8 +265,91 @@
                                                     <input type="date"
                                                         class="form-control @error('tanggal_lahir_murid') is-invalid @enderror"
                                                         name="tanggal_lahir_murid" id="tanggal_lahir_murid"
-                                                        placeholder="Nama Lengkap">
+                                                        placeholder="Nama Lengkap"
+                                                        value="{{ old('tanggal_lahir_murid') }}">
                                                     @error('tanggal_lahir_murid')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="saudara_kandung" class="form-label">Saudara
+                                                        Kandung</label>
+                                                    <input type="number"
+                                                        class="form-control @error('saudara_kandung') is-invalid @enderror"
+                                                        name="saudara_kandung" id="saudara_kandung"
+                                                        placeholder="Misal : 2" value="{{ old('saudara_kandung') }}">
+                                                    @error('saudara_kandung')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="saudara_tiri" class="form-label">Saudara
+                                                        Tiri</label>
+                                                    <input type="number"
+                                                        class="form-control @error('saudara_tiri') is-invalid @enderror"
+                                                        name="saudara_tiri" id="saudara_tiri" placeholder="Misal : 0"
+                                                        value="{{ old('saudara_tiri') }}">
+                                                    @error('saudara_tiri')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="saudara_angkat" class="form-label">Saudara
+                                                        Angkat</label>
+                                                    <input type="number"
+                                                        class="form-control @error('saudara_angkat') is-invalid @enderror"
+                                                        name="saudara_angkat" id="saudara_angkat" placeholder="Misal : 0"
+                                                        value="{{ old('saudara_angkat') }}">
+                                                    @error('saudara_angkat')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="bahasa" class="form-label">Bahasa</label>
+                                                    <input type="text"
+                                                        class="form-control @error('bahasa') is-invalid @enderror"
+                                                        name="bahasa" id="bahasa" placeholder="Contoh : Bahasa Sasak"
+                                                        value="{{ old('bahasa') }}">
+                                                    @error('bahasa')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="imunitas_diterima" class="form-label">Imunitas
+                                                        Diterima</label>
+                                                    <input type="text"
+                                                        class="form-control @error('imunitas_diterima') is-invalid @enderror"
+                                                        name="imunitas_diterima" id="imunitas_diterima"
+                                                        placeholder="Imunitas Diterima"
+                                                        value="{{ old('imunitas_diterima') }}">
+                                                    @error('imunitas_diterima')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="ciri_khusus" class="form-label">Ciri Khusus</label>
+                                                    <input type="text"
+                                                        class="form-control @error('ciri_khusus') is-invalid @enderror"
+                                                        name="ciri_khusus" id="ciri_khusus" placeholder="Ciri Khusus"
+                                                        value="{{ old('ciri_khusus') }}">
+                                                    @error('ciri_khusus')
+                                                        <div class="valid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="gol_darah" class="form-label">Golongan Darah</label>
+                                                    <input type="text"
+                                                        class="form-control @error('gol_darah') is-invalid @enderror"
+                                                        name="gol_darah" id="gol_darah" placeholder="A, B, AB, O"
+                                                        value="{{ old('gol_darah') }}">
+                                                    @error('gol_darah')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -215,7 +370,7 @@
                                                 <div class="col-md-4">
                                                     <label for="alamat_murid" class="form-label">Alamat</label>
                                                     <textarea class="form-control @error('alamat_murid') is-invalid @enderror" name="alamat_murid" id="alamat_murid"
-                                                        rows="3" placeholder="Masukkan detail alamat atau nama jalan..." value="{{ old('alamat_murid') }}"></textarea>
+                                                        rows="3" placeholder="Masukkan detail alamat atau nama jalan...">{{ old('alamat_murid') }}</textarea>
                                                     @error('alamat_murid')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -265,7 +420,8 @@
                                                     <input type="date"
                                                         class="form-control @error('tanggal_lahir_ayah') is-invalid @enderror"
                                                         name="tanggal_lahir_ayah" id="tanggal_lahir_ayah"
-                                                        placeholder="Nama Lengkap">
+                                                        placeholder="Nama Lengkap"
+                                                        value="{{ old('tanggal_lahir_ayah') }}">
                                                     @error('tanggal_lahir_ayah')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -279,12 +435,56 @@
                                                         <option selected="" disabled="" value="">Pilih
                                                             Agama...
                                                         </option>
-                                                        <option value="Islam">Islam</option>
-                                                        <option value="Protestan">Protestan</option>
-                                                        <option value="Katolik">Katolik</option>
-                                                        <option value="Hindu">Hindu</option>
-                                                        <option value="Buddha">Buddha</option>
-                                                        <option value="Konghucu">Konghucu</option>
+                                                        @if (old('agama_ayah') == 'Islam')
+                                                            <option value="Islam" selected>Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ayah') == 'Kristen')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen" selected>Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ayah') == 'Katholik')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik" selected>Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ayah') == 'Hindu')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu" selected>Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ayah') == 'Budha')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha" selected>Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ayah') == 'Konghucu')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu" selected>Konghucu</option>
+                                                        @else
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @endif
                                                     </select>
 
                                                     @error('agama_ayah')
@@ -299,10 +499,26 @@
                                                     <select
                                                         class="form-select @error('kewarganegaraan_ayah') is-invalid @enderror"
                                                         name="kewarganegaraan_ayah" id="kewarganegaraan_ayah">
-                                                        <option selected disabled>Pilih Kewarganegaraan_ayah...
-                                                        </option>
-                                                        <option value="WNI">WNI</option>
-                                                        <option value="WNI Keturunan">WNI Keturunan</option>
+
+                                                        @if (old('kewarganegaraan_ayah') == 'WNI')
+                                                            <option disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI" selected>WNI</option>
+                                                            <option value="WNI Keturunan">WNI Keturunan</option>
+                                                        @elseif (old('kewarganegaraan_ayah') == 'WNI Keturunan')
+                                                            <option disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI">WNI</option>
+                                                            <option value="WNI Keturunan" selected>WNI Keturunan</option>
+                                                        @else
+                                                            <option disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI">WNI</option>
+                                                            <option value="WNI Keturunan" selected>WNI Keturunan</option>
+                                                        @endif
+
+
+
                                                     </select>
 
                                                     @error('kewarganegaraan_ayah')
@@ -388,7 +604,8 @@
                                                     <input type="date"
                                                         class="form-control @error('tanggal_lahir_ibu') is-invalid @enderror"
                                                         name="tanggal_lahir_ibu" id="tanggal_lahir_ibu"
-                                                        placeholder="Nama Lengkap">
+                                                        placeholder="Nama Lengkap"
+                                                        value="{{ old('tanggal_lahir_ibu') }}">
                                                     @error('tanggal_lahir_ibu')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -402,12 +619,56 @@
                                                         <option selected="" disabled="" value="">Pilih
                                                             Agama...
                                                         </option>
-                                                        <option value="Islam">Islam</option>
-                                                        <option value="Protestan">Protestan</option>
-                                                        <option value="Katolik">Katolik</option>
-                                                        <option value="Hindu">Hindu</option>
-                                                        <option value="Buddha">Buddha</option>
-                                                        <option value="Konghucu">Konghucu</option>
+                                                        @if (old('agama_ibu') == 'Islam')
+                                                            <option value="Islam" selected>Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ibu') == 'Kristen')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen" selected>Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ibu') == 'Katholik')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik" selected>Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ibu') == 'Hindu')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu" selected>Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ibu') == 'Budha')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha" selected>Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @elseif(old('agama_ibu') == 'Konghucu')
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu" selected>Konghucu</option>
+                                                        @else
+                                                            <option value="Islam">Islam</option>
+                                                            <option value="Kristen">Kristen</option>
+                                                            <option value="Katholik">Katholik</option>
+                                                            <option value="Hindu">Hindu</option>
+                                                            <option value="Budha">Budha</option>
+                                                            <option value="Konghucu">Konghucu</option>
+                                                        @endif
                                                     </select>
 
                                                     @error('agama_ibu')
@@ -422,10 +683,26 @@
                                                     <select
                                                         class="form-select @error('kewarganegaraan_ibu') is-invalid @enderror"
                                                         name="kewarganegaraan_ibu" id="kewarganegaraan_ibu">
-                                                        <option selected disabled>Pilih Kewarganegaraan_ibu...
-                                                        </option>
-                                                        <option value="WNI">WNI</option>
-                                                        <option value="WNI Keturunan">WNI Keturunan</option>
+
+                                                        @if (old('kewarganegaraan_ibu') == 'WNI')
+                                                            <option disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI" selected>WNI</option>
+                                                            <option value="WNI Keturunan">WNI Keturunan</option>
+                                                        @elseif (old('kewarganegaraan_ibu') == 'WNI Keturunan')
+                                                            <option selected disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI">WNI</option>
+                                                            <option value="WNI Keturunan">WNI Keturunan</option>
+                                                        @else
+                                                            <option disabled>Pilih Kewarganegaraan
+                                                            </option>
+                                                            <option value="WNI">WNI</option>
+                                                            <option value="WNI Keturunan" selected>WNI Keturunan</option>
+                                                        @endif
+
+
+
                                                     </select>
 
                                                     @error('kewarganegaraan_ibu')
@@ -448,11 +725,11 @@
                                                 </div>
 
                                                 <div class="col-md-4">
-                                                    <label for="pekerjaan_ibu" class="form-label">Pekerjaan Ayah</label>
+                                                    <label for="pekerjaan_ibu" class="form-label">Pekerjaan Ibu</label>
                                                     <input type="text"
                                                         class="form-control @error('pekerjaan_ibu') is-invalid @enderror"
                                                         name="pekerjaan_ibu" id="pekerjaan_ibu"
-                                                        placeholder="Pekerjaan Ayah" value="{{ old('pekerjaan_ibu') }}">
+                                                        placeholder="Pekerjaan Ibu" value="{{ old('pekerjaan_ibu') }}">
                                                     @error('pekerjaan_ibu')
                                                         <div class="valid-feedback">{{ $message }}</div>
                                                     @enderror

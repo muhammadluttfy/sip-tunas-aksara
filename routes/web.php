@@ -250,10 +250,9 @@ Route::post('/program-paud-tunas-aksara/daftar/pindahan', [RegistrationFromContr
 
 
 // Testing Route
-// Route::get('/email', function () {
-//     Mail::to('muhamamdlutfi3101@gmail.com')->send(new EmailRegister());
-//     return new EmailRegister();
-// });
+Route::get('/email', function () {
+    return view('emails.test');
+});
 
 
 

@@ -30,7 +30,6 @@ class EmailRegister extends Mailable
     public function build()
     {
         return $this->markdown('emails.register', [
-            // get latest data student
             'student' => Student::latest()->first(),
         ])->subject('Pendaftaran Berhasil | PPDB - Calon Peserta Didik Baru');
     }
