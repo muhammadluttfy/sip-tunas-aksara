@@ -214,10 +214,14 @@ Route::group(['middleware' => ['auth:user,student', 'role:Administrator,Student'
     Route::get('/student/forum-paud/{post:slug}', [StudentController::class, 'show'])->name('student.forum.show');
     // ======= Student :: Nilai Raport =======
     Route::get('/student/nilai-raport/', [StudentController::class, 'showNilaiRaport'])->name('student.nilai-raport.index');
+    // ======= Student :: Profile =======
+    Route::get('/profile/', [StudentController::class, 'showProfile'])->name('student.profile.index');
+
+
+
 
 
     // ====== GLOBAL ROUTES ======
-
     // teacher & Student :: comment on post
     Route::post('/forum-paud/comment/{post:id}', [PostController::class, 'comment'])->name('posts.comment');
 

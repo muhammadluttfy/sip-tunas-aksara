@@ -360,7 +360,8 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="javascript"><i class="bx bx-user"></i><span>Profile</span></a>
+                    <li><a class="dropdown-item" href="{{ route('student.profile.index') }}"><i
+                                class="bx bx-user"></i><span>Profile</span></a>
                     </li>
                     <li>
                         {{-- @if (Str::length(Auth::guard('student')->user()) > 0) --}}

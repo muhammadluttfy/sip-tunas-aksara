@@ -49,4 +49,21 @@ class StudentController extends Controller
             'years' => range(date('Y') - 2, date('Y')),
         ]);
     }
+
+    public function showProfile()
+    {
+        // if guard student is login
+        if (auth()->guard('student')->check()) {
+            return view('profile.profile-student', [
+                'title' => 'Profile',
+                'student' => auth()->guard('student')->user(),
+            ]);
+        } else {
+            return view('profile.profile-teacher', [
+                'title' => 'Profile',
+                // get data guard user
+                'teacher' => auth()->guard('user')->user(),
+            ]);
+        }
+    }
 }
