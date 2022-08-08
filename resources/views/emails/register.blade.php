@@ -317,8 +317,12 @@
                                                                     Pindahan TK Tunas Aksara. --}}
                                                                 @endif
                                                                 <br>
+                                                                Lakukan biaya pendaftaran sebesar Rp.***.*** ke No. Rek
+                                                                (BNI) 0733770512 A/n Nurhidayatul Hikmah
+                                                                <br><br>
                                                                 Selanjutnya kamu bisa <a
-                                                                    href="{{ route('login') }}">login</a> untuk
+                                                                    href="{{ route('dashboard') }}">login disini</a>
+                                                                untuk
                                                                 melihat info lebih detail terkait proses pendaftaranmu.
                                                             </div>
                                                         </td>
@@ -342,24 +346,6 @@
                                                                     <td style="text-align: right;">
                                                                         {{ $student->student_detail->tanggal_lahir }}
                                                                     </td>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" vertical-align="middle"
-                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                                <table border="0" cellpadding="0" cellspacing="0"
-                                                    role="presentation"
-                                                    style="border-collapse:separate;line-height:100%;">
-                                                    <tr>
-                                                        <td align="center" bgcolor="#FF9E53" role="presentation"
-                                                            style="border:none;border-radius:8px;cursor:auto;mso-padding-alt:10px 25px;background:#008cff;"
-                                                            valign="middle">
-                                                            <a href="{{ route('dashboard') }}"
-                                                                style="display:inline-block;background:#008cff;color:#ffffff;font-family:Assistant, Helvetica, Arial, sanf-serif;font-size:18px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:8px;">
-                                                                Masuk Dashboard </a>
                                                         </td>
                                                     </tr>
                                                 </table>

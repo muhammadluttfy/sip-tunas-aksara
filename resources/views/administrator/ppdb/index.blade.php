@@ -57,7 +57,7 @@
                                     <th width="15%">NIS</th>
                                     <th width="30%">Nama Lengkap</th>
                                     <th width="10%">Jenis Kelamin</th>
-                                    <th width="15%">Kelas</th>
+                                    <th width="15%">Status</th>
                                     <th width="20%">Aksi</th>
                                 </tr>
                             </thead>
@@ -68,7 +68,11 @@
                                         <td>{{ $student->no_identitas }}</td>
                                         <td>{{ $student->nama_lengkap }}</td>
                                         <td>{{ $student->jenis_kelamin }}</td>
-                                        <td>{{ $student->level_id }}</td>
+                                        <td>
+                                            <span
+                                                class="text-white badge bg-success">{{ $student->registration_status->status }}
+                                            </span>
+                                        </td>
                                         <td class="gap-2">
                                             <a href="/kb-tunas-aksara/{{ $student->username }}" class="mx-md-1">
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
@@ -126,7 +130,7 @@
                                     <th>NIS</th>
                                     <th>Nama Lengkap</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Kelas</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>

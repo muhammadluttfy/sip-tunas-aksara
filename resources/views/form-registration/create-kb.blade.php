@@ -6,7 +6,7 @@
             <div class="row">
                 <h4 class="">Form Pendaftarn Program KB Tunas Aksara</h4>
                 <p class="mb-0">Selamat datang! Silahkan mengisi formulir pendaftaran dibawah ini. <br> <a
-                        href="">Lihat
+                        href="{{ route('registration.panduan') }}">Lihat
                         Panduan</a>
                     atau <a href="https://wa.me/6285299848346">Hubungi Kami</a> jika Anda kebingunan dalam proses
                     pendaftaran.</p>

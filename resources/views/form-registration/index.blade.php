@@ -5,9 +5,11 @@
         <div class="container">
             <div class="row">
                 <h4 class="">Pendaftaran Penerimaan Peserta Didik Baru PAUD Tunas Aksara</h4>
-                <p class="mb-0">Pilih jalur penerimaan sesuai dengan keinginan dan kebutuhan Anda. <a href="">Lihat
+                <p class="mb-0">Pilih jalur penerimaan sesuai dengan keinginan dan kebutuhan Anda. <a
+                        href="{{ route('registration.panduan') }}">Lihat
                         Panduan</a>
-                    atau <a href="">Tanya Admin</a> jika Anda kebingunan dalam proses pendaftaran.</p>
+                    atau <a href="https://wa.me/6285299848346">Hubungi Kami</a> jika Anda kebingunan dalam proses
+                    pendaftaran.</p>
             </div>
 
             <hr>
@@ -30,7 +32,8 @@
                                             <span class="px-3 badge bg-warning">Berbayar</span>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <a href="#" class="px-2 border-0 badge bg-success"><i
+                                            <a href="{{ route('registration.panduan') }}"
+                                                class="px-2 border-0 badge bg-success"><i
                                                     class="bx bx-info-square me-1"></i> Info
                                             </a>
                                         </div>

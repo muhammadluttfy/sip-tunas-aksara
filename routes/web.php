@@ -236,7 +236,7 @@ Route::get('/profil/{user:username}', [Controller::class, 'profile'])->name('pro
 // jangan merubah name route, jika dirubah, ubah dibagian DatabaseSeeder
 Route::get('/program-paud-tunas-aksara', [RegistrationFromController::class, 'index'])->name('registration.index');
 
-Route::get('/program-paud-tunas-aksara/panduan', [RegistrationFromController::class, 'panduan'])->name('registration.panduan')->middleware('guest');
+Route::get('/program-paud-tunas-aksara/panduan', [RegistrationFromController::class, 'panduan'])->name('registration.panduan');
 
 Route::get('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'createKB'])->name('registration.createKB');
 Route::post('/program-paud-tunas-aksara/daftar/kb-tunas-aksara', [RegistrationFromController::class, 'storeKB'])->name('registration.storeKB');
