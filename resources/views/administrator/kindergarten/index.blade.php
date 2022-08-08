@@ -57,7 +57,7 @@
                                     <th width="15%">NIS</th>
                                     <th width="30%">Nama Lengkap</th>
                                     <th width="10%">Jenis Kelamin</th>
-                                    <th width="15%">Kelas</th>
+                                    <th width="15%">Kelompok</th>
                                     <th width="20%">Aksi</th>
                                 </tr>
                             </thead>
@@ -68,15 +68,13 @@
                                         <td>{{ $student->no_identitas }}</td>
                                         <td>{{ $student->nama_lengkap }}</td>
                                         <td>{{ $student->jenis_kelamin }}</td>
-                                        <td>{{ $student->level_id }}</td>
+                                        <td>{{ $student->student_detail->kelompok }}</td>
                                         <td class="gap-2">
-                                            <a href="{{ route('kindergarten.show', $student->username) }}"
-                                                class="mx-md-1">
+                                            <a href="{{ route('kindergarten.show', $student->username) }}" class="mx-md-1">
                                                 <span class="text-white badge bg-secondary"><i class='bx bxs-show'></i>
                                                     Detail</span>
                                             </a>
-                                            <a href="{{ route('kindergarten.edit', $student->username) }}"
-                                                class="mx-md-1">
+                                            <a href="{{ route('kindergarten.edit', $student->username) }}" class="mx-md-1">
                                                 <span class="badge bg-warning"><i class='bx bxs-edit'></i> Edit</span>
                                             </a>
                                             <a href="#" class="mx-md-1 delete" data-id="{{ $student->id }}"
@@ -105,7 +103,7 @@
                                     <th>NIS</th>
                                     <th>Nama Lengkap</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Kelas</th>
+                                    <th>Kelompok</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>

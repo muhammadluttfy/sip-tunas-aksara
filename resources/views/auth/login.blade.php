@@ -78,10 +78,10 @@
                                             <div class="input-group" id="show_hide_password">
                                                 <input type="password" class="form-control border-end-0" name="password"
                                                     id="password" placeholder="Masukkan Password">
-                                                <a href="javascript:;" class="bg-transparent input-group-text"><i
-                                                        class='bx bx-hide'></i></a>
+                                                <a href="javascript:;" class="bg-transparent input-group-text"></a>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-check form-switch">
                                                 {{-- <input class="form-check-input" type="checkbox"
@@ -90,9 +90,38 @@
                                                         for="flexSwitchCheckChecked">Remember Me</label> --}}
                                             </div>
                                         </div>
-                                        <div class="col-md-6 text-end"> <a
-                                                href="{{ url('authentication-forgot-password') }}">Lupa Password
-                                                ?</a>
+                                        <div class="col-md-6 text-end">
+                                            <button type="button" class="btn" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                Lupa Password ?
+                                            </button>
+
+                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                style="display: none;">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                Lupa Password ?
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <a href="https://wa.me/6285299848346">Hubungi Admin</a> jika
+                                                            kamu mengalami lupa password / sandi akun SIM PAUD Tunas Aksara
+                                                            !
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
@@ -110,4 +139,24 @@
             <!--end row-->
         </div>
     </div>
+@endsection
+
+@section('script')
+    <!--Password show & hide js -->
+    <script>
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("bx-hide");
+                    $('#show_hide_password i').removeClass("bx-show");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bx-hide");
+                    $('#show_hide_password i').addClass("bx-show");
+                }
+            });
+        });
+    </script>
 @endsection
